@@ -1,0 +1,11 @@
+<!--logs.wxml-->
+<view class="container log-list">
+  <form bindsubmit='loginForm'>
+    <input type='text' name='username' placeholder="输入链接"></input>
+    <button formType="submit" type='primary'>确认</button>
+  </form>
+  <video id="myVideo" src="{{inputUrl}}"  enable-danmu danmu-btn controls></video>
+  <scroll-view scroll-y="true" style="height: 600rpx;" bindscrolltoupper="upper" bindscrolltolower="lower">
+    <view class="list" wx:for="{{arrUrl}}" wx:key="unique" data-item="{{item}}" catchtap="playlike">{{index}}</view>
+  </scroll-view>
+</view>
