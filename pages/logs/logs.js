@@ -10,9 +10,9 @@ Page({
   },
   loginForm: function (data){
     var username = data.detail.value.username
-    if (username == 'like'){
+    if (username.indexOf('m3u8')==-1){
       this.setData({
-        arrUrl: arr.arrUrl
+        arrUrl: arr.arrUrl[username]
       })
     }else{
       this.setData({
