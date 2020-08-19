@@ -9,20 +9,41 @@ Page({
    */
   data: {
     requestToken:'',
-    bookList:[]
+    bookList:[],
+    typeArr:[]
   },
-  newRand:function(bookId){
+  reback:function(){
+    let url = 'http://mhapi.spdchgj.com/3/cartoon/positionback/reback'
+    let data = {
+      lang: 1
+    }
+
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
+    });
+  },
+  typeList:function(){
+    let url = 'http://mhapi.spdchgj.com/3/cartoon/cartoonType/list'
+    let data = {
+      lang: 1
+    }
+
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
+    });
+  },
+  newRand:function(bookId,id){
     let url = 'http://mhapi.spdchgj.com/2/cartoon/cartoon/newRand';
     let data = {
       bookId: parseInt(bookId),
-      id:33
+      id:parseInt(id)
     }
 
-    this.setApi(url,data).then(res=>{
-      console.log(res)
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
     });
   },
-  getCartoonLists:function(){
+  cartoonLists:function(){
     let url = 'http://mhapi.spdchgj.com/3/cartoon/cartoon/lists';
     let data = {
       typeId: 0,
@@ -33,23 +54,21 @@ Page({
       page: 1
     }
 
-    this.setApi(url,data);  
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
+    }); 
   },
-  getreCommendLists:function(){
+  recommendLists:function(ids){
     let url = 'http://mhapi.spdchgj.com/3/cartoon/recommend/lists';
     let data = {
-      ids: 2
+      ids: ids
     }
 
-    this.setApi(url,data).then(res=>{
-      console.log(res)
-      this.setData({
-        bookList: res.data['2'].list
-      })
-      
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
     });
   },
-  getMinlist:function(){
+  minListt:function(){
     let url = 'http://mhapi.spdchgj.com/3/cartoon/statiscartoon/minlist';
     let data = {
       num: 20,
@@ -59,33 +78,27 @@ Page({
       page: 1
     }
 
-    this.setApi(url,data).then(res=>{
-      console.log(res)
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
     });
   },
   isLogin2:function(){
     let url = 'http://mhapi.spdchgj.com/2/cartoon/tempuser/login'
     let data = {
       app: 1,
-      tname: 'u_temp_user_5',
-      refid: '',
-      linkid: '',
-      recommend: '',
-      from: ''
+      tname: 'u_temp_user_5'
     }
 
-   this.setApi(url,data);
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
+    });
   },
   isLogin:function(){
     
     let url = 'http://mhapi.spdchgj.com/3/cartoon/user/login'
     let data = {
       phone: '18007027355',
-      password: '123456asdf',
-      refid: '',
-      linkid: '',
-      recommend: '',
-      from: ''
+      password: '123456asdf'
     }
 
     this.setApi(url,data);
@@ -106,7 +119,7 @@ Page({
         },
         success(res) {
           if (res.data.code == 0) {
-            console.log(res.data)
+            //console.log(res.data)
             resolved(res.data)
           }
         }
@@ -165,12 +178,26 @@ Page({
     }
 
     this.setData({
-      requestToken: requestToken
+      requestToken: refRequestToken()
     })
   },
   playlike:function(e){
-    let id = e.currentTarget.dataset['id']
-    this.newRand(id)
+    let bookId = e.currentTarget.dataset['id'];
+    let typename = e.currentTarget.dataset['typename'];
+    let id = 0;
+
+    for(let i=0; i<this.data.typeArr.length; i++){
+        if(typename == this.data.typeArr[i].typename){
+          id = this.data.typeArr[i].id;
+          break;
+        }
+    }
+
+    this.newRand(bookId,id).then(res => {
+      if(res.code == 0){
+        console.log(res)
+      }
+    })
   },
 
 
@@ -178,22 +205,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getToke();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    this.isLogin2().then(res => {
+      //console.log(res)
+      if(res.code == 0){
+        this.typeList().then(res => {
+          this.setData({
+            typeArr: res.data
+          })
+        })
 
-    
-
-    this.isLogin();
-    this.getreCommendLists();
-    //this.getMinlist();
-    //this.getCartoonLists();
-
+        this.recommendLists(2).then(res => {
+          if(res.code == 0){
+            this.setData({
+              bookList: res.data['2'].list
+            })
+          }
+        })
+      }
+    })
   },
 
   /**
