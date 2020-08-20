@@ -1,5 +1,4 @@
-// pages/book/book.js
-
+// pages/rebook/rebook.js
 import { hexMD5 } from "../../utils/md5.js"
 
 Page({
@@ -8,22 +7,45 @@ Page({
    * 页面的初始数据
    */
   data: {
-    requestToken:'',
-    bookList:[],
-    typeArr:[]
+    imgArr:[],
+    nextid:'',
+    previd:'',
+    bookid:0,
+    imgURL:''
   },
-  typeList:function(){
-    let url = 'http://mhapi.spdchgj.com/3/cartoon/cartoonType/list'
+  chapterWithNext:function(chapterId){
+  let url = 'http://mhapi.spdchgj.com/3/cartoon/chapter/chapterWithNext'
+   let data = {
+    chapterId: parseInt(chapterId),
+    app: 1
+  }
+
+  return this.setApi(url,data).then(res => {
+    return Promise.resolve(res)
+  });
+ },
+  getDomainByTypes:function(){
+    let url = 'http://mhapi.spdchgj.com/2/cartoon/domain/getDomainByTypes'
     let data = {
-      lang: 1
+      typeString: '1,8,10'
     }
 
     return this.setApi(url,data).then(res => {
       return Promise.resolve(res)
     });
   },
-  newRand:function(bookId,id){
-    let url = 'http://mhapi.spdchgj.com/2/cartoon/cartoon/newRand';
+  last:function(bookId){
+    let url = 'http://mhapi.spdchgj.com/3/cartoon/history/last'
+    let data = {
+      bookId: parseInt(bookId)
+    }
+
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
+    });
+  },
+  reback:function(bookId,id){
+    let url = 'http://mhapi.spdchgj.com/3/cartoon/positionback/reback'
     let data = {
       bookId: parseInt(bookId),
       id:parseInt(id)
@@ -32,66 +54,6 @@ Page({
     return this.setApi(url,data).then(res => {
       return Promise.resolve(res)
     });
-  },
-  cartoonLists:function(){
-    let url = 'http://mhapi.spdchgj.com/3/cartoon/cartoon/lists';
-    let data = {
-      typeId: 0,
-      lang: 1,
-      sexy: 0,
-      status: 0,
-      pagesize: 20,
-      page: 1
-    }
-
-    return this.setApi(url,data).then(res => {
-      return Promise.resolve(res)
-    }); 
-  },
-  recommendLists:function(ids){
-    let url = 'http://mhapi.spdchgj.com/3/cartoon/recommend/lists';
-    let data = {
-      ids: ids
-    }
-
-    return this.setApi(url,data).then(res => {
-      return Promise.resolve(res)
-    });
-  },
-  minListt:function(){
-    let url = 'http://mhapi.spdchgj.com/3/cartoon/statiscartoon/minlist';
-    let data = {
-      num: 20,
-      sortField: 'rate_order',
-      sort: 1,
-      lang: 1,
-      page: 1
-    }
-
-    return this.setApi(url,data).then(res => {
-      return Promise.resolve(res)
-    });
-  },
-  isLogin2:function(){
-    let url = 'http://mhapi.spdchgj.com/2/cartoon/tempuser/login'
-    let data = {
-      app: 1,
-      tname: 'u_temp_user_5'
-    }
-
-    return this.setApi(url,data).then(res => {
-      return Promise.resolve(res)
-    });
-  },
-  isLogin:function(){
-    
-    let url = 'http://mhapi.spdchgj.com/3/cartoon/user/login'
-    let data = {
-      phone: '18007027355',
-      password: '123456asdf'
-    }
-
-    this.setApi(url,data);
   },
   setApi:function(url,data){
     this.getToke();
@@ -108,10 +70,38 @@ Page({
           'sign': signParams.sign
         },
         success(res) {
-          if (res.data.code == 0) {
-            //console.log(res.data)
-            resolved(res.data)
-          }
+          resolved(res.data)
+        }
+      })
+    })
+  },
+  getImgSrc:function(aImg){
+    for(let i=0; i<aImg.length; i++){
+      let url = this.data.imgURL + '/' + aImg[i].toLowerCase().replace('.jpg', '.html').replace('.png', '.html').replace('.gif', '.html');
+      this.getImg(url).then(res=>{
+        let str = res.replace(/\+/g, '*').replace(/\//g, '+').replace(/\*/g, '\/');
+        str = str.substring(23);
+        let json = {img:str};
+        let data = JSON.stringify(json);
+        let _json = JSON.parse(data);
+        let _str = 'data:image/jpeg;base64,' + _json.img.replace(/[\r\n]/g,"");
+
+        aImg[i] = _str;
+
+        if(i == aImg.length-1){
+          this.setData({
+            imgArr: aImg
+          })
+        }
+      })
+    }
+  },
+  getImg:function(url){
+    return new Promise((resolved,rejected)=>{
+      wx.request({
+        url: url, //仅为示例，并非真实的接口地址
+        success(res) {
+          resolved(res.data)
         }
       })
     })
@@ -171,63 +161,77 @@ Page({
       requestToken: refRequestToken()
     })
   },
-  playlike:function(e){
-    let bookId = e.currentTarget.dataset['id'];
-    // let typename = e.currentTarget.dataset['typename'];
-    // let id = 0;
+  nextBtn:function(){
+    if(this.data.nextid){
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
 
-    // for(let i=0; i<this.data.typeArr.length; i++){
-    //     if(typename == this.data.typeArr[i].typename){
-    //       id = this.data.typeArr[i].id;
-    //       break;
-    //     }
-    // }
-
-    // this.newRand(bookId,id).then(res => {
-    //   if(res.code == 0){
-    //     wx.navigateTo({
-    //       url: '/pages/rebook/rebook?bookId='+bookId+'&id='+id
-    //     })
-    //     console.log(res)
-    //   }
-    // })
-
-
-    wx.navigateTo({
-      url: '/pages/rebook/rebook?bookId='+bookId
-    })
+      this.chapterWithNext(this.data.nextid).then(res=>{
+        if(res.data.id){
+          this.setData({
+            nextid:res.data.nextid
+          })
+          
+          let aImg = res.data.image;
+          this.getImgSrc(aImg)
+        }else{
+          if(res.code == 0){
+            this.setData({
+              nextid:res.data[0].nextid
+            })
+            
+            let aImg = res.data[0].image;
+            this.getImgSrc(aImg)
+          }
+        }
+      })
+    }
+    
   },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.getToke();
+    this.getDomainByTypes().then(res => {
+      if(res.code == 0){
+        var url2 = res.data[1]['8'][0];
+        if (url2) {
+            let str = url2.domain;
+            let imgURL = ''
+            if (str.substr(str.length - 1, 1) == "/") {
+              imgURL = str.substr(0, str.length - 1);
+            } else {
+              imgURL = str;
+            }
+            this.setData({
+              imgURL: imgURL
+            })
+        }
+      }
+      
+    })
+
+    this.last(options.bookId).then(res => {
+      if(res.code == 0){
+        this.setData({
+          nextid:res.data.nextid
+        })
+        
+        let aImg = res.data.image;
+        this.getImgSrc(aImg)
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.isLogin2().then(res => {
-      //console.log(res)
-      if(res.code == 0){
-        this.typeList().then(res => {
-          this.setData({
-            typeArr: res.data
-          })
-        })
 
-        this.recommendLists(2).then(res => {
-          if(res.code == 0){
-            this.setData({
-              bookList: res.data['2'].list
-            })
-          }
-        })
-      }
-    })
   },
 
   /**

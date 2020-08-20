@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/book/book",
+    "pages/rebook/rebook",
     "pages/video/video"
   ],
   "window":{

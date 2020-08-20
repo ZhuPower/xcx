@@ -2,6 +2,6 @@
 
 <view>
   <scroll-view scroll-y="true" style="height: 600rpx;" bindscrolltoupper="upper" bindscrolltolower="lower">
-    <view class="list" wx:for="{{bookList}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.id}}</view>
+    <view class="list" wx:for="{{bookList}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.title}}</view>
   </scroll-view>
 </view>
