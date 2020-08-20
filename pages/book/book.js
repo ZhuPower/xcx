@@ -19,7 +19,8 @@ Page({
     page:1,
     typeId:0,
     sexy:0,
-    status:0
+    status:0,
+    tname:'u_temp_user_5'
   },
 
 
@@ -94,7 +95,7 @@ Page({
     let url = 'http://mhapi.spdchgj.com/2/cartoon/tempuser/login'
     let data = {
       app: 1,
-      tname: 'u_temp_user_5'
+      tname: this.data.tname
     }
 
     return this.setApi(url,data).then(res => {
@@ -345,12 +346,12 @@ Page({
           })
         })
 
-        // this.fn_1().then(res => {
-        //   console.log(res)
-        // })
-        // this.fn_2().then(res => {
-        //   console.log(res)
-        // })
+        this.fn_1().then(res => {
+          console.log(res)
+        })
+        this.fn_2().then(res => {
+          console.log(res)
+        })
 
       }
     })
@@ -359,11 +360,8 @@ Page({
   fn_2:function(){
     let url = 'http://vapi.yichuba.com/player'
     let data = {
-      app:1,
-      playerId:422,
-      videoId:572
-      // page: 1,
-      // pageCount: 20
+      vid: 573,
+      tname: this.data.tname
     }
 
     return this.setApi(url,data).then(res => {
