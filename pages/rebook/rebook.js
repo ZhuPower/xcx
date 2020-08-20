@@ -1,5 +1,7 @@
 // pages/rebook/rebook.js
-import { hexMD5 } from "../../utils/md5.js"
+import {
+  hexMD5
+} from "../../utils/md5.js"
 
 Page({
 
@@ -7,57 +9,58 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgArr:[],
-    nextid:'',
-    previd:'',
-    bookid:0,
-    imgURL:''
+    imgArr: [],
+    nextid: '',
+    previd: '',
+    bookid: 0,
+    cartoonId: 0,
+    imgURL: ''
   },
-  chapterWithNext:function(chapterId){
-  let url = 'http://mhapi.spdchgj.com/3/cartoon/chapter/chapterWithNext'
-   let data = {
-    chapterId: parseInt(chapterId),
-    app: 1
-  }
+  chapterWithNext: function (chapterId) {
+    let url = 'http://mhapi.spdchgj.com/3/cartoon/chapter/chapterWithNext'
+    let data = {
+      chapterId: parseInt(chapterId),
+      app: 1
+    }
 
-  return this.setApi(url,data).then(res => {
-    return Promise.resolve(res)
-  });
- },
-  getDomainByTypes:function(){
+    return this.setApi(url, data).then(res => {
+      return Promise.resolve(res)
+    });
+  },
+  getDomainByTypes: function () {
     let url = 'http://mhapi.spdchgj.com/2/cartoon/domain/getDomainByTypes'
     let data = {
       typeString: '1,8,10'
     }
 
-    return this.setApi(url,data).then(res => {
+    return this.setApi(url, data).then(res => {
       return Promise.resolve(res)
     });
   },
-  last:function(bookId){
+  last: function (bookId) {
     let url = 'http://mhapi.spdchgj.com/3/cartoon/history/last'
     let data = {
       bookId: parseInt(bookId)
     }
 
-    return this.setApi(url,data).then(res => {
+    return this.setApi(url, data).then(res => {
       return Promise.resolve(res)
     });
   },
-  reback:function(bookId,id){
+  reback: function (bookId, id) {
     let url = 'http://mhapi.spdchgj.com/3/cartoon/positionback/reback'
     let data = {
       bookId: parseInt(bookId),
-      id:parseInt(id)
+      id: parseInt(id)
     }
 
-    return this.setApi(url,data).then(res => {
+    return this.setApi(url, data).then(res => {
       return Promise.resolve(res)
     });
   },
-  setApi:function(url,data){
+  setApi: function (url, data) {
     this.getToke();
-    return new Promise((resolved,rejected)=>{
+    return new Promise((resolved, rejected) => {
       var signParams = this.signString(data);
       wx.request({
         url: url, //仅为示例，并非真实的接口地址
@@ -75,29 +78,34 @@ Page({
       })
     })
   },
-  getImgSrc:function(aImg){
-    for(let i=0; i<aImg.length; i++){
-      let url = this.data.imgURL + '/' + aImg[i].toLowerCase().replace('.jpg', '.html').replace('.png', '.html').replace('.gif', '.html');
-      this.getImg(url).then(res=>{
-        let str = res.replace(/\+/g, '*').replace(/\//g, '+').replace(/\*/g, '\/');
-        str = str.substring(23);
-        let json = {img:str};
-        let data = JSON.stringify(json);
-        let _json = JSON.parse(data);
-        let _str = 'data:image/jpeg;base64,' + _json.img.replace(/[\r\n]/g,"");
+  getImgSrc: function (aImg) {
+    let _this = this;
+    for (let i = 0; i < aImg.length; i++) {
+      (function (n) {
+        let url = _this.data.imgURL + '/' + aImg[n].toLowerCase().replace('.jpg', '.html').replace('.png', '.html').replace('.gif', '.html');
+        _this.getImg(url).then(res => {
+          let str = res.replace(/\+/g, '*').replace(/\//g, '+').replace(/\*/g, '\/');
+          str = str.substring(23);
+          let json = {
+            img: str
+          };
+          let data = JSON.stringify(json);
+          let _json = JSON.parse(data);
+          let _str = 'data:image/jpeg;base64,' + _json.img.replace(/[\r\n]/g, "");
 
-        aImg[i] = _str;
+          aImg[n] = _str;
 
-        if(i == aImg.length-1){
-          this.setData({
-            imgArr: aImg
-          })
-        }
-      })
+          if (i == aImg.length - 1) {
+            _this.setData({
+              imgArr: aImg
+            })
+          }
+        })
+      })(i)
     }
   },
-  getImg:function(url){
-    return new Promise((resolved,rejected)=>{
+  getImg: function (url) {
+    return new Promise((resolved, rejected) => {
       wx.request({
         url: url, //仅为示例，并非真实的接口地址
         success(res) {
@@ -106,45 +114,45 @@ Page({
       })
     })
   },
-  signString:function(req){
+  signString: function (req) {
     var obj = {}
-      for (var key in req) {
-        obj[key] = req[key]
+    for (var key in req) {
+      obj[key] = req[key]
+    }
+    var tmp = Date.parse(new Date()).toString();
+    var timestamp = tmp.substr(0, 13);
+    obj.timestamp = timestamp;
+    var arr = new Array();
+    var num = 0;
+    for (var i in obj) {
+      arr[num] = i;
+      num++;
+    }
+    var sortArr = arr.sort();
+    var stringA = '';
+    var j = 0;
+    for (var i in sortArr) {
+      var v = obj[sortArr[i]];
+      if (!v && v != 0) {
+        v = '';
       }
-      var tmp = Date.parse(new Date()).toString();
-      var timestamp = tmp.substr(0, 13);
-      obj.timestamp = timestamp;
-      var arr = new Array();
-      var num = 0;
-      for (var i in obj) {
-        arr[num] = i;
-        num++;
+      stringA += sortArr[i] + '=' + v;
+      if (j < sortArr.length - 1) {
+        stringA += '&';
       }
-      var sortArr = arr.sort();
-      var stringA = '';
-      var j = 0;
-      for (var i in sortArr) {
-        var v = obj[sortArr[i]];
-        if (!v) {
-          v = '';
-        }
-        stringA += sortArr[i] + '=' + v;
-        if (j < sortArr.length - 1) {
-          stringA += '&';
-        }
-        j++;
-      }
+      j++;
+    }
 
-      var key = '&key=Cartoon$2019&#';
-      var sign = hexMD5(stringA + key);
-      return {
-        timestamp: timestamp,
-        sign: sign.toUpperCase()
-      };
+    var key = '&key=Cartoon$2019&#';
+    var sign = hexMD5(stringA + key);
+    return {
+      timestamp: timestamp,
+      sign: sign.toString().toUpperCase()
+    };
   },
-  getToke:function(){
+  getToke: function () {
     var requestToken = wx.getStorageSync('token') || '';
-    var refRequestToken = function() {
+    var refRequestToken = function () {
       if (requestToken) {
         return requestToken;
       } else {
@@ -161,70 +169,109 @@ Page({
       requestToken: refRequestToken()
     })
   },
-  nextBtn:function(){
-    if(this.data.nextid){
-      wx.pageScrollTo({
-        scrollTop: 0
-      })
-
-      this.chapterWithNext(this.data.nextid).then(res=>{
-        if(res.data.id){
-          this.setData({
-            nextid:res.data.nextid
-          })
-          
-          let aImg = res.data.image;
-          this.getImgSrc(aImg)
-        }else{
-          if(res.code == 0){
-            this.setData({
-              nextid:res.data[0].nextid
-            })
-            
-            let aImg = res.data[0].image;
-            this.getImgSrc(aImg)
-          }
-        }
-      })
+  nextBtn: function () {
+    if (this.data.nextid) {
+      this.changeBook(this.data.nextid)
     }
-    
+  },
+  preBtn: function () {
+    if (this.data.previd) {
+      this.changeBook(this.data.previd)
+    }
+  },
+  changeBook: function (id) {
+    console.log(id)
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
+
+    this.chapterWithNext(id).then(res => {
+      let title = ''
+      if (res.data.id) {
+        this.setData({
+          nextid: res.data.nextid,
+          previd: res.data.previd
+        })
+
+        title = res.data.book.title + res.data.name
+
+
+        let aImg = res.data.image;
+        this.getImgSrc(aImg)
+      } else {
+        if (res.code == 0) {
+          this.setData({
+            nextid: res.data[0].nextid,
+            previd: res.data[0].previd
+          })
+
+          title = res.data.book[0].title + res.data[0].name
+
+          let aImg = res.data[0].image;
+          this.getImgSrc(aImg)
+        }
+      }
+
+      wx.setNavigationBarTitle({
+        title: title
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.getToke();
     this.getDomainByTypes().then(res => {
-      if(res.code == 0){
+      if (res.code == 0) {
         var url2 = res.data[1]['8'][0];
         if (url2) {
-            let str = url2.domain;
-            let imgURL = ''
-            if (str.substr(str.length - 1, 1) == "/") {
-              imgURL = str.substr(0, str.length - 1);
-            } else {
-              imgURL = str;
-            }
-            this.setData({
-              imgURL: imgURL
-            })
+          let str = url2.domain;
+          let imgURL = ''
+          if (str.substr(str.length - 1, 1) == "/") {
+            imgURL = str.substr(0, str.length - 1);
+          } else {
+            imgURL = str;
+          }
+          this.setData({
+            imgURL: imgURL
+          })
         }
       }
-      
     })
 
-    this.last(options.bookId).then(res => {
-      if(res.code == 0){
-        this.setData({
-          nextid:res.data.nextid
-        })
-        
-        let aImg = res.data.image;
-        this.getImgSrc(aImg)
-      }
-    })
+    if (options.bookId) {
+      this.setData({
+        bookid: options.bookId
+      })
+
+      this.last(options.bookId).then(res => {
+        if (res.code == 0) {
+          this.setData({
+            nextid: res.data.nextid
+          })
+
+          let title = res.data.book.title + res.data.name
+          wx.setNavigationBarTitle({
+            title: title
+          })
+
+          let aImg = Array.from(new Set(res.data.image));
+          this.getImgSrc(aImg)
+        }
+      })
+    } else if (options.cartoonId) {
+      this.setData({
+        cartoonId: options.cartoonId
+      })
+
+      this.changeBook(options.cartoonId)
+    }
+
+
+
+
   },
 
   /**

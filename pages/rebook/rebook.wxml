@@ -4,7 +4,7 @@
     <image mode="widthFix" src="{{item}}"></image>
   </view>
   <view>
-    <view catchtap="catBtn">目录</view>
+    <navigator url="/pages/catbook/catbook?cartoonId={{bookid}}" hover-class="navigator-hover">目录</navigator>
     <view catchtap="preBtn">上一章</view>
     <view catchtap="nextBtn">下一章</view>
   </view>

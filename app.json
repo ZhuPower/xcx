@@ -4,6 +4,7 @@
     "pages/logs/logs",
     "pages/book/book",
     "pages/rebook/rebook",
+    "pages/catbook/catbook",
     "pages/video/video"
   ],
   "window":{

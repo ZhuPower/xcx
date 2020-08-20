@@ -9,9 +9,21 @@ Page({
    */
   data: {
     requestToken:'',
-    bookList:[],
-    typeArr:[]
+    bookList_1:[],
+    bookList_2:[],
+    bookList_3:[],
+    bookList_4:[],
+    bookList_5:[],
+    bookList_6:[],
+    typeArr:[],
+    page:1,
+    typeId:0,
+    sexy:0,
+    status:0
   },
+
+
+  //类别
   typeList:function(){
     let url = 'http://mhapi.spdchgj.com/3/cartoon/cartoonType/list'
     let data = {
@@ -33,21 +45,25 @@ Page({
       return Promise.resolve(res)
     });
   },
+
+  //列表
   cartoonLists:function(){
     let url = 'http://mhapi.spdchgj.com/3/cartoon/cartoon/lists';
     let data = {
-      typeId: 0,
+      typeId: parseInt(this.data.typeId),
       lang: 1,
-      sexy: 0,
-      status: 0,
+      sexy: parseInt(this.data.sexy),
+      status: parseInt(this.data.status), //2完结，1连载
       pagesize: 20,
-      page: 1
+      page: parseInt(this.data.page)
     }
 
     return this.setApi(url,data).then(res => {
       return Promise.resolve(res)
     }); 
   },
+
+  //榜单
   recommendLists:function(ids){
     let url = 'http://mhapi.spdchgj.com/3/cartoon/recommend/lists';
     let data = {
@@ -58,6 +74,7 @@ Page({
       return Promise.resolve(res)
     });
   },
+  //随机
   minListt:function(){
     let url = 'http://mhapi.spdchgj.com/3/cartoon/statiscartoon/minlist';
     let data = {
@@ -72,6 +89,7 @@ Page({
       return Promise.resolve(res)
     });
   },
+  //模板登录
   isLogin2:function(){
     let url = 'http://mhapi.spdchgj.com/2/cartoon/tempuser/login'
     let data = {
@@ -135,7 +153,7 @@ Page({
       var j = 0;
       for (var i in sortArr) {
         var v = obj[sortArr[i]];
-        if (!v) {
+        if (!v && v!=0) {
           v = '';
         }
         stringA += sortArr[i] + '=' + v;
@@ -149,7 +167,7 @@ Page({
       var sign = hexMD5(stringA + key);
       return {
         timestamp: timestamp,
-        sign: sign.toUpperCase()
+        sign: sign.toString().toUpperCase()
       };
   },
   getToke:function(){
@@ -197,6 +215,70 @@ Page({
       url: '/pages/rebook/rebook?bookId='+bookId
     })
   },
+  randBtn:function(){
+    this.minListt().then(res => {
+      this.setData({
+        bookList_5: res.data
+      })
+    })
+  },
+  setType:function(e){
+    let typeId = e.currentTarget.dataset['id'];
+    let obj = {
+      page:1,
+      typeId:typeId
+    }
+
+    this.setData(obj)
+    this.cartoonLists().then(res => {
+      this.setData({
+        bookList_6: res.data
+      })
+    })
+  },
+  setSex:function(e){
+    let sexy = e.currentTarget.dataset['id'];
+    let obj = {
+      page:1,
+      sexy:sexy
+    }
+    
+    this.setData(obj)
+    this.cartoonLists().then(res => {
+      this.setData({
+        bookList_6: res.data
+      })
+    })
+  },
+  setStatus:function(e){
+    let status = e.currentTarget.dataset['id'];
+    let obj = {
+      page:1,
+      status:status
+    }
+  
+    this.setData(obj)
+    this.cartoonLists().then(res => {
+      this.setData({
+        bookList_6: res.data
+      })
+    })
+  },
+  moreBtn:function(){
+    let page = this.data.page + 1;
+    let obj = {
+      page:page
+    }
+  
+    this.setData(obj)
+    this.cartoonLists().then(res => {
+      let arr = this.data.bookList_6;
+      arr.push(...res.data);
+      this.setData({
+        bookList_6: arr
+      })
+    })
+  },
 
 
   /**
@@ -222,12 +304,83 @@ Page({
         this.recommendLists(2).then(res => {
           if(res.code == 0){
             this.setData({
-              bookList: res.data['2'].list
+              bookList_1: res.data['2'].list
             })
           }
         })
+
+        this.recommendLists(10).then(res => {
+          if(res.code == 0){
+            this.setData({
+              bookList_2: res.data['10'].list
+            })
+          }
+        })
+
+        this.recommendLists(3).then(res => {
+          if(res.code == 0){
+            this.setData({
+              bookList_3: res.data['3'].list
+            })
+          }
+        })
+
+        this.recommendLists(11).then(res => {
+          if(res.code == 0){
+            this.setData({
+              bookList_4: res.data['11'].list
+            })
+          }
+        })
+
+        this.minListt().then(res => {
+          this.setData({
+            bookList_5: res.data
+          })
+        })
+
+        this.cartoonLists().then(res => {
+          this.setData({
+            bookList_6: res.data
+          })
+        })
+
+        // this.fn_1().then(res => {
+        //   console.log(res)
+        // })
+        // this.fn_2().then(res => {
+        //   console.log(res)
+        // })
+
       }
     })
+  },
+
+  fn_2:function(){
+    let url = 'http://vapi.yichuba.com/player'
+    let data = {
+      app:1,
+      playerId:422,
+      videoId:572
+      // page: 1,
+      // pageCount: 20
+    }
+
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
+    });
+  },
+
+  fn_1:function(){
+    let url = 'http://vapi.yichuba.com/list'
+    let data = {
+      page: 1,
+      pageCount: 20
+    }
+
+    return this.setApi(url,data).then(res => {
+      return Promise.resolve(res)
+    });
   },
 
   /**

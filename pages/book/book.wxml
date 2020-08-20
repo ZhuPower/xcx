@@ -1,7 +1,28 @@
 <!--pages/book/book.wxml-->
 
 <view>
-  <scroll-view scroll-y="true" style="height: 600rpx;" bindscrolltoupper="upper" bindscrolltolower="lower">
-    <view class="list" wx:for="{{bookList}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.title}}</view>
-  </scroll-view>
+  <view class="h2">类别1</view>
+  <view class="list" wx:for="{{bookList_1}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.title}}</view>
+  <view class="h2">类别2</view>
+  <view class="list" wx:for="{{bookList_2}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.title}}</view>
+  <view class="h2">类别3</view>
+  <view class="list" wx:for="{{bookList_3}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.title}}</view>
+  <view class="h2">类别4</view>
+  <view class="list" wx:for="{{bookList_4}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.title}}</view>
+  <view class="h2" catchtap="randBtn">随机</view>
+  <view class="list" wx:for="{{bookList_5}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.title}}</view>
+  <view class="classify">
+    <view class="typeStatus">
+      <view class="typename" catchtap="setSex" data-id="1">男</view>
+      <view class="typename" catchtap="setSex" data-id="2">女</view>
+      <view class="typename" catchtap="setStatus" data-id="1">连载</view>
+      <view class="typename" catchtap="setStatus" data-id="2">完</view>
+    </view>
+    <view class="list-type">
+      <view class="typename" wx:for="{{typeArr}}" wx:key="unique" catchtap="setType" data-id="{{item.id}}">{{item.typename}}</view>
+    </view>
+    <view class="h2">列表</view>
+  <view class="list" wx:for="{{bookList_6}}" wx:key="unique" data-item="{{item}}" catchtap="playlike" data-id="{{item.id}}" data-typename="{{item.typename}}">{{item.title}}</view>
+    <view class="moreBtn" catchtap="moreBtn">更多</view>
+  </view>
 </view>

@@ -1,8 +1,6 @@
-/* pages/book/book.wxss */
-.h2 {
-  font-weight: bold;
-  font-size: 32rpx;
-  margin-bottom: 20rpx;
+/* pages/catbook/catbook.wxss */
+.picker {
+  font-size: 26rpx;
 }
 
 .list {
