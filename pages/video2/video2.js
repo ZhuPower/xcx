@@ -117,8 +117,7 @@ Page({
         vid: parseInt(vid),
         tname: this.data.tname
       }
-
-      wx.clearStorage();
+      
       let res2 = await this.setApi(url, data);
       console.log(res2)
       if(res2.code == 0){
