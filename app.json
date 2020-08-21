@@ -5,6 +5,8 @@
     "pages/book/book",
     "pages/rebook/rebook",
     "pages/catbook/catbook",
+    "pages/videoList/videoList",
+    "pages/video2/video2",
     "pages/video/video"
   ],
   "window":{

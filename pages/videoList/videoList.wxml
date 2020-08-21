@@ -1,0 +1,20 @@
+<!--pages/videoList/videoList.wxml-->
+<view>
+  <view>
+    <form bindsubmit='loginForm'>
+      <input type='text' name='username' placeholder="输入关键字"></input>
+      <button formType="submit" type='primary'>确认</button>
+    </form>
+  </view>
+  <view>
+    <view class="h2">分类</view>
+    <view class="list" wx:for="{{tagsList}}" wx:key="unique" catchtap="changeTag" data-id="{{item.id}}">{{item.tag}}
+    </view>
+  </view>
+  <view>
+    <view class="h2">列表</view>
+    <view class="list" wx:for="{{catelist}}" wx:key="unique" catchtap="playlike" data-id="{{item.id}}">{{item.name}}
+    </view>
+    <view catchtap="moreBtn">更多</view>
+  </view>
+</view>

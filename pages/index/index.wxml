@@ -1,3 +1,4 @@
 <!--pages/index/index.wxml-->
 <navigator url="/pages/book/book" hover-class="navigator-hover">文章</navigator>
 <navigator url="/pages/video/video" hover-class="navigator-hover">视频</navigator>
+<navigator url="/pages/videoList/videoList" hover-class="navigator-hover">视频2</navigator>

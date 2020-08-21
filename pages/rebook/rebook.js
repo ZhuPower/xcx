@@ -78,12 +78,17 @@ Page({
       })
     })
   },
-  getImgSrc: function (aImg) {
+  async getImgSrc (aImg) {
     let _this = this;
+    let _aImg = [];
+    
     for (let i = 0; i < aImg.length; i++) {
-      (function (n) {
-        let url = _this.data.imgURL + '/' + aImg[n].toLowerCase().replace('.jpg', '.html').replace('.png', '.html').replace('.gif', '.html');
-        _this.getImg(url).then(res => {
+      await getBase64(aImg[i],i);
+    }
+
+    function getBase64 (sUrl,n){
+      let url = _this.data.imgURL + '/' + sUrl.toLowerCase().replace('.jpg', '.html').replace('.png', '.html').replace('.gif', '.html');
+      _this.getImg(url).then(res => {
           let str = res.replace(/\+/g, '*').replace(/\//g, '+').replace(/\*/g, '\/');
           str = str.substring(23);
           let json = {
@@ -93,15 +98,13 @@ Page({
           let _json = JSON.parse(data);
           let _str = 'data:image/jpeg;base64,' + _json.img.replace(/[\r\n]/g, "");
 
-          aImg[n] = _str;
+          _aImg[n] = _str;
 
-          if (i == aImg.length - 1) {
-            _this.setData({
-              imgArr: aImg
-            })
-          }
-        })
-      })(i)
+          _this.setData({
+            imgArr: _aImg
+          })
+      })
+        
     }
   },
   getImg: function (url) {
@@ -196,7 +199,7 @@ Page({
         title = res.data.book.title + res.data.name
 
 
-        let aImg = res.data.image;
+        let aImg = Array.from(new Set(res.data.image));
         this.getImgSrc(aImg)
       } else {
         if (res.code == 0) {
@@ -206,8 +209,7 @@ Page({
           })
 
           title = res.data.book[0].title + res.data[0].name
-
-          let aImg = res.data[0].image;
+          let aImg = Array.from(new Set(res.data[0].image));
           this.getImgSrc(aImg)
         }
       }
@@ -268,10 +270,6 @@ Page({
 
       this.changeBook(options.cartoonId)
     }
-
-
-
-
   },
 
   /**

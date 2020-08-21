@@ -1,0 +1,4 @@
+<!--pages/video2/video2.wxml-->
+<view>
+  <video id="myVideo" src="{{vSrc}}"  enable-danmu danmu-btn controls></video>
+</view>
