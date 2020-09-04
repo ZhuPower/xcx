@@ -22,9 +22,25 @@ Page({
     typeId: 0,
     sexy: 0,
     status: 0,
-    tname: 'u_temp_user_1'
+    tname: 'u_temp_user_1',
+    inputValue: ''
   },
 
+  //搜索
+  search:function(keyword){
+    let url = 'http://mhapi.spdchgj.com/3/cartoon/cartoon/search'
+    let data = {
+      keyword: keyword,
+      refid: '',
+      linkid: '',
+      recommend: '',
+      from: ''
+    }
+
+    return this.setApi(url, data).then(res => {
+      return Promise.resolve(res)
+    });
+  },
 
   //类别
   typeList: function () {
@@ -280,6 +296,18 @@ Page({
       this.setData({
         bookList_6: arr
       })
+    })
+  },
+  bindKeyInput: function (e) {
+    this.setData({
+      inputValue: e.detail.value
+    })
+  },
+  searchBtn:function(){
+    this.isLogin2().then(res => {
+      if (res.code == 0) {
+        this.search(this.data.inputValue);
+      }
     })
   },
 
