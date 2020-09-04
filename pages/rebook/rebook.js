@@ -73,6 +73,7 @@ Page({
           'sign': signParams.sign
         },
         success(res) {
+          console.log(res.data)
           resolved(res.data)
         }
       })
@@ -208,7 +209,7 @@ Page({
             previd: res.data[0].previd
           })
 
-          title = res.data.book[0].title + res.data[0].name
+          title = res.data[0].book.title + res.data[0].name
           let aImg = Array.from(new Set(res.data[0].image));
           this.getImgSrc(aImg)
         }

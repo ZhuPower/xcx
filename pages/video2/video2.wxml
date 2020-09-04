@@ -1,6 +1,6 @@
 <!--pages/video2/video2.wxml-->
 <view>
-  <video id="myVideo" src="{{vSrc}}"  enable-danmu danmu-btn controls></video>
+  <video id="myVideo" src="{{vSrc}}" custom-cache="{{false}}" enable-danmu danmu-btn show-center-play-btn='{{false}}' show-play-btn="{{true}}"
+    controls binderror="errorFn"></video>
   <view><text class="txt" user-select="true">{{vSrc}}</text></view>
-  
 </view>

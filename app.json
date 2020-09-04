@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/book/book",
+    "pages/book2/book2",
     "pages/rebook/rebook",
     "pages/catbook/catbook",
     "pages/videoList/videoList",

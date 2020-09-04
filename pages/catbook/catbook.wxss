@@ -3,10 +3,22 @@
   font-size: 26rpx;
 }
 
+.catBookList {
+  overflow: hidden;
+}
+
 .list {
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+
+.section {
+  height: 100rpx;
+  line-height: 100rpx;
 }

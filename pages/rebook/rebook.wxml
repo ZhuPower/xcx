@@ -3,9 +3,9 @@
   <view class="list" wx:for="{{imgArr}}" wx:key="unique" >
     <image mode="widthFix" src="{{item}}"></image>
   </view>
-  <view>
-    <navigator url="/pages/catbook/catbook?cartoonId={{bookid}}" hover-class="navigator-hover">目录</navigator>
+  <view class="bottomMain">
     <view catchtap="preBtn">上一章</view>
+    <navigator url="/pages/catbook/catbook?cartoonId={{bookid}}" hover-class="navigator-hover">目录</navigator>
     <view catchtap="nextBtn">下一章</view>
   </view>
 </view>
