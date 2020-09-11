@@ -34,19 +34,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // let data = {
+    //   ac:'videolist',
+    //   pg:1
+    // }
+    // this.setApi('http://bttcj.com/inc/sapi.php',data).then(res => {
+    //   //console.log(res)
+    //   let str = res.replace(/\<\!\[CDATA\[/ig,'').replace(/\]\]\>\<\//ig,'</');
+    //   //console.log(str)
+
+    //   var baseNodeName='rss';
+    //   var resObj=common.xml2Obj(str,baseNodeName);
+    //   console.log(resObj);
+    // })
+
     let data = {
-      ac:'videolist',
+      ac:'detail',
       pg:1
     }
-    this.setApi('http://bttcj.com/inc/sapi.php',data).then(res => {
-      //console.log(res)
-      let str = res.replace(/\<\!\[CDATA\[/ig,'').replace(/\]\]\>\<\//ig,'</');
-      //console.log(str)
 
-      var baseNodeName='rss';
-      var resObj=common.xml2Obj(str,baseNodeName);
-      console.log(resObj);
+    this.setApi('http://api.bbkdj.com/json/youku',data).then(res => {
+      console.log(res)
     })
+    
   },
 
   /**
