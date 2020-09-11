@@ -27,7 +27,11 @@ Page({
       inputUrl: str
     })
   },
-  onLoad: function() {
+  onLoad: function(options) {
+    console.log(options.url)
+    this.setData({
+      inputUrl: options.url
+    })
     //console.log(arr.arrUrl)
 
   }
