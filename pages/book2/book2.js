@@ -30,11 +30,6 @@ Page({
         type:'json',
         name:'佳丽影视'
       },
-      // {
-      //   url:'https://apilj.com/api.php/provide/vod/at/json/',
-      //   type:'json',
-      //   name:'辣椒影视'
-      // },
       {
         url:'https://lbapi9.com/api.php/provide/vod/at/json/',
         type:'json',
@@ -69,6 +64,71 @@ Page({
         url:'https://api.rereapi.com/inc/apijson_vod.php',
         type:'json',
         name:'热热影视'
+      },
+      {
+        url:'http://bttcj.com/inc/sapi.php',
+        type:'xml',
+        name:'博天堂影视'
+      },
+      {
+        url:'https://dadiapi.com/apple_m3u8.php',
+        type:'xml',
+        name:'大地影视'
+      },
+      {
+        url:'http://sscj8.com/inc/sapi.php',
+        type:'xml',
+        name:'色色影视'
+      },
+      {
+        url:'http://99zywcj.com/inc/sck.php',
+        type:'xml',
+        name:'玖玖影视'
+      },
+      {
+        url:'http://lsnzxcj.com/inc/sapi.php',
+        type:'xml',
+        name:'撸死你影视'
+      },
+      // {
+      //   url:'http://f2dcj6.com/sapi',
+      //   type:'xml',
+      //   name:'富二代影视'
+      // },
+      {
+        url:'http://zcyydy.com/sapi',
+        type:'xml',
+        name:'字幕网影视'
+      },
+      {
+        url:'http://ssyydy.com/sapi',
+        type:'xml',
+        name:'久草影视'
+      },
+      {
+        url:'http://nygcj.com/sapi.php',
+        type:'xml',
+        name:'女优影视'
+      },
+      {
+        url:'http://llzxcj.com/inc/sck.php',
+        type:'xml',
+        name:'利来影视'
+      },
+      {
+        url:'http://wmcj8.com/inc/sapi.php',
+        type:'xml',
+        name:'环亚影视'
+      },
+      {
+        url:'http://api.iixxzyapi.com/inc/apickm3u8.php',
+        type:'xml',
+        name:'IX影视'
+      },
+      {
+        url:'http://cj.xhgcjym.com/inc/httpapi.php',
+        type:'xml',
+        name:'黄瓜影视'
       }
     ]
   },
@@ -142,7 +202,23 @@ Page({
       arrObj: item
     }
     this.setData(obj);
-    this.cshnr();
+
+    if(this.data.arrObj.type=='json'){
+      this.cshnr();
+    }else{
+      
+      let data = {
+        ac:'videolist',
+        pg:1
+      }
+      this.setApi(this.data.arrObj.url,data).then(res => {
+        //console.log(res)
+        let str = res.replace(/\<\!\[CDATA\[/ig,'').replace(/\]\]\>\<\//ig,'</');
+       // console.log(str)
+        var resObj=common.xml2Obj(str);
+        console.log(resObj);
+      })
+    }
   },
 
   setType(e){
@@ -167,9 +243,8 @@ Page({
 
   playlike: function (e) {
     let url = e.currentTarget.dataset['url'];
-    
-    url = url.substring(5);
     console.log(url)
+    //url = url.split('$');
 
     wx.navigateTo({
       url: '/pages/video/video?url=' + url
@@ -193,22 +268,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // let data = {
-    //   ac:'videolist',
-    //   pg:1
-    // }
-    // this.setApi(this.data.arrObj.url,data).then(res => {
-    //   console.log(res)
-    //   //let str = res.replace(/\<\!\[CDATA\[/ig,'').replace(/\]\]\>\<\//ig,'</');
-    //   //console.log(str)
-
-    //   //var baseNodeName='rss';
-    //   //var resObj=common.xml2Obj(str,baseNodeName);
-    //   //console.log(resObj);
-    // })
-
-    this.cshnr();
     
+    this.cshnr();
   },
 
   /**

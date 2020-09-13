@@ -10,12 +10,14 @@ function loadXMLString(txt) {
   return xmlDoc;
 }
 
-function xml2Obj(xmlText, baseNodeName) {
+function xml2Obj(xmlText) {
   // 获取到xml dom对象
   let xmlDoc = loadXMLString(xmlText);
+  //console.log(xmlDoc)
   // 按元素名获取节点
-  let baseNode_list = xmlDoc.getElementsByTagName(baseNodeName);
-  return xmlToJson(baseNode_list[0]);
+  let baseNode_list = xmlDoc.childNodes[1];
+  //console.log(baseNode_list)
+  return xmlToJson(baseNode_list);
 }
 
 
@@ -43,14 +45,16 @@ function xmlToJson(xml) {
       var nodeName = item.nodeName;
       if (typeof(obj[nodeName]) == "undefined") {
         obj[nodeName] = xmlToJson(item);
-      } 
-          else {
+      }else {
         if (typeof(obj[nodeName].length) == "undefined") {
           var old = obj[nodeName];
           obj[nodeName] = [];
           obj[nodeName].push(old);
         }
-        obj[nodeName].push(xmlToJson(item));
+        console.log(obj[nodeName])
+        if(obj[nodeName]){
+         obj[nodeName].push(xmlToJson(item));
+        }
       }
     }
   }
