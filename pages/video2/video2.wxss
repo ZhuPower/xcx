@@ -1,6 +1,0 @@
-/* pages/video2/video2.wxss */
-.txt {
-  white-space: normal;
-  word-break: break-all;
-  word-wrap: break-word;
-}

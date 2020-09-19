@@ -1,9 +1,0 @@
-<!--pages/index/index.wxml-->
-<view class="indexMain">
-  <view class="navMain">
-    <navigator url="/pages/book/book" hover-class="navigator-hover">文章</navigator>
-    <navigator url="/pages/book2/book2" hover-class="navigator-hover">文章2</navigator>
-    <navigator url="/pages/video/video" hover-class="navigator-hover">视频</navigator>
-    <navigator url="/pages/videoList/videoList" hover-class="navigator-hover">视频2</navigator>
-  </view>
-</view>

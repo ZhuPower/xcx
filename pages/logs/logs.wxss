@@ -1,8 +1,0 @@
-
-.list {
-  margin: 10rpx;
-  height: 30px;
-  display: block;
-}
-.container{text-align: center;}
-
