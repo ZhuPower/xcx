@@ -1,0 +1,7 @@
+<view class="videoPlayWarp">
+  <video src="{{videoSrc}}" class="playBox"></video>
+  <scroll-view class="playList" scroll-y="{{true}}">
+    <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}" wx:key="index"
+      class="{{nIndex == index ? 'cur' : ''}}" catchtap="Play">{{item[0]}}</text>
+  </scroll-view>
+</view>

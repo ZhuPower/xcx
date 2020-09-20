@@ -1,0 +1,37 @@
+/* pages/Video/pages/play/play.wxss */
+.videoPlayWarp{
+  /* padding: 0px 30rpx; */
+}
+.videoPlayWarp .playBox{
+  width: 100%;
+}
+.videoPlayWarp .playList{
+  padding: 30rpx;
+  overflow: hidden;
+  height: auto;
+  max-height: 570rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+.videoPlayWarp .playList text {
+  width: 152rpx;
+  text-align: center;
+  display: block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 25rpx;
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.videoPlayWarp .playList text:nth-child(4n){
+  margin-right: 0rpx;
+}
+
+.videoPlayWarp .playList text.cur{
+  color: #fff;
+  background: #33a0ff;
+  border: 1px solid #33a0ff;
+}

@@ -61,13 +61,67 @@
 
 .videoDetailWrap .top .topRight .videoInfoLi .listInfo {
   overflow: hidden;
-  display:-webkit-box;
-  -webkit-line-clamp:1;
-  text-overflow:ellipsis;
-  -webkit-box-orient:vertical;
-  word-break:break-all;
-  width:370rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  width: 370rpx;
 }
+
 .videoDetailWrap .top .topRight .videoInfoLi.col2 .listInfo {
-  width:150rpx;
+  width: 150rpx;
+}
+
+.videoDetailWrap .conBox {
+  margin-top: 30rpx;
+}
+
+.videoDetailWrap .conBox .conTabH {
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 30rpx;
+}
+
+.videoDetailWrap .conBox .conTabH text {
+  padding: 0px 30rpx;
+  display: block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+}
+
+.videoDetailWrap .conBox .conTabH text.cur {
+  background: #33a0ff;
+  border-radius: 10rpx;
+  color: #fff;
+}
+
+.videoDetailWrap .conBox .conTabC {}
+
+.videoDetailWrap .conBox .conTabC .tabList_0 {
+  overflow: hidden;
+}
+
+.videoDetailWrap .conBox .conTabC .tabList_0 text {
+  width: 152rpx;
+  text-align: center;
+  display: block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 25rpx;
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.videoDetailWrap .conBox .conTabC .tabList_0 text:nth-child(4n){
+  margin-right: 0rpx;
+}
+
+.videoDetailWrap .conBox .conTabC .tabList_1 {
+  line-height: 44rpx;
+  font-size: 25rpx;
+  text-indent: 2em;
 }

@@ -10,7 +10,7 @@
 		<view class="listMain" wx:for="{{classify}}" wx:for-index="index1" wx:for-item="item1" wx:key="type_id" wx:if="{{list[index1].length > 0}}">
 			<view class="h3">
 				<text>{{item1.type_name}}</text>
-				<navigator url="../list/list" class="searchBtn">More</navigator>
+				<navigator url="../list/list?type={{lbID.aid2[index1][0]}}" class="searchBtn">More</navigator>
 			</view>
 			<view class="listUl">
 				<view class="listLi" wx:for="{{list[index1]}}" wx:for-index="index2" wx:for-item="item2" wx:key="vod_id" wx:if="{{index2<9}}" data-id="{{item2.vod_id}}" catchtap="goDetail">

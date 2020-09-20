@@ -1,2 +1,6 @@
 <!--pages/Video/pages/list/list.wxml-->
-<text>pages/Video/pages/list/list.wxml</text>
+<view class="videoListWrap">
+<view class="h3">列表</view>
+<view class="listMain">
+</view>
+</view>

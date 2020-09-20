@@ -77,10 +77,10 @@
           "scene": null
         },
         {
-          "id": 1,
-          "name": "pages/Video/pages/detail/detail",
-          "pathName": "pages/Video/pages/detail/detail",
-          "query": "id=46886",
+          "id": -1,
+          "name": "pages/Video/pages/list/list",
+          "pathName": "pages/Video/pages/list/list",
+          "query": "type=5",
           "scene": null
         }
       ]

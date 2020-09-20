@@ -1,59 +1,59 @@
-// pages/Video/pages/detail/detail.js
+// pages/Video/pages/play/play.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id:'',
-    data:null,
-    nTab:0,
-    playList:[]
+    videoSrc:'',
+    playList:[],
+    nIndex:0,
+    title:''
   },
-
-  setTab(e){
-    let index = e.currentTarget.dataset.index
-    this.setData({
-      nTab:parseInt(index)
-    })
-  },
-  toPlay(e){
+  Play(e){
     let obj = e.currentTarget.dataset
-    let goPlay = fnCon.goPlay
-    goPlay(obj)
+    this.setData({
+      nIndex:obj.index,
+      videoSrc:obj.url
+    })
+
+    wx.setNavigationBarTitle({
+      title: `${this.data.title} ${obj.name}` 
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let data = JSON.parse(decodeURIComponent(options.data))
+   // console.log(data)
     this.setData({
-      id:options.id
+      videoSrc:data.url,
+      nIndex:data.index,
+      title:data.title
     })
-  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function (options) {
-    let url = apiUrl.apiUrl.video.list
-    let fnAjax = fnCon.fnAjax
+    wx.setNavigationBarTitle({
+      title: `${data.title} ${data.name}` 
+    })
 
-    let data = {
+   let url = apiUrl.apiUrl.video.list
+   let fnAjax = fnCon.fnAjax
+
+    let data2 = {
       ac:'detail',
-      ids:this.data.id
+      ids:data.id
     }
 
-    fnAjax(url,data).then(res => {
+    fnAjax(url,data2).then(res => {
       
       if(res.code == 1){
-        this.setData({
-          data:res.list[0]
-        })
 
-        let arr1 = this.data.data.vod_play_url.split('#')
+        let arr1 = res.list[0].vod_play_url.split('#')
         let arr2 = []
         for(let i=0;i<arr1.length;i++){
           let arr3 = arr1[i].split('$')
@@ -65,6 +65,13 @@ Page({
         })
       }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
 
   /**

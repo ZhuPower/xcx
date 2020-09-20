@@ -15,14 +15,14 @@
         </view>
         <view class="infoBox">
           <view class="videoInfoLi">
-            <view class="listName">类型</view>
-            <view class="listInfo">{{data.type_name}}</view>
+            <view class="listName">导演</view>
+            <view class="listInfo">{{data.vod_director}}</view>
           </view>
         </view>
         <view class="infoBox">
           <view class="videoInfoLi col2">
-            <view class="listName">导演</view>
-            <view class="listInfo">{{data.vod_director}}</view>
+            <view class="listName">类型</view>
+            <view class="listInfo">{{data.type_name}}</view>
           </view>
           <view class="videoInfoLi col2">
             <view class="listName">地区</view>
@@ -44,12 +44,14 @@
   </view>
   <view class="conBox">
     <view class="conTabH">
-      <text>播放列表</text>
-      <text>内容简介</text>
+      <text class="{{nTab == 0 ? 'cur' : ''}}" catchtap="setTab" data-index="0">播放列表</text>
+      <text class="{{nTab == 1 ? 'cur' : ''}}" catchtap="setTab" data-index="1">内容简介</text>
     </view>
     <view class="conTabC">
-      <view></view>
-      <view>{{data.vod_content}}</view>
+      <view class="tabList tabList_0" wx:if="{{nTab == 0}}">
+        <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}" data-title="{{data.vod_name}}" data-id="{{data.vod_id}}" wx:key="index" catchtap="toPlay">{{item[0]}}</text>
+      </view>
+      <view class="tabList tabList_1" wx:if="{{nTab == 1}}">{{data.vod_content}}</view>
     </view>
   </view>
 </view>

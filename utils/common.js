@@ -23,8 +23,17 @@ const goVideo = function(id){
   })
 }
 
+const goPlay = function(obj){
+  let str = JSON.stringify(obj)
+  
+  wx.navigateTo({
+    url: '/pages/Video/pages/play/play?data='+encodeURIComponent(str),
+  })
+}
+
 
 module.exports = {
   fnAjax,
-  goVideo
+  goVideo,
+  goPlay
 }
