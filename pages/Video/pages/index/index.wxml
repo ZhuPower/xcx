@@ -1,8 +1,12 @@
 <!--pages/Video/pages/index/index.wxml-->
 <view class="videoIndexWrap" wx:if="{{isShow}}">
-	<navigator url="../search/search" class="searchBtn">
-		<icon class="icon-small" type="search" size="20"></icon>输入关键字
-	</navigator>
+	<view class="searchMain">
+		<view class="searchBox">
+			<icon class="icon-small" type="search" size="20"></icon>
+			<input bindinput="bindKeyInput" placeholder="请输入搜索关键字" />
+			<text catchtap="goList">搜索</text>
+		</view>
+	</view>
 	<view class="banner">
 		<image src="../../images/banner.jpg"></image>
 	</view>
@@ -10,7 +14,7 @@
 		<view class="listMain" wx:for="{{classify}}" wx:for-index="index1" wx:for-item="item1" wx:key="type_id" wx:if="{{list[index1].length > 0}}">
 			<view class="h3">
 				<text>{{item1.type_name}}</text>
-				<navigator url="../list/list?type={{lbID.aid2[index1][0]}}" class="searchBtn">More</navigator>
+				<navigator url="../list/list?type={{lbID.aid2[index1][0]}}&page=1&name={{item1.type_name}}" class="searchBtn">More</navigator>
 			</view>
 			<view class="listUl">
 				<view class="listLi" wx:for="{{list[index1]}}" wx:for-index="index2" wx:for-item="item2" wx:key="vod_id" wx:if="{{index2<9}}" data-id="{{item2.vod_id}}" catchtap="goDetail">

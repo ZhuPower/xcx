@@ -6,7 +6,6 @@
     "pages/Video/pages/list/list",
     "pages/Video/pages/detail/detail",
     "pages/Video/pages/play/play",
-    "pages/Video/pages/search/search",
     "pages/index/index"
   ],
   "window":{

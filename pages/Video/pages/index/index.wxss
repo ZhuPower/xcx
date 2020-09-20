@@ -58,3 +58,35 @@
   padding: 0px 8rpx;
   box-sizing: border-box;
 }
+.videoIndexWrap .searchMain{
+  background:#33a0ff;
+  margin-bottom: 30rpx;
+}
+.videoIndexWrap .searchMain .searchBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:30rpx;
+  height: 60rpx;
+  position: relative;
+}
+.videoIndexWrap .searchMain .searchBox icon{
+  position: absolute;
+  left: 40rpx;
+  top: 43rpx;
+}
+.videoIndexWrap .searchMain .searchBox input{
+  color: #000;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  width: 600rpx;
+  padding-left: 50rpx;
+}
+.videoIndexWrap .searchMain .searchBox text{
+  color: #fff;
+  display: block;
+  width: 90rpx;
+  text-align: center;
+}

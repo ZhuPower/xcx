@@ -1,6 +1,21 @@
 <!--pages/Video/pages/list/list.wxml-->
 <view class="videoListWrap">
-<view class="h3">列表</view>
-<view class="listMain">
-</view>
+	<view class="h3">{{name}}列表</view>
+	<scroll-view class="listMain" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}" refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
+		<view class="listBox" wx:for="{{videoList}}" wx:key="index" catchtap="goDetail" data-id="{{item.vod_id}}">
+			<image src="{{item.vod_pic}}"></image>
+			<view class="listRight">
+				<view class="listName">{{item.vod_name}}</view>
+				<view class="listInfo">
+					<view class="listInfoName">类型：</view>
+					<view class="listInfoC">{{item.type_name}}</view>
+				</view>
+				<view class="listInfo">
+					<view class="listInfoName">主演：</view>
+					<view class="listInfoC">{{item.vod_actor}}</view>
+				</view>
+				<view class="listContent">{{item.vod_content}}</view>
+			</view>
+		</view>
+	</scroll-view>
 </view>

@@ -25,12 +25,33 @@ Page({
       ]
     },
     classify:[],
-    list:[]
+    list:[],
+    searchKey:''
   },
   goDetail(e){
     let id = e.currentTarget.dataset.id
     let goVideo = fnCon.goVideo
     goVideo(id)
+  },
+  bindKeyInput(e){
+    this.setData({
+      searchKey: e.detail.value
+    })
+  },
+  goList(){
+    if(this.data.searchKey){
+      let str = 'type=-1&page=1&name=搜索"'+this.data.searchKey+'"结果&key='+this.data.searchKey
+      wx.navigateTo({
+        url: '/pages/Video/pages/list/list?'+str,
+      })
+    }else{
+      wx.showToast({
+        title: '请输入搜索关键字',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+    
   },
 
   /**
