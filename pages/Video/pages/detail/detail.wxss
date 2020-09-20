@@ -1,21 +1,73 @@
 /* pages/Video/pages/detail/detail.wxss */
-.videoDetailWrap{
-padding: 0px 30rpx
+.videoDetailWrap {
+  padding: 0px 30rpx
 }
-.videoDetailWrap .top{
+
+.videoDetailWrap .top {
   display: flex;
   justify-content: space-between;
   padding-top: 30rpx;
 }
 
-.videoDetailWrap .top .topLeft{
+.videoDetailWrap .top .topLeft {
   width: 220rpx;
   height: 300rpx;
   overflow: hidden;
   border-radius: 20rpx;
 }
 
-.videoDetailWrap .top .topLeft image{
+.videoDetailWrap .top .topLeft image {
   width: 220rpx;
   height: 300rpx;
+}
+
+.videoDetailWrap .top .topRight {
+  width: 440rpx;
+}
+
+.videoDetailWrap .top .topRight {}
+
+.videoDetailWrap .top .topRight .videoName {
+  font-size: 36rpx;
+  color: #33a0ff;
+  height: 60rpx;
+  line-height: 60rpx;
+  overflow: hidden;
+}
+
+.videoDetailWrap .top .topRight .infoBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.videoDetailWrap .top .topRight .videoInfoLi {
+  overflow: hidden;
+  font-size: 26rpx;
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+}
+
+.videoDetailWrap .top .topRight .videoInfoLi.col2 {
+  width: 50%;
+  /* flex-wrap: nowrap; */
+}
+
+.videoDetailWrap .top .topRight .videoInfoLi .listName {
+  color: #aaa;
+  margin-right: 16rpx;
+  width: 52rpx;
+}
+
+.videoDetailWrap .top .topRight .videoInfoLi .listInfo {
+  overflow: hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  text-overflow:ellipsis;
+  -webkit-box-orient:vertical;
+  word-break:break-all;
+  width:370rpx;
+}
+.videoDetailWrap .top .topRight .videoInfoLi.col2 .listInfo {
+  width:150rpx;
 }
