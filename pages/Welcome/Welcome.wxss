@@ -1,0 +1,52 @@
+/* pages/navPage/navPage.wxss */
+.navWrap{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left:0;
+  background:#33a0ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navWrap .logoMain{
+  width: 100%;
+}
+.navWrap .logoMain .logo{
+    width: 168rpx;
+    height: 168rpx;
+    border-radius: 84rpx;
+    margin: 0px auto;
+    border:1px solid #fff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+
+.navWrap .logoMain .logo image{
+  width: 168rpx;
+  height: 132rpx;
+  display: block;
+}
+.navWrap .welcome{
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 38rpx;
+  margin-top: 40rpx;
+}
+.navWrap .navMain{}
+
+.navWrap .navMain navigator{
+  width: 360rpx;
+  height: 88rpx;
+  background: #fff;
+  margin-bottom: 40rpx;
+  text-align: center;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+}

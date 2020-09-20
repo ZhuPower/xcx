@@ -1,0 +1,19 @@
+{
+  "pages":[
+    "pages/Welcome/Welcome",
+    "pages/Video/pages/index/index",
+    "pages/Video/pages/classify/classify",
+    "pages/Video/pages/list/list",
+    "pages/Video/pages/detail/detail",
+    "pages/Video/pages/search/search",
+    "pages/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

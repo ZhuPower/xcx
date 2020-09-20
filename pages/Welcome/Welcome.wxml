@@ -1,0 +1,18 @@
+<!--pages/navPage/navPage.wxml-->
+<view class="navWrap">
+	<view class="logoMain">
+		<view class="logo">
+			<image src="./images/logo.png"></image>
+		</view>
+		<view class="welcome">
+			<text>Hello，小伙伴们！</text>
+		</view>
+	</view>
+
+	<view class="navMain">
+		<navigator url="/">小说</navigator>
+		<navigator url="/">漫画</navigator>
+		<navigator url="/">音乐</navigator>
+		<navigator url="/pages/Video/pages/index/index">视频</navigator>
+	</view>
+</view>

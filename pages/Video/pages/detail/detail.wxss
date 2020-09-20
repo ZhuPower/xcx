@@ -1,0 +1,21 @@
+/* pages/Video/pages/detail/detail.wxss */
+.videoDetailWrap{
+padding: 0px 30rpx
+}
+.videoDetailWrap .top{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30rpx;
+}
+
+.videoDetailWrap .top .topLeft{
+  width: 220rpx;
+  height: 300rpx;
+  overflow: hidden;
+  border-radius: 20rpx;
+}
+
+.videoDetailWrap .top .topLeft image{
+  width: 220rpx;
+  height: 300rpx;
+}

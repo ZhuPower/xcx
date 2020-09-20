@@ -1,0 +1,60 @@
+/* pages/Video/pages/index/index.wxss */
+
+
+.videoIndexWrap .banner {
+  width: 690rpx;
+  height: 345rpx;
+  margin: 0px auto;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.videoIndexWrap .banner image {
+  width: 690rpx;
+  height: 345rpx;
+}
+
+.videoIndexWrap .main {
+  padding: 0px 30rpx;
+  overflow: hidden;
+}
+
+.videoIndexWrap .main .listMain {}
+
+.videoIndexWrap .main .listMain .h3 {
+  display: flex;
+  justify-content: space-between;
+  height: 88rpx;
+  align-items: center;
+}
+.videoIndexWrap .main .listMain .listUl{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.videoIndexWrap .main .listMain .listUl .listLi{
+  width: 30%;
+  overflow: hidden;
+  margin-bottom: 40rpx;
+  border-radius: 10rpx;
+  border:1px solid #ccc;
+}
+
+.videoIndexWrap .main .listMain .listUl .listLi image{
+  width: 100%;
+  height: 300rpx;
+}
+.videoIndexWrap .main .listMain .listUl .listLi text{
+  text-align: center;
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  -webkit-box-orient:vertical;
+  word-break:break-all;
+  padding: 0px 8rpx;
+  box-sizing: border-box;
+}

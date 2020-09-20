@@ -1,0 +1,47 @@
+<!--pages/Video/pages/detail/detail.wxml-->
+<view class="videoDetailWrap">
+	<view class="top">
+		<view class="topLeft">
+     <image src="{{data.vod_pic}}"></image>
+    </view>
+		<view class="topRight">
+      <view class="videoName">{{data.vod_name}}</view>
+      <view class="videoInfoUl">
+        <view class="videoInfoLi">
+          <view class="listName">主演</view>
+          <view class="listInfo">{{data.vod_actor}}</view>
+        </view>
+        <view class="videoInfoLi">
+          <view class="listName">类型</view>
+          <view class="listInfo">{{data.type_name}}</view>
+        </view>
+        <view class="videoInfoLi">
+          <view class="listName">导演</view>
+          <view class="listInfo">{{data.vod_director}}</view>
+        </view>
+        <view class="videoInfoLi">
+          <view class="listName">地区</view>
+          <view class="listInfo">{{data.vod_area}}</view>
+        </view>
+        <view class="videoInfoLi">
+          <view class="listName">年份</view>
+          <view class="listInfo">{{data.vod_year}}</view>
+        </view>
+        <view class="videoInfoLi">
+          <view class="listName">语言</view>
+          <view class="listInfo">{{data.vod_lang}}</view>
+        </view>
+      </view>
+    </view>
+	</view>
+  <view class="conBox">
+    <view class="conTabH">
+      <text>播放列表</text>
+      <text>内容简介</text>
+    </view>
+    <view class="conTabC">
+      <view></view>
+      <view>{{data.vod_content}}</view>
+    </view>
+  </view>
+</view>
