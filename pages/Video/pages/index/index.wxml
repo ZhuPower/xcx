@@ -1,4 +1,5 @@
 <!--pages/Video/pages/index/index.wxml-->
+
 <view class="videoIndexWrap" wx:if="{{isShow}}">
 	<view class="searchMain">
 		<view class="searchBox">
@@ -24,4 +25,5 @@
 			</view>
 		</view>
 	</view>
+	<NavBar navType="Video" navPath="index"></NavBar>
 </view>

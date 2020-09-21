@@ -1,2 +1,17 @@
 <!--pages/Video/pages/classify/classify.wxml-->
-<text>pages/Video/pages/classify/classify.wxml</text>
+<view class="videoClassifyWrap">
+  <view class="classifyMain">
+    <view class="h3">
+      <text>{{name}}列表</text>
+      <view catchtap="setHeight" class="iconsText {{isShow?'cur':''}}">
+        <icon class="iconfont iconjiantou"></icon>
+      </view>
+    </view>
+    <view class="classifyH {{isShow?'cur':''}}">
+      <text wx:for="{{classifyList}}" wx:key="index" data-type="{{item.type_id}}" data-name="{{item.type_name}}" data-index="{{index}}" catchtap="getType"
+        class="{{nIndex == index ? 'cur' : ''}}">{{item.type_name}}</text>
+    </view>
+    <VideoList type="{{classifyType}}" searchKey="{{searchKey}}" class="classifyC"></VideoList>
+  </view>
+  <NavBar navType="Video" navPath="classify"></NavBar>
+</view>

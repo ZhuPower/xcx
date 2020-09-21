@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "VideoList":"/components/VideoList/VideoList"
+  },
   "navigationBarBackgroundColor": "#33a0ff"
 }

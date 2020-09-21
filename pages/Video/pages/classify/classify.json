@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "NavBar": "/components/NavBar/NavBar",
+    "VideoList":"/components/VideoList/VideoList"
+  },
+  "navigationBarTitleText": "视频分类",
+  "navigationBarBackgroundColor": "#33a0ff"
 }

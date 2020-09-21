@@ -1,1 +1,66 @@
 /* pages/Video/pages/classify/classify.wxss */
+@import "/assets/fonts/iconfont.wxss";
+
+.videoClassifyWrap {}
+
+.videoClassifyWrap .classifyMain {}
+
+.videoClassifyWrap .classifyMain .h3 {
+  position: fixed;
+  z-index: 2;
+  height: 88rpx;
+  margin: 0px 30rpx;
+  border-bottom: 1px solid #ccc;
+  width: 690rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.videoClassifyWrap .classifyMain .h3 .iconsText {
+  width: 88rpx;
+  height: 88rpx;
+  text-align: center;
+  line-height: 88rpx;
+  transition: all 0.25s linear;
+}
+
+.videoClassifyWrap .classifyMain .h3 .iconsText.cur {
+  transform: rotate(180deg);
+  transition: all 0.25s linear;
+}
+
+.videoClassifyWrap .classifyMain .classifyH {
+  padding: 0px 30rpx;
+  position: fixed;
+  left: 0px;
+  top: 118rpx;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  overflow: hidden;
+  z-index: 1;
+  height: 0px;
+  transition: all 0.25s linear;
+}
+
+.videoClassifyWrap .classifyMain .classifyH.cur {
+  height: 630rpx;
+  transition: all 0.25s linear;
+}
+
+.videoClassifyWrap .classifyMain .classifyH text {
+  width: 25%;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  margin-bottom: 20rpx;
+  float: left;
+}
+.videoClassifyWrap .classifyMain .classifyH text.cur{
+  color: #33a0ff;
+}
+
+.videoClassifyWrap .classifyMain .classifyC scroll-view {
+  margin-bottom: 88rpx;
+}

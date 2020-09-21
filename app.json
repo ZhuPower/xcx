@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/Welcome/Welcome",
+    "pages/Member/Member",
     "pages/Video/pages/index/index",
     "pages/Video/pages/classify/classify",
     "pages/Video/pages/list/list",

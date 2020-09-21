@@ -1,0 +1,54 @@
+/* assets/components/NavBar/NavBar.wxss */
+@import "/assets/fonts/iconfont.wxss";
+
+.navBarWrap {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  border-top: 1px solid #ccc;
+  overflow: hidden;
+  background: #fff;
+}
+
+.navBarWrap navigator {
+  width: 33.333%;
+  height: 88rpx;
+  text-align: center;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.navBarWrap navigator icon {
+  display: block;
+  width: 100%;
+}
+
+.navBarWrap navigator icon.iconshouye {
+  font-size: 42rpx;
+}
+
+.navBarWrap navigator icon.iconziyuan {
+  font-size: 36rpx;
+}
+
+.navBarWrap navigator icon.iconme {
+  font-size: 38rpx;
+}
+
+.navBarWrap navigator text {
+  display: block;
+  width: 100%;
+  font-size: 24rpx;
+}
+
+.navBarWrap navigator.cur icon{
+  color: #33a0ff;
+}
+
+.navBarWrap navigator.cur text{
+  color: #33a0ff;
+}

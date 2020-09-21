@@ -1,6 +1,5 @@
 /* pages/Video/pages/index/index.wxss */
 
-
 .videoIndexWrap .banner {
   width: 690rpx;
   height: 345rpx;
@@ -17,6 +16,7 @@
 .videoIndexWrap .main {
   padding: 0px 30rpx;
   overflow: hidden;
+  padding-bottom: 90rpx;
 }
 
 .videoIndexWrap .main .listMain {}
