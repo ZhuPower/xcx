@@ -71,22 +71,9 @@
       "list": [
         {
           "id": -1,
-          "name": "pages/Video/pages/index/index",
-          "pathName": "pages/Video/pages/index/index",
+          "name": "pages/Novel/pages/index/index",
+          "pathName": "pages/Novel/pages/index/index",
           "query": "",
-          "scene": null
-        },
-        {
-          "id": 1,
-          "name": "pages/Video/pages/list/list",
-          "pathName": "pages/Video/pages/list/list",
-          "query": "type=-1&page=1&name=%E6%90%9C%E7%B4%A2%2211%22%E7%BB%93%E6%9E%9C&key=11",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/Video/pages/classify/classify",
-          "pathName": "pages/Video/pages/classify/classify",
           "scene": null
         }
       ]

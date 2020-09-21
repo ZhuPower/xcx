@@ -10,7 +10,7 @@
 	</view>
 
 	<view class="navMain">
-		<navigator url="/">小说</navigator>
+		<navigator url="/pages/Novel/pages/index/index">小说</navigator>
 		<navigator url="/">漫画</navigator>
 		<navigator url="/">音乐</navigator>
 		<navigator url="/pages/Video/pages/index/index">视频</navigator>

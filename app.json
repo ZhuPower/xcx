@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/Welcome/Welcome",
     "pages/Member/Member",
     "pages/Video/pages/index/index",
@@ -7,13 +7,14 @@
     "pages/Video/pages/list/list",
     "pages/Video/pages/detail/detail",
     "pages/Video/pages/play/play",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/Novel/pages/index/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Weixin",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
