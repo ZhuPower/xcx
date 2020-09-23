@@ -1,6 +1,6 @@
 <!--pages/Video/pages/index/index.wxml-->
 
-<view class="videoIndexWrap" wx:if="{{isShow}}">
+<view class="videoIndexWrap">
 	<view class="searchMain">
 		<view class="searchBox">
 			<icon class="icon-small" type="search" size="20"></icon>

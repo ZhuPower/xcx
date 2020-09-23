@@ -8,7 +8,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isShow:true,
     lbID:{
       aID:[1,2,3,4,41,42,43,49,20,19],
       aid2:[

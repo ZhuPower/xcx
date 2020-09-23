@@ -1,1 +1,14 @@
 /* pages/Novel/pages/index/index.wxss */
+
+.novelIndexWrap .banner {
+  width: 690rpx;
+  height: 287.96rpx;
+  margin: 0px auto;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.novelIndexWrap .banner image {
+  width: 690rpx;
+  height: 287.96rpx;
+}
