@@ -1,5 +1,5 @@
 <view class="videoPlayWarp">
-  <video src="{{videoSrc}}" class="playBox"></video>
+  <video src="https://pcvideoaliyun.titan.mgtv.com/c1/2020/08/13_0/A95C8B101F84553598480A1513778E7E_20200813_1_1_1132_mp4/D42C73E09C013150B80030CF44DE8CA9.m3u8?arange=0&pm=rzJpTIjJnenqAP8pSvp6W5o1tRERDAXPlao1G2lOd6_Py1McCbjqWNT3eXzFCtTFKyFuCoAXPbvRXc~TjOpJCP27U87eRJv3tcIUdostbgYGVtfNlt6sKU~zziqGunOMOVjuFe4LsQsxmHND1Kec0CmvqW5PIYWb8Zu6GpN2RhiEs1utgqGQy~26LFLaWNtfYJ~q_~I8Myogq7tun1_sz22~yGx8bgB_te~Ijc0ujUoJaX~2ZdzKXj1ScKMuVG1LXHonugvqFOdng381j8e3ZrcwX6U4TIMoZglXaDnn6ig8htGinbqCzoZ6RYWFZxGQS0pD40Dpjce_x2dcBEiFmXaGKjlWbo4P6USDHT1UOdpr7HewKqVJchr68CeBfMon9zFTOpwD_GFQSYfm~XdpurZH8XkTshbHbTHc26e7n3~MvZObqZ6qFYyVjhvT6tzsrByQFtO4xr6VPcer~CgFxWAJBzM1whr9uaXZcWPc~fzorZTo&mr=1J8WX4Vvdf1XJVAMLGQwh3Qz7G2SIOErt8sI2erTpgh3bDyxOVensVKmSD54SrvKlGI0C6tzzOX03Y7f~xIGahW3MYX6pE~cBLtVVI__IQGeqRIjEzh3I60XfgRsyqJ93MOYT90GiuWX1QYHFsJGuw--&vcdn=0&scid=25021" class="playBox"></video>
   <scroll-view class="playList" scroll-y="{{true}}">
     <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}" wx:key="index"
       class="{{nIndex == index ? 'cur' : ''}}" catchtap="Play">{{item[0]}}</text>

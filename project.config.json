@@ -75,6 +75,19 @@
           "pathName": "pages/Novel/pages/index/index",
           "query": "",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/Video/pages/index/index",
+          "pathName": "pages/Video/pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/Video/pages/play/play",
+          "pathName": "pages/Video/pages/play/play",
+          "scene": null
         }
       ]
     }

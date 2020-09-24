@@ -2,6 +2,7 @@
 
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+const oJson = require('../../../../utils/xml2Obj')
 Page({
 
   /**
@@ -63,48 +64,39 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    let url = apiUrl.apiUrl.video.list
+    console.log(apiUrl)
+    let videoUrl = apiUrl.apiUrl.video
+    let apiUrl = videoUrl.url + videoUrl.arr[3].type
     let fnAjax = fnCon.fnAjax
 
     let data = {
-      ac:'list'
+      // ac:'detail', //detail videolist
+      // //wd:'琉璃',
+      // pg:1,
+      // ids:92567
+
+      //详情列表
+      // ac:'videolist',
+      // pg:1
+
+      //搜索
+      // ac:'list',
+      // wd:'琉璃',
+      // pg:1
     }
 
-    fnAjax(url,data).then(res => {
-      if(res.code == 1){
-        let arr = []
-        for(let i=0;i<this.data.lbID.aID.length;i++){
-          for(let ii=0;ii<res.class.length;ii++){
-            if(this.data.lbID.aID[i] == res.class[ii].type_id){
-              arr.push(res.class[ii])
-              break;
-            }
-          }
+    // fnAjax(url,data).then(res => {
+    //   //console.log(res)
 
-          let data = {
-            ac:'detail',
-            t:this.data.lbID.aid2[i][0]
-          }
+    //   let str = res.replace(/\<\!\[CDATA\[/ig,'').replace(/\]\]\>\<\//ig,'</');
+    //   //console.log(str)
+    //   var resObj=oJson.xml2Obj(str);
+    //   console.log(resObj);
 
-          fnAjax(url,data).then(res => {
-             if(res.code == 1){
-               let arr = this.data.list
-               arr[i] = res.list
-               let obj = {
-                 list:arr
-               }
-               this.setData(obj)
-             }
-           })
-        }
-        
-        let obj = {
-          classify:arr
-        }
-        this.setData(obj)
-      }
+    //   if(res.code == 1){
+    //   }
       
-    })
+    // })
   },
 
   /**
