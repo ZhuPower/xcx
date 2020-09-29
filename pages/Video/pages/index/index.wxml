@@ -1,5 +1,5 @@
 <!--pages/Video/pages/index/index.wxml-->
-
+<wxs module="m1" src="../../../../utils/calculation.wxs"></wxs>
 <view class="videoIndexWrap">
 	<view class="searchMain">
 		<view class="searchBox">
@@ -9,18 +9,26 @@
 		</view>
 	</view>
 	<view class="banner">
-		<image src="../../images/banner.jpg"></image>
+		<swiper indicator-dots="{{swiperBanner.dots}}" autoplay="{{swiperBanner.autoplay}}" interval="{{swiperBanner.interval}}" duration="{{swiperBanner.duration}}" circular="{{swiperBanner.circular}}" indicator-active-color="{{swiperBanner.indicatorActive}}">
+			<block wx:for="{{banner}}" wx:key="vid">
+				<swiper-item data-id="{{item.vid}}" catchtap="goDetail">
+					<image src="{{m1.getImgSrc(item.img)}}" lazy-load="{{true}}"></image>
+				</swiper-item>
+			</block>
+		</swiper>
 	</view>
 	<view class="main">
-		<view class="listMain" wx:for="{{classify}}" wx:for-index="index1" wx:for-item="item1" wx:key="type_id" wx:if="{{list[index1].length > 0}}">
+		<!-- wx:if="{{list[index1].length > 0}}" -->
+		<view class="listMain" wx:for="{{videoLists}}" wx:for-index="key" wx:for-item="value" wx:key="key">
 			<view class="h3">
-				<text>{{item1.type_name}}</text>
-				<navigator url="../list/list?type={{lbID.aid2[index1][0]}}&page=1&name={{item1.type_name}}" class="searchBtn">More</navigator>
+				<text>{{classify[key].m}}</text>
+				<navigator url="../list/list?type={{classify[key].n}}&page=1&name={{classify[key].m}}" class="searchBtn">
+					More</navigator>
 			</view>
 			<view class="listUl">
-				<view class="listLi" wx:for="{{list[index1]}}" wx:for-index="index2" wx:for-item="item2" wx:key="vod_id" wx:if="{{index2<9}}" data-id="{{item2.vod_id}}" catchtap="goDetail">
-					<image src="{{item2.vod_pic}}"></image>
-					<text>{{item2.vod_name}}</text>
+				<view class="listLi" wx:for="{{value.list}}" wx:for-index="index" wx:for-item="item" wx:key="vod_id" data-id="{{item.vod_id}}" catchtap="goDetail">
+					<image src="{{item.vod_pic}}"></image>
+					<text>{{item.vod_name}}</text>
 				</view>
 			</view>
 		</view>

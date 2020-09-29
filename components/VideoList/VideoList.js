@@ -7,7 +7,9 @@ Component({
    */
   properties: {
     type:Number,
-    searchKey:String
+    searchKey:String,
+    isApp:Boolean,
+    sourceUrl: String
   },
 
   /**
@@ -17,7 +19,10 @@ Component({
     videoList:[],
     pagecount:0,
     page:1,
-    isRefresh:false
+    isRefresh:false,
+    url:'',
+    fnAjax:fnCon.fnAjax,
+    isNext:true
   },
   observers:{
     'type':function(str){
@@ -28,14 +33,53 @@ Component({
           this.cshData(1)
         }
       }
+    },
+    'url':function(str){
+      if(this.data.url != str){
+        this.setData({
+          url:str
+        })
+  
+        if(this.data.url){
+          if(this.data.searchKey){
+            this.searchFn(1)
+          }else{
+            this.cshData(1)
+          }
+        }
+      }
+    },
+    'sourceUrl':function(str){
+      this.setData({
+        url:str,
+        page:1
+      })
+
+      if(this.data.searchKey){
+        this.searchFn(1)
+      }else{
+        this.cshData(1)
+      }
     }
   },
 
   ready(){
-    if(this.data.searchKey){
-      this.searchFn(1)
+    if(this.data.isApp){
+      this.setData({
+        url:apiUrl.apiUrl.video.VideoLists
+      })
     }else{
-      this.cshData(1)
+      this.setData({
+        url:this.data.sourceUrl
+      })
+    }
+
+    if(this.data.url){
+      if(this.data.searchKey){
+        this.searchFn(1)
+      }else{
+        this.cshData(1)
+      }
     }
   },
 
@@ -51,30 +95,35 @@ Component({
       }
     },
     fnBotton(){
-      let num = parseInt(this.data.page)+1
-      if(num<=this.data.pagecount){
-        wx.showLoading({
-          title: '加载中...',
+      if(this.data.isNext){
+        this.setData({
+          isNext:false
         })
-  
-        if(this.data.searchKey){
-          this.searchFn(num)
+
+        let num = parseInt(this.data.page)+1
+        if(num<=this.data.pagecount){
+          wx.showLoading({
+            title: '加载中...',
+          })
+    
+          if(this.data.searchKey){
+            this.searchFn(num)
+          }else{
+            this.cshData(num)
+          }
+    
         }else{
-          this.cshData(num)
+          wx.showToast({
+            title: '已没有更多了',
+            icon: 'none',
+            duration: 2000
+          })
         }
-  
-      }else{
-        wx.showToast({
-          title: '已没有更多了',
-          icon: 'none',
-          duration: 2000
-        })
       }
-      
     },
     searchFn(num){
-      let url = apiUrl.apiUrl.video.list
-      let fnAjax = fnCon.fnAjax
+     let url = this.data.url
+     let fnAjax = this.data.fnAjax
   
       let data = {
         ac:'list',
@@ -112,7 +161,8 @@ Component({
       
               this.setData({
                 videoList:arr,
-                isRefresh:false
+                isRefresh:false,
+                isNext:true
               })
               wx.hideLoading()
             }
@@ -121,29 +171,46 @@ Component({
       })
     },
     cshData(num){
-      let url = apiUrl.apiUrl.video.list
-      let fnAjax = fnCon.fnAjax
-  
-      let data = {
-        ac:'detail',
-        t:this.data.type,
-        pg:num
+      let url = this.data.url
+      let fnAjax = this.data.fnAjax
+      let data = {}
+
+      if(this.data.isApp){
+        data = {
+          limit:20,
+          area: "全部",
+	        year: "全部",
+          type_id:this.data.type,
+          page:num
+        }
+      }else{
+        data = {
+          ac:'detail',
+          t:this.data.type,
+          pg:num
+        }
       }
   
+
       fnAjax(url,data).then(res => {
-        if(res.code == 1){
+        if(res.code == 1 || res.code == 200){
           let arr = []
   
           if(num > 1){
             arr = this.data.videoList
           }
-  
-          arr.push(...res.list)
-  
+          if(res.list){
+            arr.push(...res.list)
+          }else if(res.data.list){
+            arr.push(...res.data.list)
+          }
+          
+
           this.setData({
-            page:res.page,
-            pagecount:res.pagecount,
+            page:res.page || res.data.page,
+            pagecount:res.pagecount || res.data.count,
             videoList:arr,
+            isNext:true,
             isRefresh:false
           })
           wx.hideLoading()
@@ -152,8 +219,9 @@ Component({
     },
     goDetail(e){
       let id = e.currentTarget.dataset.id
+      let app = this.data.isApp
       let goVideo = fnCon.goVideo
-      goVideo(id)
+      goVideo(id,app)
     }
   }
 })

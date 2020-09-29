@@ -1,39 +1,32 @@
 //app.js
 App({
   onLaunch: function () {
-    // // 展示本地存储能力
-    // var logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
-
-    // // 登录
-    // wx.login({
-    //   success: res => {
-    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-    //   }
-    // })
-    // // 获取用户信息
-    // wx.getSetting({
-    //   success: res => {
-    //     if (res.authSetting['scope.userInfo']) {
-    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-    //       wx.getUserInfo({
-    //         success: res => {
-    //           // 可以将 res 发送给后台解码出 unionId
-    //           this.globalData.userInfo = res.userInfo
-
-    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //           // 所以此处加入 callback 以防止这种情况
-    //           if (this.userInfoReadyCallback) {
-    //             this.userInfoReadyCallback(res)
-    //           }
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
+    this.globalData.nowSource = this.globalData.sourceUrl[this.globalData.nindex]
   },
   globalData: {
-    userInfo: null
+    sourceUrl:[
+      {
+        name:'麻花资源',
+        url:'https://www.mhapi123.com/inc/api_mac10.php'
+      },
+      {
+        name:'百度云资源',
+        url:'https://m3u8.apibdzy.com/api.php/provide/vod/'
+      },
+      {
+        name:'1717资源',
+        url:'http://zy.itono.cn/inc/apijson_vod.php'
+      },
+      {
+        name:'天空影视',
+        url:'https://m3u8.tiankongapi.com/api.php/provide/vod/at/json/'
+      },
+      {
+        name:'最大影视',
+        url:'http://www.zdziyuan.com/inc/s_feifei3zuidam3u8/'
+      }
+    ],
+    nowSource:{},
+    nindex:0
   }
 })

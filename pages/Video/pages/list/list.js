@@ -1,4 +1,5 @@
 // pages/Video/pages/list/list.js
+let app = getApp()
 
 Page({
 
@@ -8,7 +9,9 @@ Page({
   data: {
     classifyType:0,
     searchKey:'',
-    name:''
+    name:'',
+    url:'',
+    isApp:true
   },
 
 
@@ -22,8 +25,11 @@ Page({
     })
   
     if(options.key){
+      let url = app.globalData.nowSource.url
       this.setData({
-        searchKey:decodeURIComponent(options.key)
+        searchKey:decodeURIComponent(options.key),
+        url:url,
+        isApp:false
       })
     }
 

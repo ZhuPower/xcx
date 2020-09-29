@@ -1,7 +1,7 @@
 // pages/Video/pages/classify/classify.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
-
+let app = getApp()
 Page({
 
   /**
@@ -13,7 +13,11 @@ Page({
     searchKey:'',
     isShow:false,
     nIndex:-1,
-    name:'最新'
+    name:'最新',
+    url:'',
+    fnAjax:fnCon.fnAjax,
+    sourceUrl:[],
+    num:0
   },
   setHeight(){
     let isShow = this.data.isShow
@@ -32,20 +36,24 @@ Page({
       name:name
     })
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    
+  bindPickerChange: function(e) {
+    let num = e.detail.value
+    app.globalData.nowSource = app.globalData.sourceUrl[num]
+    app.globalData.nindex = num
+    let url = app.globalData.nowSource.url
+    this.setData({
+      num: num,
+      url:url,
+      isShow:false,
+      nIndex:-1,
+      classifyType:0
+    })
+    this.sjcsh();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    let url = apiUrl.apiUrl.video.list
-    let fnAjax = fnCon.fnAjax
+  sjcsh(){
+    let url = this.data.url
+    let fnAjax = this.data.fnAjax
 
     let data = {
       ac:'list'
@@ -57,6 +65,25 @@ Page({
        })
       }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    let url = app.globalData.nowSource.url
+    this.setData({
+      url:url,
+      sourceUrl:app.globalData.sourceUrl,
+      num:app.globalData.nindex
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    this.sjcsh();
   },
 
   /**

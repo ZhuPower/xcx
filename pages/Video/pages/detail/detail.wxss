@@ -125,3 +125,8 @@
   font-size: 25rpx;
   text-indent: 2em;
 }
+.videoDetailWrap .conBox .conTabC .tabList_0 .yList{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}

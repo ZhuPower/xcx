@@ -5,7 +5,7 @@
       <image src="{{data.vod_pic}}"></image>
     </view>
     <view class="topRight">
-      <view class="videoName">{{data.vod_name}}</view>
+      <view class="videoName">{{data.vod_name || data.title}}</view>
       <view class="videoInfoUl">
         <view class="infoBox">
           <view class="videoInfoLi">
@@ -49,9 +49,14 @@
     </view>
     <view class="conTabC">
       <view class="tabList tabList_0" wx:if="{{nTab == 0}}">
-        <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}" data-title="{{data.vod_name}}" data-id="{{data.vod_id}}" wx:key="index" catchtap="toPlay">{{item[0]}}</text>
+        <view wx:if="{{yList.length>1}}" class="yList">
+          <text wx:for="{{yList}}" data-index="{{index}}" wx:key="index" catchtap="toPlay" >{{item}}</text>
+        </view>
+        <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}" data-title="{{data.vod_name}}" data-id="{{data.vod_id}}" wx:key="index" catchtap="toPlay" wx:if="{{!isApp}}">{{item[0]}}</text>
+
+        <text wx:for="{{data.srcList}}" data-index="{{index}}" data-name="{{item.name}}" data-url="{{item.url}}" data-title="{{data.title}}" data-id="{{data.vid}}" wx:key="index" catchtap="toPlay" wx:if="{{isApp}}">{{item.name}}</text>
       </view>
-      <view class="tabList tabList_1" wx:if="{{nTab == 1}}">{{data.vod_content}}</view>
+      <view class="tabList tabList_1" wx:if="{{nTab == 1}}">{{data.vod_content || data.remark}}</view>
     </view>
   </view>
 </view>

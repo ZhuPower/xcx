@@ -2,7 +2,7 @@
 <scroll-view class="listMain" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
   refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
   <view class="listBox" wx:for="{{videoList}}" wx:key="index" catchtap="goDetail" data-id="{{item.vod_id}}">
-    <image src="{{item.vod_pic}}"></image>
+    <image src="{{item.vod_pic}}" lazy-load="{{true}}"></image>
     <view class="listRight">
       <view class="listName">{{item.vod_name}}</view>
       <view class="listInfo">

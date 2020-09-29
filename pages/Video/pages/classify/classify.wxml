@@ -2,6 +2,13 @@
 <view class="videoClassifyWrap">
   <view class="classifyMain">
     <view class="h3">
+      <view class="section">
+      <picker bindchange="bindPickerChange" value="{{num}}" range="{{sourceUrl}}" range-key="name">
+        <view class="picker">
+          {{sourceUrl[num].name}}
+        </view>
+      </picker>
+    </view>
       <text>{{name}}列表</text>
       <view catchtap="setHeight" class="iconsText {{isShow?'cur':''}}">
         <icon class="iconfont iconjiantou"></icon>
@@ -11,7 +18,7 @@
       <text wx:for="{{classifyList}}" wx:key="index" data-type="{{item.type_id}}" data-name="{{item.type_name}}" data-index="{{index}}" catchtap="getType"
         class="{{nIndex == index ? 'cur' : ''}}">{{item.type_name}}</text>
     </view>
-    <VideoList type="{{classifyType}}" searchKey="{{searchKey}}" class="classifyC"></VideoList>
+    <VideoList type="{{classifyType}}" searchKey="{{searchKey}}" sourceUrl="{{url}}" class="classifyC"></VideoList>
   </view>
   <NavBar navType="Video" navPath="classify"></NavBar>
 </view>
