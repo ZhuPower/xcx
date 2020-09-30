@@ -49,12 +49,19 @@
     </view>
     <view class="conTabC">
       <view class="tabList tabList_0" wx:if="{{nTab == 0}}">
-        <view wx:if="{{yList.length>1}}" class="yList">
-          <text wx:for="{{yList}}" data-index="{{index}}" wx:key="index" catchtap="toPlay" >{{item}}</text>
-        </view>
-        <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}" data-title="{{data.vod_name}}" data-id="{{data.vod_id}}" wx:key="index" catchtap="toPlay" wx:if="{{!isApp}}">{{item[0]}}</text>
+        <picker bindchange="bindPickerChange" value="{{num}}" range="{{yList}}" class="pickerWrap" wx:if="{{isShowSource}}">
+          <view class="pickerMain">播放源：<view class="pickerValue">{{yList[num]}}<icon class="iconfont iconjiantou">
+              </icon>
+            </view>
+          </view>
+        </picker>
+        <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}"
+          data-title="{{data.vod_name}}" data-id="{{data.vod_id}}" wx:key="index" catchtap="toPlay"
+          wx:if="{{!isApp}}">{{item[0]}}</text>
 
-        <text wx:for="{{data.srcList}}" data-index="{{index}}" data-name="{{item.name}}" data-url="{{item.url}}" data-title="{{data.title}}" data-id="{{data.vid}}" wx:key="index" catchtap="toPlay" wx:if="{{isApp}}">{{item.name}}</text>
+        <text wx:for="{{data.srcList}}" data-index="{{index}}" data-name="{{item.name}}" data-url="{{item.url}}"
+          data-title="{{data.title}}" data-id="{{data.vid}}" wx:key="index" catchtap="toPlay"
+          wx:if="{{isApp}}">{{item.name}}</text>
       </view>
       <view class="tabList tabList_1" wx:if="{{nTab == 1}}">{{data.vod_content || data.remark}}</view>
     </view>

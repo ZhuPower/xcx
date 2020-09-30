@@ -1,9 +1,16 @@
 <view class="videoPlayWarp">
   <video src="{{videoSrc}}" autoplay="{{true}}" class="playBox"></video>
   <scroll-view class="playList" scroll-y="{{true}}">
+    <picker bindchange="bindPickerChange" value="{{num}}" range="{{yList}}" class="pickerWrap" wx:if="{{isShowSource}}">
+      <view class="pickerMain">播放源：<view class="pickerValue">{{yList[num]}}<icon class="iconfont iconjiantou">
+          </icon>
+        </view>
+      </view>
+    </picker>
     <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}" wx:key="index"
       class="{{nIndex == index ? 'cur' : ''}}" catchtap="Play" wx:if="{{!isApp}}">{{item[0]}}</text>
-      <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item.name}}" data-url="{{item.url}}" wx:key="index"
+    <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item.name}}" data-url="{{item.url}}" wx:key="index"
       class="{{nIndex == index ? 'cur' : ''}}" catchtap="Play" wx:if="{{isApp}}">{{item.name}}</text>
+    <view style="width:100%; height:30rpx;clear: both;"></view>
   </scroll-view>
 </view>

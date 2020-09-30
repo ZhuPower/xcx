@@ -102,9 +102,9 @@ Component({
 
         let num = parseInt(this.data.page)+1
         if(num<=this.data.pagecount){
-          wx.showLoading({
-            title: '加载中...',
-          })
+          // wx.showLoading({
+          //   title: '加载中...',
+          // })
     
           if(this.data.searchKey){
             this.searchFn(num)
@@ -164,7 +164,7 @@ Component({
                 isRefresh:false,
                 isNext:true
               })
-              wx.hideLoading()
+              //wx.hideLoading()
             }
           })
         }
@@ -193,22 +193,27 @@ Component({
   
 
       fnAjax(url,data).then(res => {
-        if(res.code == 1 || res.code == 200){
+        if(res.code == 1 || res.code == 200 || res.status == 200){
           let arr = []
   
           if(num > 1){
             arr = this.data.videoList
           }
-          if(res.list){
+     
+          if(res.data){
+            if(res.data.list){
+              arr.push(...res.data.list)
+            }else{
+              arr.push(...res.data)
+            }
+          }else if(res.list){
             arr.push(...res.list)
-          }else if(res.data.list){
-            arr.push(...res.data.list)
           }
           
 
           this.setData({
-            page:res.page || res.data.page,
-            pagecount:res.pagecount || res.data.count,
+            page:res.page.pageindex || res.page || res.data.page,
+            pagecount:res.page.pagecount || res.pagecount || res.data.count,
             videoList:arr,
             isNext:true,
             isRefresh:false

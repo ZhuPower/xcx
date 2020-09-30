@@ -18,7 +18,9 @@ Page({
     url:'',
     fnAjax:fnCon.fnAjax,
     yList:[],
-    aarYlist:[]
+    aarYlist:[],
+    num:0,
+    isShowSource:false
   },
 
   setTab(e){
@@ -34,6 +36,14 @@ Page({
     goPlay(obj,app)
   },
 
+  bindPickerChange(e){
+    let num = e.detail.value
+    this.setData({
+      num: num,
+      playList:this.data.aarYlist[num]
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -46,12 +56,16 @@ Page({
     }else{
       url = app.globalData.nowSource.url
     }
-
-    this.setData({
+    let obj = {
       id:options.id,
       isApp:b,
       url:url
-    })
+    }
+    if(url == app.globalData.sourceUrl[1].url){
+      obj.isShowSource = true
+    }
+
+    this.setData(obj)
   },
 
   /**
@@ -89,6 +103,7 @@ Page({
       })
 
     }else{
+      let _arr = ['sohu','funshion','pptv']
       data = {
         ac:'detail',
         ids:this.data.id
@@ -102,26 +117,52 @@ Page({
           let arr1 = []
           let arr2 = []
           let arr3 =[]
-          if(this.data.data.vod_play_note){
-            arr1 = this.data.data.vod_play_from.split(this.data.data.vod_play_note)
-            arr2 = this.data.data.vod_play_url.split(this.data.data.vod_play_note)
+          if(this.data.data.vod_play_url.indexOf('$$$')>-1){
+            arr1 = this.data.data.vod_play_from.split('$$$')
+            arr2 = this.data.data.vod_play_url.split('$$$')
+            for(let x=0; x<_arr.length; x++){
+              let n = arr1.indexOf(_arr[x])
+              if(n>-1){
+                arr1.splice(n,1)
+                arr2.splice(n,1)
+              }
+            }
           }else{
-            arr2 = [this.data.data.vod_play_url]
+            if(_arr.indexOf(this.data.data.vod_play_from)>-1){
+              arr1 = []
+              arr2 = []
+            } else {
+              arr1 = [this.data.data.vod_play_from]
+              arr2 = [this.data.data.vod_play_url]
+            }
           }
 
           for(let i=0; i<arr2.length; i++){
-            let arr4 = arr2[i].split('#')
+            if(arr2[i].indexOf('#')>-1){
+              let arr4 = arr2[i].split('#')
+              getArrList(arr4,i)
+            }else{
+              let arr4 = [arr2[i]]
+              getArrList(arr4,i)
+            }
+            
+          }
+
+          function getArrList(arr4,num){
+           
             let arr5 = []
 
             for(let ii=0;ii<arr4.length;ii++){
               let arr6 = arr4[ii].split('$')
               
               if(ii==0){
-                if(arr6[1].indexOf('.m3u8')>-1 || arr6[1].indexOf('.mp4')>-1){
+                if(url != app.globalData.sourceUrl[1].url){
+                  if(arr6[1].indexOf('.m3u8')>-1 || arr6[1].indexOf('.mp4')>-1){
 
-                }else{
-                  arr1.splice(i,1);
-                  break;
+                  }else{
+                    arr1.splice(num,1);
+                    break;
+                  }
                 }
               }
               arr5.push(arr6)

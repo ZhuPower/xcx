@@ -1,4 +1,6 @@
 /* pages/Video/pages/detail/detail.wxss */
+@import "/assets/fonts/iconfont.wxss";
+
 .videoDetailWrap {
   padding: 0px 30rpx
 }
@@ -101,10 +103,16 @@
 
 .videoDetailWrap .conBox .conTabC .tabList_0 {
   overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .videoDetailWrap .conBox .conTabC .tabList_0 text {
-  width: 152rpx;
+  width: auto;
+  min-width: 150rpx;
+  padding: 0px 30rpx;
+  box-sizing: border-box;
   text-align: center;
   display: block;
   height: 60rpx;
@@ -116,17 +124,45 @@
   margin-right: 20rpx;
   margin-bottom: 20rpx;
 }
-.videoDetailWrap .conBox .conTabC .tabList_0 text:nth-child(4n){
+
+/* .videoDetailWrap .conBox .conTabC .tabList_0 text:nth-child(4n) {
   margin-right: 0rpx;
-}
+} */
 
 .videoDetailWrap .conBox .conTabC .tabList_1 {
   line-height: 44rpx;
   font-size: 25rpx;
   text-indent: 2em;
 }
-.videoDetailWrap .conBox .conTabC .tabList_0 .yList{
+
+.videoDetailWrap .conBox .conTabC .tabList_0 .yList {
   width: 100%;
   height: auto;
   overflow: hidden;
+}
+
+
+.pickerWrap {
+  width:100%;
+  margin-bottom: 20rpx;
+}
+
+.pickerMain {
+  display:flex;
+  align-items: center;
+}
+
+.pickerValue {
+  padding: 0px 20rpx;
+  width: auto;
+  border: 1px solid #33a0ff;
+  border-radius: 10rpx;
+  display: block;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.pickerValue icon{
+  float: right;
+  margin-left: 30rpx;
 }

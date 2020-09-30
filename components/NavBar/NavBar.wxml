@@ -8,8 +8,8 @@
     <icon class="iconfont iconziyuan"></icon>
     <text>分类</text>
   </navigator>
-  <navigator class="nav" url="/pages/Member/Member" class="{{navPath == 'Member' ? 'cur' : ''}}">
+  <!-- <navigator class="nav" url="/pages/Member/Member" class="{{navPath == 'Member' ? 'cur' : ''}}">
     <icon class="iconfont iconme"></icon>
     <text>我的</text>
-  </navigator>
+  </navigator> -->
 </view>
