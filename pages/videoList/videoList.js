@@ -11,239 +11,124 @@ Page({
    * 页面的初始数据
    */
   data: {
-    catelist:[],
-    tagsList:[],
-    tname: 'u_temp_user_1',
-    tag:0,
+    pagecount:1,
     page:1,
-    isSearch:false,
-    keySearch:''
+    type:13,
+    key:'最新片源',
+    catelist:[],
+    tagsList:[
+      '高清无码',
+      '偷拍自拍',
+      '日韩女优',
+      '欧美激情',
+      '成人动漫',
+      '今日网红',
+      '经典三级',
+      '麻豆专区',
+      '韩国演艺圈',
+      '网红主播',
+      '台湾特辑',
+      '明星换脸',
+      '女教师辅导',
+      '最新片源',
+      'H动漫',
+      '中文字幕',
+      '重磅热播',
+      '剧情',
+      '国产高清',
+      '大神专区',
+      '按摩桑拿',
+      '不雅视频',
+      'OL',
+      '韩国女主播',
+      '有码',
+      '无码'
+    ]
   },
-  getSearch:function(){
-    let vname = this.data.keySearch.toString()
-    let url = 'http://vapi.yichuba.com/search'
+  getList(){
+    let url = 'http://app.xjlb6.com/api.php/app_2/typeSearch'
     let data = {
-      vname: vname,
-      page: parseInt(this.data.page),
-      pageCount: 20
+      uid:11425432,
+      limit:20,
+      page:this.data.page
+    }
+    if(this.data.type<7){
+      data['vod_big_class'] = this.data.key
+    }else{
+      data['vod_class'] = this.data.key
     }
 
-    return this.setApi(url, data).then(res => {
-      return Promise.resolve(res)
-    });
-  },
-  getTags: function(){
-    let url = 'http://vapi.yichuba.com/showtags'
-    let data = {}
+    this.setApi(url,data).then(res => {
+      let arr = []
+      if(this.data.page == 1){
+        arr = []
+      }else{
+        arr = this.data.catelist
+      }
 
-    return this.setApi(url, data).then(res => {
-      return Promise.resolve(res)
-    });
+      if(res.list.length>0){
+        arr.push(...res.list)
+      }
+
+      this.setData({
+        catelist:arr,
+        pagecount:res.pagecount
+      })
+
+    })
   },
-  getCate: function(){
-    
-    let url = 'http://vapi.yichuba.com/catelist'
-    let data = {
-      type: 0,
-      tag: parseInt(this.data.tag),
-      page: parseInt(this.data.page),
-      pageCount: 20,
+  changeTag(e){
+    let key = e.currentTarget.dataset['name'];
+    let index = e.currentTarget.dataset['index'];
+    this.setData({
+      page:1,
+      key:key,
+      type:parseInt(index)
+    })
+    this.getList();
+  },
+  moreBtn(){
+    let page = this.data.page+1
+    if(page<=this.data.pagecount){
+      this.setData({
+        page:page
+      })
+      this.getList();
     }
-
-    return this.setApi(url, data).then(res => {
-      return Promise.resolve(res)
-    });
   },
-  isLogin2: function () {
-    let url = 'http://mhapi.spdchgj.com/2/cartoon/tempuser/login'
-    let data = {
-      app: 1,
-      tname: this.data.tname
-    }
 
-    return this.setApi(url, data).then(res => {
-      return Promise.resolve(res)
-    });
-  },
   setApi: function (url, data) {
-    this.getToke();
     return new Promise((resolved, rejected) => {
-      var signParams = this.signString(data);
       wx.request({
         url: url, //仅为示例，并非真实的接口地址
-        method: 'POST',
+        method: 'GET',
         data: data,
-        header: {
-          'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-          'Access-Token': this.data.requestToken,
-          'timestamp': signParams.timestamp,
-          'sign': signParams.sign
-        },
         success(res) {
           resolved(res.data)
         }
       })
     })
   },
-  signString: function (req) {
-    var obj = {}
-    for (var key in req) {
-      obj[key] = req[key]
-    }
-    var tmp = Date.parse(new Date()).toString();
-    var timestamp = tmp.substr(0, 13);
-    obj.timestamp = timestamp;
-    var arr = new Array();
-    var num = 0;
-    for (var i in obj) {
-      arr[num] = i;
-      num++;
-    }
-    var sortArr = arr.sort();
-    var stringA = '';
-    var j = 0;
-    for (var i in sortArr) {
-      var v = obj[sortArr[i]];
-      if (!v && v != 0) {
-        v = '';
-      }
-      stringA += sortArr[i] + '=' + v;
-      if (j < sortArr.length - 1) {
-        stringA += '&';
-      }
-      j++;
-    }
 
-    var key = '&key=Cartoon$2019&#';
-    var sign = hexMD5(stringA + key);
-    return {
-      timestamp: timestamp,
-      sign: sign.toString().toUpperCase()
-    };
-  },
-  getToke: function () {
-    var requestToken = wx.getStorageSync('token') || '';
-    var refRequestToken = function () {
-      if (requestToken) {
-        return requestToken;
-      } else {
-        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-        var uuid = [];
-        for (var i = 0; i < 32; i++) uuid[i] = chars[0 | Math.random() * 62];
-        requestToken = uuid.join('');
-        wx.setStorageSync("token", requestToken);
-        return requestToken;
-      }
-    }
-
-    this.setData({
-      requestToken: refRequestToken()
-    })
-  },
-  loginForm: function(data) {
-    var keySearch = data.detail.value.username
-    if (keySearch) {
-      this.setData({
-        keySearch: keySearch,
-        isSearch:true
-      })
-      this.getSearch().then(res => {
-        if(res.code == 0){
-          this.setData({
-            catelist: res.data
-          })
-        }
-      })
-    }
-  },
-  changeTag:function(e){
-    let tag = e.currentTarget.dataset['id'];
-    let obj = {
-      page: 1,
-      isSearch:false,
-      tag: tag
-    }
-
-    this.setData(obj)
-    this.getCate().then(res => {
-      if(res.code == 0){
-        this.setData({
-          catelist: res.data
-        })
-      }
-    })
-  },
   playlike:function(e){
-    wx.clearStorage();
-    wx.setStorageSync("tname", this.data.tname);
-
     let vid = e.currentTarget.dataset['id'];
     wx.navigateTo({
       url: '/pages/video2/video2?vid=' + vid
     })
-  },
-  moreBtn:function(){
-    let page = this.data.page + 1;
-    let obj = {
-      page: page
-    }
-
-    this.setData(obj);
-    if(this.data.isSearch){
-      this.getSearch().then(res => {
-        if(res.code == 0){
-          let catelist = this.data.catelist
-          catelist.push(...res.data)
-          this.setData({
-            catelist: catelist
-          })
-        }
-      })
-    }else{
-      this.getCate().then(res => {
-        if(res.code == 0){
-          let catelist = this.data.catelist
-          catelist.push(...res.data)
-          this.setData({
-            catelist: catelist
-          })
-        }
-      })
-    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getToke();
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.isLogin2().then(res =>{
-      if(res.code == 0){
-        this.setData({
-          tname: res.data.tname
-        })
-        this.getTags().then(res =>{
-          if(res.code == 0){
-            this.setData({
-              tagsList: res.data
-            })
-          }
-        })
-        this.getCate().then(res => {
-          if(res.code == 0){
-            this.setData({
-              catelist: res.data
-            })
-          }
-        })
-      }
-    })
+    this.getList();
   },
 
   /**

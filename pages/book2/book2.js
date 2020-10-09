@@ -19,6 +19,7 @@ Page({
     videolist:[],
     page:1,
     arr:[],
+    indexZYK:0,
     arr2:[
       {
         url:'https://shayuapi.com/api.php/provide/vod/at/json/',
@@ -132,7 +133,33 @@ Page({
       }
     ]
   },
+  bindPickerChange:function(e){
+    let indexZYK = parseInt(e.detail.value)
 
+    let obj = {
+      indexZYK:indexZYK,
+      arrObj: this.data.arr2[indexZYK]
+    }
+    this.setData(obj);
+
+    if(this.data.arrObj.type=='json'){
+      this.cshnr();
+    }else{
+      
+      let data = {
+        ac:'videolist',
+        pg:1
+      }
+      this.setApi(this.data.arrObj.url,data).then(res => {
+        //console.log(res)
+        let str = res.replace(/\<\!\[CDATA\[/ig,'').replace(/\]\]\>\<\//ig,'</');
+       // console.log(str)
+        var resObj=common.xml2Obj(str);
+        console.log(resObj);
+      })
+    }
+    
+  },
   xzlb(){
     let data = {
       ac:'videolist',
@@ -194,31 +221,6 @@ Page({
         }
       })
     })
-  },
-
-  setZYK(e){
-    let item = e.currentTarget.dataset['item'];
-    let obj = {
-      arrObj: item
-    }
-    this.setData(obj);
-
-    if(this.data.arrObj.type=='json'){
-      this.cshnr();
-    }else{
-      
-      let data = {
-        ac:'videolist',
-        pg:1
-      }
-      this.setApi(this.data.arrObj.url,data).then(res => {
-        //console.log(res)
-        let str = res.replace(/\<\!\[CDATA\[/ig,'').replace(/\]\]\>\<\//ig,'</');
-       // console.log(str)
-        var resObj=common.xml2Obj(str);
-        console.log(resObj);
-      })
-    }
   },
 
   setType(e){

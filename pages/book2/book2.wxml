@@ -1,28 +1,18 @@
 <!--pages/book2/book2.wxml-->
 <view>
-	<!-- <view class="section">
-		<picker bindchange="bindPickerChange" value="{{index}}" range="{{arr}}">
-			<view class="picker">
-				当前选择：{{arr[index]}}
-			</view>
+	<view class="section">
+		<picker bindchange="bindPickerChange" value="{{indexZYK}}" range="{{arr2}}" range-key="name">
+			<view class="picker">{{arr2[indexZYK].name}}</view>
 		</picker>
-	</view> -->
-
-	<form bindsubmit='loginForm'>
-    <input type='text' name='username' placeholder="输入链接"></input>
-    <button formType="submit" type='primary'>确认</button>
-  </form>
-
-	<view class="zyk">
-		<view class="list-type">
-			<view class="typename" wx:for="{{arr2}}" wx:key="unique" catchtap="setZYK" data-item="{{item}}">
-				{{item.name}}</view>
-		</view>
+		<form bindsubmit='loginForm' class="ssmain">
+			<input type='text' name='username' placeholder="输入搜索关键字"></input>
+			<button formType="submit" type='primary' style="width:200rpx">确认</button>
+		</form>
 	</view>
-
 	<view class="lmMain">
 		<view class="list-type">
-			<view class="typename" wx:for="{{typeList}}" wx:key="unique" catchtap="setType" data-id="{{item.type_id}}">
+			<view class="typename {{(typeID == item.type_id) ? 'cur':'' }}" wx:for="{{typeList}}" wx:key="unique"
+				catchtap="setType" data-id="{{item.type_id}}">
 				{{item.type_name}}</view>
 		</view>
 	</view>
@@ -31,9 +21,9 @@
 	<view class="h2">列表</view>
 	<view class="listUl">
 		<view class="list" wx:for="{{videolist}}" wx:key="unique" catchtap="playlike" data-url="{{item.vod_play_url}}">
-    <image mode="aspectFill" src="{{item.vod_pic}}"></image>
-    <text>{{item.vod_name}}</text>
-    </view>
+			<image src="{{item.vod_pic}}"></image>
+			<text>{{item.vod_name}}</text>
+		</view>
 	</view>
 	<view class="moreBtn" catchtap="moreBtn">更多</view>
 </view>

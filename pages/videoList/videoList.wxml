@@ -1,20 +1,27 @@
 <!--pages/videoList/videoList.wxml-->
 <view>
-  <view>
+  <!-- <view>
     <form bindsubmit='loginForm'>
       <input type='text' name='username' placeholder="输入关键字"></input>
       <button formType="submit" type='primary'>确认</button>
     </form>
-  </view>
+  </view> -->
   <view>
     <view class="h2">分类</view>
-    <view class="list" wx:for="{{tagsList}}" wx:key="unique" catchtap="changeTag" data-id="{{item.id}}">{{item.tag}}
+    <view class="list-type">
+      <view class="typename {{(type == index) ? 'cur':'' }}" wx:for="{{tagsList}}" wx:key="*this" catchtap="changeTag"
+        data-name="{{item}}" data-index="{{index}}">
+        {{item}}</view>
     </view>
   </view>
   <view>
     <view class="h2">列表</view>
-    <view class="list" wx:for="{{catelist}}" wx:key="unique" catchtap="playlike" data-id="{{item.id}}">{{item.name}}
+    <view class="listUl">
+      <view class="list" wx:for="{{catelist}}" wx:key="unique" catchtap="playlike" data-id="{{item.vod_id}}">
+        <image src="{{item.vod_pic_thumb}}"></image>
+        <text>{{item.vod_name}}</text>
+      </view>
     </view>
-    <view catchtap="moreBtn">更多</view>
+    <view catchtap="moreBtn" class="moreBtn">更多</view>
   </view>
 </view>
