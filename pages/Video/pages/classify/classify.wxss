@@ -45,7 +45,7 @@
 }
 
 .videoClassifyWrap .classifyMain .classifyH.cur {
-  height: 630rpx;
+  height: auto;
   transition: all 0.25s linear;
 }
 

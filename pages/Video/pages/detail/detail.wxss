@@ -104,7 +104,7 @@
 .videoDetailWrap .conBox .conTabC .tabList_0 {
   overflow: hidden;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   flex-wrap: wrap;
 }
 

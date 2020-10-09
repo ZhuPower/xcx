@@ -178,7 +178,7 @@ Component({
       if(this.data.isApp){
         data = {
           limit:20,
-          area: "全部",
+          area: "-1",
 	        year: "全部",
           type_id:this.data.type,
           page:num
@@ -209,15 +209,32 @@ Component({
           }else if(res.list){
             arr.push(...res.list)
           }
-          
 
-          this.setData({
-            page:res.page.pageindex || res.page || res.data.page,
-            pagecount:res.page.pagecount || res.pagecount || res.data.count,
+          let obj = {
             videoList:arr,
             isNext:true,
             isRefresh:false
-          })
+          }
+
+          if(res.page){
+            if(res.page.pageindex){
+              obj['page'] = res.page.pageindex
+              obj['pagecount'] = res.page.pagecount
+            }else{
+              obj['page'] = res.page
+              obj['pagecount'] = res.pagecount
+            }
+          }else{
+            if(res.data){
+              if(res.data.page){
+                obj['page'] = res.data.page
+                obj['pagecount'] = res.data.count
+              }
+            }
+          }
+          
+
+          this.setData(obj)
           wx.hideLoading()
         }
       })

@@ -20,10 +20,10 @@ const fnAjax = function (url, data, method, type) {
 
       let isUrl = false
 
-      if(url.indexOf('https://aa.ahy1.top')>-1 ||url.indexOf('https://shuapi.jiaston.com')>-1 || url == apiUrl.apiUrl.proxyUrl){
-        isUrl = true
-      }else{
+      if(url.indexOf('http://zy.itono.cn')>-1 || url == apiUrl.apiUrl.proxyUrl){
         data.apiUrl = url
+      }else{
+        isUrl = true
       }
 
 
