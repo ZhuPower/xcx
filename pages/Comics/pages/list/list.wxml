@@ -1,5 +1,4 @@
 <!--pages/Comics/pages/list/list.wxml-->
 <view class="comicsListWrap">
-  {{typeComics}}
 	<ComicsList typeComics="{{typeComics}}" bookId="{{bookId}}"></ComicsList>
 </view>

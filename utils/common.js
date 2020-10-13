@@ -77,9 +77,18 @@ function getParameter(url) {
 }
 
 
+
+const goComics = function (id) {
+  wx.navigateTo({
+      url: '/pages/Comics/pages/detail/detail?id=' + id
+  })
+}
+
+
 module.exports = {
   fnAjax,
   goVideo,
   goPlay,
-  getParameter
+  getParameter,
+  goComics
 }

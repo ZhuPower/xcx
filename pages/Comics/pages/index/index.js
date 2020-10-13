@@ -28,8 +28,8 @@ Page({
     let url = this.data.urlBanner
     let data = {
       app_id:103,
-      app_version:'3.3.6',
-      citycode:360000,
+      //app_version:'3.3.6',
+      // citycode:360000,
       gender:1
     }
     this.data.fnAjax(url,data).then(res => {
@@ -53,8 +53,7 @@ Page({
   getHomeComicsLists(){
     let url = this.data.homeComics
     let data = {
-      gender:1,
-      uid:35050531
+      gender:1
     }
     this.data.fnAjax(url,data).then(res => {
       if(res.status == 0){

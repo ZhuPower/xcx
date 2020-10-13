@@ -1,5 +1,9 @@
 <!--components/ComicsList/ComicsList.wxml-->
 <scroll-view class="listMain" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
   refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
-  
+  <view class="listBox" wx:for="{{comicsList}}" wx:key="index" catchtap="goDetail" data-id="{{item.comic_id}}">
+    <image src="{{item.cover_lateral + '!cover-800-x'}}" webp="true"></image>
+    <view class="title">{{item.title}}</view>
+    <view class="info">{{item.feature}}</view>
+  </view>
 </scroll-view>

@@ -1,1 +1,10 @@
 /* components/ComicsList/ComicsList.wxss */
+.listMain {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}

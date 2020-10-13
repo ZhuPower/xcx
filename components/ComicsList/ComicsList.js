@@ -15,7 +15,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    videoList:[],
+    comicsList:[],
     pagecount:0,
     page:1,
     isRefresh:false,
@@ -43,8 +43,26 @@ Component({
    */
   methods: {
     fnTop(){
+
+      this.setData({
+        page:1
+      })
+
+      this.getMoreList()
     },
     fnBotton(){
+      if(this.data.isNext){
+        let page = this.data.page + 1
+        this.setData({
+          page:page
+        })
+        this.getMoreList()
+      }
+    },
+    goDetail(e){
+      let id = e.currentTarget.dataset.id
+      let goComics = fnCon.goComics
+      goComics(id)
     },
     getMoreList(str){
       let url = this.data.url
@@ -54,20 +72,26 @@ Component({
       }
 
       let data = {
-        book_id: 1,
+        book_id: this.data.bookId,
         gender: 1,
-        page_num: 1,
-        page_size: 5,
-        uid: 35050531
+        page_num: this.data.page,
+        page_size: 5
       }
 
       this.data.fnAjax(url,data).then(res => {
         console.log(res)
         if(res.code == 200){
-          
-          // this.setData({
-          //   banner:arr
-          // })
+          let arr = []
+          if(this.data.page > 1){
+            arr = this.data.comicsList
+          }
+          arr.push(...res.data.list)
+
+          this.setData({
+            comicsList:arr,
+            isRefresh:false,
+            isNext: !(res.data.count < 5)
+          })
         }
       })
     }

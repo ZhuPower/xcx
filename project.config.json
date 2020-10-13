@@ -110,6 +110,13 @@
           "pathName": "pages/Comics/pages/list/list",
           "query": "type=list&book_id=1&page=1&name=客栈精品",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/Comics/pages/detail/detail",
+          "pathName": "pages/Comics/pages/detail/detail",
+          "query": "id= 209997",
+          "scene": null
         }
       ]
     }
