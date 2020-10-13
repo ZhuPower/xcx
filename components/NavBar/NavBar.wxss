@@ -45,10 +45,19 @@
   font-size: 24rpx;
 }
 
-.navBarWrap navigator.cur icon{
+.navBarWrap navigator.Video_cur icon {
   color: #33a0ff;
 }
 
-.navBarWrap navigator.cur text{
+.navBarWrap navigator.Video_cur text {
   color: #33a0ff;
+}
+
+
+.navBarWrap navigator.Comics_cur icon {
+  color: #ff7830;
+}
+
+.navBarWrap navigator.Comics_cur text {
+  color: #ff7830;
 }

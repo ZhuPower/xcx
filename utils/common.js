@@ -20,8 +20,9 @@ const fnAjax = function (url, data, method, type) {
 
       let isUrl = false
 
-      if(url.indexOf('http://zy.itono.cn')>-1 || url == apiUrl.apiUrl.proxyUrl){
-        data.apiUrl = url
+      //console.log(url)
+      if(url == apiUrl.apiUrl.proxyUrl){
+        //data.apiUrl = url
       }else{
         isUrl = true
       }

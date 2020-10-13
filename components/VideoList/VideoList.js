@@ -164,7 +164,7 @@ Component({
                 isRefresh:false,
                 isNext:true
               })
-              //wx.hideLoading()
+              wx.hideLoading()
             }
           })
         }

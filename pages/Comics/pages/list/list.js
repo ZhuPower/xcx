@@ -1,21 +1,32 @@
-// pages/Novel/pages/index/index.js
-const apiUrl = require('../../../../utils/apiUrl')
-const fnCon = require('../../../../utils/common')
-
+// pages/Comics/pages/list/list.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    typeComics:'',
+    bookId:1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options)
+    let obj = {
+      typeComics:options.type,
+      bookId:options.book_id
+    }
+
+    this.setData(obj)
+
+    console.log(this.data.typeComics)
+
+    wx.setNavigationBarTitle({
+      title: options.name 
+    })
+
   },
 
   /**

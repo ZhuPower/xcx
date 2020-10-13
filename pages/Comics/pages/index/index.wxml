@@ -1,0 +1,40 @@
+<!--pages/Comics/pages/index/index.wxml-->
+<wxs module="m1" src="../../../../utils/calculation.wxs"></wxs>
+<view class="comicsIndexWrap">
+  <view class="searchMain {{isBackground ? 'cur' : ''}}">
+    <view class="searchBox">
+      <icon class="icon-small" type="search" size="20"></icon>
+      <input bindinput="bindKeyInput" placeholder="请输入搜索关键字" />
+      <text catchtap="goList">搜索</text>
+    </view>
+  </view>
+  <view class="banner">
+    <swiper indicator-dots="{{swiperBanner.dots}}" autoplay="{{swiperBanner.autoplay}}"
+      interval="{{swiperBanner.interval}}" duration="{{swiperBanner.duration}}" circular="{{swiperBanner.circular}}"
+      indicator-active-color="{{swiperBanner.indicatorActive}}">
+      <block wx:for="{{banner}}" wx:key="vid">
+        <swiper-item data-id="{{item.vid}}" catchtap="goDetail">
+          <image src="{{item.img}}" lazy-load="true" webp="true"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="main">
+		<!-- wx:if="{{list[index1].length > 0}}" -->
+		<view class="listMain" wx:for="{{comicsLists}}"  wx:key="section_name" wx:if="{{index < 4}}">
+			<view class="h3">
+				<text>{{item.section_name}}</text>
+				<navigator url="../list/list?type=list&book_id={{index + 1}}&page=1&name={{item.section_name}}" class="searchBtn">
+					More</navigator>
+			</view>
+			<view class="listUl {{'listUl_'+index}}">
+				<view class="listLi {{'listLi_'+index2}}" wx:for="{{item.comic_info}}" wx:for-index="index2" wx:for-item="item2" wx:key="comic_id" data-id="{{item2.comic_id}}" catchtap="goDetail">
+					<image src="{{m1.getComicsIndexImg(item2,index,index2)}}" webp="true"></image>
+					<view class="title">{{item2.title}}</view>
+					<view class="info">{{item2.feature}}</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<NavBar navType="Comics" navPath="index"></NavBar>
+</view>

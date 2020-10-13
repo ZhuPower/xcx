@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "NavBar": "/components/NavBar/NavBar"
-  },
-  "navigationBarTitleText": "个人中心",
-  "navigationBarBackgroundColor": "#33a0ff"
-}

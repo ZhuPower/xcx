@@ -1,0 +1,153 @@
+/* pages/Comics/pages/index/index.wxss */
+.comicsIndexWrap {}
+
+.comicsIndexWrap .banner {
+  width: 100%;
+  height: 475rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.comicsIndexWrap .banner swiper {
+  width: 100%;
+  height: 475rpx;
+}
+
+.comicsIndexWrap .banner image {
+  width: 100%;
+  height: 475rpx;
+}
+
+
+.slide-image {
+  transform: scale(0.6, 0.6);
+}
+
+.slide-active {
+  transform: scale(1, 1);
+}
+
+.comicsIndexWrap .searchMain {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 9;
+}
+/* .comicsIndexWrap .searchMain_1{
+  position: fixed;
+  background: none;
+  left: 0;
+  top: 0;
+  z-index: 9;
+} */
+
+/* .comicsIndexWrap .searchMain.cur {
+  background:rgba(255,255,255, .5);
+} */
+
+.comicsIndexWrap .searchMain .searchBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  height: 60rpx;
+  position: relative;
+}
+
+.comicsIndexWrap .searchMain .searchBox icon {
+  position: absolute;
+  left: 40rpx;
+  top: 43rpx;
+}
+
+.comicsIndexWrap .searchMain .searchBox input {
+  color: #000;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  width: 600rpx;
+  padding-left: 50rpx;
+}
+
+.comicsIndexWrap .searchMain .searchBox text {
+  color: #fff;
+  display: block;
+  width: 90rpx;
+  text-align: center;
+}
+
+.comicsIndexWrap .main {
+  padding: 0px 30rpx;
+  overflow: hidden;
+  padding-bottom: 100rpx;
+}
+
+.comicsIndexWrap .main .listMain {}
+
+.comicsIndexWrap .main .listMain .h3 {
+  display: flex;
+  justify-content: space-between;
+  height: 88rpx;
+  align-items: center;
+}
+
+.comicsIndexWrap .main .listMain .listUl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.comicsIndexWrap .listUl .listLi {
+  overflow: hidden;
+}
+
+.comicsIndexWrap .listUl .listLi image {
+  display: block;
+  width: 100%;
+  border-radius: 8rpx;
+}
+
+.comicsIndexWrap .listUl .listLi .title {
+  font-size: 28rpx;
+  color: #28292d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 12rpx;
+}
+
+.comicsIndexWrap .listUl .listLi .info {
+  font-size: 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #999999;
+  margin-top: 2rpx;
+  margin-bottom: 12rpx;
+}
+
+.comicsIndexWrap .listUl_0 .listLi {
+  width: 49%;
+}
+
+.comicsIndexWrap .listUl_0 .listLi image {
+  height: 183rpx;
+}
+
+.comicsIndexWrap .listUl:not(.listUl_0) .listLi_0 {
+  width: 100%;
+}
+
+.comicsIndexWrap .listUl:not(.listUl_0) .listLi_0 image {
+  height: 260rpx;
+}
+
+.comicsIndexWrap .listUl:not(.listUl_0) .listLi:not(.listLi_0) {
+  width: 32%;
+}
+
+.comicsIndexWrap .listUl:not(.listUl_0) .listLi:not(.listLi_0) image {
+  height: 300rpx;
+}

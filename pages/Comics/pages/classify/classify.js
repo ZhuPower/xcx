@@ -1,4 +1,4 @@
-// pages/Member/Member.js
+// pages/Comics/pages/classify/classify.js
 Page({
 
   /**

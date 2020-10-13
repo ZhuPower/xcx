@@ -1,10 +1,10 @@
 <!--assets/components/NavBar/NavBar.wxml-->
 <view class="navBarWrap">
-  <navigator class="nav" url="/pages/{{navType}}/pages/index/index" class="{{navPath == 'index' ? 'cur' : ''}}">
+  <navigator class="nav" url="/pages/{{navType}}/pages/index/index" class="{{navPath == 'index' ? navType+'_cur' : ''}}">
     <icon class="iconfont iconshouye"></icon>
     <text>首页</text>
   </navigator>
-  <navigator class="nav" url="/pages/{{navType}}/pages/classify/classify" class="{{navPath == 'classify' ? 'cur' : ''}}">
+  <navigator class="nav" url="/pages/{{navType}}/pages/classify/classify" class="{{navPath == 'classify' ? navType+'_cur' : ''}}">
     <icon class="iconfont iconziyuan"></icon>
     <text>分类</text>
   </navigator>

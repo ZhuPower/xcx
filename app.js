@@ -11,7 +11,7 @@ App({
       },
       {
         name:'1717资源',
-        url:'http://zy.itono.cn/inc/apijson_vod.php'
+        url:'https://zy.itono.cn/inc/apijson_vod.php'
       },
       // {
       //   name:'OK影视',

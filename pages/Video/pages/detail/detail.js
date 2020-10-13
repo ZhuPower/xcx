@@ -17,6 +17,7 @@ Page({
     isApp:true,
     url:'',
     fnAjax:fnCon.fnAjax,
+    getParameter:fnCon.getParameter,
     yList:[],
     aarYlist:[],
     num:0,
@@ -29,11 +30,57 @@ Page({
       nTab:parseInt(index)
     })
   },
+  getVideoSrc(str,endFn){
+    let fnAjax = this.data.fnAjax
+    let getParameter = this.data.getParameter 
+
+    let data = getParameter(str)
+
+    fnAjax(apiUrl.apiUrl.proxyUrl,data,'POST','application/x-www-form-urlencoded').then(res => {
+      endFn && endFn(res)
+    })
+  },
   toPlay(e){
-    let obj = e.currentTarget.dataset
-    let app = this.data.isApp
-    let goPlay = fnCon.goPlay
-    goPlay(obj,app)
+     let obj = e.currentTarget.dataset
+     let isApp = this.data.isApp
+    // let goPlay = fnCon.goPlay
+    // goPlay(obj,isApp)
+
+
+    let _url = ''
+    if(isApp){
+      _url = apiUrl.apiUrl.video.videoDetail
+    }else{
+      _url = app.globalData.nowSource.url
+    }
+
+
+    if(_url != app.globalData.sourceUrl[1].url){
+      wx.setClipboardData({
+        data: obj.url,
+        success (res) {
+          wx.showToast({
+            title: '请前往各大影视官网观看',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+    }else{
+      this.getVideoSrc(obj.url,res => {
+        wx.hideLoading()
+        wx.setClipboardData({
+          data: res.url,
+          success (res) {
+            wx.showToast({
+              title: '请前往各大影视官网观看',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        })
+      })
+    }
   },
 
   bindPickerChange(e){

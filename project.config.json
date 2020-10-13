@@ -96,6 +96,20 @@
           "pathName": "pages/Video/pages/classify/classify",
           "query": "",
           "scene": null
+        },
+        {
+          "id": 4,
+          "name": "pages/Comics/pages/index/index",
+          "pathName": "pages/Comics/pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "pages/Comics/pages/list/list",
+          "pathName": "pages/Comics/pages/list/list",
+          "query": "type=list&book_id=1&page=1&name=客栈精品",
+          "scene": null
         }
       ]
     }

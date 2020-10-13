@@ -1,11 +1,15 @@
 const apiUrl = {
   proxyUrl:'https://test.yijiago.com/gly/yiJiaGo/test/proxy.php',
   video:{
-    //url:'http://zy.itono.cn/inc/apijson_vod.php',
     banner:'https://aa.ahy1.top/api.php/banner/banner/getBannerLists',
     homeVideo:'https://aa.ahy1.top/api.php/videos/videos/getHomeVideoLists',
     VideoLists:'https://aa.ahy1.top/api.php/videos/videos/getVideoLists',
     videoDetail:'https://aa.ahy1.top/api.php/videos/videos/getVideoDetail'
+  },
+  comics:{
+    banner:'https://base.mkzcdn.com/advert/app/slide/v3/',
+    homeComics:'https://recommend.mkzcdn.com/mkz/top/v2/homepage',
+    moreComics:'https://recommend.mkzcdn.com/mkz/top/v2/more',
   },
   
   novel:{

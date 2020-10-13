@@ -1,15 +1,30 @@
 function getImgSrc(str){
   var src = ''
-  console.log(str)
   if(str.indexOf('http://') == 0 || str.indexOf('https://') == 0){
     src = str
   }else{
     src = 'https://aa.ahy1.top' + str
+  }
+  return src;
+}
+
+function getComicsIndexImg(obj,n1,n2){
+  var src = ''
+
+  if(n1 == 0){
+    src = obj.cover_lateral + '!cover-800-x'
+  }else{
+    if(n2 == 0){
+      src = obj.cover_lateral + '!cover-800-x'
+    }else{
+      src = obj.cover + '!cover-400-x'
+    }
   }
   
   return src;
 }
 
 module.exports = {
-  getImgSrc:getImgSrc
+  getImgSrc:getImgSrc,
+  getComicsIndexImg:getComicsIndexImg
 }
