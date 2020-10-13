@@ -6,7 +6,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    typeComics:Number,
+    typeComics:String,
     searchKey:String,
     bookId:String
   },
@@ -26,20 +26,15 @@ Component({
   },
 
   ready(){
-    console.log(this.data.typeComics)
-    console.log(this.data.bookId)
     let url = ''
-    if(this.data.type == 'list'){
+    if(this.data.typeComics == 'list'){
       url = apiUrl.apiUrl.comics.moreComics
+      this.getMoreList(url)
     }
 
     this.setData({
       url:url
     })
-
-    if(this.data.type == 'list'){
-      this.getMoreList()
-    }
 
   },
 
@@ -51,8 +46,13 @@ Component({
     },
     fnBotton(){
     },
-    getMoreList(){
+    getMoreList(str){
       let url = this.data.url
+      
+      if(str){
+        url = str
+      }
+
       let data = {
         book_id: 1,
         gender: 1,

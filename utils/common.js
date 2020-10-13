@@ -27,7 +27,6 @@ const fnAjax = function (url, data, method, type) {
         isUrl = true
       }
 
-
       //data.apiUrl = url
       wx.showLoading({
         title: '加载中...',

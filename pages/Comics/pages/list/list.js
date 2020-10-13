@@ -21,8 +21,6 @@ Page({
 
     this.setData(obj)
 
-    console.log(this.data.typeComics)
-
     wx.setNavigationBarTitle({
       title: options.name 
     })
