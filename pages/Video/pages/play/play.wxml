@@ -1,0 +1,6 @@
+<!--pages/Video/pages/play/play.wxml-->
+
+<import src="../../../../wxParse/wxParse.wxml"/>
+<view>
+  <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+</view>

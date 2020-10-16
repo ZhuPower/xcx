@@ -39,6 +39,7 @@ App({
       // }  
     ],
     nowSource:{},
-    nindex:0
+    nindex:0,
+    aOpenid:['ox-C94udOl1Zx6v4xXXu1brSG9EM']
   }
 })

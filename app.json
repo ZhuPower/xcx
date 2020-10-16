@@ -9,6 +9,7 @@
     "pages/Video/pages/index/index",
     "pages/Video/pages/classify/classify",
     "pages/Video/pages/list/list",
+    "pages/Video/pages/play/play",
     "pages/Video/pages/detail/detail"
   ],
   "window": {
