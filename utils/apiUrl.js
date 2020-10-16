@@ -11,8 +11,8 @@ const apiUrl = {
     homeComics:'https://recommend.mkzcdn.com/mkz/top/v2/homepage', //首页
     moreComics:'https://recommend.mkzcdn.com/mkz/top/v2/more', //更多
     infoComics:'https://comic.mkzcdn.com/comic/info/', //详情
-    chapterComics:'https://comic.mkzhan.com/chapter/', // 目录
-    contentComics:'https://comic.mkzhan.com/chapter/content/', //内容
+    chapterComics:'https://comic.mkzcdn.com/chapter/', // 目录
+    contentComics:'https://comic.mkzcdn.com/chapter/content/', //内容
     filterComics:'https://comic.mkzcdn.com/search/filter/', //分类
     keyComics:'https://comic.mkzcdn.com/recom/search/app/', //热搜
     keywordComics:'https://comic.mkzcdn.com/search/keyword/', //搜索
