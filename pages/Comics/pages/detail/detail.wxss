@@ -1,1 +1,103 @@
 /* pages/Comics/pages/detail/detail.wxss */
+.detailWrap {}
+
+.detailWrap .topImg {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.detailWrap .topImg image {
+  width: 100%;
+  height: 56.266666666666666vw;
+}
+
+.detailWrap .topImg .title {
+  position: absolute;
+  color: #fff;
+  bottom: 80rpx;
+  left: 80rpx;
+  right: 80rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -webkit-text-stroke: 1px #000;
+  font-weight: bold;
+  z-index: 3;
+  font-size: 40rpx;
+}
+
+.detailWrap .topImg .banner__bg {
+  width: 100%;
+  height: 56.266666666666666vw;
+  max-height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.detailWrap .topImg .banner__bg2 {
+  width: 100%;
+  height: 2.6666666666666665vw;
+  position: absolute;
+  left: 0;
+  bottom: -0.13333333333333333vw;
+  z-index: 1;
+}
+
+.detailMain {}
+
+.detail-content {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.5;
+  text-align: justify;
+  text-indent: 2em;
+  padding: 30rpx;
+}
+
+.detail-chapter {}
+
+.tabH {
+  overflow: hidden;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.tabH text {
+  float: left;
+  width: 50%;
+  height: 80rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.tabH text.cur {
+  background: #ff7830;
+  color: #fff;
+}
+
+.detail-chapter {
+}
+
+.detail-chapter>view {
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ebebeb;
+  padding: 30rpx;
+  align-items: center;
+}
+
+.detail-chapter image {
+  width: 240rpx;
+  height: 135rpx;
+}
+.detail-chapter .chapter-title{
+  margin-left: 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

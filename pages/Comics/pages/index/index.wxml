@@ -24,12 +24,12 @@
 		<view class="listMain" wx:for="{{comicsLists}}"  wx:key="section_name" wx:if="{{index < 4}}">
 			<view class="h3">
 				<text>{{item.section_name}}</text>
-				<navigator url="../list/list?type=list&book_id={{index + 1}}&page=1&name={{item.section_name}}" class="searchBtn">
+				<navigator url="../list/list?book_id={{index + 1}}&page=1&name={{item.section_name}}" class="searchBtn">
 					More</navigator>
 			</view>
 			<view class="listUl {{'listUl_'+index}}">
 				<view class="listLi {{'listLi_'+index2}}" wx:for="{{item.comic_info}}" wx:for-index="index2" wx:for-item="item2" wx:key="comic_id" data-id="{{item2.comic_id}}" catchtap="goDetail">
-					<image src="{{m1.getComicsIndexImg(item2,index,index2)}}" webp="true"></image>
+					<image src="{{m1.getComicsIndexImg(item2,index,index2)}}" lazy-load="true" webp="true"></image>
 					<view class="title">{{item2.title}}</view>
 					<view class="info">{{item2.feature}}</view>
 				</view>

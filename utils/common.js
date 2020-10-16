@@ -84,11 +84,18 @@ const goComics = function (id) {
   })
 }
 
+const goComicCon = function (chapterId,comicId,title,index) {
+  wx.navigateTo({
+      url: '/pages/Comics/pages/content/content?chapterId=' + chapterId + '&comicId=' + comicId + '&title=' + title + '&index=' + index
+  })
+}
+
 
 module.exports = {
   fnAjax,
   goVideo,
   goPlay,
   getParameter,
-  goComics
+  goComics,
+  goComicCon
 }

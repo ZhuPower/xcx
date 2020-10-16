@@ -1,0 +1,8 @@
+<!--pages/Comics/pages/content/content.wxml-->
+<view class="contentWrap">
+  <scroll-view class="contentMain" scroll-y="true" bindscrolltolower="fnBotton" refresher-enabled="true"
+    refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
+    <image wx:for="{{aContent}}" wx:key="page_id" src="{{item.image + '!width-900'}}" webp="true" lazy-load="true"
+      mode="widthFix"></image>
+  </scroll-view>
+</view>

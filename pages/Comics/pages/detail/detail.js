@@ -7,11 +7,63 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nIndex:0,
     detailData:{},
+    aChapter:[],
     comicId:0,
-    urlBanner:apiUrl.apiUrl.comics.banner,
-    homeComics:apiUrl.apiUrl.comics.homeComics,
-    fnAjax:fnCon.fnAjax,
+    infoComics:apiUrl.apiUrl.comics.infoComics,
+    chapterComics:apiUrl.apiUrl.comics.chapterComics,
+    fnAjax:fnCon.fnAjax
+  },
+
+  getInfoComics(){
+    let url = this.data.infoComics
+
+    let data = {
+      comic_id: this.data.comicId
+    }
+
+    this.data.fnAjax(url,data).then(res => {
+      if(res.code == 200){
+        this.setData({
+          detailData:res.data
+        })
+
+        wx.setNavigationBarTitle({
+          title:res.data.title 
+        })
+      }
+    })
+  },
+
+  getChapterComics(){
+    let url = this.data.chapterComics
+
+    let data = {
+      comic_id: this.data.comicId
+    }
+
+    this.data.fnAjax(url,data).then(res => {
+      if(res.code == 200){
+        this.setData({
+          aChapter:res.data
+        })
+      }
+    })
+  },
+
+  goComicCon(e){
+    let id = e.currentTarget.dataset.id
+    let title = e.currentTarget.dataset.title
+    let index = e.currentTarget.dataset.index
+    let goComicCon = fnCon.goComicCon
+    goComicCon(id,this.data.comicId,title,index)
+  },
+  tabFn(e){
+    let n = e.currentTarget.dataset.num
+    this.setData({
+      nIndex:n
+    })
   },
 
   /**
@@ -28,7 +80,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.getInfoComics()
+    this.getChapterComics()
   },
 
   /**

@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    typeComics:'',
-    bookId:1
+    bookId:1,
+    searchKey:''
   },
 
   /**
@@ -15,8 +15,8 @@ Page({
   onLoad: function (options) {
     console.log(options)
     let obj = {
-      typeComics:options.type,
-      bookId:options.book_id
+      bookId:options.book_id,
+      searchKey:options.key
     }
 
     this.setData(obj)

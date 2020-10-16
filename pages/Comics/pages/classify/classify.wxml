@@ -1,2 +1,15 @@
 <!--pages/Comics/pages/classify/classify.wxml-->
-<text>pages/Comics/pages/classify/classify.wxml</text>
+<view class="classifyWrap">
+	<view class="themeMain list">
+		<text catchtap="setTheme" class="{{(themeId == 0) ? 'cur' : ''}}" data-id="{{''}}">全部</text>
+		<text wx:for="{{aTheme}}" class="{{themeId == item.id ? 'cur' : ''}}" wx:key="id" catchtap="setTheme" data-id="{{item.id}}">{{item.title}}</text>
+	</view>
+	<view class="finishMain list">
+		<text wx:for="{{finish}}" class="{{curFinish == index ? 'cur' : ''}}" wx:key="*this" catchtap="setFinish" data-id="{{index}}">{{item}}</text>
+	</view>
+	<view class="orderMain list">
+		<text wx:for="{{order}}" class="{{curOrder == index ? 'cur' : ''}}" wx:key="*this" catchtap="setOrder" data-id="{{index}}">{{item}}</text>
+	</view>
+	<ComicsList typeComics="classify" themeId="{{themeId}}" finish="{{curFinish}}" order="{{curOrder}}"></ComicsList>
+	<NavBar navType="Comics" navPath="classify"></NavBar>
+</view>

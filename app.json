@@ -4,6 +4,7 @@
     "pages/Comics/pages/index/index",
     "pages/Comics/pages/list/list",
     "pages/Comics/pages/detail/detail",
+    "pages/Comics/pages/content/content",
     "pages/Comics/pages/classify/classify",
     "pages/Video/pages/index/index",
     "pages/Video/pages/classify/classify",

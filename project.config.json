@@ -112,10 +112,24 @@
           "scene": null
         },
         {
-          "id": -1,
+          "id": 6,
           "name": "pages/Comics/pages/detail/detail",
           "pathName": "pages/Comics/pages/detail/detail",
-          "query": "id= 209997",
+          "query": "id=211692",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "pages/Comics/pages/content/content",
+          "pathName": "pages/Comics/pages/content/content",
+          "query": "chapterId=644915&comicId=211692&title=引子&index=0",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/Comics/pages/classify/classify",
+          "pathName": "pages/Comics/pages/classify/classify",
+          "query": "",
           "scene": null
         }
       ]

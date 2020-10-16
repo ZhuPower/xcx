@@ -1,11 +1,52 @@
 // pages/Comics/pages/classify/classify.js
+const apiUrl = require('../../../../utils/apiUrl')
+const fnCon = require('../../../../utils/common')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    aTheme:[],
+    themeComics:apiUrl.apiUrl.comics.themeComics,
+    fnAjax:fnCon.fnAjax,
+    finish:['全部','连载','完成'],
+    order:['全部','最热','最新','推荐'],
+    curFinish:0,
+    curOrder:0,
+    themeId:0
+  },
 
+  getTheme(){
+    let url = this.data.themeComics
+
+    let data = { }
+
+    this.data.fnAjax(url,data).then(res => {
+      if(res.code == 200){
+        this.setData({
+          aTheme:res.data
+        })
+      }
+    })
+  },
+  setTheme(e){
+    let id = e.currentTarget.dataset.id
+    this.setData({
+      themeId:parseInt(id)
+    })
+  },
+  setFinish(e){
+    let id = e.currentTarget.dataset.id
+    this.setData({
+      curFinish:parseInt(id)
+    })
+  },
+  setOrder(e){
+    let id = e.currentTarget.dataset.id
+    this.setData({
+      curOrder:parseInt(id)
+    })
   },
 
   /**
@@ -19,7 +60,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.getTheme()
   },
 
   /**

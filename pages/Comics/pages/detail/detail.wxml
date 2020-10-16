@@ -1,2 +1,22 @@
 <!--pages/Comics/pages/detail/detail.wxml-->
-<text>pages/Comics/pages/detail/detail.wxml</text>
+<view class="detailWrap">
+ <view class="topImg">
+  <image src="{{detailData.cover_lateral + '!banner-600'}}" webp="true" lazy-load="true"></image>
+  <view class="title">{{detailData.title}}</view>
+  <image src="https://static.mkzcdn.com/mobile/img/detail/bg_detail_bannerbg.png" class="banner__bg"></image>
+  <image src="https://static.mkzcdn.com/mobile/img/detail/bg_banner.png" class="banner__bg2"></image>
+ </view>
+ <view class="detailMain">
+   <view class="tabH">
+      <text class="{{nIndex == 0 ? 'cur' : ''}}" catchtap="tabFn" data-num="0">简介</text>
+      <text class="{{nIndex == 1 ? 'cur' : ''}}" catchtap="tabFn" data-num="1">目录</text>
+   </view>
+   <view class="detail-content" wx:if="{{nIndex == 0}}">{{detailData.content}}</view>
+   <view class="detail-chapter" wx:if="{{nIndex == 1}}">
+     <view wx:for="{{aChapter}}" wx:key="chapter_id" catchtap="goComicCon" data-id="{{item.chapter_id}}" data-title="{{item.title}}" data-index="{{index}}">
+       <image src="{{item.cover + '!cover-400-x'}}" webp="true" lazy-load="true"></image>
+       <view class="chapter-title">{{item.title}}</view>
+     </view>
+   </view>
+ </view>
+</view>

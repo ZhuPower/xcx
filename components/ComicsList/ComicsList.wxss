@@ -1,5 +1,5 @@
 /* components/ComicsList/ComicsList.wxss */
-.listMain {
+.listWrap {
   height: 100%;
   overflow: hidden;
   width: 100%;
@@ -7,4 +7,53 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
+  padding: 30rpx;
+}
+
+.listMain .listBox{
+  
+}
+
+.listMain .listBox image{
+  width: 100%;
+  border-radius: 8rpx;
+}
+.title{
+  font-size: 28rpx;
+  color: #28292d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 12rpx;
+}
+
+.info {
+  font-size: 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #999999;
+  margin-top: 2rpx;
+  margin-bottom: 12rpx;
+}
+
+.classifyMain{
+  top:237rpx;
+  height: calc(100%-237rpx);
+}
+
+.classifyMain .listBox,.searchMain .listBox{
+  float: left;
+  width: 32%;
+  margin-right: 2%;
+}
+
+.classifyMain .listBox:nth-child(3n),.searchMain .listBox:nth-child(3n){
+  margin-right: 0;
+}
+
+.classifyMain .listBox image,.searchMain .listBox image{
+  width: 100%;
+  height: 300rpx;
+  border-radius: 8rpx;
 }

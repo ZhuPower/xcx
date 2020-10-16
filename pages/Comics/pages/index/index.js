@@ -21,7 +21,8 @@ Page({
       circular:true,
       indicatorActive:'#33a0ff'
     },
-    comicsLists:[]
+    comicsLists:[],
+    searchKey:''
   },
 
   getBannerLists(){
@@ -62,6 +63,25 @@ Page({
         })
       }
     })
+  },
+  bindKeyInput(e){
+    this.setData({
+      searchKey: e.detail.value
+    })
+  },
+  goList(){
+    if(this.data.searchKey){
+      let str = 'page=1&name=搜索"'+this.data.searchKey+'"结果&key='+this.data.searchKey
+      wx.navigateTo({
+        url:'/pages/Comics/pages/list/list?'+str
+      })
+    }else{
+      wx.showToast({
+        title: '请输入搜索关键字',
+        icon: 'none',
+        duration: 2000
+      })
+    }
   },
 
   /**

@@ -1,1 +1,20 @@
 /* pages/Comics/pages/classify/classify.wxss */
+.classifyWrap{
+  padding-top: 10rpx;
+}
+.themeMain{}
+.finishMain{}
+.orderMain{}
+.list{
+  overflow: hidden;
+  padding: 0px 30rpx;
+}
+.list text{
+  float: left;
+  padding: 0px 10rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.list text.cur{
+  color: #ff7830;
+}
