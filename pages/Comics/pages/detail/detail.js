@@ -1,6 +1,7 @@
 // pages/Comics/pages/detail/detail.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+let app = getApp()
 Page({
 
   /**
@@ -13,7 +14,8 @@ Page({
     comicId:0,
     infoComics:apiUrl.apiUrl.comics.infoComics,
     chapterComics:apiUrl.apiUrl.comics.chapterComics,
-    fnAjax:fnCon.fnAjax
+    fnAjax:fnCon.fnAjax,
+    isShow:false
   },
 
   getInfoComics(){
@@ -82,6 +84,9 @@ Page({
   onReady: function () {
     this.getInfoComics()
     this.getChapterComics()
+    this.setData({
+      isShow:app.globalData.isShow
+    })
   },
 
   /**

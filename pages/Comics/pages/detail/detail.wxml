@@ -9,7 +9,7 @@
  <view class="detailMain">
    <view class="tabH">
       <text class="{{nIndex == 0 ? 'cur' : ''}}" catchtap="tabFn" data-num="0">简介</text>
-      <text class="{{nIndex == 1 ? 'cur' : ''}}" catchtap="tabFn" data-num="1">目录</text>
+      <text class="{{nIndex == 1 ? 'cur' : ''}}" catchtap="tabFn" data-num="1" wx:if="{{isShow}}">目录</text>
    </view>
    <view class="detail-content" wx:if="{{nIndex == 0}}">{{detailData.content}}</view>
    <view class="detail-chapter" wx:if="{{nIndex == 1}}">

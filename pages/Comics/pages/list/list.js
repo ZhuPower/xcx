@@ -1,4 +1,5 @@
 // pages/Comics/pages/list/list.js
+let app = getApp()
 Page({
 
   /**
@@ -17,6 +18,12 @@ Page({
     let obj = {
       bookId:options.book_id,
       searchKey:options.key
+    }
+    console.log(options.key)
+    console.log(options.key == '092654')
+    if(options.key == '092654'){
+      
+      app.globalData.isShow = true
     }
 
     this.setData(obj)

@@ -1,7 +1,6 @@
-// pages/Video/pages/detail/detail.js
+// pages/Video/pages/play/play.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
-
 let app = getApp()
 
 Page({
@@ -12,8 +11,10 @@ Page({
   data: {
     id:'',
     data:null,
-    nTab:0,
+    videoSrc:'',
     playList:[],
+    nIndex:0,
+    title:'',
     isApp:true,
     url:'',
     fnAjax:fnCon.fnAjax,
@@ -21,23 +22,40 @@ Page({
     yList:[],
     aarYlist:[],
     num:0,
-    isShowSource:false,
-    isShow:false
+    isShowSource:false
   },
+  Play(e){
+    let obj = e.currentTarget.dataset
 
-  setTab(e){
-    let index = e.currentTarget.dataset.index
-    this.setData({
-      nTab:parseInt(index)
+    if(this.data.isShowSource){
+      this.getVideoSrc(obj.url,res => {
+        console.log(res)
+        this.setData({
+          nIndex:obj.index,
+          videoSrc:res.url
+        })
+      })
+    }else{
+      this.setData({
+        nIndex:obj.index,
+        videoSrc:obj.url
+      })
+    }
+
+    wx.setNavigationBarTitle({
+      title: `${this.data.title} ${obj.name}` 
     })
   },
-  toPlay(e){
-     let obj = e.currentTarget.dataset
-     let isApp = this.data.isApp
-     let goPlay = fnCon.goPlay
-     goPlay(obj,isApp)
-  },
+  getVideoSrc(str,endFn){
+    let fnAjax = this.data.fnAjax
+    let getParameter = this.data.getParameter 
 
+    let data = getParameter(str)
+
+    fnAjax(apiUrl.apiUrl.proxyUrl,data,'POST','application/x-www-form-urlencoded').then(res => {
+      endFn && endFn(res)
+    })
+  },
   bindPickerChange(e){
     let num = e.detail.value
     this.setData({
@@ -50,67 +68,72 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let b = (options.isApp == 'true' ? true : false)
-    let url = ''
-
-    if(b){
-      url = apiUrl.apiUrl.video.videoDetail
+    console.log(options.data)
+    let data = JSON.parse(decodeURIComponent(options.data))
+    console.log(data)
+    let _url = ''
+    if(data.isApp){
+      _url = apiUrl.apiUrl.video.videoDetail
     }else{
-      url = app.globalData.nowSource.url
-    }
-    let obj = {
-      id:options.id,
-      isApp:b,
-      url:url
-    }
-    if(url == app.globalData.sourceUrl[1].url){
-      obj.isShowSource = true
+      _url = app.globalData.nowSource.url
     }
 
-    this.setData(obj)
+    this.setData({
+      id:data.id,
+      nIndex:data.index,
+      title:data.title,
+      isApp:data.isApp,
+      url:_url
+    })
+
+    if(_url != app.globalData.sourceUrl[1].url){
+      this.setData({
+        videoSrc:data.url
+      })
+    }else{
+
+      this.setData({
+        isShowSource:true
+      })
+
+      this.getVideoSrc(data.url,res => {
+        console.log(res)
+        this.setData({
+          videoSrc:res.url
+        })
+      })
+    }
+
+    wx.setNavigationBarTitle({
+      title: `${data.title} ${data.name}` 
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function (options) {
+  onReady: function () {
     let url = this.data.url
     let fnAjax = this.data.fnAjax
-    let data = {}
-
-    this.setData({
-      isShow:app.globalData.isShow
-    })
-
+    
     if(this.data.isApp){
-      data = {
+
+      let data2 = {
         index:'0',
         vid:this.data.id
       }
 
-      fnAjax(url,data).then(res => {
+      fnAjax(url,data2).then(res => {
         if(res.code == 200){
           this.setData({
-            data:res.data
-          })
-        }else{
-          wx.showModal({
-            content: res.msg,
-            showCancel:false,
-            success (res) {
-              if (res.confirm) {
-                wx.navigateBack({
-                  delta: getCurrentPages().length-1
-                })
-              }
-            }
+            playList:res.data.srcList
           })
         }
       })
 
     }else{
       let _arr = ['sohu','funshion','pptv']
-      data = {
+      let data = {
         ac:'detail',
         ids:this.data.id
       }
@@ -186,7 +209,6 @@ Page({
         }
       })
     }
-
   },
 
   /**
