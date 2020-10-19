@@ -1,5 +1,6 @@
+<import src="../../../../wxParse/wxParse.wxml"/>
 <view class="videoPlayWarp">
-  <video src="{{videoSrc}}" autoplay="{{true}}" class="playBox"></video>
+  <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
   <scroll-view class="playList" scroll-y="{{true}}">
     <picker bindchange="bindPickerChange" value="{{num}}" range="{{yList}}" class="pickerWrap" wx:if="{{isShowSource}}">
       <view class="pickerMain">播放源：<view class="pickerValue">{{yList[num]}}<icon class="iconfont iconjiantou">

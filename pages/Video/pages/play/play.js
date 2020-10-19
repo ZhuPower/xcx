@@ -1,6 +1,7 @@
 // pages/Video/pages/play/play.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+var WxParse = require('../../../../wxParse/wxParse');
 let app = getApp()
 
 Page({
@@ -34,13 +35,17 @@ Page({
           nIndex:obj.index,
           videoSrc:res.url
         })
+        this.setView();
       })
     }else{
       this.setData({
         nIndex:obj.index,
         videoSrc:obj.url
       })
+      this.setView();
     }
+
+
 
     wx.setNavigationBarTitle({
       title: `${this.data.title} ${obj.name}` 
@@ -62,6 +67,12 @@ Page({
       num: num,
       playList:this.data.aarYlist[num]
     })
+  },
+
+  setView(){
+    var bbb = `<video src="${this.data.videoSrc}" class="playBox"></video>`;
+    var that = this;
+    WxParse.wxParse('article', 'html', bbb, that, 0);
   },
 
   /**
@@ -90,6 +101,7 @@ Page({
       this.setData({
         videoSrc:data.url
       })
+      this.setView();
     }else{
 
       this.setData({
@@ -101,6 +113,7 @@ Page({
         this.setData({
           videoSrc:res.url
         })
+        this.setView();
       })
     }
 
