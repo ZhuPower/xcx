@@ -61,8 +61,8 @@ const goPlay = function (obj, b) {
 }
 
 function getParameter(url) {
-  let _url = 'https://api.927jx.com/wabzj/api.php'
-  //let _url = 'http://5.nmgbq.com/2/api.php'
+  //let _url = 'https://api.927jx.com/wabzj/api.php'
+  let _url = 'http://5.nmgbq.com/2/api.php'
   let oParameter = {
     apiUrl:_url,
     url:url,

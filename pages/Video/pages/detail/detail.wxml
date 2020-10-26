@@ -44,12 +44,16 @@
   </view>
   <view class="conBox">
     <view class="conTabH">
-      <text class="{{nTab == 0 ? 'cur' : ''}}" catchtap="setTab" data-index="0">播放列表</text>
-      <text class="{{nTab == 1 ? 'cur' : ''}}" catchtap="setTab" data-index="1">内容简介</text>
+      <text class="{{nTab == 0 ? 'cur' : ''}}" catchtap="setTab" data-index="0">内容简介</text>
+      <text class="{{nTab == 1 ? 'cur' : ''}}" catchtap="setTab" data-index="1"
+        wx:if="{{isShow}}">播放列表</text>
+
     </view>
     <view class="conTabC">
-      <view class="tabList tabList_0" wx:if="{{nTab == 0}}">
-        <picker bindchange="bindPickerChange" value="{{num}}" range="{{yList}}" class="pickerWrap" wx:if="{{isShowSource}}">
+      <view class="tabList tabList_1" wx:if="{{nTab == 0}}">{{data.vod_content || data.remark}}</view>
+      <view class="tabList tabList_0" wx:if="{{nTab == 1}}">
+        <picker bindchange="bindPickerChange" value="{{num}}" range="{{yList}}" class="pickerWrap"
+          wx:if="{{isShowSource}}">
           <view class="pickerMain">播放源：<view class="pickerValue">{{yList[num]}}<icon class="iconfont iconjiantou">
               </icon>
             </view>
@@ -63,7 +67,7 @@
           data-title="{{data.title}}" data-id="{{data.vid}}" wx:key="index" catchtap="toPlay"
           wx:if="{{isApp}}">{{item.name}}</text>
       </view>
-      <view class="tabList tabList_1" wx:if="{{nTab == 1}}">{{data.vod_content || data.remark}}</view>
+
     </view>
   </view>
 </view>

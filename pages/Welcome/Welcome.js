@@ -1,4 +1,5 @@
 // pages/navPage/navPage.js
+let app = getApp()
 Page({
 
   /**
@@ -19,27 +20,11 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-    // wx.login({
-    //   success (res) {
-    //     if (res.code) {
-    //       //发起网络请求
-    //       wx.request({
-    //         url: 'https://test.yijiago.com/gly/yiJiaGo/test/proxy.php',
-    //         data: {
-    //           apiUrl:'https://api.weixin.qq.com/sns/jscode2session',
-    //           appid:'wx0393ec5072a7e5b1',
-    //           js_code:res.code,
-    //           secret:'a93f5758a345c268878059b2281ad89f',
-    //           grant_type:'authorization_code'
-    //         },
-    //         success(res) {
-    //           console.log(res)
-    //         }
-    //       })
-    //     } 
-    //   }
-    // })
+    wx.showModal({
+      title: '温馨提示',
+      content: app.globalData.prompt,
+      success (res) {}
+    })
   },
 
   /**
