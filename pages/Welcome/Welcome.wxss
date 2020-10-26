@@ -41,7 +41,7 @@
 }
 .navWrap .navMain{}
 
-.navWrap .navMain navigator{
+.navWrap .navMain navigator,.navWrap .navMain button{
   width: 360rpx;
   height: 88rpx;
   background: #fff;
@@ -49,4 +49,13 @@
   text-align: center;
   line-height: 88rpx;
   border-radius: 44rpx;
+}
+
+.navWrap .navMain button{
+  background: #07c160;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
 }

@@ -68,6 +68,7 @@ Page({
     this.setData({
       searchKey: e.detail.value
     })
+    e.detail.value = ''
   },
   goList(){
     if(this.data.searchKey){

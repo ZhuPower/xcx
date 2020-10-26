@@ -1,4 +1,5 @@
 const Base64 = require('./base64')
+const XML = require('./XML')
 const apiUrl = require('../utils/apiUrl')
 
 const fnAjax = function (url, data, method, type) {
@@ -27,6 +28,8 @@ const fnAjax = function (url, data, method, type) {
         isUrl = true
       }
 
+      console.log(url)
+
       //data.apiUrl = url
       wx.showLoading({
         title: '加载中...',
@@ -39,6 +42,7 @@ const fnAjax = function (url, data, method, type) {
           header: obj,
           success(res) {
             wx.hideLoading()
+            console.log(res.data)
             resolved(res.data)
           }
       })

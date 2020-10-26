@@ -1,11 +1,13 @@
 <!--pages/navPage/navPage.wxml-->
 <view class="navWrap">
 	<view class="logoMain">
-		<view class="logo">
-			<image src="./images/logo.png"></image>
+		<view class="logo" catchtap="copyTex">
+			<image wx:if="{{userInfo.avatarUrl}}" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
+			<image wx:else src="./images/logo.png"></image>
 		</view>
 		<view class="welcome">
-			<text>Hello，小伙伴们！</text>
+			<text wx:if="{{userInfo.nickName}}">Hello，{{userInfo.nickName}}！</text>
+			<text wx:else>Hello，小伙伴们！</text>
 		</view>
 	</view>
 
@@ -15,5 +17,6 @@
 		<navigator url="/">音乐查询</navigator> -->
 		<navigator url="/pages/Comics/pages/index/index">漫画查询</navigator>
 		<navigator url="/pages/Video/pages/index/index">视频查询</navigator>
+		<button wx:if="{{isUser}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
 	</view>
 </view>
