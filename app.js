@@ -2,7 +2,6 @@
 App({
   onLaunch: function () {
     this.autoUpdate()
-    this.globalData.nowSource = this.globalData.sourceUrl[this.globalData.nindex]
   },
   autoUpdate: function() {
     var self = this

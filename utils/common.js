@@ -1,5 +1,4 @@
 const Base64 = require('./base64')
-const XML = require('./XML')
 const apiUrl = require('../utils/apiUrl')
 
 const fnAjax = function (url, data, method, type) {

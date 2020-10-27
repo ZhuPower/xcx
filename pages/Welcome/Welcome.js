@@ -1,7 +1,7 @@
 // pages/navPage/navPage.js
 const apiUrl = require('../../utils/apiUrl')
 const fnCon = require('../../utils/common')
-const XML = require('../../utils/XML')
+const X2JS = require('../../x2js/we-x2js');
 let app = getApp()
 Page({
 
@@ -43,16 +43,37 @@ Page({
   getResources() {
     let url = apiUrl.apiUrl.proxyUrl
     let data = {
-      apiUrl:'https://note.youdao.com/yws/public/note/956f3aa608490fb2a28b13cb923e4ed5',
+      apiUrl: 'https://note.youdao.com/yws/public/note/956f3aa608490fb2a28b13cb923e4ed5',
       editorType: 1,
       unloginId: '191fd197-241a-d913-c3ab-cc184cc1882a',
       editorVersion: 'new-json-editor',
       cstk: 'NRR52d4u',
     }
     this.data.fnAjax(url, data).then(res => {
-      var xotree = new XML.ObjTree();
-      var json = xotree.parseXML(res.content);
-      console.log(json)
+      var x2js = new X2JS();
+      var json = x2js.xml2js(res.content);
+      var obj = JSON.parse(json.note.body.code.text);
+      //console.log(obj)
+      if(obj.authority[app.globalData.openid]){
+        if(obj.authority[app.globalData.openid] == 'listC'){
+          app.globalData.sourceUrl.push(...obj.listD)
+          app.globalData.sourceUrl.push(...obj.listC)
+        }else if(obj.authority[app.globalData.openid] == 'listB'){
+          app.globalData.sourceUrl.push(...obj.listD)
+          app.globalData.sourceUrl.push(...obj.listC)
+          app.globalData.sourceUrl.push(...obj.listB)
+        }else if(obj.authority[app.globalData.openid] == 'listA'){
+          app.globalData.sourceUrl.push(...obj.listD)
+          app.globalData.sourceUrl.push(...obj.listC)
+          app.globalData.sourceUrl.push(...obj.listB)
+          app.globalData.sourceUrl.push(...obj.listA)
+        }
+        app.globalData.isShow = true
+      }else{
+        app.globalData.sourceUrl = obj.listD
+      }
+
+      app.globalData.nowSource = app.globalData.sourceUrl[app.globalData.nindex]
     })
   },
 
@@ -112,7 +133,7 @@ Page({
           }
         }
       })
-    }else{
+    } else {
       that.getResources()
     }
   },
