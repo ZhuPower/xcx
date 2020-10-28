@@ -8,62 +8,61 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classifyList:[],
-    classifyType:0,
-    searchKey:'',
-    isShow:false,
-    nIndex:-1,
-    name:'最新',
-    url:'',
-    fnAjax:fnCon.fnAjax,
-    sourceUrl:[],
-    num:0
+    classifyList: [],
+    classifyType: 0,
+    searchKey: '',
+    isShow: false,
+    nIndex: -1,
+    name: '最新',
+    url: '',
+    fnAjax: fnCon.fnAjax,
+    sourceUrl: [],
+    num: 0
   },
-  setHeight(){
+  setHeight() {
     let isShow = this.data.isShow
     this.setData({
-      isShow:!isShow
+      isShow: !isShow
     })
   },
-  getType(e){
+  getType(e) {
     let type = e.currentTarget.dataset.type
     let index = e.currentTarget.dataset.index
     let name = e.currentTarget.dataset.name
     this.setData({
-      classifyType:type,
-      isShow:false,
-      nIndex:index,
-      name:name
+      classifyType: type,
+      isShow: false,
+      nIndex: index,
+      name: name
     })
   },
-  bindPickerChange: function(e) {
+  bindPickerChange: function (e) {
     let num = e.detail.value
     app.globalData.nowSource = app.globalData.sourceUrl[num]
     app.globalData.nindex = num
     let url = app.globalData.nowSource.url
     this.setData({
       num: num,
-      url:url,
-      isShow:false,
-      nIndex:-1,
-      classifyType:0
+      url: url,
+      isShow: false,
+      nIndex: -1,
+      classifyType: 0
     })
     this.sjcsh();
   },
 
-  sjcsh(){
+  sjcsh() {
     let url = this.data.url
     let fnAjax = this.data.fnAjax
 
     let data = {
-      ac:'list'
+      ac: 'list'
     }
-    fnAjax(url,data).then(res => {
-      if(res.code == 1){
-       this.setData({
-        classifyList:res.class
-       })
-      }
+    fnAjax(url, data).then(res => {
+      console.log(res)
+      this.setData({
+        classifyList: res.class || res.rss.class.ty
+      })
     })
   },
 
@@ -73,9 +72,9 @@ Page({
   onLoad: function (options) {
     let url = app.globalData.nowSource.url
     this.setData({
-      url:url,
-      sourceUrl:app.globalData.sourceUrl,
-      num:app.globalData.nindex
+      url: url,
+      sourceUrl: app.globalData.sourceUrl,
+      num: app.globalData.nindex
     })
   },
 

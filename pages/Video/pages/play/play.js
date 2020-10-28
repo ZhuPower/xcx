@@ -10,37 +10,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id:'',
-    data:null,
-    videoSrc:'',
-    playList:[],
-    nIndex:0,
-    title:'',
-    isApp:true,
-    url:'',
-    fnAjax:fnCon.fnAjax,
-    getParameter:fnCon.getParameter,
-    yList:[],
-    aarYlist:[],
-    num:0,
-    isShowSource:false
+    id: '',
+    data: null,
+    videoSrc: '',
+    playList: [],
+    nIndex: 0,
+    title: '',
+    isApp: true,
+    url: '',
+    fnAjax: fnCon.fnAjax,
+    getParameter: fnCon.getParameter,
+    parsing: apiUrl.apiUrl.parsing,
+    yList: [],
+    aarYlist: [],
+    num: 0,
+    isShowSource: false
   },
-  Play(e){
+  Play(e) {
     let obj = e.currentTarget.dataset
 
-    if(this.data.isShowSource){
-      this.getVideoSrc(obj.url,res => {
+    if (this.data.isShowSource) {
+      this.getVideoSrc(obj.url, res => {
         console.log(res)
         this.setData({
-          nIndex:obj.index,
-          videoSrc:res.url
+          nIndex: obj.index,
+          videoSrc: res.url
         })
         this.setView();
       })
-    }else{
+    } else {
       this.setData({
-        nIndex:obj.index,
-        videoSrc:obj.url
+        nIndex: obj.index,
+        videoSrc: obj.url
       })
       this.setView();
     }
@@ -48,28 +49,29 @@ Page({
 
 
     wx.setNavigationBarTitle({
-      title: `${this.data.title} ${obj.name}` 
+      title: `${this.data.title} ${obj.name}`
     })
   },
-  getVideoSrc(str,endFn){
+  getVideoSrc(str, endFn) {
     let fnAjax = this.data.fnAjax
-    let getParameter = this.data.getParameter 
 
-    let data = getParameter(str)
+    let data = {
+      url:str
+    }
 
-    fnAjax(apiUrl.apiUrl.proxyUrl,data,'POST','application/x-www-form-urlencoded').then(res => {
+    fnAjax(this.data.parsing, data).then(res => {
       endFn && endFn(res)
     })
   },
-  bindPickerChange(e){
+  bindPickerChange(e) {
     let num = e.detail.value
     this.setData({
       num: num,
-      playList:this.data.aarYlist[num]
+      playList: this.data.aarYlist[num]
     })
   },
 
-  setView(){
+  setView() {
     var bbb = `<video src="${this.data.videoSrc}" class="playBox"></video>`;
     var that = this;
     WxParse.wxParse('article', 'html', bbb, that, 0);
@@ -83,42 +85,48 @@ Page({
     let data = JSON.parse(decodeURIComponent(options.data))
     console.log(data)
     let _url = ''
-    if(data.isApp){
+    if (data.isApp) {
       _url = apiUrl.apiUrl.video.videoDetail
-    }else{
+    } else {
       _url = app.globalData.nowSource.url
     }
 
     this.setData({
-      id:data.id,
-      nIndex:data.index,
-      title:data.title,
-      isApp:data.isApp,
-      url:_url
+      id: data.id,
+      nIndex: data.index,
+      title: data.title,
+      isApp: data.isApp,
+      url: _url
     })
 
-    if(_url != app.globalData.sourceUrl[1].url){
+    let arr_1 = ['https://zy.itono.cn/inc/apijson_vod.php']
+
+    if (arr_1.indexOf(_url) == -1) {
       this.setData({
-        videoSrc:data.url
+        videoSrc: data.url
       })
       this.setView();
-    }else{
+    } else {
 
       this.setData({
-        isShowSource:true
+        isShowSource: true
       })
 
-      this.getVideoSrc(data.url,res => {
-        console.log(res)
+      this.getVideoSrc(data.url, res => {
+        //console.log(res)
+        let _src = res.url
+        if(_src.indexOf('//') == 0){
+          _src = 'https:'+_src
+        }
         this.setData({
-          videoSrc:res.url
+          videoSrc: _src
         })
         this.setView();
       })
     }
 
     wx.setNavigationBarTitle({
-      title: `${data.title} ${data.name}` 
+      title: `${data.title} ${data.name}`
     })
   },
 
@@ -128,49 +136,50 @@ Page({
   onReady: function () {
     let url = this.data.url
     let fnAjax = this.data.fnAjax
-    
-    if(this.data.isApp){
+
+    if (this.data.isApp) {
 
       let data2 = {
-        index:'0',
-        vid:this.data.id
+        index: '0',
+        vid: this.data.id
       }
 
-      fnAjax(url,data2).then(res => {
-        if(res.code == 200){
+      fnAjax(url, data2).then(res => {
+        if (res.code == 200) {
           this.setData({
-            playList:res.data.srcList
+            playList: res.data.srcList
           })
         }
       })
 
-    }else{
-      let _arr = ['sohu','funshion','pptv']
+    } else {
+      let _arr = ['sohu', 'funshion', 'pptv']
       let data = {
-        ac:'detail',
-        ids:this.data.id
+        ac: 'detail',
+        ids: this.data.id
       }
 
-      fnAjax(url,data).then(res => {
-        if(res.code == 1){
+      fnAjax(url, data).then(res => {
+        if (res.code == 1) {
           this.setData({
-            data:res.list[0]
+            data: res.list[0]
           })
           let arr1 = []
           let arr2 = []
-          let arr3 =[]
-          if(this.data.data.vod_play_url.indexOf('$$$')>-1){
+          let arr3 = []
+          let arr_1 = ['https://zy.itono.cn/inc/apijson_vod.php']
+          if (this.data.data.vod_play_url.indexOf('$$$') > -1) {
             arr1 = this.data.data.vod_play_from.split('$$$')
             arr2 = this.data.data.vod_play_url.split('$$$')
-            for(let x=0; x<_arr.length; x++){
+            for (let x = 0; x < _arr.length; x++) {
               let n = arr1.indexOf(_arr[x])
-              if(n>-1){
-                arr1.splice(n,1)
-                arr2.splice(n,1)
+              if (n > -1) {
+                arr1.splice(n, 1)
+                arr2.splice(n, 1)
               }
             }
-          }else{
-            if(_arr.indexOf(this.data.data.vod_play_from)>-1){
+          } else {
+            if (_arr.indexOf(this.data.data.vod_play_from) > -1) {
               arr1 = []
               arr2 = []
             } else {
@@ -179,45 +188,45 @@ Page({
             }
           }
 
-          for(let i=0; i<arr2.length; i++){
-            if(arr2[i].indexOf('#')>-1){
+          for (let i = 0; i < arr2.length; i++) {
+            if (arr2[i].indexOf('#') > -1) {
               let arr4 = arr2[i].split('#')
-              getArrList(arr4,i)
-            }else{
+              getArrList(arr4, i)
+            } else {
               let arr4 = [arr2[i]]
-              getArrList(arr4,i)
+              getArrList(arr4, i)
             }
-            
+
           }
 
-          function getArrList(arr4,num){
-           
+          function getArrList(arr4, num) {
+
             let arr5 = []
 
-            for(let ii=0;ii<arr4.length;ii++){
+            for (let ii = 0; ii < arr4.length; ii++) {
               let arr6 = arr4[ii].split('$')
-              
-              if(ii==0){
-                if(url != app.globalData.sourceUrl[1].url){
-                  if(arr6[1].indexOf('.m3u8')>-1 || arr6[1].indexOf('.mp4')>-1){
 
-                  }else{
-                    arr1.splice(num,1);
+              if (ii == 0) {
+                if (arr_1.indexOf(url) == -1) {
+                  if (arr6[1].indexOf('.m3u8') > -1 || arr6[1].indexOf('.mp4') > -1) {
+
+                  } else {
+                    arr1.splice(num, 1);
                     break;
                   }
                 }
               }
               arr5.push(arr6)
             }
-            if(arr5.length>0){
+            if (arr5.length > 0) {
               arr3.push(arr5)
             }
           }
-  
+
           this.setData({
-            yList:arr1,
-            aarYlist:arr3,
-            playList:arr3[0]
+            yList: arr1,
+            aarYlist: arr3,
+            playList: arr3[0]
           })
         }
       })

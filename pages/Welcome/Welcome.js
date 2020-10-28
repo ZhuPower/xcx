@@ -1,7 +1,6 @@
 // pages/navPage/navPage.js
 const apiUrl = require('../../utils/apiUrl')
 const fnCon = require('../../utils/common')
-const X2JS = require('../../x2js/we-x2js');
 let app = getApp()
 Page({
 
@@ -41,36 +40,44 @@ Page({
     }, 3000)
   },
   getResources() {
-    let url = apiUrl.apiUrl.proxyUrl
+    let url = 'https://www.yuque.com/api/docs/kuhdex'
     let data = {
-      apiUrl: 'https://note.youdao.com/yws/public/note/956f3aa608490fb2a28b13cb923e4ed5',
-      editorType: 1,
-      unloginId: '191fd197-241a-d913-c3ab-cc184cc1882a',
-      editorVersion: 'new-json-editor',
-      cstk: 'NRR52d4u',
+      book_id: 1937115,
+      include_contributors: true,
+      include_hits: true,
+      include_like: true,
+      include_pager: true,
+      include_suggests: true
     }
     this.data.fnAjax(url, data).then(res => {
-      var x2js = new X2JS();
-      var json = x2js.xml2js(res.content);
-      var obj = JSON.parse(json.note.body.code.text);
-      //console.log(obj)
-      if(obj.authority[app.globalData.openid]){
-        if(obj.authority[app.globalData.openid] == 'listC'){
-          app.globalData.sourceUrl.push(...obj.listD)
-          app.globalData.sourceUrl.push(...obj.listC)
-        }else if(obj.authority[app.globalData.openid] == 'listB'){
-          app.globalData.sourceUrl.push(...obj.listD)
-          app.globalData.sourceUrl.push(...obj.listC)
-          app.globalData.sourceUrl.push(...obj.listB)
-        }else if(obj.authority[app.globalData.openid] == 'listA'){
-          app.globalData.sourceUrl.push(...obj.listD)
-          app.globalData.sourceUrl.push(...obj.listC)
-          app.globalData.sourceUrl.push(...obj.listB)
-          app.globalData.sourceUrl.push(...obj.listA)
+      let str1 = res.data.content
+      let num = str1.indexOf('">%');
+      let str2 = str1.substring(num + 2);
+      let num2 = str2.indexOf('</p>')
+      let str = decodeURIComponent(str2.substring(0, num2)).replace(/\s+/g, "")
+      var obj = JSON.parse(str);
+     // console.log(obj)
+      var arr1 = obj.listD
+      var arr2 = obj.listC
+      var arr3 = obj.listB
+      var arr4 = obj.listA
+      if (obj.authority[app.globalData.openid]) {
+        if (obj.authority[app.globalData.openid] == 'listC') {
+          app.globalData.sourceUrl.push(...arr1)
+          app.globalData.sourceUrl.push(...arr2)
+        } else if (obj.authority[app.globalData.openid] == 'listB') {
+          app.globalData.sourceUrl.push(...arr1)
+          app.globalData.sourceUrl.push(...arr2)
+          app.globalData.sourceUrl.push(...arr3)
+        } else if (obj.authority[app.globalData.openid] == 'listA') {
+          app.globalData.sourceUrl.push(...arr1)
+          app.globalData.sourceUrl.push(...arr2)
+          app.globalData.sourceUrl.push(...arr3)
+          app.globalData.sourceUrl.push(...arr4)
         }
         app.globalData.isShow = true
-      }else{
-        app.globalData.sourceUrl = obj.listD
+      } else {
+        app.globalData.sourceUrl = arr1
       }
 
       app.globalData.nowSource = app.globalData.sourceUrl[app.globalData.nindex]

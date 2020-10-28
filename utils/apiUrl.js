@@ -1,5 +1,6 @@
 const apiUrl = {
   proxyUrl:'https://test.yijiago.com/gly/yiJiaGo/test/proxy.php',
+  parsing:'https://cdn.yangju.vip/kc/api.php',
   video:{
     banner:'https://aa.ahy1.top/api.php/banner/banner/getBannerLists',
     homeVideo:'https://aa.ahy1.top/api.php/videos/videos/getHomeVideoLists',
