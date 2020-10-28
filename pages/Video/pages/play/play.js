@@ -2,6 +2,7 @@
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
 var WxParse = require('../../../../wxParse/wxParse');
+const CryptoJS = require('../../../../utils/Crypto')
 let app = getApp()
 
 Page({
@@ -24,7 +25,8 @@ Page({
     yList: [],
     aarYlist: [],
     num: 0,
-    isShowSource: false
+    isShowSource: false,
+    parsingIndex: 0
   },
   Play(e) {
     let obj = e.currentTarget.dataset
@@ -55,12 +57,36 @@ Page({
   getVideoSrc(str, endFn) {
     let fnAjax = this.data.fnAjax
 
-    let data = {
-      url:str
-    }
+    let getParameter = this.data.getParameter(str, this.data.parsingIndex)
+    console.log(getParameter)
 
-    fnAjax(this.data.parsing, data).then(res => {
-      endFn && endFn(res)
+    fnAjax(getParameter.url, getParameter.data).then(res => {
+      console.log(res)
+
+      if (this.data.parsingIndex == 0) {
+        if (res.code == 200) {
+
+          if (res.url.indexOf('AINX') != -1) {
+            var newurl = res.url.replace(/AINX/, '');
+            var obj = {
+              mode: CryptoJS.mode.ECB,
+              padding: CryptoJS.pad.Pkcs7
+            };
+            var str2 = CryptoJS.enc.Utf8.parse('loveme@nxflv@com');
+            var str = CryptoJS.AES.decrypt(newurl, str2, obj);
+            res.url = str.toString(CryptoJS.enc.Utf8)
+            endFn && endFn(res)
+          };
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      } else {
+        endFn && endFn(res)
+      }
     })
   },
   bindPickerChange(e) {
@@ -115,8 +141,8 @@ Page({
       this.getVideoSrc(data.url, res => {
         //console.log(res)
         let _src = res.url
-        if(_src.indexOf('//') == 0){
-          _src = 'https:'+_src
+        if (_src.indexOf('//') == 0) {
+          _src = 'https:' + _src
         }
         this.setData({
           videoSrc: _src

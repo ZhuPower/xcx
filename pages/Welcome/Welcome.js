@@ -56,7 +56,7 @@ Page({
       let num2 = str2.indexOf('</p>')
       let str = decodeURIComponent(str2.substring(0, num2)).replace(/\s+/g, "")
       var obj = JSON.parse(str);
-     // console.log(obj)
+      // console.log(obj)
       var arr1 = obj.listD
       var arr2 = obj.listC
       var arr3 = obj.listB
