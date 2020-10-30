@@ -69,6 +69,7 @@ Page({
     let data = {
       ac: 'list'
     }
+    
     fnAjax(url, data).then(res => {
       this.setData({
         classifyList: res.class || res.rss.class.ty,

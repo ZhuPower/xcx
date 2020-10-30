@@ -11,7 +11,15 @@ Page({
     fnAjax: fnCon.fnAjax,
     userInfo: {},
     isUser: true,
-    num: 0
+    num: 0,
+    queyu: {
+      book_id: 1937115,
+      include_contributors: true,
+      include_hits: true,
+      include_like: true,
+      include_pager: true,
+      include_suggests: true
+    }
   },
   bindGetUserInfo(e) {
     console.log(e.detail.userInfo)
@@ -41,22 +49,10 @@ Page({
   },
   getResources() {
     let url = 'https://www.yuque.com/api/docs/kuhdex'
-    let data = {
-      book_id: 1937115,
-      include_contributors: true,
-      include_hits: true,
-      include_like: true,
-      include_pager: true,
-      include_suggests: true
-    }
+    let data = this.data.queyu
     this.data.fnAjax(url, data).then(res => {
-      let str1 = res.data.content
-      let num = str1.indexOf('">%');
-      let str2 = str1.substring(num + 2);
-      let num2 = str2.indexOf('</p>')
-      let str = decodeURIComponent(str2.substring(0, num2)).replace(/\s+/g, "")
-      var obj = JSON.parse(str);
-      // console.log(obj)
+      var obj = this.getQueYu(res);
+      //console.log(obj)
       var arr1 = obj.listD
       var arr2 = obj.listC
       var arr3 = obj.listB
@@ -83,7 +79,35 @@ Page({
       app.globalData.nowSource = app.globalData.sourceUrl[app.globalData.nindex]
     })
   },
+  getJxUrl() {
+    let url = 'https://www.yuque.com/api/docs/dcyc02'
+    let data = this.data.queyu
+    this.data.fnAjax(url, data).then(res => {
+      var obj = this.getQueYu(res);
+      //console.log(obj)
+      app.globalData.jxUrl = obj
 
+    })
+  },
+  getAc() {
+    let url = 'https://www.yuque.com/api/docs/vbpvs4'
+    let data = this.data.queyu
+    this.data.fnAjax(url, data).then(res => {
+      var obj = this.getQueYu(res);
+      //console.log(obj)
+      app.globalData.getAc = obj
+
+    })
+  },
+  getQueYu(obj) {
+    let str1 = obj.data.content
+    let num = str1.indexOf('">%');
+    let str2 = str1.substring(num + 2);
+    let num2 = str2.indexOf('</p>')
+    let str = decodeURIComponent(str2.substring(0, num2)).replace(/\s+/g, "")
+    var json = JSON.parse(str);
+    return json
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -107,21 +131,6 @@ Page({
         }
       }
     })
-
-    // let url = 'https://1717.ntryjd.net/1717yun/api.php';
-    // let data = {
-    //   url: 'https://v.qq.com/x/cover/s9jv3s19tcrooln/w0034lsttga.html',
-    //   time: 1604027092,
-    //   other: 'aHR0cHM6Ly92LnFxLmNvbS94L2NvdmVyL3M5anYzczE5dGNyb29sbi93MDAzNGxzdHRnYS5odG1s',
-    //   token: '959ed34a094def10fc750dac78f9f6da',
-    //   keys: '26e94506a1d086e838266f3ac7099838',
-    //   keep: 'ed33912d402b241d036ca322ba0b2643',
-    //   key: '382a00255ef3e3f1a8aa3dce25f3c6c4'
-    // }
-
-    // this.data.fnAjax(url, data,'POST','application/x-www-form-urlencoded').then(res => {
-
-    // })
   },
 
   /**
@@ -150,6 +159,12 @@ Page({
               success(res) {
                 app.globalData.openid = res.data.openid
                 that.getResources()
+                setTimeout(()=>{
+                  that.getJxUrl()
+                  setTimeout(()=>{
+                    that.getAc()
+                  },500)
+                },500)
               }
             })
           }
@@ -157,6 +172,12 @@ Page({
       })
     } else {
       that.getResources()
+      setTimeout(()=>{
+        that.getJxUrl()
+        setTimeout(()=>{
+          that.getAc()
+        },500)
+      },500)
     }
   },
 

@@ -70,7 +70,11 @@ Page({
     let that = this
     let fnAjax = this.data.fnAjax
     let getParameter = null;
-    if (this.data.parsingIndex == 4) {
+    let isMg = false
+    if(str.indexOf('www.mgtv.com') > -1){
+      isMg = true
+    }
+    if (this.data.parsingIndex == 4 && !isMg) {
       this.data.getParameter(str, this.data.parsingIndex).then(res => {
         getParameter = res
         nextFn(endFn)
@@ -82,7 +86,13 @@ Page({
 
 
     function nextFn(endFn) {
-      fnAjax(getParameter.url, getParameter.data, that.data.parsing[that.data.parsingIndex].method, 'application/x-www-form-urlencoded').then(res => {
+      let method = 'GET'
+      if(isMg && that.data.parsingIndex == 4){
+       
+      }else{
+        method = that.data.parsing[that.data.parsingIndex].method
+      }
+      fnAjax(getParameter.url, getParameter.data, method, 'application/x-www-form-urlencoded').then(res => {
         console.log(res)
         if (that.data.parsingIndex == 3) {
 

@@ -26,7 +26,7 @@ const fnAjax = function (url, data, method, type) {
     //console.log(url)
     if (url == apiUrl.apiUrl.proxyUrl) {
       //data.apiUrl = url
-    }else if(url.indexOf('https://') != 0){
+    } else if (url.indexOf('https://') != 0) {
       isUrl = false
       data.apiUrl = url
     } else {
@@ -52,7 +52,7 @@ const fnAjax = function (url, data, method, type) {
             var x2js = new X2JS();
             var json = x2js.xml2js(res.data);
             resolved(json)
-          }else if(res.data.indexOf('<script type="text/javascript" src="//iszzj.com/"></script') > -1){
+          } else if (res.data.indexOf('<script type="text/javascript" src="//iszzj.com/"></script') > -1) {
             let num = res.data.indexOf('{"code":')
             let str = res.data.substring(num)
             let obj = JSON.parse(str)
@@ -82,26 +82,30 @@ const goPlay = function (obj, b) {
 }
 
 function getParameter(url, num) {
-  console.log(url, num)
+  //console.log(url, num)
   let oParameter = {}
+
+  if (url.indexOf('www.mgtv.com') > -1 && parseInt(num) == 4) {
+    num = -1
+  }
   switch (parseInt(num)) {
+    case -1:
+      oParameter = getParameter_mg(url)
+      break;
     case 0:
-      oParameter = getParameter0(url,parseInt(num))
+      oParameter = getParameter0(url, parseInt(num))
       break;
     case 1:
-      oParameter = getParameter1(url,parseInt(num))
+      oParameter = getParameter1(url, parseInt(num))
       break;
     case 2:
-      oParameter = getParameter2(url,parseInt(num))
+      oParameter = getParameter2(url, parseInt(num))
       break;
     case 3:
-      oParameter = getParameter3(url,parseInt(num))
+      oParameter = getParameter3(url, parseInt(num))
       break;
     case 4:
-      oParameter = getParameter4(url,parseInt(num))
-      break;
-    case 5:
-      oParameter = getParameter5(url,parseInt(num))
+      oParameter = getParameter4(url, parseInt(num))
       break;
   }
 
@@ -109,7 +113,7 @@ function getParameter(url, num) {
 }
 
 
-function getParameter0(url,nIndex) {
+function getParameter0(url, nIndex) {
   let _url = apiUrl.apiUrl.parsing[nIndex].url
   let data = {
     apiUrl: _url,
@@ -129,7 +133,7 @@ function getParameter0(url,nIndex) {
   return oParameter;
 }
 
-function getParameter1(url,nIndex) {
+function getParameter1(url, nIndex) {
   let data = {
     apiUrl: apiUrl.apiUrl.parsing[nIndex].url,
     url: url,
@@ -146,9 +150,9 @@ function getParameter1(url,nIndex) {
   return oParameter;
 }
 
-function getParameter2(url,nIndex) {
+function getParameter2(url, nIndex) {
   let data = {
-    apiUrl:apiUrl.apiUrl.parsing[nIndex].url,
+    apiUrl: apiUrl.apiUrl.parsing[nIndex].url,
     url: url
   }
 
@@ -160,7 +164,7 @@ function getParameter2(url,nIndex) {
   return oParameter;
 }
 
-function getParameter3(url,nIndex) {
+function getParameter3(url, nIndex) {
   var _str1 = CryptoJS.enc.Utf8.parse(url);
   var _obj = {
     mode: CryptoJS.mode.ECB,
@@ -182,7 +186,7 @@ function getParameter3(url,nIndex) {
 }
 
 
-function getParameter4(url,nIndex) {
+function getParameter4(url, nIndex) {
   let _url = 'https://1717.ntryjd.net/1717yun/'
   let _data = {
     url: url
@@ -237,6 +241,19 @@ function getParameter4(url,nIndex) {
       }
     })
   })
+}
+
+
+function getParameter_mg(url) {
+  let data = {
+    url: url,
+    danmu: 0
+  }
+  let oParameter = {
+    url: 'https://plamgtvcache.ccyjjd.com/mgtv666/api.php',
+    data: data
+  }
+  return oParameter;
 }
 
 

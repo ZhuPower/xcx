@@ -65,6 +65,7 @@ Component({
   },
 
   ready() {
+   // console.log(this.data.sourceUrl)
     if (this.data.isApp) {
       this.setData({
         url: apiUrl.apiUrl.video.VideoLists
@@ -82,6 +83,8 @@ Component({
         this.cshData(1)
       }
     }
+
+   // console.log(this.data.url)
   },
 
   /**
@@ -150,6 +153,11 @@ Component({
             pg: 1,
             ids: ids
           }
+          let arr_0 = app.globalData.getAc
+          if (arr_0.indexOf(url) > -1) {
+            data.ac = 'videolist'
+          }
+
           fnAjax(url, data2).then(res => {
             if (res.code == 1) {
               let arr = []
@@ -193,7 +201,7 @@ Component({
       }
 
       let arr_0 = app.globalData.getAc
-      if (arr_0.indexOf(url)>-1) {
+      if (arr_0.indexOf(url) > -1) {
         data.ac = 'videolist'
       }
 
@@ -202,51 +210,51 @@ Component({
         if (res.code == 1 || res.code == 200 || res.status == 200 || res.rss) {
           let arr = []
 
-        if (num > 1) {
-          arr = this.data.videoList
-        }
-
-        if (res.data) {
-          if (res.data.list) {
-            arr.push(...res.data.list)
-          } else {
-            arr.push(...res.data)
+          if (num > 1) {
+            arr = this.data.videoList
           }
-        } else if (res.list) {
-          arr.push(...res.list)
-        } else if (res.rss) {
-          arr.push(...res.rss.list.video)
-        }
 
-        let obj = {
-          videoList: arr,
-          isNext: true,
-          isRefresh: false
-        }
-
-        if (res.page) {
-          if (res.page.pageindex) {
-            obj['page'] = res.page.pageindex
-            obj['pagecount'] = res.page.pagecount
-          } else {
-            obj['page'] = res.page
-            obj['pagecount'] = res.pagecount
-          }
-        } else if (res.rss) {
-          obj['page'] = res.rss.list._page
-          obj['pagecount'] = res.rss.list._recordcount
-        } else {
           if (res.data) {
-            if (res.data.page) {
-              obj['page'] = res.data.page
-              obj['pagecount'] = res.data.count
+            if (res.data.list) {
+              arr.push(...res.data.list)
+            } else {
+              arr.push(...res.data)
+            }
+          } else if (res.list) {
+            arr.push(...res.list)
+          } else if (res.rss) {
+            arr.push(...res.rss.list.video)
+          }
+
+          let obj = {
+            videoList: arr,
+            isNext: true,
+            isRefresh: false
+          }
+
+          if (res.page) {
+            if (res.page.pageindex) {
+              obj['page'] = res.page.pageindex
+              obj['pagecount'] = res.page.pagecount
+            } else {
+              obj['page'] = res.page
+              obj['pagecount'] = res.pagecount
+            }
+          } else if (res.rss) {
+            obj['page'] = res.rss.list._page
+            obj['pagecount'] = res.rss.list._recordcount
+          } else {
+            if (res.data) {
+              if (res.data.page) {
+                obj['page'] = res.data.page
+                obj['pagecount'] = res.data.count
+              }
             }
           }
-        }
 
 
-        this.setData(obj)
-        wx.hideLoading()
+          this.setData(obj)
+          wx.hideLoading()
         }
       })
     },
