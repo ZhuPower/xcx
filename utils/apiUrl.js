@@ -1,11 +1,31 @@
 const apiUrl = {
   proxyUrl: 'https://test.yijiago.com/gly/yiJiaGo/test/proxy.php',
   parsing: [
-    'https://www.ckmov.com/Api.php',
-    'http://5.nmgbq.com/2/api.php',
-    'https://api.927jx.com/wabzj/api.php',
-    'https://cdn.yangju.vip/kc/api.php',
-    'http://qq.peilili.com/mgjiexi/api.php'
+    {
+      name:'金桥解析',
+      url:'http://5.nmgbq.com/2/api.php', 
+      method:'POST'
+    },
+    {
+      name:'测试解析2',
+      url:'http://qq.peilili.com/mgjiexi/api.php',
+      method:'POST'
+    },
+    {
+      name:'测试解析',
+      url:'https://cdn.yangju.vip/kc/api.php',
+      method:'GET' 
+    },
+    {
+      name:'解析接口1',
+      url:'https://www.ckmov.com/Api.php',
+      method:'POST'
+    },
+    {
+      name:'1717解析',
+      url:'https://1717.ntryjd.net/1717yun/api.php',
+      method:'POST'
+    } 
   ],
   video: {
     banner: 'https://aa.ahy1.top/api.php/banner/banner/getBannerLists',

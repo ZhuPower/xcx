@@ -73,6 +73,9 @@ Page({
   goList(){
     if(this.data.searchKey){
       let str = 'page=1&name=搜索"'+this.data.searchKey+'"结果&key='+this.data.searchKey
+      this.setData({
+        searchKey:''
+      })
       wx.navigateTo({
         url:'/pages/Comics/pages/list/list?'+str
       })

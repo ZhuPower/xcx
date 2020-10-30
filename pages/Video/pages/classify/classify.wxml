@@ -15,8 +15,8 @@
       </view>
     </view>
     <view class="classifyH {{isShow?'cur':''}}">
-      <text wx:for="{{classifyList}}" wx:key="index" data-type="{{item.type_id}}" data-name="{{item.type_name}}"
-        data-index="{{index}}" catchtap="getType" class="{{nIndex == index ? 'cur' : ''}}">{{item.type_name}}</text>
+      <text wx:for="{{classifyList}}" wx:key="index" data-type="{{item.type_id || item._id}}" data-name="{{item.type_name || item.__text}}"
+        data-index="{{index}}" catchtap="getType" class="{{nIndex == index ? 'cur' : ''}}">{{item.type_name || item.__text}}</text>
     </view>
     <VideoList type="{{classifyType}}" searchKey="{{searchKey}}" sourceUrl="{{url}}" class="classifyC"></VideoList>
   </view>

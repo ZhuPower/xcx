@@ -1,6 +1,7 @@
 // pages/Video/pages/detail/detail.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+const Base64 = require('../../../../utils/base64')
 
 let app = getApp()
 
@@ -22,7 +23,9 @@ Page({
     aarYlist: [],
     num: 0,
     isShowSource: false,
-    isShow: false
+    isShow: false,
+    isNoParse: 0,
+    hasParse:false
   },
 
   setTab(e) {
@@ -63,9 +66,6 @@ Page({
       isApp: b,
       url: url
     }
-    if (url == app.globalData.sourceUrl[1].url) {
-      obj.isShowSource = true
-    }
 
     this.setData(obj)
   },
@@ -74,6 +74,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function (options) {
+    let that = this
     let url = this.data.url
     let fnAjax = this.data.fnAjax
     let data = {}
@@ -109,22 +110,29 @@ Page({
       })
 
     } else {
-      let _arr = ['sohu', 'funshion', 'pptv']
+      let _arr = []
       data = {
         ac: 'detail',
         ids: this.data.id
       }
+      let arr_0 = app.globalData.getAc
+      if (arr_0.indexOf(url)>-1) {
+        data.ac = 'videolist'
+      }
+
+
+      let arr1 = []
+      let arr2 = []
+      let arr3 = []
+      let arr_1 = app.globalData.jxUrl
 
       fnAjax(url, data).then(res => {
+        console.log(res)
         if (res.code == 1) {
           this.setData({
             data: res.list[0]
           })
-          let arr1 = []
-          let arr2 = []
-          let arr3 = []
-          let arr_1 = ['https://zy.itono.cn/inc/apijson_vod.php']
-          
+
           if (this.data.data.vod_play_url.indexOf('$$$') > -1) {
             arr1 = this.data.data.vod_play_from.split('$$$')
             arr2 = this.data.data.vod_play_url.split('$$$')
@@ -145,6 +153,7 @@ Page({
             }
           }
 
+
           for (let i = 0; i < arr2.length; i++) {
             if (arr2[i].indexOf('#') > -1) {
               let arr4 = arr2[i].split('#')
@@ -156,34 +165,80 @@ Page({
 
           }
 
-          function getArrList(arr4, num) {
+        } else if (res.rss) {
+          this.setData({
+            data: res.rss.list.video
+          })
 
-            let arr5 = []
-            for (let ii = 0; ii < arr4.length; ii++) {
-              let arr6 = arr4[ii].split('$')
+          let arr0 = null
+          if (typeof res.rss.list.video.dl.dd == 'string') {
+            arr0 = []
+            arr0[0] = res.rss.list.video.dl.dd
+          } else {
+            arr0 = res.rss.list.video.dl.dd
+          }
 
-              if (ii == 0) {
-                if (arr_1.indexOf(url) == -1) {
-                  if (arr6[1].indexOf('.m3u8') > -1 || arr6[1].indexOf('.mp4') > -1) {
+          for (let i = 0; i < arr0.length; i++) {
+            arr1.push('影视源' + (i + 1))
 
-                  } else {
-                    arr1.splice(num, 1);
-                    break;
+            if (arr0[i].indexOf('#') > -1) {
+              let arr4 = arr0[i].split('#')
+              getArrList(arr4, i)
+            } else {
+              let arr4 = [arr0[i]]
+              getArrList(arr4, i)
+            }
+
+          }
+        }
+
+        this.setData({
+          yList: arr1,
+          aarYlist: arr3,
+          playList: arr3[that.data.isNoParse]
+        })
+
+        function getArrList(arr4, num) {
+          let arr5 = []
+          for (let ii = 0; ii < arr4.length; ii++) {
+            let arr6 = arr4[ii].split('$')
+            let _str1 = arr6[0].replace(/\s*/g, "")
+            arr6[0] = _str1
+            if (arr6[1]) {
+              if (arr6[1].indexOf('aHR') == 0) {
+                let _str2 = Base64.decode(arr6[1])
+                arr6[1] = _str2
+                if (arr6[1].indexOf('.m3u8') > -1 || arr6[1].indexOf('.mp4') > -1) {
+                  if (!that.data.isNoParse) {
+                    that.setData({
+                      isNoParse: num,
+                      num: num
+                    })
                   }
                 }
               }
-              arr5.push(arr6)
+            }else{
+              let _a61 = arr6[0]
+              arr6[1] = _a61
+              arr6[0] = '第' + (ii+1) + '集'
             }
-            if (arr5.length > 0) {
-              arr3.push(arr5)
-            }
-          }
 
-          this.setData({
-            yList: arr1,
-            aarYlist: arr3,
-            playList: arr3[0]
-          })
+
+            if (ii == 0) {
+              if (arr_1.indexOf(url) == -1) {
+                if (arr6[1].indexOf('.m3u8') > -1 || arr6[1].indexOf('.mp4') > -1) {
+
+                } else {
+                  arr1.splice(num, 1);
+                  break;
+                }
+              }
+            }
+            arr5.push(arr6)
+          }
+          if (arr5.length > 0) {
+            arr3.push(arr5)
+          }
         }
       })
     }

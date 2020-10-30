@@ -66,3 +66,9 @@
   float: right;
   margin-left: 30rpx;
 }
+
+.pickerBox{
+  width: 100%;
+  height: auto;
+  display: flex;
+}

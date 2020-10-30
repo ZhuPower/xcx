@@ -1,17 +1,17 @@
 <!--components/VideoList/VideoList.wxml-->
 <scroll-view class="listMain" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
   refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
-  <view class="listBox" wx:for="{{videoList}}" wx:key="index" catchtap="goDetail" data-id="{{item.vod_id}}">
-    <image src="{{item.vod_pic}}" lazy-load="{{true}}"></image>
+  <view class="listBox" wx:for="{{videoList}}" wx:key="index" catchtap="goDetail" data-id="{{item.vod_id || item.id}}">
+    <image src="{{item.vod_pic || item.pic}}" lazy-load="{{true}}"></image>
     <view class="listRight">
-      <view class="listName">{{item.vod_name}}</view>
+      <view class="listName">{{item.vod_name || item.name}}</view>
       <view class="listInfo">
         <view class="listInfoName">类型：</view>
-        <view class="listInfoC">{{item.type_name}}</view>
+        <view class="listInfoC">{{item.type_name || item.type}}</view>
       </view>
       <view class="listInfo">
         <view class="listInfoName">主演：</view>
-        <view class="listInfoC">{{item.vod_actor}}</view>
+        <view class="listInfoC">{{item.vod_actor || item.actor}}</view>
       </view>
       <view class="listContent">{{item.vod_content}}</view>
     </view>

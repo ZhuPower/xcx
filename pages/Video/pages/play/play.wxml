@@ -1,13 +1,25 @@
-<import src="../../../../wxParse/wxParse.wxml"/>
+<import src="../../../../wxParse/wxParse.wxml" />
 <view class="videoPlayWarp">
-  <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
   <scroll-view class="playList" scroll-y="{{true}}">
-    <picker bindchange="bindPickerChange" value="{{num}}" range="{{yList}}" class="pickerWrap" wx:if="{{isShowSource}}">
-      <view class="pickerMain">播放源：<view class="pickerValue">{{yList[num]}}<icon class="iconfont iconjiantou">
-          </icon>
+    <view class="pickerBox">
+      <picker bindchange="bindPickerChange" value="{{num}}" range="{{yList}}" class="pickerWrap"
+        wx:if="{{isShowSource}}">
+        <view class="pickerMain">播放源：<view class="pickerValue">{{yList[num]}}<icon class="iconfont iconjiantou">
+            </icon>
+          </view>
         </view>
-      </view>
-    </picker>
+      </picker>
+      <picker bindchange="parseChange" value="{{parsingIndex}}" range="{{parsing}}" range-key="name" class="pickerWrap"
+        wx:if="{{isShowSource || hasParse}}">
+        <view class="pickerMain">解析：<view class="pickerValue">{{parsing[parsingIndex].name}}<icon
+              class="iconfont iconjiantou">
+            </icon>
+          </view>
+        </view>
+      </picker>
+    </view>
+
     <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}" wx:key="index"
       class="{{nIndex == index ? 'cur' : ''}}" catchtap="Play" wx:if="{{!isApp}}">{{item[0]}}</text>
     <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item.name}}" data-url="{{item.url}}" wx:key="index"

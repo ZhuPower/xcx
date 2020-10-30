@@ -4,7 +4,7 @@
 	<view class="searchMain">
 		<view class="searchBox">
 			<icon class="icon-small" type="search" size="20"></icon>
-			<input bindinput="bindKeyInput" placeholder="请输入搜索关键字" />
+			<input bindinput="bindKeyInput" value="{{searchKey}}" placeholder="请输入搜索关键字" />
 			<text catchtap="goList">搜索</text>
 		</view>
 	</view>

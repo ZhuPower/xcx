@@ -73,6 +73,8 @@ App({
     nowSource:{},
     nindex:0,
     isShow:false,
+    jxUrl:['https://zy.itono.cn/inc/apijson_vod.php','http://api.zz22x.com/inc/qb.php'],
+    getAc:['http://api.zz22x.com/inc/qb.php','http://bttcj.com/inc/sapi.php','https://dadiapi.com/apple_m3u8.php','http://sscj8.com/inc/sapi.php','http://99zywcj.com/inc/sck.php','http://lsnzxcj.com/inc/sapi.php','http://zcyydy.com/sapi','http://ssyydy.com/sapi','http://llzxcj.com/inc/sck.php','http://wmcj8.com/inc/sapi.php','http://api.iixxzyapi.com/inc/apickm3u8.php','http://cj.xhgcjym.com/inc/httpapi.php'],
     prompt:'本程序仅供信息查询，如有需要请自行百度搜索观看'
   }
 })

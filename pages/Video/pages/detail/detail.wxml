@@ -2,41 +2,41 @@
 <view class="videoDetailWrap">
   <view class="top">
     <view class="topLeft">
-      <image src="{{data.vod_pic}}"></image>
+      <image src="{{data.vod_pic || data.pic}}"></image>
     </view>
     <view class="topRight">
-      <view class="videoName">{{data.vod_name || data.title}}</view>
+      <view class="videoName">{{data.vod_name || data.title || data.name}}</view>
       <view class="videoInfoUl">
         <view class="infoBox">
           <view class="videoInfoLi">
             <view class="listName">主演</view>
-            <view class="listInfo">{{data.vod_actor}}</view>
+            <view class="listInfo">{{data.vod_actor || data.actor}}</view>
           </view>
         </view>
         <view class="infoBox">
           <view class="videoInfoLi">
             <view class="listName">导演</view>
-            <view class="listInfo">{{data.vod_director}}</view>
+            <view class="listInfo">{{data.vod_director || data.director}}</view>
           </view>
         </view>
         <view class="infoBox">
           <view class="videoInfoLi col2">
             <view class="listName">类型</view>
-            <view class="listInfo">{{data.type_name}}</view>
+            <view class="listInfo">{{data.type_name || data.type}}</view>
           </view>
           <view class="videoInfoLi col2">
             <view class="listName">地区</view>
-            <view class="listInfo">{{data.vod_area}}</view>
+            <view class="listInfo">{{data.vod_area || data.area}}</view>
           </view>
         </view>
         <view class="infoBox">
           <view class="videoInfoLi col2">
             <view class="listName">年份</view>
-            <view class="listInfo">{{data.vod_year}}</view>
+            <view class="listInfo">{{data.vod_year || data.year}}</view>
           </view>
           <view class="videoInfoLi col2">
             <view class="listName">语言</view>
-            <view class="listInfo">{{data.vod_lang}}</view>
+            <view class="listInfo">{{data.vod_lang || data.lang}}</view>
           </view>
         </view>
       </view>
@@ -50,7 +50,7 @@
 
     </view>
     <view class="conTabC">
-      <view class="tabList tabList_1" wx:if="{{nTab == 0}}">{{data.vod_content || data.remark}}</view>
+      <view class="tabList tabList_1" wx:if="{{nTab == 0}}">{{data.vod_content || data.remark || data.des}}</view>
       <view class="tabList tabList_0" wx:if="{{nTab == 1}}">
         <picker bindchange="bindPickerChange" value="{{num}}" range="{{yList}}" class="pickerWrap"
           wx:if="{{isShowSource}}">
@@ -60,7 +60,7 @@
           </view>
         </picker>
         <text wx:for="{{playList}}" data-index="{{index}}" data-name="{{item[0]}}" data-url="{{item[1]}}"
-          data-title="{{data.vod_name}}" data-id="{{data.vod_id}}" wx:key="index" catchtap="toPlay"
+          data-title="{{data.vod_name || data.name}}" data-id="{{data.vod_id || data.id}}" wx:key="index" catchtap="toPlay"
           wx:if="{{!isApp}}">{{item[0]}}</text>
 
         <text wx:for="{{data.srcList}}" data-index="{{index}}" data-name="{{item.name}}" data-url="{{item.url}}"

@@ -1,4 +1,5 @@
 const Base64 = require('./base64')
+const parse1717 = require('./parse1717')
 const apiUrl = require('../utils/apiUrl')
 const X2JS = require('../x2js/we-x2js');
 const CryptoJS = require('../utils/Crypto')
@@ -25,6 +26,9 @@ const fnAjax = function (url, data, method, type) {
     //console.log(url)
     if (url == apiUrl.apiUrl.proxyUrl) {
       //data.apiUrl = url
+    }else if(url.indexOf('https://') != 0){
+      isUrl = false
+      data.apiUrl = url
     } else {
       isUrl = true
     }
@@ -48,6 +52,11 @@ const fnAjax = function (url, data, method, type) {
             var x2js = new X2JS();
             var json = x2js.xml2js(res.data);
             resolved(json)
+          }else if(res.data.indexOf('<script type="text/javascript" src="//iszzj.com/"></script') > -1){
+            let num = res.data.indexOf('{"code":')
+            let str = res.data.substring(num)
+            let obj = JSON.parse(str)
+            resolved(obj)
           }
         } else {
           resolved(res.data)
@@ -73,19 +82,26 @@ const goPlay = function (obj, b) {
 }
 
 function getParameter(url, num) {
+  console.log(url, num)
   let oParameter = {}
-  switch (num) {
+  switch (parseInt(num)) {
     case 0:
-      oParameter = getParameter0(url)
+      oParameter = getParameter0(url,parseInt(num))
       break;
     case 1:
-      oParameter = getParameter1(url)
+      oParameter = getParameter1(url,parseInt(num))
       break;
     case 2:
-      oParameter = getParameter2(url)
+      oParameter = getParameter2(url,parseInt(num))
       break;
     case 3:
-      oParameter = getParameter3(url)
+      oParameter = getParameter3(url,parseInt(num))
+      break;
+    case 4:
+      oParameter = getParameter4(url,parseInt(num))
+      break;
+    case 5:
+      oParameter = getParameter5(url,parseInt(num))
       break;
   }
 
@@ -93,7 +109,58 @@ function getParameter(url, num) {
 }
 
 
-function getParameter0(url) {
+function getParameter0(url,nIndex) {
+  let _url = apiUrl.apiUrl.parsing[nIndex].url
+  let data = {
+    apiUrl: _url,
+    url: url,
+    referer: Base64.encode(_url + '?url=' + url),
+    ref: 0,
+    time: parseInt(new Date().getTime() / 1000),
+    type: '',
+    other: Base64.encode(url)
+  }
+
+  let oParameter = {
+    url: apiUrl.apiUrl.proxyUrl,
+    data: data
+  }
+
+  return oParameter;
+}
+
+function getParameter1(url,nIndex) {
+  let data = {
+    apiUrl: apiUrl.apiUrl.parsing[nIndex].url,
+    url: url,
+    time: parseInt(new Date().getTime() / 1000),
+    other: Base64.encode(url)
+  }
+
+  let oParameter = {
+    url: apiUrl.apiUrl.proxyUrl,
+    data: data
+  }
+
+
+  return oParameter;
+}
+
+function getParameter2(url,nIndex) {
+  let data = {
+    apiUrl:apiUrl.apiUrl.parsing[nIndex].url,
+    url: url
+  }
+
+  let oParameter = {
+    url: apiUrl.apiUrl.proxyUrl,
+    data: data
+  }
+
+  return oParameter;
+}
+
+function getParameter3(url,nIndex) {
   var _str1 = CryptoJS.enc.Utf8.parse(url);
   var _obj = {
     mode: CryptoJS.mode.ECB,
@@ -107,81 +174,69 @@ function getParameter0(url) {
     vkey: _str
   }
   let oParameter = {
-    url: apiUrl.apiUrl.parsing[0],
+    url: apiUrl.apiUrl.parsing[nIndex].url,
     data: data
   }
 
   return oParameter;
 }
 
-function getParameter1(url) {
-  let _url = apiUrl.apiUrl.parsing[1]
-  let data = {
-    apiUrl: _url,
-    url: url,
-    referer: Base64.encode(_url + '?url=' + url),
-    ref: 0,
-    time: parseInt(new Date().getTime() / 1000),
-    type: '',
-    other: Base64.encode(url)
-  }
 
-  let oParameter = {
-    url: apiUrl.apiUrl.proxyUrl,
-    data: data
-  }
-
-  return oParameter;
-}
-
-function getParameter2(url) {
-  let _url = apiUrl.apiUrl.parsing[2]
-  let data = {
-    apiUrl: _url,
-    url: url,
-    referer: Base64.encode(_url + '?url=' + url),
-    ref: 0,
-    time: parseInt(new Date().getTime() / 1000),
-    type: '',
-    other: Base64.encode(url)
-  }
-
-  let oParameter = {
-    url: apiUrl.apiUrl.proxyUrl,
-    data: data
-  }
-
-  return oParameter;
-}
-
-function getParameter3(url) {
-  let data = {
+function getParameter4(url,nIndex) {
+  let _url = 'https://1717.ntryjd.net/1717yun/'
+  let _data = {
     url: url
   }
 
-  let oParameter = {
-    url: apiUrl.apiUrl.parsing[3],
-    data: data
-  }
+  return new Promise((resolved, rejected) => {
+    wx.request({
+      url: _url,
+      data: _data,
+      header: {
+        'Content-type': 'text/xml;charset=UTF-8'
+      },
+      success(res) {
+        let time = '';
+        let keys = '';
+        let key = '';
 
-  return oParameter;
-}
+        let str1 = res.data;
+        let num1 = str1.indexOf('var time = ')
+        let str2 = str1.substring(num1)
+        let num2 = str2.indexOf('\';')
+        time = str2.substring(12, num2)
 
-function getParameter4(url) {
-  let data = {
-    apiUrl: apiUrl.apiUrl.parsing[4],
-    url: url,
-    time: parseInt(new Date().getTime() / 1000),
-    other: Base64.encode(url)
-  }
+        let num3 = str2.indexOf('\'keys\':\'')
+        let str3 = str2.substring(num3)
+        let num4 = str3.indexOf('\',')
+        keys = str3.substring(8, num4)
 
-  let oParameter = {
-    url: apiUrl.apiUrl.proxyUrl,
-    data: data
-  }
+        let num5 = str3.indexOf('\'key\':\'')
+        let str4 = str3.substring(num5)
+        let num6 = str4.indexOf('\',')
+        key = str4.substring(7, num6)
 
+        let obj = parse1717(time)
 
-  return oParameter;
+        let data = {
+          url: url,
+          time: time,
+          other: Base64.encode(url),
+          token: obj.token,
+          keys: keys,
+          keep: obj.keep,
+          key: key
+        }
+
+        let oParameter = {
+          url: apiUrl.apiUrl.parsing[nIndex].url,
+          data: data
+        }
+
+        resolved(oParameter)
+      }
+    })
+  })
 }
 
 

@@ -17,7 +17,8 @@ Page({
     url: '',
     fnAjax: fnCon.fnAjax,
     sourceUrl: [],
-    num: 0
+    num: 0,
+    hsource: true
   },
   setHeight() {
     let isShow = this.data.isShow
@@ -37,18 +38,28 @@ Page({
     })
   },
   bindPickerChange: function (e) {
-    let num = e.detail.value
-    app.globalData.nowSource = app.globalData.sourceUrl[num]
-    app.globalData.nindex = num
-    let url = app.globalData.nowSource.url
-    this.setData({
-      num: num,
-      url: url,
-      isShow: false,
-      nIndex: -1,
-      classifyType: 0
-    })
-    this.sjcsh();
+    if (this.data.hsource) {
+      let num = e.detail.value
+      app.globalData.nowSource = app.globalData.sourceUrl[num]
+      app.globalData.nindex = num
+      let url = app.globalData.nowSource.url
+      this.setData({
+        num: num,
+        url: url,
+        isShow: false,
+        nIndex: -1,
+        classifyType: 0,
+        hsource: false
+      })
+      this.sjcsh();
+    } else {
+      wx.showToast({
+        title: '您点的太快了，请稍后再试',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+
   },
 
   sjcsh() {
@@ -59,9 +70,9 @@ Page({
       ac: 'list'
     }
     fnAjax(url, data).then(res => {
-      console.log(res)
       this.setData({
-        classifyList: res.class || res.rss.class.ty
+        classifyList: res.class || res.rss.class.ty,
+        hsource: true
       })
     })
   },

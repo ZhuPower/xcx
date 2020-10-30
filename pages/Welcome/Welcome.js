@@ -107,6 +107,21 @@ Page({
         }
       }
     })
+
+    // let url = 'https://1717.ntryjd.net/1717yun/api.php';
+    // let data = {
+    //   url: 'https://v.qq.com/x/cover/s9jv3s19tcrooln/w0034lsttga.html',
+    //   time: 1604027092,
+    //   other: 'aHR0cHM6Ly92LnFxLmNvbS94L2NvdmVyL3M5anYzczE5dGNyb29sbi93MDAzNGxzdHRnYS5odG1s',
+    //   token: '959ed34a094def10fc750dac78f9f6da',
+    //   keys: '26e94506a1d086e838266f3ac7099838',
+    //   keep: 'ed33912d402b241d036ca322ba0b2643',
+    //   key: '382a00255ef3e3f1a8aa3dce25f3c6c4'
+    // }
+
+    // this.data.fnAjax(url, data,'POST','application/x-www-form-urlencoded').then(res => {
+
+    // })
   },
 
   /**

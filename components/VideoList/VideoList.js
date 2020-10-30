@@ -1,14 +1,15 @@
 // components/VideoList/VideoList.js
 const apiUrl = require('../../utils/apiUrl')
 const fnCon = require('../../utils/common')
+let app = getApp()
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    type:Number,
-    searchKey:String,
-    isApp:Boolean,
+    type: Number,
+    searchKey: String,
+    isApp: Boolean,
     sourceUrl: String
   },
 
@@ -16,68 +17,68 @@ Component({
    * 组件的初始数据
    */
   data: {
-    videoList:[],
-    pagecount:0,
-    page:1,
-    isRefresh:false,
-    url:'',
-    fnAjax:fnCon.fnAjax,
-    isNext:true
+    videoList: [],
+    pagecount: 0,
+    page: 1,
+    isRefresh: false,
+    url: '',
+    fnAjax: fnCon.fnAjax,
+    isNext: true
   },
-  observers:{
-    'type':function(str){
-      if(str>0){
-        if(this.data.searchKey){
+  observers: {
+    'type': function (str) {
+      if (str > 0) {
+        if (this.data.searchKey) {
           this.searchFn(1)
-        }else{
+        } else {
           this.cshData(1)
         }
       }
     },
-    'url':function(str){
-      if(this.data.url != str){
+    'url': function (str) {
+      if (this.data.url != str) {
         this.setData({
-          url:str
+          url: str
         })
-  
-        if(this.data.url){
-          if(this.data.searchKey){
+
+        if (this.data.url) {
+          if (this.data.searchKey) {
             this.searchFn(1)
-          }else{
+          } else {
             this.cshData(1)
           }
         }
       }
     },
-    'sourceUrl':function(str){
+    'sourceUrl': function (str) {
       this.setData({
-        url:str,
-        page:1
+        url: str,
+        page: 1
       })
 
-      if(this.data.searchKey){
+      if (this.data.searchKey) {
         this.searchFn(1)
-      }else{
+      } else {
         this.cshData(1)
       }
     }
   },
 
-  ready(){
-    if(this.data.isApp){
+  ready() {
+    if (this.data.isApp) {
       this.setData({
-        url:apiUrl.apiUrl.video.VideoLists
+        url: apiUrl.apiUrl.video.VideoLists
       })
-    }else{
+    } else {
       this.setData({
-        url:this.data.sourceUrl
+        url: this.data.sourceUrl
       })
     }
 
-    if(this.data.url){
-      if(this.data.searchKey){
+    if (this.data.url) {
+      if (this.data.searchKey) {
         this.searchFn(1)
-      }else{
+      } else {
         this.cshData(1)
       }
     }
@@ -87,32 +88,32 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    fnTop(){
-      if(this.data.searchKey){
+    fnTop() {
+      if (this.data.searchKey) {
         this.searchFn(1)
-      }else{
+      } else {
         this.cshData(1)
       }
     },
-    fnBotton(){
-      if(this.data.isNext){
+    fnBotton() {
+      if (this.data.isNext) {
         this.setData({
-          isNext:false
+          isNext: false
         })
 
-        let num = parseInt(this.data.page)+1
-        if(num<=this.data.pagecount){
+        let num = parseInt(this.data.page) + 1
+        if (num <= this.data.pagecount) {
           // wx.showLoading({
           //   title: '加载中...',
           // })
-    
-          if(this.data.searchKey){
+
+          if (this.data.searchKey) {
             this.searchFn(num)
-          }else{
+          } else {
             this.cshData(num)
           }
-    
-        }else{
+
+        } else {
           wx.showToast({
             title: '已没有更多了',
             icon: 'none',
@@ -121,48 +122,48 @@ Component({
         }
       }
     },
-    searchFn(num){
-     let url = this.data.url
-     let fnAjax = this.data.fnAjax
-  
+    searchFn(num) {
+      let url = this.data.url
+      let fnAjax = this.data.fnAjax
+
       let data = {
-        ac:'list',
-        pg:num,
-        wd:this.data.searchKey
+        ac: 'list',
+        pg: num,
+        wd: this.data.searchKey
       }
-  
-      fnAjax(url,data).then(res => {
+
+      fnAjax(url, data).then(res => {
         let arr_1 = []
-        if(res.code == 1){
+        if (res.code == 1) {
           this.setData({
-            pagecount:res.pagecount,
-            page:res.page
+            pagecount: res.pagecount,
+            page: res.page
           })
-          
-          for(let i=0;i<res.list.length;i++){
+
+          for (let i = 0; i < res.list.length; i++) {
             arr_1.push(res.list[i].vod_id)
           }
-  
+
           let ids = arr_1.join(',')
           let data2 = {
-            ac:'detail',
-            pg:1,
-            ids:ids
+            ac: 'detail',
+            pg: 1,
+            ids: ids
           }
-          fnAjax(url,data2).then(res => {
-            if(res.code == 1){
+          fnAjax(url, data2).then(res => {
+            if (res.code == 1) {
               let arr = []
-      
-              if(num > 1){
+
+              if (num > 1) {
                 arr = this.data.videoList
               }
-      
+
               arr.push(...res.list)
-      
+
               this.setData({
-                videoList:arr,
-                isRefresh:false,
-                isNext:true
+                videoList: arr,
+                isRefresh: false,
+                isNext: true
               })
               wx.hideLoading()
             }
@@ -170,80 +171,90 @@ Component({
         }
       })
     },
-    cshData(num){
+    cshData(num) {
       let url = this.data.url
       let fnAjax = this.data.fnAjax
       let data = {}
 
-      if(this.data.isApp){
+      if (this.data.isApp) {
         data = {
-          limit:20,
+          limit: 20,
           area: "-1",
-	        year: "全部",
-          type_id:this.data.type,
-          page:num
+          year: "全部",
+          type_id: this.data.type,
+          page: num
         }
-      }else{
+      } else {
         data = {
-          ac:'detail',
-          t:this.data.type,
-          pg:num
+          ac: 'detail',
+          t: this.data.type,
+          pg: num
         }
       }
-  
 
-      fnAjax(url,data).then(res => {
-        if(res.code == 1 || res.code == 200 || res.status == 200){
+      let arr_0 = app.globalData.getAc
+      if (arr_0.indexOf(url)>-1) {
+        data.ac = 'videolist'
+      }
+
+
+      fnAjax(url, data).then(res => {
+        if (res.code == 1 || res.code == 200 || res.status == 200 || res.rss) {
           let arr = []
-  
-          if(num > 1){
-            arr = this.data.videoList
-          }
-     
-          if(res.data){
-            if(res.data.list){
-              arr.push(...res.data.list)
-            }else{
-              arr.push(...res.data)
-            }
-          }else if(res.list){
-            arr.push(...res.list)
-          }
 
-          let obj = {
-            videoList:arr,
-            isNext:true,
-            isRefresh:false
-          }
+        if (num > 1) {
+          arr = this.data.videoList
+        }
 
-          if(res.page){
-            if(res.page.pageindex){
-              obj['page'] = res.page.pageindex
-              obj['pagecount'] = res.page.pagecount
-            }else{
-              obj['page'] = res.page
-              obj['pagecount'] = res.pagecount
-            }
-          }else{
-            if(res.data){
-              if(res.data.page){
-                obj['page'] = res.data.page
-                obj['pagecount'] = res.data.count
-              }
+        if (res.data) {
+          if (res.data.list) {
+            arr.push(...res.data.list)
+          } else {
+            arr.push(...res.data)
+          }
+        } else if (res.list) {
+          arr.push(...res.list)
+        } else if (res.rss) {
+          arr.push(...res.rss.list.video)
+        }
+
+        let obj = {
+          videoList: arr,
+          isNext: true,
+          isRefresh: false
+        }
+
+        if (res.page) {
+          if (res.page.pageindex) {
+            obj['page'] = res.page.pageindex
+            obj['pagecount'] = res.page.pagecount
+          } else {
+            obj['page'] = res.page
+            obj['pagecount'] = res.pagecount
+          }
+        } else if (res.rss) {
+          obj['page'] = res.rss.list._page
+          obj['pagecount'] = res.rss.list._recordcount
+        } else {
+          if (res.data) {
+            if (res.data.page) {
+              obj['page'] = res.data.page
+              obj['pagecount'] = res.data.count
             }
           }
-          
+        }
 
-          this.setData(obj)
-          wx.hideLoading()
+
+        this.setData(obj)
+        wx.hideLoading()
         }
       })
     },
-    goDetail(e){
+    goDetail(e) {
       let id = e.currentTarget.dataset.id
       let app = this.data.isApp
       let goVideo = fnCon.goVideo
-      goVideo(id,app)
+      goVideo(id, app)
     }
   }
 })
