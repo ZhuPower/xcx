@@ -131,6 +131,13 @@
           "pathName": "pages/Comics/pages/classify/classify",
           "query": "",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/Novel/pages/index/index",
+          "pathName": "pages/Novel/pages/index/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

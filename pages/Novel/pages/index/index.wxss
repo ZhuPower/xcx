@@ -1,1 +1,124 @@
 /* pages/Novel/pages/index/index.wxss */
+.novelIndexWrap .searchMain{
+  background:#ff0000;
+}
+.novelIndexWrap .searchMain .searchBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:30rpx;
+  height: 60rpx;
+  position: relative;
+}
+.novelIndexWrap .searchMain .searchBox icon{
+  position: absolute;
+  left: 40rpx;
+  top: 43rpx;
+}
+.novelIndexWrap .searchMain .searchBox input{
+  color: #000;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  width: 600rpx;
+  padding-left: 50rpx;
+}
+.novelIndexWrap .searchMain .searchBox text{
+  color: #fff;
+  display: block;
+  width: 90rpx;
+  text-align: center;
+}
+.channel{
+ height: 80rpx;
+ display: flex;
+ justify-content: space-between;
+ border-bottom: 1px solid #ccc;
+}
+.channel text{
+  width: 50%;
+  display: block;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.channel text.cur{
+  color:#ff0000;
+}
+.bannerMain{
+  width: 690rpx;
+  height: auto;
+  margin: 20rpx auto;
+}
+
+.bannerMain image{
+  width: 100%;
+  border-radius: 10rpx;
+}
+.novelIndexWrap .main {
+  padding: 0px 30rpx;
+  overflow: hidden;
+  padding-bottom: 100rpx;
+}
+
+
+.novelIndexWrap .main .listMain .h3 {
+  display: flex;
+  justify-content: space-between;
+  height: 88rpx;
+  align-items: center;
+}
+
+.novelIndexWrap .main .listMain .h3 image{
+  width: 60rpx;
+  height: 60rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.novelIndexWrap .main .listMain .listUl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.novelIndexWrap .listUl .listLi {
+  overflow: hidden;
+  width: 30%;
+}
+.novelIndexWrap .listUl .listLi.listLi_0{
+  width: 100%;
+}
+
+.novelIndexWrap .listUl .listLi.listLi_0 .leftImg{
+  width: 30%;
+}
+
+.novelIndexWrap .listUl .listLi image {
+  display: block;
+  width: 100%;
+  height: 338rpx;
+  border-radius: 8rpx;
+}
+
+.novelIndexWrap .listUl .listLi .title {
+  font-size: 28rpx;
+  color: #28292d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 12rpx;
+}
+
+.novelIndexWrap .listUl .listLi .info {
+  font-size: 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #999999;
+  margin-top: 2rpx;
+  margin-bottom: 12rpx;
+}

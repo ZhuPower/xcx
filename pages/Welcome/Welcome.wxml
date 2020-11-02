@@ -15,6 +15,7 @@
 		<!-- <navigator url="/pages/Novel/pages/index/index">小说查询</navigator>
 		<navigator url="/">漫画查询</navigator>
 		<navigator url="/">音乐查询</navigator> -->
+		<navigator url="/pages/Novel/pages/index/index">小说查询</navigator>
 		<navigator url="/pages/Comics/pages/index/index">漫画查询</navigator>
 		<navigator url="/pages/Video/pages/index/index">视频查询</navigator>
 		<button wx:if="{{isUser}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>

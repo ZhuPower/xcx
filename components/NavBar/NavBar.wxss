@@ -61,3 +61,12 @@
 .navBarWrap navigator.Comics_cur text {
   color: #ff7830;
 }
+
+
+.navBarWrap navigator.Novel_cur icon {
+  color: #ff0000;
+}
+
+.navBarWrap navigator.Novel_cur text {
+  color: #ff0000;
+}

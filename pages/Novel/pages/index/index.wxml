@@ -1,2 +1,51 @@
 <!--pages/Novel/pages/index/index.wxml-->
-<text>pages/Novel/pages/index/index.wxml</text>
+<view class="novelIndexWrap">
+  <view class="searchMain">
+    <view class="searchBox">
+      <icon class="icon-small" type="search" size="20"></icon>
+      <input bindinput="bindKeyInput" value="{{searchKey}}" placeholder="请输入搜索关键字" />
+      <text catchtap="goList">搜索</text>
+    </view>
+  </view>
+  <view class="channel">
+    <text class="{{nChannel == 0 ? 'cur' : ''}}" catchtap="setChannel" data-num="0">男频</text>
+    <text class="{{nChannel == 1 ? 'cur' : ''}}" catchtap="setChannel" data-num="1">女频</text>
+  </view>
+  <view class="indexTab">
+    <view class="indexTabCon" wx:if="{{nChannel == 0}}">
+      <view class="bannerMain">
+        <image src="{{data1.banners[0].imgurl}}" mode="widthFix"></image>
+      </view>
+      <view class="main">
+        <view class="listMain" wx:for="{{data1.data}}" wx:key="ViewType">
+          <view class="h3">
+            <view>
+              <image src="{{item.NavIcon}}"></image>
+              <text>{{item.Category}}</text>
+            </view>
+            <navigator url="../list/list?book_id={{index + 1}}&page=1&name={{item.Category}}" class="searchBtn">
+              More</navigator>
+          </view>
+          <view class="listUl {{'listUl_'+index}}">
+            <view class="listLi {{'listLi_'+index2}}" wx:for="{{item.Books}}" wx:for-index="index2" wx:for-item="item2"
+              wx:key="Id" data-id="{{item2.Id}}" catchtap="goDetail">
+              <view class="leftImg">
+                <image src="{{img}}{{item2.Img}}" lazy-load="true" webp="true" mode="widthFix"></image>
+              </view>
+              <view class="rightInfo">
+                <view class="title">{{item2.Name}}</view>
+                <view class="typeInfo" wx:if="{{index2 == 0}}">
+                  <view class="Author">{{item2.Author}}</view>
+                  <view class="CName">{{item2.CName}}</view>
+                </view>
+                <view class="info">{{item2.Desc}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="indexTabCon" wx:if="{{nChannel == 1}}"></view>
+  </view>
+  <NavBar navType="Novel" navPath="index"></NavBar>
+</view>
