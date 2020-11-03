@@ -1,0 +1,42 @@
+<!--pages/Novel/pages/detail/detail.wxml-->
+<view class="detailWrap" wx:if="{{isShow2}}">
+ <view class="topImg">
+  <view class="bgimgblur" style="background-image: url({{img}}{{detailData.Img}})"></view>
+  <icon class="iconfont iconhoutui"></icon>
+  <view class="infoBox">
+    <image src="{{img}}{{detailData.Img}}"></image>
+    <view class="rightBox">
+      <text class="Name">{{detailData.Name}}</text>
+      <text class="Autho">作者：{{detailData.Autho}}</text>
+      <text class="CName">类型：{{detailData.CName}}</text>
+      <text class="BookStatus">状态：{{detailData.BookStatus}}</text>
+    </view>
+    <view class="Score">{{detailData.BookVote.Score}}</view>
+  </view>
+ </view>
+ <view class="tabH">
+   <view>简介</view>
+   <view>目录</view>
+ </view>
+ <view class="infoDesc">
+   <view>{{detailData.Desc}}</view>
+ </view>
+ <view class="infoChapter">
+   <view class="chapterList" wx:for="{{aChapter}}" wx:key="index">
+    <view class="chapterTitle">{{item.name}}</view>
+    <view class="chapterName" wx:for="{{item.list}}" wx:key="id" wx:for-index="index2" wx:for-item="item2" data-id="{{item2.id}}">{{item2.name}}</view>
+   </view>
+ </view>
+ <view class="authoMore">
+  <view>作者其它作品：</view>
+  <view class="moreList" wx:for="{{detailData.SameUserBooks}}">
+    <image src="{{img}}{{item.Img}}"></image>
+    <view class="moreRight">
+      <view class="Name">{{item.Name}}</view>
+      <view class="Author">作者：{{item.Author}}</view>
+      <view class="LastChapter">{{item.LastChapter}}</view>
+    </view>
+  </view>
+ </view>
+
+</view>

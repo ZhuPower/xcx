@@ -47,7 +47,7 @@ const apiUrl = {
   },
 
   novel: {
-    img:'https://imgapixs.pysmei.com//BookFiles/BookImages/',
+    img:'https://imgapixs.pysmei.com/BookFiles/BookImages/',
     home:'https://scxs.pysmei.com/prov8/newfram//man_channel.html',
     home2:'https://scxs.pysmei.com/prov8/newfram//lady_channel.html',
     search: 'https://scxs.pysmei.com/search.aspx',//搜索 https://scxs.pysmei.com/search.aspx?key={{key}}

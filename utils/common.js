@@ -57,6 +57,10 @@ const fnAjax = function (url, data, method, type) {
             let str = res.data.substring(num)
             let obj = JSON.parse(str)
             resolved(obj)
+          }else{
+            let str = res.data.replace(/,]/ig,"]");
+            let obj = JSON.parse(str)
+            resolved(obj)
           }
         } else {
           resolved(res.data)
@@ -271,11 +275,19 @@ const goComicCon = function (chapterId, comicId, title, index) {
 }
 
 
+const goNovel = function (id) {
+  wx.navigateTo({
+    url: '/pages/Novel/pages/detail/detail?id=' + id
+  })
+}
+
+
 module.exports = {
   fnAjax,
   goVideo,
   goPlay,
   getParameter,
   goComics,
-  goComicCon
+  goComicCon,
+  goNovel
 }

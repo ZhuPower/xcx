@@ -1,0 +1,20 @@
+<!--components/NovelList/NovelList.wxml-->
+<scroll-view class="listWrap" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
+  refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
+  <view class="listBox" wx:for="{{NovelList}}" wx:key="index" catchtap="goDetail" data-id="{{item.Id}}">
+    <view class="leftImg">
+      <image src="{{img}}{{item.Img}}" lazy-load="true" webp="true"></image>
+    </view>
+    <view class="rightInfo">
+      <view class="title">
+        <text class="Name">{{item.Name}}</text>
+        <text class="Score">{{item.Score}}</text>
+      </view>
+      <view class="typeInfo">
+        <view class="Author">作者：{{item.Author}}</view>
+        <view class="CName">类型：{{item.CName}}</view>
+      </view>
+      <view class="info">{{item.Desc}}</view>
+    </view>
+  </view>
+</scroll-view>

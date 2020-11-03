@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "NovelList":"/components/NovelList/NovelList"
+  },
+  "navigationBarBackgroundColor": "#ff0000"
+}

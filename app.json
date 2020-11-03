@@ -2,6 +2,9 @@
   "pages": [
     "pages/Welcome/Welcome",
     "pages/Novel/pages/index/index",
+    "pages/Novel/pages/list/list",
+    "pages/Novel/pages/detail/detail",
+    "pages/Novel/pages/content/content",
     "pages/Comics/pages/index/index",
     "pages/Comics/pages/list/list",
     "pages/Comics/pages/detail/detail",

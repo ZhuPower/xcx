@@ -1,21 +1,24 @@
 /* pages/Novel/pages/index/index.wxss */
-.novelIndexWrap .searchMain{
-  background:#ff0000;
+.novelIndexWrap .searchMain {
+  background: #ff0000;
 }
-.novelIndexWrap .searchMain .searchBox{
+
+.novelIndexWrap .searchMain .searchBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:30rpx;
+  padding: 30rpx;
   height: 60rpx;
   position: relative;
 }
-.novelIndexWrap .searchMain .searchBox icon{
+
+.novelIndexWrap .searchMain .searchBox icon {
   position: absolute;
   left: 40rpx;
   top: 43rpx;
 }
-.novelIndexWrap .searchMain .searchBox input{
+
+.novelIndexWrap .searchMain .searchBox input {
   color: #000;
   height: 60rpx;
   line-height: 60rpx;
@@ -24,39 +27,44 @@
   width: 600rpx;
   padding-left: 50rpx;
 }
-.novelIndexWrap .searchMain .searchBox text{
+
+.novelIndexWrap .searchMain .searchBox text {
   color: #fff;
   display: block;
   width: 90rpx;
   text-align: center;
 }
-.channel{
- height: 80rpx;
- display: flex;
- justify-content: space-between;
- border-bottom: 1px solid #ccc;
+
+.channel {
+  height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
 }
-.channel text{
-  width: 50%;
+
+.channel text {
+  width: 33.33%;
   display: block;
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
 }
 
-.channel text.cur{
-  color:#ff0000;
+.channel text.cur {
+  color: #ff0000;
 }
-.bannerMain{
+
+.bannerMain {
   width: 690rpx;
   height: auto;
   margin: 20rpx auto;
 }
 
-.bannerMain image{
+.bannerMain image {
   width: 100%;
   border-radius: 10rpx;
 }
+
 .novelIndexWrap .main {
   padding: 0px 30rpx;
   overflow: hidden;
@@ -71,7 +79,7 @@
   align-items: center;
 }
 
-.novelIndexWrap .main .listMain .h3 image{
+.novelIndexWrap .main .listMain .h3 image {
   width: 60rpx;
   height: 60rpx;
   display: inline-block;
@@ -88,19 +96,30 @@
 .novelIndexWrap .listUl .listLi {
   overflow: hidden;
   width: 30%;
-}
-.novelIndexWrap .listUl .listLi.listLi_0{
-  width: 100%;
+  margin-bottom: 3%;
 }
 
-.novelIndexWrap .listUl .listLi.listLi_0 .leftImg{
+.novelIndexWrap .listUl .listLi_0.listLi_w {
+  width: 100%;
+  overflow: hidden;
+}
+
+.novelIndexWrap .listUl .listLi_0.listLi_w .leftImg {
   width: 30%;
+  float: left;
+}
+
+.novelIndexWrap .listUl .listLi_0.listLi_w .rightInfo {
+  width: 70%;
+  float: left;
+  box-sizing: border-box;
+  padding-left: 30rpx;
 }
 
 .novelIndexWrap .listUl .listLi image {
   display: block;
   width: 100%;
-  height: 338rpx;
+  height: 278rpx;
   border-radius: 8rpx;
 }
 
@@ -121,4 +140,22 @@
   color: #999999;
   margin-top: 2rpx;
   margin-bottom: 12rpx;
+}
+
+.novelIndexWrap .listUl .listLi_0.listLi_w .info {
+  white-space: normal;
+  line-height: 34rpx;
+  height: 170rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+}
+
+.novelIndexWrap .listUl .typeInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  margin: 15rpx 0px;
 }

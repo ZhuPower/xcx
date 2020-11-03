@@ -10,6 +10,7 @@
   <view class="channel">
     <text class="{{nChannel == 0 ? 'cur' : ''}}" catchtap="setChannel" data-num="0">男频</text>
     <text class="{{nChannel == 1 ? 'cur' : ''}}" catchtap="setChannel" data-num="1">女频</text>
+    <text class="{{nChannel == 2 ? 'cur' : ''}}" catchtap="setChannel" data-num="2">排行</text>
   </view>
   <view class="indexTab">
     <view class="indexTabCon" wx:if="{{nChannel == 0}}">
@@ -23,20 +24,20 @@
               <image src="{{item.NavIcon}}"></image>
               <text>{{item.Category}}</text>
             </view>
-            <navigator url="../list/list?book_id={{index + 1}}&page=1&name={{item.Category}}" class="searchBtn">
+            <navigator url="../list/list?url={{item.More}}&name={{item.Category}}" class="searchBtn">
               More</navigator>
           </view>
           <view class="listUl {{'listUl_'+index}}">
-            <view class="listLi {{'listLi_'+index2}}" wx:for="{{item.Books}}" wx:for-index="index2" wx:for-item="item2"
+            <view class="listLi {{'listLi_'+index2}} {{item.Books.length % 3 == 1 ? 'listLi_w':''}}" wx:for="{{item.Books}}" wx:for-index="index2" wx:for-item="item2"
               wx:key="Id" data-id="{{item2.Id}}" catchtap="goDetail">
               <view class="leftImg">
-                <image src="{{img}}{{item2.Img}}" lazy-load="true" webp="true" mode="widthFix"></image>
+                <image src="{{img}}{{item2.Img}}" lazy-load="true" webp="true"></image>
               </view>
               <view class="rightInfo">
                 <view class="title">{{item2.Name}}</view>
-                <view class="typeInfo" wx:if="{{index2 == 0}}">
-                  <view class="Author">{{item2.Author}}</view>
-                  <view class="CName">{{item2.CName}}</view>
+                <view class="typeInfo" wx:if="{{index2 == 0 && item.Books.length % 3 == 1}}">
+                  <view class="Author">作者：{{item2.Author}}</view>
+                  <view class="CName">类型：{{item2.CName}}</view>
                 </view>
                 <view class="info">{{item2.Desc}}</view>
               </view>
@@ -46,6 +47,7 @@
       </view>
     </view>
     <view class="indexTabCon" wx:if="{{nChannel == 1}}"></view>
+    <view class="indexTabCon" wx:if="{{nChannel == 2}}"></view>
   </view>
   <NavBar navType="Novel" navPath="index"></NavBar>
 </view>

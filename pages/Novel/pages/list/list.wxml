@@ -1,0 +1,4 @@
+<!--pages/Novel/pages/list/list.wxml-->
+<view class="NovelListWrap">
+	<NovelList type="list" searchKey="{{searchKey}}" arrUrl="{{url}}"></NovelList>
+</view>

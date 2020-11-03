@@ -1,0 +1,78 @@
+/* components/NovelList/NovelList.wxss */
+
+.listWrap {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 30rpx;
+}
+
+.listWrap .listBox {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 3%;
+}
+
+.listWrap .listBox .leftImg {
+  width: 30%;
+  float: left;
+  overflow: hidden;
+}
+
+.listWrap .listBox .rightInfo {
+  width: 70%;
+  float: left;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+}
+
+.listWrap .listBox image {
+  display: block;
+  width: 100%;
+  height: 278rpx;
+  border-radius: 8rpx;
+}
+
+.listWrap .listBox .title {
+  font-size: 28rpx;
+  color: #28292d;
+  margin-top: 12rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.listWrap .listBox .title .Name{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 80%;
+}
+.listWrap .listBox .title .Score{
+  color: #ff0000;
+  font-size: 36rpx;
+}
+
+.listWrap .listBox .info {
+  font-size: 24rpx;
+  line-height: 34rpx;
+  height: 170rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  color: #999999;
+  margin-top: 2rpx;
+  margin-bottom: 12rpx;
+}
+
+.listWrap .listBox .typeInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  margin: 15rpx 0px;
+}

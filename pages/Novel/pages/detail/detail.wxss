@@ -1,0 +1,31 @@
+/* pages/Novel/pages/detail/detail.wxss */
+@import "/assets/fonts/iconfont.wxss";
+.topImg {
+  width: 100%;
+  height: 370rpx;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+.bgimg {
+  width: 100%;
+  height: 370rpx;
+}
+
+.bgimgblur {
+  width: 100%;
+  height: 370rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  filter: blur(30rpx);
+}
+
+.detailWrap .topImg icon.iconhoutui {
+  font-size: 36rpx;
+}

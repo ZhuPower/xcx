@@ -1,6 +1,7 @@
-// pages/Novel/pages/index/index.js
+// pages/Novel/pages/detail/detail.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+let app = getApp()
 Page({
 
   /**
@@ -8,56 +9,51 @@ Page({
    */
   data: {
     img: apiUrl.apiUrl.novel.img,
-    homeNovel: apiUrl.apiUrl.novel.home,
-    homeNovel2: apiUrl.apiUrl.novel.home2,
+    detailData: {},
+    aChapter: [],
+    novelId: 0,
+    infoNovel: apiUrl.apiUrl.novel.info,
+    chapterNovel: apiUrl.apiUrl.novel.chapter,
     fnAjax: fnCon.fnAjax,
-    nChannel: 0,
-    data1: null,
-    data2: null,
+    isShow: false,
+    isShow2: false,
   },
-  getHome() {
-    let url = this.data.homeNovel
-    let data = {}
-    this.data.fnAjax(url, data).then(res => {
+  getInfoNovel() {
+    let url = `${this.data.infoNovel}/${this.data.novelId}.html`
+    this.data.fnAjax(url, {}).then(res => {
       this.setData({
-        data1: res
+        detailData: res.data,
+        isShow2:true
       })
     })
   },
-  getHome2() {
-    let url = this.data.homeNovel2
-    let data = {}
-    this.data.fnAjax(url, data).then(res => {
+  getChapterNovel() {
+    let url = `${this.data.chapterNovel}${this.data.novelId}/`
+    this.data.fnAjax(url, {}).then(res => {
+      //console.log(res)
       this.setData({
-        data2: res
+        aChapter: res.data.list
       })
+      console.log(this.data.aChapter)
     })
-  },
-  setChannel(e) {
-    let n = e.currentTarget.dataset.num
-    this.setData({
-      nChannel: n
-    })
-  },
-  goDetail(e){
-    let id = e.currentTarget.dataset.id
-    let goNovel = fnCon.goNovel
-    goNovel(id)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+    this.setData({
+      novelId: options.id
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getHome();
-    this.getHome2();
+    this.getInfoNovel();
+    this.getChapterNovel();
   },
 
   /**
