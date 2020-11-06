@@ -27,6 +27,9 @@ const apiUrl = {
       method:'POST'
     } 
   ],
+  music:{
+    home:'https://u.y.qq.com/cgi-bin/musics.fcg'
+  },
   video: {
     banner: 'https://aa.ahy1.top/api.php/banner/banner/getBannerLists',
     homeVideo: 'https://aa.ahy1.top/api.php/videos/videos/getHomeVideoLists',
@@ -45,7 +48,6 @@ const apiUrl = {
     keywordComics: 'https://comic.mkzcdn.com/search/keyword/', //搜索
     themeComics: 'https://comic.mkzcdn.com/config/theme/' //分类名
   },
-
   novel: {
     img:'https://imgapixs.pysmei.com/BookFiles/BookImages/',
     home:'https://scxs.pysmei.com/prov8/newfram//man_channel.html',

@@ -131,6 +131,11 @@
           "pathName": "pages/Novel/pages/content/content",
           "query": "chapterId=2231224&novelId=412435",
           "scene": null
+        },
+        {
+          "name": "pages/Music/pages/index/index",
+          "pathName": "pages/Music/pages/index/index",
+          "scene": null
         }
       ]
     }

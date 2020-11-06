@@ -11,6 +11,7 @@
     "pages/Comics/pages/detail/detail",
     "pages/Comics/pages/content/content",
     "pages/Comics/pages/classify/classify",
+    "pages/Music/pages/index/index",
     "pages/Video/pages/index/index",
     "pages/Video/pages/classify/classify",
     "pages/Video/pages/list/list",
