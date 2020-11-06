@@ -1,0 +1,15 @@
+<!--pages/Novel/pages/classify/classify.wxml-->
+<view class="classifyWrap">
+	<view class="classifMain">
+		<navigator class="classifList" wx:for="{{aCategory}}" wx:key="Id" url="../list/list?type=category&id={{item.Id}}&name={{item.Name}}">
+			<view class="leftBox">
+				<image src="/pages/Novel/assets/image/{{index}}.png" class="img_{{index}}"></image>
+			</view>
+			<view class="rightBox">
+				<view class="classifName">{{item.Name}}</view>
+				<view class="classifCount">{{item.Count}}本书</view>
+			</view>
+		</navigator>
+	</view>
+	<NavBar navType="Novel" navPath="classify"></NavBar>
+</view>

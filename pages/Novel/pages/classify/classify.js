@@ -1,30 +1,31 @@
-// pages/Comics/pages/list/list.js
-let app = getApp()
+// pages/Novel/pages/classify/classify.js
+const apiUrl = require('../../../../utils/apiUrl')
+const fnCon = require('../../../../utils/common')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bookId:1,
-    searchKey:''
+    img: apiUrl.apiUrl.novel.img,
+    category: apiUrl.apiUrl.novel.category,
+    fnAjax: fnCon.fnAjax,
+    aCategory:[]
+  },
+  getCategory() {
+    let url = this.data.category
+    let data = {}
+    this.data.fnAjax(url, data).then(res => {
+      this.setData({
+        aCategory: res.data
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    let obj = {
-      bookId:options.book_id,
-      searchKey:options.key
-    }
-    
-    this.setData(obj)
-
-    wx.setNavigationBarTitle({
-      title: options.name 
-    })
 
   },
 
@@ -32,7 +33,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.getCategory()
   },
 
   /**

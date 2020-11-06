@@ -17,24 +17,59 @@ Page({
     fnAjax: fnCon.fnAjax,
     isShow: false,
     isShow2: false,
+    isNav: false,
+    tabIndex:0
   },
   getInfoNovel() {
     let url = `${this.data.infoNovel}/${this.data.novelId}.html`
     this.data.fnAjax(url, {}).then(res => {
       this.setData({
         detailData: res.data,
-        isShow2:true
+        isShow2: true
+      })
+      wx.setNavigationBarTitle({
+        title: res.data.Name
       })
     })
   },
   getChapterNovel() {
     let url = `${this.data.chapterNovel}${this.data.novelId}/`
     this.data.fnAjax(url, {}).then(res => {
-      //console.log(res)
       this.setData({
         aChapter: res.data.list
       })
-      console.log(this.data.aChapter)
+    })
+  },
+  goNovelCon(e) {
+    let id = e.currentTarget.dataset.id
+    let goNovelCon = fnCon.goNovelCon
+    goNovelCon(id, this.data.novelId)
+  },
+  goDetail(e) {
+    let id = e.currentTarget.dataset.id
+    let goNovel = fnCon.goNovel
+    goNovel(id)
+  },
+  scrollFn(e) {
+    if (e.detail.scrollTop >= 150) {
+      this.setData({
+        isNav: true
+      })
+    } else {
+      this.setData({
+        isNav: false
+      })
+    }
+  },
+  goBack() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  doTab(e){
+    let num = e.currentTarget.dataset.num
+    this.setData({
+      tabIndex:num
     })
   },
 

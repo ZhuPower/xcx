@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "NavBar": "/components/NavBar/NavBar"
+  },
+  "navigationBarTitleText": "小说分类",
+  "navigationBarBackgroundColor": "#ff0000"
+}

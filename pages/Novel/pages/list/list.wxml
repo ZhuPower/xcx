@@ -1,4 +1,18 @@
 <!--pages/Novel/pages/list/list.wxml-->
 <view class="NovelListWrap">
-	<NovelList type="list" searchKey="{{searchKey}}" arrUrl="{{url}}"></NovelList>
+	<view class="categoryTab" wx:if="{{type == 'category'}}">
+		<view class="{{Htab == 'hot' ? 'cur' : ''}}" catchtap="setHtab" data-type="hot">
+			<text>热门</text>
+		</view>
+		<view class="{{Htab == 'new' ? 'cur' : ''}}" catchtap="setHtab" data-type="new">
+			<text>新书</text>
+		</view>
+		<view class="{{Htab == 'vote' ? 'cur' : ''}}" catchtap="setHtab" data-type="vote">
+			<text>好评</text>
+		</view>
+		<view class="{{Htab == 'over' ? 'cur' : ''}}" catchtap="setHtab" data-type="over">
+			<text>完结</text>
+		</view>
+	</view>
+	<NovelList type="{{type}}" searchKey="{{searchKey}}" arrUrl="{{url}}"></NovelList>
 </view>

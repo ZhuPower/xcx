@@ -1,0 +1,77 @@
+/* pages/Novel/pages/classify/classify.wxss */
+.classifMain {
+  width: 690rpx;
+  margin: 0px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 30rpx;
+}
+
+.classifList {
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  border-radius: 50rpx;
+  background: #eee;
+  margin-bottom: 30rpx;
+  width: 330rpx;
+}
+
+.classifList .leftBox {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 10rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.classifList .classifCount {
+  color: #aaa;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+
+.classifList .img_0 {
+  width: 30px;
+  height: 21px;
+}
+
+.classifList .img_1 {
+  width: 30px;
+  height: 29px;
+}
+
+.classifList .img_2 {
+  width: 33px;
+  height: 21px;
+}
+
+.classifList .img_3 {
+  width: 30px;
+  height: 19px;
+}
+
+.classifList .img_4 {
+  width: 30px;
+  height: 23px;
+}
+
+.classifList .img_5 {
+  width: 25px;
+  height: 24px;
+}
+
+.classifList .img_6 {
+  width: 28px;
+  height: 25px;
+}
+
+.classifList .img_7 {
+  width: 22px;
+  height: 27px;
+}

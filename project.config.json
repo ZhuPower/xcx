@@ -46,36 +46,17 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
     "plugin": {
-      "current": -1,
       "list": []
     },
     "game": {
-      "current": -1,
       "list": []
     },
     "gamePlugin": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": [
-        {
-          "id": -1,
-          "name": "pages/Novel/pages/index/index",
-          "pathName": "pages/Novel/pages/index/index",
-          "query": "",
-          "scene": null
-        },
         {
           "id": 4,
           "name": "pages/Video/pages/detail/detail",
@@ -137,6 +118,18 @@
           "name": "pages/Novel/pages/index/index",
           "pathName": "pages/Novel/pages/index/index",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Novel/pages/detail/detail",
+          "pathName": "pages/Novel/pages/detail/detail",
+          "query": "id=412435",
+          "scene": null
+        },
+        {
+          "name": "pages/Novel/pages/content/content",
+          "pathName": "pages/Novel/pages/content/content",
+          "query": "chapterId=2231224&novelId=412435",
           "scene": null
         }
       ]

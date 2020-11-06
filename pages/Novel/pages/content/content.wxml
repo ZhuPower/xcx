@@ -1,2 +1,16 @@
 <!--pages/Novel/pages/content/content.wxml-->
-<text>pages/Novel/pages/content/content.wxml</text>
+<view class="contentWrap">
+  <image src="{{setInfo.Bj}}" class="themeBj"></image>
+  <scroll-view catchtap="setFn" class="contentMain" scroll-y="true" bindscrolltolower="fnBotton" refresher-enabled="true"
+    refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop"
+    style="font-size:{{setInfo.size}}rpx; color:{{setInfo.color}}; line-height:{{2*setInfo.size}}rpx;">
+    <view class="contentList" wx:for="{{aContent}}" wx:key="cid">
+      <view class="contentTitle" style="font-size:{{setInfo.size + 3}}rpx;">{{item.cname}}</view>
+      <view class="contentCon">{{item.content}}</view>
+    </view>
+  </scroll-view>
+  <view class="navTitle" wx:if="{{isNav}}">
+    <icon class="iconfont iconhoutui" catchtap="goBack"></icon>
+    <text>{{_title}}</text>
+  </view>
+</view>

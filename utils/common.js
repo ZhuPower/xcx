@@ -281,6 +281,13 @@ const goNovel = function (id) {
   })
 }
 
+const goNovelCon = function (chapterId, novelId) {
+  wx.navigateTo({
+    url: '/pages/Novel/pages/content/content?chapterId=' + chapterId + '&novelId=' + novelId
+  })
+}
+
+
 
 module.exports = {
   fnAjax,
@@ -289,5 +296,6 @@ module.exports = {
   getParameter,
   goComics,
   goComicCon,
-  goNovel
+  goNovel,
+  goNovelCon
 }

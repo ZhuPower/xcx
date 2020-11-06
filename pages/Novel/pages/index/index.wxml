@@ -13,23 +13,25 @@
     <text class="{{nChannel == 2 ? 'cur' : ''}}" catchtap="setChannel" data-num="2">排行</text>
   </view>
   <view class="indexTab">
-    <view class="indexTabCon" wx:if="{{nChannel == 0}}">
+    <view class="indexTabCon" wx:if="{{nChannel == 0 || nChannel == 1}}">
       <view class="bannerMain">
-        <image src="{{data1.banners[0].imgurl}}" mode="widthFix"></image>
+        <image src="{{nChannel == 0 ? data1.banners[0].imgurl : data2.banners[0].imgurl}}" mode="widthFix" data-id="{{nChannel == 0 ? data1.banners[0].param : data2.banners[0].param}}"
+              catchtap="goDetail"></image>
       </view>
       <view class="main">
-        <view class="listMain" wx:for="{{data1.data}}" wx:key="ViewType">
+        <view class="listMain" wx:for="{{nChannel == 0 ? data1.data : data2.data}}" wx:key="ViewType">
           <view class="h3">
             <view>
               <image src="{{item.NavIcon}}"></image>
               <text>{{item.Category}}</text>
             </view>
-            <navigator url="../list/list?url={{item.More}}&name={{item.Category}}" class="searchBtn">
+            <navigator url="../list/list?type=more&url={{item.More}}&name={{item.Category}}" class="searchBtn">
               More</navigator>
           </view>
           <view class="listUl {{'listUl_'+index}}">
-            <view class="listLi {{'listLi_'+index2}} {{item.Books.length % 3 == 1 ? 'listLi_w':''}}" wx:for="{{item.Books}}" wx:for-index="index2" wx:for-item="item2"
-              wx:key="Id" data-id="{{item2.Id}}" catchtap="goDetail">
+            <view class="listLi {{'listLi_'+index2}} {{item.Books.length % 3 == 1 ? 'listLi_w':''}}"
+              wx:for="{{item.Books}}" wx:for-index="index2" wx:for-item="item2" wx:key="Id" data-id="{{item2.Id}}"
+              catchtap="goDetail">
               <view class="leftImg">
                 <image src="{{img}}{{item2.Img}}" lazy-load="true" webp="true"></image>
               </view>
@@ -46,8 +48,14 @@
         </view>
       </view>
     </view>
-    <view class="indexTabCon" wx:if="{{nChannel == 1}}"></view>
-    <view class="indexTabCon" wx:if="{{nChannel == 2}}"></view>
+    <view class="indexTabCon ranking" wx:if="{{nChannel == 2}}">
+      <view class="typeInfo">
+        <view class="typeBox" wx:for="{{typeInfo}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+          <view class="typeList {{curType[key] == item.field ? 'cur' : ''}}" wx:for="{{value}}" wx:key="index" data-field="{{item.field}}" data-key="{{key}}" catchtap="setType">{{item.name}}</view>
+        </view>
+      </view>
+      <NovelList type="ranking" arrUrl="{{arrUrl}}"></NovelList>
+    </view>
   </view>
   <NavBar navType="Novel" navPath="index"></NavBar>
 </view>

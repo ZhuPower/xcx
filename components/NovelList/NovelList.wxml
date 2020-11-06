@@ -1,9 +1,9 @@
 <!--components/NovelList/NovelList.wxml-->
-<scroll-view class="listWrap" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
-  refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
-  <view class="listBox" wx:for="{{NovelList}}" wx:key="index" catchtap="goDetail" data-id="{{item.Id}}">
+<scroll-view class="listWrap {{type}}" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
+  refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop" scroll-top="{{page == 1 ? true : false}}">
+  <view class="listBox" wx:for="{{NovelList}}" wx:key="index" id="_{{item.Id}}" catchtap="goDetail" data-id="{{item.Id}}">
     <view class="leftImg">
-      <image src="{{img}}{{item.Img}}" lazy-load="true" webp="true"></image>
+      <image src="{{searchKey ? item.Img : img+item.Img}}" lazy-load="true" webp="true"></image>
     </view>
     <view class="rightInfo">
       <view class="title">

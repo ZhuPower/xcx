@@ -1,1 +1,59 @@
 /* pages/Novel/pages/content/content.wxss */
+@import "/assets/fonts/iconfont.wxss";
+
+.contentWrap {
+  position: relative;
+}
+
+.contentMain {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0px 30rpx;
+  padding-top: 50rpx;
+}
+
+.contentList .contentTitle {
+  font-weight: bold;
+}
+
+.contentCon {
+  white-space: pre-wrap;
+}
+
+.navTitle {
+  z-index: 10;
+  position: fixed;
+  padding-top: 35rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  text-align: center;
+  background: #ff0000;
+}
+
+.navTitle text {
+  color: #fff;
+}
+
+.navTitle icon.iconhoutui {
+  font-size: 36rpx;
+  color: #fff;
+  left: 20rpx;
+  position: absolute;
+}
+
+.themeBj {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}

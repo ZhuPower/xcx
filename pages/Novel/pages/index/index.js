@@ -14,6 +14,68 @@ Page({
     nChannel: 0,
     data1: null,
     data2: null,
+    searchKey: '',
+    arrUrl: ['top', 'man', 'top', 'hot', 'week'],
+    curType: {
+      rankList: 'week',
+      channel: 'man',
+      category: 'hot'
+    },
+    typeInfo: {
+      rankList: [
+        {
+          name: '周榜',
+          field: 'week'
+        },
+        {
+          name: '月榜',
+          field: 'month'
+        },
+        {
+          name: '总榜',
+          field: 'total'
+        }
+      ],
+      channel: [
+        {
+          name: '男频',
+          field: 'man'
+        },
+        {
+          name: '女频',
+          field: 'lady'
+        }
+      ],
+      category: [
+        {
+          name: '最热',
+          field: 'hot'
+        },
+        {
+          name: '推荐',
+          field: 'commend'
+        },
+        {
+          name: '完结',
+          field: 'over'
+        },
+        {
+          name: '收藏',
+          field: 'collect'
+        },
+        {
+          name: '新书',
+          field: 'new'
+        },
+        {
+          name: '评分',
+          field: 'vote'
+        }
+      ]
+    }
+
+    //  https://scxs.pysmei.com/top/男女/top/分类/榜单名/页码.html
+    //  https://scxs.pysmei.com/top/lady/top/commend/month/1.html
   },
   getHome() {
     let url = this.data.homeNovel
@@ -39,10 +101,54 @@ Page({
       nChannel: n
     })
   },
-  goDetail(e){
+  goDetail(e) {
     let id = e.currentTarget.dataset.id
     let goNovel = fnCon.goNovel
     goNovel(id)
+  },
+  setType(e) {
+    let field = e.currentTarget.dataset.field
+    let key = e.currentTarget.dataset.key
+    let arr = this.data.arrUrl
+    if (key == 'rankList') {
+      arr[4] = field
+    } else if (key == 'channel') {
+      arr[1] = field
+    } else if (key == 'category') {
+      arr[3] = field
+    }
+
+    this.setData({
+      arrUrl: arr,
+      curType: {
+        rankList: arr[4],
+        channel: arr[1],
+        category: arr[3]
+      }
+    })
+  },
+  bindKeyInput(e) {
+    this.setData({
+      searchKey: e.detail.value
+    })
+  },
+  goList() {
+    if (this.data.searchKey) {
+      let str = 'type=search&name=搜索"' + this.data.searchKey + '"结果&key=' + this.data.searchKey
+      this.setData({
+        searchKey: ''
+      })
+      wx.navigateTo({
+        url: '/pages/Novel/pages/list/list?' + str,
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索关键字',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+
   },
 
   /**

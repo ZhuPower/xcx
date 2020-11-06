@@ -76,3 +76,12 @@
   font-size: 24rpx;
   margin: 15rpx 0px;
 }
+.ranking{
+  height:calc(100% - 438rpx);
+  top:376rpx;
+}
+
+.category{
+  height:calc(100% - 88rpx);
+  top:88rpx;
+}

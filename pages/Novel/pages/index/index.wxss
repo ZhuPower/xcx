@@ -159,3 +159,23 @@
   font-size: 24rpx;
   margin: 15rpx 0px;
 }
+
+.ranking .typeInfo {
+  width: 100%;
+  height: 210rpx;
+  box-sizing: border-box;
+  padding: 15rpx 0px;
+}
+.ranking .typeInfo .typeBox{
+  display: flex;
+}
+.ranking .typeInfo .typeBox .typeList{
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 17%;
+  text-align: center;
+}
+
+.ranking .typeInfo .typeBox .typeList.cur{
+  color:#ff0000;
+}

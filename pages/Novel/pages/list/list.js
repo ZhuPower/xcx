@@ -5,10 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classifyType: 0,
+    Htab: 'hot',
     searchKey: '',
     name: '',
     url: '',
+    type: 'list'
+  },
+
+  setHtab(e) {
+    let type = e.currentTarget.dataset.type
+    let arr = this.data.url
+    arr[2] = type
+    this.setData({
+      Htab: type,
+      url: arr
+    })
   },
 
   /**
@@ -16,12 +27,26 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    let arr = options.url.substring(24,options.url.length-12).split('/')
+    let arr = []
+    if (options.type == 'more') {
+      arr = options.url.substring(24, options.url.length - 12).split('/')
+    } else if (options.type == 'category') {
+      arr = ['Categories', options.id, 'hot']
+    }
 
-    this.setData({
-      name:options.name,
-      url:arr
-    })
+    if (options.type == 'more' || options.type == 'category') {
+      this.setData({
+        name: options.name,
+        url: arr,
+        type: options.type
+      })
+    } else if (options.type == 'search') {
+      this.setData({
+        name: options.name,
+        searchKey: options.key
+      })
+    }
+
 
     wx.setNavigationBarTitle({
       title: `${this.data.name}列表`

@@ -54,63 +54,12 @@ const apiUrl = {
     info: 'https://scxs.pysmei.com/info/',//书籍信息 https://scxs.pysmei.com/info/{$.Id}.html
     chapter: 'https://scxs.pysmei.com/book/', //书籍章节 https://scxs.pysmei.com/book/{$.Id}/  
     //章节内容    https://scxs.pysmei.com/book/521014/3144129.html
-    sort: 'https://scxs.pysmei.com/top/', //分类
-
-    typeInfo: {
-      channel: [
-        {
-          name: '男',
-          field: 'man'
-        },
-        {
-          name: '女',
-          field: 'lady'
-        }
-      ],
-      category: [
-        {
-          name: '最热',
-          field: 'hot'
-        },
-        {
-          name: '推荐',
-          field: 'commend'
-        },
-        {
-          name: '完结',
-          field: 'over'
-        },
-        {
-          name: '收藏',
-          field: 'collect'
-        },
-        {
-          name: '新书',
-          field: 'new'
-        },
-        {
-          name: '评分',
-          field: 'vote'
-        }
-      ],
-      rankList: [
-        {
-          name: '周榜',
-          field: 'week'
-        },
-        {
-          name: '月榜',
-          field: 'month'
-        },
-        {
-          name: '总榜',
-          field: 'total'
-        }
-      ]
-    }
-
-    //  https://scxs.pysmei.com/top/男女/top/分类/榜单名/页码.html
-    //  https://scxs.pysmei.com/top/lady/top/commend/month/1.html
+    category:'https://scxs.pysmei.com/Categories/BookCategory.html',
+    //https://scxs.pysmei.com/Categories/BookCategory.html
+    //https://scxs.pysmei.com/Categories/2/hot/1.html
+    //https://scxs.pysmei.com/Categories/2/new/1.html
+    //https://scxs.pysmei.com/Categories/2/vote/1.html
+    //https://scxs.pysmei.com/Categories/2/over/1.html
   }
 }
 module.exports = {
