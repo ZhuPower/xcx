@@ -1,1 +1,65 @@
 /* pages/Music/pages/index/index.wxss */
+.musicIndexWrap .searchMain {
+  background: #18be76;
+}
+
+.musicIndexWrap .searchMain .searchBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  height: 60rpx;
+  position: relative;
+}
+
+.musicIndexWrap .searchMain .searchBox icon {
+  position: absolute;
+  left: 40rpx;
+  top: 43rpx;
+}
+
+.musicIndexWrap .searchMain .searchBox input {
+  color: #000;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  width: 600rpx;
+  padding-left: 50rpx;
+}
+
+.musicIndexWrap .searchMain .searchBox text {
+  color: #fff;
+  display: block;
+  width: 90rpx;
+  text-align: center;
+}
+
+.musicIndexWrap .banner image {
+  width: 100%;
+}
+
+.videoIndexWrap .banner {
+  width: 750rpx;
+  margin: 0px auto;
+  border-radius: 20rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.videoIndexWrap .banner swiper {
+  width: 750rpx;
+}
+
+.videoIndexWrap .banner image {
+  width: 100%;
+}
+
+
+.slide-image {
+  transform: scale(0.6, 0.6);
+}
+
+.slide-active {
+  transform: scale(1, 1);
+}

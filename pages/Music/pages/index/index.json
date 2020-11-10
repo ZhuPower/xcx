@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "NavBar": "/components/NavBar/NavBar"
+  },
   "navigationBarTitleText": "音乐首页",
   "navigationBarBackgroundColor": "#18be76"
 }

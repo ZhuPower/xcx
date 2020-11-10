@@ -70,3 +70,11 @@
 .navBarWrap navigator.Novel_cur text {
   color: #ff0000;
 }
+
+.navBarWrap navigator.Music_cur icon {
+  color: #18be76;
+}
+
+.navBarWrap navigator.Music_cur text {
+  color: #18be76;
+}
