@@ -1,4 +1,4 @@
-// pages/Music/pages/index/index.js
+// pages/Music/pages/list/list.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
 Page({
@@ -7,48 +7,66 @@ Page({
    * 页面的初始数据
    */
   data: {
-    proxyUrl: apiUrl.apiUrl.proxyUrl,
     toplist: apiUrl.apiUrl.music.toplist,
     img: apiUrl.apiUrl.music.img,
     fnAjax: fnCon.fnAjax,
     songList: [],
-    banner: [
-      'http://p1.music.126.net/sooZQ6BuDAtztTfS02e_hQ==/109951165457314199.jpg',
-      'http://p1.music.126.net/AcfS8ODMYZCzNqvjX1HoWQ==/109951165456003034.jpg',
-      'http://p1.music.126.net/qC-5B-_p4ld-ebX_uMgT8Q==/109951165456267803.jpg'
-    ]
+    topinfo:{},
+    id: 0,
+    song_page: 1,
+    song_num: 20,
+    total_song_num: 0,
+    isRefresh: false
   },
-
-  bb() {
-    let url = this.data.proxyUrl
-    let data = {
-      apiUrl: 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg',
-      songmid: '002GwAma2DGN2x',
-      g_tk: 5381
-    }
-    this.data.fnAjax(url, data).then(res => {
-      console.log(res)
-    })
-  },
-  getRank() {
+  getRankInfo() {
     let url = this.data.toplist
     let data = {
-      page: 'index',
-      format: 'html',
-      tpl: 'macv4',
-      v8debug: 1
+      tpl: 3,
+      page: 'detail',
+      topid: this.data.id,
+      type: 'top',
+      song_begin: (this.data.song_page - 1) * this.data.song_num,
+      song_num: this.data.song_num,
+      g_tk: '5381',
+      loginUin: 0,
+      hostUin: 0,
+      format: 'json',
+      inCharset: 'utf-8',
+      outCharset: 'utf-8',
+      notice: 0,
+      platform: 'yqq.json',
+      needNewCode: 0
     }
     this.data.fnAjax(url, data).then(res => {
       let arr = []
-      for (var key in res.songinfomap) {
-        arr.push(res.songinfomap[key])
+      if (this.data.song_page > 1) {
+        arr = this.data.songList
       }
-      let num = arr.length % 3
-      arr.splice(-num, num)
+      arr.push(...res.songlist)
       this.setData({
-        songList: arr
+        total_song_num: res.total_song_num,
+        topinfo:res.topinfo,
+        songList: arr,
+        isRefresh: false
       })
     })
+  },
+  fnTop() {
+    this.setData({
+      song_page: 1
+    })
+    this.getRankInfo();
+  },
+  fnBotton() {
+    let num = this.data.song_page
+
+    if (num * this.data.song_num < this.data.total_song_num) {
+      num = num + 1
+      this.setData({
+        song_page: num
+      })
+      this.getRankInfo();
+    }
   },
   goDetail(e){
     let id = e.currentTarget.dataset.id
@@ -56,21 +74,24 @@ Page({
     goMusic(id)
   },
 
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      id: options.id
+    })
 
+    wx.setNavigationBarTitle({
+      title: options.name
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getRank();
-    //this.getRankInfo(27)
-    // this.bb();
+    this.getRankInfo();
   },
 
   /**

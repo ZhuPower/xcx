@@ -1,0 +1,2 @@
+<!--pages/Music/pages/detail/detail.wxml-->
+<audio src="http://dl.stream.qqmusic.qq.com/C4000007zPns2TNcQ2.m4a?guid=6541487400&vkey=E9513FEE990A2CEC9D1B124B58044F66D61F0A96869D6F7B7D5264C892479824D5623CDF5C59E1ECF4E79C1E44E5C2F1F9F77F22A9D9BDF1&uin=0&fromtag=66" id="myAudio" controls loop></audio>

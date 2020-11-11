@@ -1,6 +1,4 @@
 /* pages/Video/pages/detail/detail.wxss */
-@import "/assets/fonts/iconfont.wxss";
-
 .videoDetailWrap {
   padding: 0px 30rpx
 }

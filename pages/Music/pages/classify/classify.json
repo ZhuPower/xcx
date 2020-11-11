@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "NavBar": "/components/NavBar/NavBar"
+  },
+  "navigationBarTitleText": "音乐榜单",
+  "navigationBarBackgroundColor": "#18be76"
+}

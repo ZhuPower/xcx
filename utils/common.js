@@ -57,8 +57,6 @@ const fnAjax = function (url, data, method, type) {
             let str = res.data.substring(num)
             let obj = JSON.parse(str)
             resolved(obj)
-          }else if(data.apiUrl.indexOf('qq.com')>-1){
-
           }else{
             let str = res.data.replace(/,]/ig,"]");
             let obj = JSON.parse(str)
@@ -289,6 +287,12 @@ const goNovelCon = function (chapterId, novelId) {
   })
 }
 
+const goMusic = function (id) {
+  wx.navigateTo({
+    url: '/pages/Music/pages/detail/detail?id=' + id
+  })
+}
+
 
 
 module.exports = {
@@ -299,5 +303,6 @@ module.exports = {
   goComics,
   goComicCon,
   goNovel,
-  goNovelCon
+  goNovelCon,
+  goMusic
 }

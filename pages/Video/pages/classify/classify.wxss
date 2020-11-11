@@ -1,6 +1,4 @@
 /* pages/Video/pages/classify/classify.wxss */
-@import "/assets/fonts/iconfont.wxss";
-
 .videoClassifyWrap {}
 
 .videoClassifyWrap .classifyMain {}

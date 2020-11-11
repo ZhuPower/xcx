@@ -1,0 +1,140 @@
+/* pages/Music/pages/list/list.wxss */
+.listWrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.musicBox{
+  box-sizing: border-box;
+  padding: 0px 30rpx 30rpx 30rpx;
+}
+
+.musicList {
+  height: 200rpx;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 30rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.musicList .noBox {
+  width: 80rpx;
+  text-align: center;
+  height: 140rpx;
+  line-height: 140rpx;
+  font-size: 40rpx;
+  color: #9195A3;
+}
+
+.musicList:nth-child(1) .noBox {
+  color: #FE2D46;
+}
+
+.musicList:nth-child(2) .noBox {
+  color: #F60;
+}
+
+.musicList:nth-child(3) .noBox {
+  color: #FAA90E;
+}
+
+.musicList .albumdBox {
+  margin-right: 15rpx;
+  width: 140rpx;
+  height: 140rpx;
+  overflow: hidden;
+  border-radius: 70rpx;
+  border: 1px solid #eee;
+}
+
+.musicList .albumdBox image {
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.musicList .songInfo {
+  width: 440rpx;
+  height: 140rpx;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.musicList .songInfo>view {
+  width: 100%;
+}
+
+.musicList .songInfo .songname {
+  width: 100%;
+  font-size: 28rpx;
+  color: #28292d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.musicList .songInfo .singer {
+  width: 100%;
+  font-size: 24rpx;
+  color: #999999;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.detail-container {
+  height: 320rpx;
+  filter: blur(40rpx);
+  opacity: 0.4;
+}
+
+.detail-mask {
+  position: absolute;
+  width: 100%;
+  height: 320rpx;
+  background-color: #333;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.detail-img {
+  width: 280rpx;
+  height: 280rpx;
+  margin-right: 24rpx;
+  border-radius: 6rpx;
+}
+
+.detail-info {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 320rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.detail {
+  flex-grow: 1;
+  line-height: 60rpx;
+  width: 0;
+}
+
+.detail view {
+  color: #fff;
+  font-size: 24rpx;
+}
+
+.detail .detail-nm {
+  font-size: 36rpx;
+  font-weight: 400;
+}

@@ -1,0 +1,31 @@
+/* pages/Music/pages/classify/classify.wxss */
+.musicClassifyWrap {
+  padding-bottom: 88rpx;
+}
+
+.topListBox {
+  padding-left:30rpx;
+}
+
+.topList {
+  height: 246rpx;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 30rpx;
+  padding-left: 0px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.topList image{
+  width: 186rpx;
+  height: 186rpx;
+  margin-right: 30rpx;
+  border-radius: 6rpx;
+}
+
+.topList>view{
+  color: #333;
+  font-size: 40rpx;
+}

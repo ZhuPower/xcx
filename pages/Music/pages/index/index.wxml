@@ -8,8 +8,7 @@
     </view>
   </view>
   <view class="banner">
-    <swiper indicator-dots="true" autoplay="true"
-      interval="2000" duration="500" circular="true"
+    <swiper indicator-dots="true" autoplay="true" interval="2000" duration="500" circular="true"
       indicator-active-color="#18be76">
       <block wx:for="{{banner}}" wx:key="index">
         <swiper-item>
@@ -19,12 +18,16 @@
     </swiper>
   </view>
   <view class="main">
-    <view class="title">随机推荐</view>
-    <view class="musicList">
-      <view wx:for="{{songList}}" wx:for-index="key"  wx:for-item="value" wx:key="key">
-        <view class="songname">{{value.songname}}</view>
-        <view class="singer">
-          <text wx:for="{{value.singer}}" wx:key="index">{{item.name}}</text>
+    <view class="musicListBox">
+      <view class="musicList" wx:for="{{songList}}" wx:for-index="key" wx:for-item="value" wx:key="key" catchtap="goDetail" data-id="{{value.songmid}}">
+        <image class="albumdBox" src="{{img}}{{value.albummid}}_1.jpg?max_age=2592000"></image>
+        <view class="songInfo">
+          <view>
+            <view class="songname">{{value.songname}}</view>
+            <view class="singer">
+              <text wx:for="{{value.singer}}"  wx:key="index">{{item.name}}<block wx:if="{{index < value.singer.length-1}}">、</block></text>
+            </view>
+          </view>
         </view>
       </view>
     </view>

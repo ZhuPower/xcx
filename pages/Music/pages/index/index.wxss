@@ -39,27 +39,71 @@
   width: 100%;
 }
 
-.videoIndexWrap .banner {
-  width: 750rpx;
-  margin: 0px auto;
-  border-radius: 20rpx;
-  overflow: hidden;
-  position: relative;
-}
-
-.videoIndexWrap .banner swiper {
-  width: 750rpx;
-}
-
-.videoIndexWrap .banner image {
-  width: 100%;
-}
-
-
 .slide-image {
   transform: scale(0.6, 0.6);
 }
 
 .slide-active {
   transform: scale(1, 1);
+}
+
+.musicIndexWrap .main {
+  padding: 0px 30rpx;
+}
+
+.musicIndexWrap .main .title {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.musicIndexWrap .main .musicListBox {
+  overflow: hidden;
+  padding-bottom: 88rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 10rpx;
+  flex-direction: row;
+}
+
+.musicIndexWrap .main .musicList {
+  width: 220rpx;
+  position: relative;
+  padding-bottom: 20rpx;
+}
+
+.musicIndexWrap .main .musicList .albumdBox {
+  width: 100%;
+  height: 220rpx;
+  border-radius: 6rpx;
+}
+
+.musicIndexWrap .main .musicList .songInfo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.musicIndexWrap .main .musicList .songInfo>view {
+  width: 100%;
+}
+
+.musicIndexWrap .main .musicList .songInfo .songname {
+  width: 100%;
+  font-size: 28rpx;
+  color: #28292d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.musicIndexWrap .main .musicList .songInfo .singer {
+  width: 100%;
+  font-size: 24rpx;
+  color: #999999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

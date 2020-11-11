@@ -1,6 +1,4 @@
 /* pages/Novel/pages/content/content.wxss */
-@import "/assets/fonts/iconfont.wxss";
-
 .contentWrap {
   position: relative;
 }

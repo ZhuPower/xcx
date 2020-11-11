@@ -1,0 +1,10 @@
+<!--pages/Music/pages/classify/classify.wxml-->
+<view class="musicClassifyWrap">
+  <view class="topListBox">
+    <view class="topList" wx:for="{{aToplist}}" wx:key="index" catchtap="goTopList" data-id="{{item.topID}}" data-name="{{item.ListName}}">
+      <image src="{{item.MacDetailPicUrl}}"></image>
+      <view>{{item.ListName}}</view>
+    </view>
+  </view>
+  <NavBar navType="Music" navPath="classify"></NavBar>
+</view>

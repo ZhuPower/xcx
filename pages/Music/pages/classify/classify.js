@@ -1,4 +1,4 @@
-// pages/Music/pages/index/index.js
+// pages/Music/pages/classify/classify.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
 Page({
@@ -11,24 +11,7 @@ Page({
     toplist: apiUrl.apiUrl.music.toplist,
     img: apiUrl.apiUrl.music.img,
     fnAjax: fnCon.fnAjax,
-    songList: [],
-    banner: [
-      'http://p1.music.126.net/sooZQ6BuDAtztTfS02e_hQ==/109951165457314199.jpg',
-      'http://p1.music.126.net/AcfS8ODMYZCzNqvjX1HoWQ==/109951165456003034.jpg',
-      'http://p1.music.126.net/qC-5B-_p4ld-ebX_uMgT8Q==/109951165456267803.jpg'
-    ]
-  },
-
-  bb() {
-    let url = this.data.proxyUrl
-    let data = {
-      apiUrl: 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg',
-      songmid: '002GwAma2DGN2x',
-      g_tk: 5381
-    }
-    this.data.fnAjax(url, data).then(res => {
-      console.log(res)
-    })
+    aToplist: []
   },
   getRank() {
     let url = this.data.toplist
@@ -39,23 +22,18 @@ Page({
       v8debug: 1
     }
     this.data.fnAjax(url, data).then(res => {
-      let arr = []
-      for (var key in res.songinfomap) {
-        arr.push(res.songinfomap[key])
-      }
-      let num = arr.length % 3
-      arr.splice(-num, num)
       this.setData({
-        songList: arr
+        aToplist: res.toplist
       })
     })
   },
-  goDetail(e){
+  goTopList(e) {
     let id = e.currentTarget.dataset.id
-    let goMusic = fnCon.goMusic
-    goMusic(id)
+    let name = e.currentTarget.dataset.name
+    wx.navigateTo({
+      url: '/pages/Music/pages/list/list?id=' + id + '&name=' + name
+    })
   },
-
 
   /**
    * 生命周期函数--监听页面加载
@@ -68,9 +46,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getRank();
-    //this.getRankInfo(27)
-    // this.bb();
+    this.getRank()
   },
 
   /**

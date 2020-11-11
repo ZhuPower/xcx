@@ -28,7 +28,8 @@ const apiUrl = {
     } 
   ],
   music:{
-    home:'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg'
+    toplist:'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
+    img:'https://y.gtimg.cn/music/photo_new/T002R300x300M000'
   },
   video: {
     banner: 'https://aa.ahy1.top/api.php/banner/banner/getBannerLists',

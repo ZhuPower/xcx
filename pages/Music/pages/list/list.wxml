@@ -1,0 +1,30 @@
+<!--pages/Music/pages/list/list.wxml-->
+<scroll-view class="listWrap" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
+  refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
+  <view class='detail-container' style='background: url({{topinfo.pic_v12}}) no-repeat top/cover'></view>
+  <view class='detail-mask'></view>
+  <view class='detail-info'>
+    <image src="{{topinfo.pic_v12}}" class='detail-img'></image>
+    <view class='detail'>
+      <view class='detail-nm'>{{topinfo.ListName}}</view>
+    </view>
+  </view>
+  <view class="musicBox">
+    <view class="musicList" wx:for="{{songList}}" wx:for-index="key" wx:for-item="value" wx:key="key" catchtap="goDetail" data-id="{{value.data.songmid}}">
+      <text class="noBox">{{key+1}}</text>
+      <view class="albumdBox">
+        <image src="{{img}}{{value.data.albummid}}_1.jpg?max_age=2592000"></image>
+      </view>
+      <view class="songInfo">
+        <view>
+          <view class="songname">{{value.data.songname}}</view>
+          <view class="singer">
+            <text wx:for="{{value.data.singer}}" wx:key="index">{{item.name}}<block
+                wx:if="{{index < value.data.singer.length-1}}">、</block></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</scroll-view>

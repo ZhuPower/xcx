@@ -58,83 +58,27 @@
     "miniprogram": {
       "list": [
         {
-          "id": 4,
-          "name": "pages/Video/pages/detail/detail",
-          "pathName": "pages/Video/pages/detail/detail",
-          "query": "id= 22595&isApp=true",
-          "scene": null
-        },
-        {
-          "id": 2,
-          "name": "pages/Video/pages/play/play",
-          "pathName": "pages/Video/pages/play/play",
-          "query": "data=%7B%22id%22%3A%2225960%22%2C%22index%22%3A5%2C%22name%22%3A%22%E7%AC%AC6%E9%9B%86%22%2C%22title%22%3A%22%E4%BD%BF%E5%BE%92%E8%A1%8C%E8%80%853%5B%E6%99%AE%E9%80%9A%E8%AF%9D%E7%89%88%5D%22%2C%22url%22%3A%22https%3A%2F%2Fv.qq.com%2Fx%2Fcover%2Fs9jv3s19tcrooln%2Fc0034zwzv9q.html%22%2C%22isApp%22%3Afalse%7D",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/Video/pages/classify/classify",
-          "pathName": "pages/Video/pages/classify/classify",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 4,
-          "name": "pages/Comics/pages/index/index",
-          "pathName": "pages/Comics/pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 5,
-          "name": "pages/Comics/pages/list/list",
-          "pathName": "pages/Comics/pages/list/list",
-          "query": "type=list&book_id=1&page=1&name=客栈精品",
-          "scene": null
-        },
-        {
-          "id": 6,
-          "name": "pages/Comics/pages/detail/detail",
-          "pathName": "pages/Comics/pages/detail/detail",
-          "query": "id=211692",
-          "scene": null
-        },
-        {
-          "id": 7,
-          "name": "pages/Comics/pages/content/content",
-          "pathName": "pages/Comics/pages/content/content",
-          "query": "chapterId=644915&comicId=211692&title=引子&index=0",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/Comics/pages/classify/classify",
-          "pathName": "pages/Comics/pages/classify/classify",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/Novel/pages/index/index",
-          "pathName": "pages/Novel/pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/Novel/pages/detail/detail",
-          "pathName": "pages/Novel/pages/detail/detail",
-          "query": "id=412435",
-          "scene": null
-        },
-        {
-          "name": "pages/Novel/pages/content/content",
-          "pathName": "pages/Novel/pages/content/content",
-          "query": "chapterId=2231224&novelId=412435",
-          "scene": null
-        },
-        {
           "name": "pages/Music/pages/index/index",
           "pathName": "pages/Music/pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Music/pages/classify/classify",
+          "pathName": "pages/Music/pages/classify/classify",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Music/pages/list/list",
+          "pathName": "pages/Music/pages/list/list",
+          "query": "id=4&name=巅峰榜·热歌",
+          "scene": null
+        },
+        {
+          "name": "pages/Music/pages/detail/detail",
+          "pathName": "pages/Music/pages/detail/detail",
+          "query": "id=0016IvEW0kcA1M",
           "scene": null
         }
       ]
