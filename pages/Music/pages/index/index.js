@@ -1,6 +1,7 @@
 // pages/Music/pages/index/index.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+const app = getApp()
 Page({
 
   /**
@@ -41,7 +42,22 @@ Page({
     this.data.fnAjax(url, data).then(res => {
       let arr = []
       for (var key in res.songinfomap) {
-        arr.push(res.songinfomap[key])
+        let _obj = res.songinfomap[key]
+        let mid = _obj.songmid
+        let id = _obj.songid + ''
+        let name = _obj.songname
+        let singer = _obj.singer
+        let pic = `${this.data.img}${_obj.albummid}_1.jpg?max_age=2592000`
+        let obj = {
+          name: name,
+          mid: mid,
+          id: id,
+          singer: singer,
+          pic: pic,
+          url: '',
+          lyric: ''
+        }
+        arr.push(obj)
       }
       let num = arr.length % 3
       arr.splice(-num, num)
@@ -50,10 +66,19 @@ Page({
       })
     })
   },
-  goDetail(e){
+  goDetail(e) {
+    let item = e.currentTarget.dataset.item
     let id = e.currentTarget.dataset.id
+    let mid = e.currentTarget.dataset.mid
     let goMusic = fnCon.goMusic
-    goMusic(id)
+
+    if (app.globalData.musiclist.mid.indexOf(mid) == -1) {
+      app.globalData.musiclist.mid.push(mid)
+      app.globalData.musiclist.id.push(id)
+      app.globalData.musiclist.list.push(item)
+    }
+
+    goMusic(id, mid)
   },
 
 

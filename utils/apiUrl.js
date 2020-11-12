@@ -30,10 +30,8 @@ const apiUrl = {
   music:{
     toplist:'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
     img:'https://y.gtimg.cn/music/photo_new/T002R300x300M000',
-    songInfo:'https://api.vvhan.com/api/music',
-    songSrc:'https://dl.stream.qqmusic.qq.com/' 
-    //http://isure.stream.qqmusic.qq.com/   
-    //https://dl.stream.qqmusic.qq.com/
+    songInfo:'https://u.y.qq.com/cgi-bin/musicu.fcg',
+    songSrc:'https://dl.stream.qqmusic.qq.com/'
   },
   video: {
     banner: 'https://aa.ahy1.top/api.php/banner/banner/getBannerLists',

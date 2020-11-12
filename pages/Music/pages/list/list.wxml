@@ -10,17 +10,17 @@
     </view>
   </view>
   <view class="musicBox">
-    <view class="musicList" wx:for="{{songList}}" wx:for-index="key" wx:for-item="value" wx:key="key" catchtap="goDetail" data-id="{{value.data.songmid}}">
+    <view class="musicList" wx:for="{{songList}}" wx:for-index="key" wx:for-item="value" wx:key="key" catchtap="goDetail" data-mid="{{value.mid}}" data-id="{{value.id}}">
       <text class="noBox">{{key+1}}</text>
       <view class="albumdBox">
-        <image src="{{img}}{{value.data.albummid}}_1.jpg?max_age=2592000"></image>
+        <image src="{{value.pic}}"></image>
       </view>
       <view class="songInfo">
         <view>
-          <view class="songname">{{value.data.songname}}</view>
+          <view class="songname">{{value.name}}</view>
           <view class="singer">
-            <text wx:for="{{value.data.singer}}" wx:key="index">{{item.name}}<block
-                wx:if="{{index < value.data.singer.length-1}}">、</block></text>
+            <text wx:for="{{value.singer}}" wx:key="index">{{item.name}}<block
+                wx:if="{{index < value.singer.length-1}}">、</block></text>
           </view>
         </view>
       </view>

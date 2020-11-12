@@ -3,20 +3,20 @@ App({
   onLaunch: function () {
     this.autoUpdate()
   },
-  autoUpdate: function() {
+  autoUpdate: function () {
     var self = this
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
       //1. 检查小程序是否有新版本发布
-      updateManager.onCheckForUpdate(function(res) {
+      updateManager.onCheckForUpdate(function (res) {
         // 请求完新版本信息的回调
         if (res.hasUpdate) {
           //检测到新版本，需要更新，给出提示
           wx.showModal({
             title: '更新提示',
             content: '检测到新版本，是否下载新版本并重启小程序？',
-            success: function(res) {
+            success: function (res) {
               if (res.confirm) {
                 //2. 用户确定下载更新小程序，小程序下载及更新静默进行
                 self.downLoadAndUpdate(updateManager)
@@ -25,9 +25,9 @@ App({
                 wx.showModal({
                   title: '温馨提示~',
                   content: '本次版本更新涉及到新的功能添加，旧版本无法正常访问的哦~',
-                  showCancel:false,//隐藏取消按钮
-                  confirmText:"确定更新",//只保留确定更新按钮
-                  success: function(res) {
+                  showCancel: false,//隐藏取消按钮
+                  confirmText: "确定更新",//只保留确定更新按钮
+                  success: function (res) {
                     if (res.confirm) {
                       //下载新版本，并重新应用
                       self.downLoadAndUpdate(updateManager)
@@ -50,8 +50,8 @@ App({
   /**
    * 下载小程序新版本并重启应用
    */
-  downLoadAndUpdate: function (updateManager){
-    var self=this
+  downLoadAndUpdate: function (updateManager) {
+    var self = this
     wx.showLoading();
     //静默下载更新小程序新版本
     updateManager.onUpdateReady(function () {
@@ -68,13 +68,19 @@ App({
     })
   },
   globalData: {
-    sourceUrl:[],
-    openid:'',
-    nowSource:{},
-    nindex:0,
-    isShow:false,
-    jxUrl:[],
-    getAc:[],
-    prompt:'本程序仅供信息查询，如有需要请自行百度搜索观看'
+    sourceUrl: [],
+    openid: '',
+    nowSource: {},
+    nindex: 0,
+    isShow: false,
+    jxUrl: [],
+    getAc: [],
+    prompt: '本程序仅供信息查询，如有需要请自行百度搜索观看',
+    songmid: '',
+    musiclist: {
+      list: [],
+      id: [],
+      mid: []
+    }
   }
 })

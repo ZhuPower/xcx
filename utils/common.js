@@ -40,33 +40,37 @@ const fnAjax = function (url, data, method, type) {
       title: '加载中...',
     })
 
-    wx.request({
-      url: isUrl ? url : apiUrl.apiUrl.proxyUrl,
-      method: method || 'GET',
-      data: data,
-      header: obj,
-      success(res) {
-        wx.hideLoading()
-        if (typeof res.data == 'string') {
-          if (res.data.indexOf('<?xml') == 0) {
-            var x2js = new X2JS();
-            var json = x2js.xml2js(res.data);
-            resolved(json)
-          } else if (res.data.indexOf('<script type="text/javascript" src="//iszzj.com/"></script') > -1) {
-            let num = res.data.indexOf('{"code":')
-            let str = res.data.substring(num)
-            let obj = JSON.parse(str)
-            resolved(obj)
-          }else{
-            let str = res.data.replace(/,]/ig,"]");
-            let obj = JSON.parse(str)
-            resolved(obj)
+    if (url) {
+      wx.request({
+        url: isUrl ? url : apiUrl.apiUrl.proxyUrl,
+        method: method || 'GET',
+        data: data,
+        header: obj,
+        success(res) {
+          wx.hideLoading()
+          if (typeof res.data == 'string') {
+            if (res.data.indexOf('<?xml') == 0) {
+              var x2js = new X2JS();
+              var json = x2js.xml2js(res.data);
+              resolved(json)
+            } else if (res.data.indexOf('<script type="text/javascript" src="//iszzj.com/"></script') > -1) {
+              let num = res.data.indexOf('{"code":')
+              let str = res.data.substring(num)
+              let obj = JSON.parse(str)
+              resolved(obj)
+            } else if (url.indexOf('https://i.y.qq.com') > -1) {
+              resolved(res.data)
+            } else {
+              let str = res.data.replace(/,]/ig, "]");
+              let obj = JSON.parse(str)
+              resolved(obj)
+            }
+          } else {
+            resolved(res.data)
           }
-        } else {
-          resolved(res.data)
         }
-      }
-    })
+      })
+    }
   })
 }
 
@@ -287,9 +291,9 @@ const goNovelCon = function (chapterId, novelId) {
   })
 }
 
-const goMusic = function (id) {
+const goMusic = function (id, mid) {
   wx.navigateTo({
-    url: '/pages/Music/pages/detail/detail?id=' + id
+    url: '/pages/Music/pages/detail/detail?id=' + id + '&mid=' + mid
   })
 }
 

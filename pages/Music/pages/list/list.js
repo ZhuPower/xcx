@@ -1,6 +1,7 @@
 // pages/Music/pages/list/list.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+const app = getApp()
 Page({
 
   /**
@@ -11,7 +12,7 @@ Page({
     img: apiUrl.apiUrl.music.img,
     fnAjax: fnCon.fnAjax,
     songList: [],
-    topinfo:{},
+    topinfo: {},
     id: 0,
     song_page: 1,
     song_num: 20,
@@ -42,10 +43,27 @@ Page({
       if (this.data.song_page > 1) {
         arr = this.data.songList
       }
-      arr.push(...res.songlist)
+      for (let i = 0; i < res.songlist.length; i++) {
+        let mid = res.songlist[i].data.songmid
+        let id = res.songlist[i].data.songid + ''
+        let name = res.songlist[i].data.songname
+        let singer = res.songlist[i].data.singer
+        let pic = `${this.data.img}${res.songlist[i].data.albummid}_1.jpg?max_age=2592000`
+        let obj = {
+          name: name,
+          mid: mid,
+          id: id,
+          singer: singer,
+          pic: pic,
+          url: '',
+          lyric: ''
+        }
+
+        arr.push(obj)
+      }
       this.setData({
         total_song_num: res.total_song_num,
-        topinfo:res.topinfo,
+        topinfo: res.topinfo,
         songList: arr,
         isRefresh: false
       })
@@ -68,16 +86,29 @@ Page({
       this.getRankInfo();
     }
   },
-  goDetail(e){
+  goDetail(e) {
     let id = e.currentTarget.dataset.id
+    let mid = e.currentTarget.dataset.mid
+    let arr = this.data.songList
     let goMusic = fnCon.goMusic
-    goMusic(id)
+
+    for (let i = 0; i < arr.length; i++) {
+
+      if (app.globalData.musiclist.mid.indexOf(arr[i].mid) == -1) {
+        app.globalData.musiclist.mid.push(arr[i].mid)
+        app.globalData.musiclist.id.push(arr[i].id)
+        app.globalData.musiclist.list.push(arr[i])
+      }
+    }
+
+    goMusic(id, mid)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     this.setData({
       id: options.id
     })

@@ -21,6 +21,7 @@
     "pages/Video/pages/play/play",
     "pages/Video/pages/detail/detail"
   ],
+  "requiredBackgroundModes": ["audio"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
