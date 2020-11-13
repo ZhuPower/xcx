@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    search: apiUrl.apiUrl.music.search,
     toplist: apiUrl.apiUrl.music.toplist,
     img: apiUrl.apiUrl.music.img,
     fnAjax: fnCon.fnAjax,
@@ -17,7 +18,9 @@ Page({
     song_page: 1,
     song_num: 20,
     total_song_num: 0,
-    isRefresh: false
+    isRefresh: false,
+    searchKey: '',
+    curnum: 1
   },
   getRankInfo() {
     let url = this.data.toplist
@@ -73,17 +76,45 @@ Page({
     this.setData({
       song_page: 1
     })
-    this.getRankInfo();
+
+    if (this.data.searchKey) {
+      this.searchFn();
+    } else {
+      this.getRankInfo();
+    }
   },
   fnBotton() {
     let num = this.data.song_page
 
-    if (num * this.data.song_num < this.data.total_song_num) {
-      num = num + 1
-      this.setData({
-        song_page: num
-      })
-      this.getRankInfo();
+    if (this.data.searchKey) {
+      if (num < this.data.curnum) {
+        num = num + 1
+        this.setData({
+          song_page: num
+        })
+        this.searchFn();
+      } else {
+        wx.showToast({
+          title: '没有更多了',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+
+    } else {
+      if (num * this.data.song_num < this.data.total_song_num) {
+        num = num + 1
+        this.setData({
+          song_page: num
+        })
+        this.getRankInfo();
+      } else {
+        wx.showToast({
+          title: '没有更多了',
+          icon: 'none',
+          duration: 2000
+        })
+      }
     }
   },
   goDetail(e) {
@@ -101,17 +132,86 @@ Page({
       }
     }
 
-    goMusic(id, mid)
+    if (app.globalData.isShow) {
+      goMusic(id, mid)
+    }
+  },
+  searchFn() {
+    let url = this.data.search
+    let data = {
+      ct: 24,
+      qqmusic_ver: 1298,
+      new_json: 1,
+      remoteplace: 'txt.yqq.center',
+      searchid: 49364391340764285,
+      t: 0,
+      aggr: 1,
+      cr: 1,
+      catZhida: 1,
+      lossless: 0,
+      flag_qc: 0,
+      p: this.data.song_page,
+      n: this.data.song_num,
+      w: this.data.searchKey,
+      g_tk_new_20200303: 5381,
+      g_tk: 5381,
+      loginUin: 0,
+      hostUin: 0,
+      format: 'json',
+      inCharset: 'utf8',
+      outCharset: 'utf-8',
+      notice: 0,
+      platform: 'yqq.json',
+      needNewCode: 0
+    }
+    this.data.fnAjax(url, data).then(res => {
+      let arr = []
+      if (this.data.song_page > 1) {
+        arr = this.data.songList
+      }
+      for (let i = 0; i < res.data.song.list.length; i++) {
+        let mid = res.data.song.list[i].mid
+        let id = res.data.song.list[i].id + ''
+        let name = res.data.song.list[i].name
+        let singer = res.data.song.list[i].singer
+        let pic = `${this.data.img}${res.data.song.list[i].album.mid}_1.jpg?max_age=2592000`
+        let obj = {
+          name: name,
+          mid: mid,
+          id: id,
+          singer: singer,
+          pic: pic,
+          url: '',
+          lyric: ''
+        }
+
+        arr.push(obj)
+      }
+      this.setData({
+        curnum: res.data.song.curnum,
+        songList: arr,
+        isRefresh: false
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
 
-    this.setData({
-      id: options.id
-    })
+    if (options.key) {
+      this.setData({
+        searchKey: options.key
+      })
+    }
+
+    if (options.id) {
+      this.setData({
+        id: options.id
+      })
+    }
 
     wx.setNavigationBarTitle({
       title: options.name
@@ -122,7 +222,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getRankInfo();
+    if (this.data.id) {
+      this.getRankInfo();
+    }
+
+    if (this.data.searchKey) {
+      this.searchFn();
+    }
+
   },
 
   /**

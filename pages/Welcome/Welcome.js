@@ -108,6 +108,15 @@ Page({
     var json = JSON.parse(str);
     return json
   },
+
+  bbb() {
+    let url = 'https://www.ehvip.cn/File/Edit'
+    let data = {"action":"edit","item":"/xcx/新建文本文档 (2).txt","content":"154545"}
+    this.data.fnAjax(url, data,'POST').then(res => {
+      console.log(res)
+
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -131,6 +140,8 @@ Page({
         }
       }
     })
+
+    this.bbb();
   },
 
   /**
@@ -159,12 +170,12 @@ Page({
               success(res) {
                 app.globalData.openid = res.data.openid
                 that.getResources()
-                setTimeout(()=>{
+                setTimeout(() => {
                   that.getJxUrl()
-                  setTimeout(()=>{
+                  setTimeout(() => {
                     that.getAc()
-                  },500)
-                },500)
+                  }, 500)
+                }, 500)
               }
             })
           }
@@ -172,12 +183,12 @@ Page({
       })
     } else {
       that.getResources()
-      setTimeout(()=>{
+      setTimeout(() => {
         that.getJxUrl()
-        setTimeout(()=>{
+        setTimeout(() => {
           that.getAc()
-        },500)
-      },500)
+        }, 500)
+      }, 500)
     }
   },
 

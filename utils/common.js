@@ -20,7 +20,7 @@ const fnAjax = function (url, data, method, type) {
       }
       //application/x-www-form-urlencoded
     }
-
+    obj['cookie'] = 'user_id=8754; login_status=ok; login_key=261936dda6b290ca28145e6c981e3ca6; path=xcx; path_tmp=xcx'
     let isUrl = false
 
     //console.log(url)

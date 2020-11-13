@@ -18,7 +18,7 @@ Page({
     isShow: false,
     isShow2: false,
     isNav: false,
-    tabIndex:0
+    tabIndex: 0
   },
   getInfoNovel() {
     let url = `${this.data.infoNovel}/${this.data.novelId}.html`
@@ -66,10 +66,10 @@ Page({
       delta: 1
     })
   },
-  doTab(e){
+  doTab(e) {
     let num = e.currentTarget.dataset.num
     this.setData({
-      tabIndex:num
+      tabIndex: num
     })
   },
 
@@ -89,6 +89,9 @@ Page({
   onReady: function () {
     this.getInfoNovel();
     this.getChapterNovel();
+    this.setData({
+      isShow: app.globalData.isShow
+    })
   },
 
   /**

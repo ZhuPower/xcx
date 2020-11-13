@@ -19,18 +19,6 @@ Page({
       'http://p1.music.126.net/qC-5B-_p4ld-ebX_uMgT8Q==/109951165456267803.jpg'
     ]
   },
-
-  bb() {
-    let url = this.data.proxyUrl
-    let data = {
-      apiUrl: 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg',
-      songmid: '002GwAma2DGN2x',
-      g_tk: 5381
-    }
-    this.data.fnAjax(url, data).then(res => {
-      console.log(res)
-    })
-  },
   getRank() {
     let url = this.data.toplist
     let data = {
@@ -78,7 +66,32 @@ Page({
       app.globalData.musiclist.list.push(item)
     }
 
-    goMusic(id, mid)
+    if (app.globalData.isShow) {
+      goMusic(id, mid)
+    }
+  },
+  bindKeyInput(e) {
+    this.setData({
+      searchKey: e.detail.value
+    })
+  },
+  goList() {
+    if (this.data.searchKey) {
+      let str = 'type=search&name=搜索"' + this.data.searchKey + '"结果&key=' + this.data.searchKey
+      this.setData({
+        searchKey: ''
+      })
+      wx.navigateTo({
+        url: '/pages/Music/pages/list/list?' + str,
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索关键字',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+
   },
 
 

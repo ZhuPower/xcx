@@ -186,6 +186,10 @@ Page({
         musicInfo: JSON.parse(JSON.stringify(app.globalData.musiclist.list[nowPlayingIndex]))
       })
 
+      wx.setNavigationBarTitle({
+        title: this.data.musicInfo.name
+      })
+
     } else {
 
       nowPlayingIndex = 0

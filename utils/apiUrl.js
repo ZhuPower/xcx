@@ -28,6 +28,7 @@ const apiUrl = {
     } 
   ],
   music:{
+    search:'https://c.y.qq.com/soso/fcgi-bin/client_search_cp',
     toplist:'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
     img:'https://y.gtimg.cn/music/photo_new/T002R300x300M000',
     songInfo:'https://u.y.qq.com/cgi-bin/musicu.fcg',
