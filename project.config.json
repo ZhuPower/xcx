@@ -59,27 +59,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/Music/pages/index/index",
-          "pathName": "pages/Music/pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/Music/pages/classify/classify",
-          "pathName": "pages/Music/pages/classify/classify",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/Music/pages/list/list",
-          "pathName": "pages/Music/pages/list/list",
-          "query": "id=4&name=巅峰榜·热歌",
-          "scene": null
-        },
-        {
-          "name": "pages/Music/pages/detail/detail",
-          "pathName": "pages/Music/pages/detail/detail",
-          "query": "id=407886&mid=0016IvEW0kcA1M",
+          "name": "pages/Novel/pages/detail/detail",
+          "pathName": "pages/Novel/pages/detail/detail",
+          "query": "id=412435",
           "scene": null
         }
       ]

@@ -36,11 +36,11 @@
       </view>
     </view>
   </view>
-  <view class="infoChapter" wx:if="{{tabIndex == 1}}">
+  <scroll-view scroll-y="true" enhanced="true" show-scrollbar="true" scroll-into-view="_{{nowChapter}}" bindscroll="scrollFn2" class="infoChapter" wx:if="{{tabIndex == 1}}">
     <view class="chapterList" wx:for="{{aChapter}}" wx:key="index">
       <view class="chapterTitle">{{item.name}}</view>
-      <view class="chapterName" wx:for="{{item.list}}" catchtap="goNovelCon" wx:key="id" wx:for-index="index2"
+      <view class="chapterName" id="_{{item2.id}}" class="{{nowChapter == item2.id ? 'cur' : ''}}" wx:for="{{item.list}}" catchtap="goNovelCon" wx:key="id" wx:for-index="index2"
         wx:for-item="item2" data-id="{{item2.id}}">{{item2.name}}</view>
     </view>
-  </view>
+  </scroll-view>
 </scroll-view>

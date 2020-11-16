@@ -18,7 +18,8 @@ Page({
     isShow: false,
     isShow2: false,
     isNav: false,
-    tabIndex: 0
+    tabIndex: 0,
+    nowChapter:0
   },
   getInfoNovel() {
     let url = `${this.data.infoNovel}/${this.data.novelId}.html`
@@ -48,6 +49,9 @@ Page({
   goDetail(e) {
     let id = e.currentTarget.dataset.id
     let goNovel = fnCon.goNovel
+    this.setData({
+      nowChapter:parseInt(id)
+    })
     goNovel(id)
   },
   scrollFn(e) {
@@ -71,6 +75,9 @@ Page({
     this.setData({
       tabIndex: num
     })
+  },
+  scrollFn2(e){
+    console.log(e.detail.scrollTop)
   },
 
   /**

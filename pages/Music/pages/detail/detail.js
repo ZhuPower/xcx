@@ -22,6 +22,7 @@ Page({
     isPlaying: false, // false表示不播放，true表示正在播放
     isLyricShow: false, //表示当前歌词是否显示
     isSame: false, // 表示是否为同一首歌
+    isShow:false
   },
   getMusic() {
     backgroundAudioManager.stop()
@@ -229,7 +230,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.setData({
+      isShow:app.globalData.isShow
+    })
   },
 
   /**

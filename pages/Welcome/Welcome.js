@@ -48,11 +48,12 @@ Page({
     }, 3000)
   },
   getResources() {
-    let url = 'https://www.yuque.com/api/docs/kuhdex'
-    let data = this.data.queyu
-    this.data.fnAjax(url, data).then(res => {
-      var obj = this.getQueYu(res);
-      //console.log(obj)
+    let url = 'https://www.ehvip.cn/File/Content'
+    let data = { "action": "getContent", "item": "/xcx/Resources.txt" }
+    this.data.fnAjax(url, data, 'POST').then(res => {
+      let obj = JSON.parse(res.result)
+      app.globalData.jxUrl = obj.JxUrl
+      app.globalData.getAc = obj.Ac
       var arr1 = obj.listD
       var arr2 = obj.listC
       var arr3 = obj.listB
@@ -77,45 +78,16 @@ Page({
       }
 
       app.globalData.nowSource = app.globalData.sourceUrl[app.globalData.nindex]
-    })
-  },
-  getJxUrl() {
-    let url = 'https://www.yuque.com/api/docs/dcyc02'
-    let data = this.data.queyu
-    this.data.fnAjax(url, data).then(res => {
-      var obj = this.getQueYu(res);
-      //console.log(obj)
-      app.globalData.jxUrl = obj
 
     })
   },
-  getAc() {
-    let url = 'https://www.yuque.com/api/docs/vbpvs4'
-    let data = this.data.queyu
-    this.data.fnAjax(url, data).then(res => {
-      var obj = this.getQueYu(res);
-      //console.log(obj)
-      app.globalData.getAc = obj
-
-    })
-  },
-  getQueYu(obj) {
-    let str1 = obj.data.content
-    let num = str1.indexOf('">%');
-    let str2 = str1.substring(num + 2);
-    let num2 = str2.indexOf('</p>')
-    let str = decodeURIComponent(str2.substring(0, num2)).replace(/\s+/g, "")
-    var json = JSON.parse(str);
-    return json
-  },
-
   bbb() {
-    let url = 'https://www.ehvip.cn/File/Edit'
-    let data = {"action":"edit","item":"/xcx/新建文本文档 (2).txt","content":"154545"}
-    this.data.fnAjax(url, data,'POST').then(res => {
-      console.log(res)
+    // let url = 'https://www.ehvip.cn/File/Edit'
+    // let data = {"action":"edit","item":"/xcx/新建文本文档 (2).txt","content":"154545"}
+    // this.data.fnAjax(url, data,'POST').then(res => {
+    //   console.log(res)
 
-    })
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -170,12 +142,6 @@ Page({
               success(res) {
                 app.globalData.openid = res.data.openid
                 that.getResources()
-                setTimeout(() => {
-                  that.getJxUrl()
-                  setTimeout(() => {
-                    that.getAc()
-                  }, 500)
-                }, 500)
               }
             })
           }
@@ -183,12 +149,6 @@ Page({
       })
     } else {
       that.getResources()
-      setTimeout(() => {
-        that.getJxUrl()
-        setTimeout(() => {
-          that.getAc()
-        }, 500)
-      }, 500)
     }
   },
 
