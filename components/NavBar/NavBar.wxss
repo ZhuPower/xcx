@@ -9,10 +9,10 @@
   border-top: 1px solid #ccc;
   overflow: hidden;
   background: #fff;
+  flex-wrap: nowrap;
 }
 
 .navBarWrap navigator {
-  width: 50%;
   height: 88rpx;
   text-align: center;
   float: left;
@@ -20,6 +20,14 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.nav_2 navigator{
+  width: 50%;
+}
+
+.nav_4 navigator{
+  width: 25%;
 }
 
 .navBarWrap navigator icon {
@@ -36,6 +44,9 @@
 }
 
 .navBarWrap navigator icon.iconme {
+  font-size: 38rpx;
+}
+.navBarWrap navigator icon.iconcollect {
   font-size: 38rpx;
 }
 

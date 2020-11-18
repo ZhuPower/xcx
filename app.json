@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/Welcome/Welcome",
+    "pages/Member/Member",
+    "pages/Collect/Collect", 
     "pages/Novel/pages/index/index",
     "pages/Novel/pages/classify/classify",
     "pages/Novel/pages/list/list",

@@ -11,7 +11,7 @@ Page({
     chapterId: 0,
     aChapter: [],
     aContent: [],
-    _title:'',
+    _title: '',
     chapterNovel: apiUrl.apiUrl.novel.chapter,
     fnAjax: fnCon.fnAjax,
     pid: 0,
@@ -20,14 +20,16 @@ Page({
     isReset: false,
     setInfo: {
       Bj: '/pages/Novel/assets/image/bj3.jpg',
-      size: 44,
+      size: 32,
       color: '#000'
     },
-    aColor:['#000','#fff'],
-    aBj: ['/pages/Novel/assets/image/bj1.jpg','/pages/Novel/assets/image/bj2.jpg','/pages/Novel/assets/image/bj3.jpg'],
-    isNav:false
+    aColor: ['#000', '#fff', '#000'],
+    aBj: ['/pages/Novel/assets/image/bj1.jpg', '/pages/Novel/assets/image/bj2.jpg', '/pages/Novel/assets/image/bj3.jpg'],
+    isNav: false,
+    isTop: false,
+    isChapter: false
   },
-  getContent(b) {
+  getContent(b, b2) {
     let url = `${this.data.chapterNovel}${this.data.novelId}/${this.data.chapterId}.html`
     this.data.fnAjax(url, {}).then(res => {
       console.log(res)
@@ -41,7 +43,8 @@ Page({
         pid: res.data.pid,
         nid: res.data.nid,
         isRefresh: false,
-        _title:res.data.cname
+        _title: res.data.cname,
+        isTop: b2 || false
       })
     })
   },
@@ -84,14 +87,100 @@ Page({
       })
     }
   },
-  setFn(){
+  setFn() {
     this.setData({
-      isNav:!this.data.isNav
+      isNav: !this.data.isNav
     })
   },
   goBack() {
     wx.navigateBack({
       delta: 1
+    })
+  },
+  setAddFont() {
+    let num = this.data.setInfo.size
+    if (num > 56) {
+      wx.showToast({
+        title: '已经是最大的字体了',
+        icon: 'none',
+        duration: 2000
+      })
+    } else {
+      num += 8
+      this.setData({
+        'setInfo.size': num
+      })
+    }
+  },
+  setMinusFont() {
+    let num = this.data.setInfo.size
+    if (num < 24) {
+      wx.showToast({
+        title: '已经是最小的字体了',
+        icon: 'none',
+        duration: 2000
+      })
+    } else {
+      num -= 8
+      this.setData({
+        'setInfo.size': num
+      })
+    }
+  },
+  nextChapter() {
+    if (this.data.nid > 0) {
+      this.setData({
+        chapterId: this.data.nid
+      })
+      this.getContent(false, true)
+    } else {
+      wx.showToast({
+        title: '已经是最后一章了',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+  prevChapter() {
+    if (this.data.pid > 0) {
+      this.setData({
+        chapterId: this.data.pid
+      })
+      this.getContent(false, true)
+    } else {
+      wx.showToast({
+        title: '已经是第一章了',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+  setBj(e) {
+    let id = e.currentTarget.dataset.id
+    this.data.setInfo.Bj = this.data.aBj[parseInt(id)]
+    this.data.setInfo.color = this.data.aColor[parseInt(id)]
+    this.setData({
+      setInfo: this.data.setInfo
+    })
+  },
+  goNovelCon(e) {
+    let id = e.currentTarget.dataset.id
+    this.setData({
+      chapterId: id,
+      isNav: false,
+      isChapter: false
+    })
+    this.getContent(false, true)
+  },
+  showChapter() {
+    this.setData({
+      isNav: false,
+      isChapter: true
+    })
+  },
+  hideChapter(){
+    this.setData({
+      isChapter: false
     })
   },
 

@@ -1,16 +1,49 @@
 <!--pages/Novel/pages/content/content.wxml-->
 <view class="contentWrap">
   <image src="{{setInfo.Bj}}" class="themeBj"></image>
-  <scroll-view catchtap="setFn" class="contentMain" scroll-y="true" bindscrolltolower="fnBotton" refresher-enabled="true"
-    refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop"
+  <scroll-view catchtap="setFn" class="contentMain" scroll-y="true" scroll-top="{{isTop == 1 ? true : false}}"
+    bindscrolltolower="fnBotton" refresher-enabled="true" refresher-triggered="{{isRefresh}}"
+    bindrefresherrefresh="fnTop"
     style="font-size:{{setInfo.size}}rpx; color:{{setInfo.color}}; line-height:{{2*setInfo.size}}rpx;">
     <view class="contentList" wx:for="{{aContent}}" wx:key="cid">
-      <view class="contentTitle" style="font-size:{{setInfo.size + 3}}rpx;">{{item.cname}}</view>
+      <view class="contentTitle" style="font-size:{{setInfo.size + 10}}rpx;">{{item.cname}}</view>
       <view class="contentCon">{{item.content}}</view>
     </view>
   </scroll-view>
-  <view class="navTitle" wx:if="{{isNav}}">
+  <view class="navTitle {{isNav ? 'cur' : ''}}">
     <icon class="iconfont iconhoutui" catchtap="goBack"></icon>
     <text>{{_title}}</text>
+  </view>
+  <view class="setBoxMain {{isNav ? 'cur' : ''}}">
+    <view class="setBox setBox_1">
+      <view class="set_border" catchtap="prevChapter">上一章</view>
+      <view catchtap="showChapter">目录</view>
+      <view class="set_border" catchtap="nextChapter">下一章</view>
+    </view>
+    <view class="setBox setBox_2">
+      <view>字号</view>
+      <view class="set_border" catchtap="setMinusFont">A-</view>
+      <view class="set_border" catchtap="setAddFont">A+</view>
+    </view>
+    <view class="setBox setBox_3">
+      <view class="setBox_3_1">背景</view>
+      <view class="setBox_3_2" catchtap="setBj" data-id="2">默认</view>
+      <view class="setBox_3_2" catchtap="setBj" data-id="1">夜间</view>
+      <view class="setBox_3_2" catchtap="setBj" data-id="0">护眼</view>
+    </view>
+  </view>
+  <view class="chapterBox {{isChapter ? 'cur' : ''}}" catchtap="hideChapter">
+    <view class="chapterMain">
+      <view class="h3">目录</view>
+      <scroll-view scroll-y="true" enhanced="true" show-scrollbar="true" scroll-into-view="_{{chapterId}}"
+        class="infoChapter">
+        <view class="chapterList" wx:for="{{aChapter}}" wx:key="index">
+          <view class="chapterTitle">{{item.name}}</view>
+          <view class="chapterName {{chapterId == item2.id ? 'cur' : ''}}" id="_{{item2.id}}" wx:for="{{item.list}}"
+            catchtap="goNovelCon" wx:key="id" wx:for-index="index2" wx:for-item="item2" data-id="{{item2.id}}">
+            {{item2.name}}</view>
+        </view>
+      </scroll-view>
+    </view>
   </view>
 </view>

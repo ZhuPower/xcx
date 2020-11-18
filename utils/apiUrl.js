@@ -56,7 +56,7 @@ const apiUrl = {
     img:'https://imgapixs.pysmei.com/BookFiles/BookImages/',
     home:'https://scxs.pysmei.com/prov8/newfram//man_channel.html',
     home2:'https://scxs.pysmei.com/prov8/newfram//lady_channel.html',
-    search: 'https://scxs.pysmei.com/search.aspx',//搜索 https://scxs.pysmei.com/search.aspx?key={{key}}
+    search: 'https://souxs.leeyegy.com/search.aspx',//搜索 https://scxs.pysmei.com/search.aspx?key={{key}}
     info: 'https://scxs.pysmei.com/info/',//书籍信息 https://scxs.pysmei.com/info/{$.Id}.html
     chapter: 'https://scxs.pysmei.com/book/', //书籍章节 https://scxs.pysmei.com/book/{$.Id}/  
     //章节内容    https://scxs.pysmei.com/book/521014/3144129.html

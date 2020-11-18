@@ -52,7 +52,9 @@ Component({
     getSearch() {
       let url = this.data.search
       let data = {
-        key: this.data.searchKey
+        key: this.data.searchKey,
+        page: this.data.page,
+        siteid: 'app2'
       }
       this.data.fnAjax(url, data).then(res => {
         this.setData({
@@ -83,7 +85,7 @@ Component({
           page: 1
         })
         this.getNovelList()
-      }else{
+      } else {
         this.setData({
           isRefresh: false
         })

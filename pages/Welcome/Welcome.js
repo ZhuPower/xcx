@@ -11,15 +11,7 @@ Page({
     fnAjax: fnCon.fnAjax,
     userInfo: {},
     isUser: true,
-    num: 0,
-    queyu: {
-      book_id: 1937115,
-      include_contributors: true,
-      include_hits: true,
-      include_like: true,
-      include_pager: true,
-      include_suggests: true
-    }
+    num: 0
   },
   bindGetUserInfo(e) {
     console.log(e.detail.userInfo)
@@ -112,8 +104,6 @@ Page({
         }
       }
     })
-
-    this.bbb();
   },
 
   /**

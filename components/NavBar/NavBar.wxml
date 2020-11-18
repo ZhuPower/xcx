@@ -1,5 +1,5 @@
 <!--assets/components/NavBar/NavBar.wxml-->
-<view class="navBarWrap">
+<view class="navBarWrap {{isShow ? 'nav_4' : 'nav_2'}}">
   <navigator class="nav" url="/pages/{{navType}}/pages/index/index" class="{{navPath == 'index' ? navType+'_cur' : ''}}">
     <icon class="iconfont iconshouye"></icon>
     <text>首页</text>
@@ -8,8 +8,12 @@
     <icon class="iconfont iconziyuan"></icon>
     <text>分类</text>
   </navigator>
-  <!-- <navigator class="nav" url="/pages/Member/Member" class="{{navPath == 'Member' ? 'cur' : ''}}">
+  <navigator class="nav" url="/pages/Collect/Collect" class="{{navPath == 'Collect' ? navType+'_cur' : ''}}" wx:if="{{isShow}}">
+    <icon class="iconfont iconcollect"></icon>
+    <text>收藏</text>
+  </navigator>
+  <navigator class="nav" url="/pages/Member/Member" class="{{navPath == 'Member' ? navType+'_cur' : ''}}" wx:if="{{isShow}}">
     <icon class="iconfont iconme"></icon>
     <text>我的</text>
-  </navigator> -->
+  </navigator>
 </view>

@@ -37,7 +37,8 @@ Page({
     let url = `${this.data.chapterNovel}${this.data.novelId}/`
     this.data.fnAjax(url, {}).then(res => {
       this.setData({
-        aChapter: res.data.list
+        aChapter: res.data.list,
+        nowChapter: res.data.list[0].list[0].id
       })
     })
   },

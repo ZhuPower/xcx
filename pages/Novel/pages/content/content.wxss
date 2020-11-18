@@ -30,11 +30,17 @@
   height: 80rpx;
   line-height: 80rpx;
   width: 100%;
-  top: 0;
+  top: -120rpx;
   left: 0;
   overflow: hidden;
   text-align: center;
   background: #ff0000;
+  transition: all .3s;
+}
+
+.navTitle.cur {
+  top: 0rpx;
+  transition: all .3s;
 }
 
 .navTitle text {
@@ -54,4 +60,110 @@
   height: 100%;
   top: 0;
   left: 0;
+}
+
+.setBoxMain {
+  position: fixed;
+  bottom: -296rpx;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  padding: 0px 30rpx;
+  box-sizing: border-box;
+  transition: all .3s;
+}
+
+.setBoxMain.cur {
+  bottom: 0;
+  transition: all .3s;
+}
+
+.setBoxMain .setBox {
+  display: flex;
+  justify-content: space-between;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  margin: 30rpx 0px;
+}
+
+.setBoxMain .setBox view {
+  width: 30%;
+  text-align: center;
+}
+
+.setBoxMain .setBox .setBox_3_2 {
+  width: 20%;
+}
+
+.setBoxMain .setBox .setBox_3_2,
+.setBoxMain .setBox .set_border {
+  border: 1px solid #ccc;
+  border-radius: 30rpx;
+}
+
+.chapterBox {
+  background: rgba(0, 0, 0, .6);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: -100%;
+  top: 0;
+  transition: all .3s;
+}
+
+.chapterBox.cur {
+  left: 0;
+  transition: all .3s;
+}
+
+.chapterBox .chapterMain {
+  width: 76%;
+  height: 100%;
+  background: #fff;
+}
+
+.chapterBox .chapterMain .h3 {
+  height: 102rpx;
+  line-height: 102rpx;
+  border-bottom: 1px solid #ccc;
+  padding-left: 1em;
+  font-size: 36rpx;
+}
+
+.chapterBox .chapterMain .infoChapter {
+  height: calc(100% - 102rpx);
+  position: fixed;
+  width: 76%;
+  left: -100%;
+  top: 102rpx;
+}
+
+.chapterBox.cur .chapterMain .infoChapter{
+  left: 0;
+  transition: all .3s;
+}
+
+.chapterBox .chapterMain .infoChapter .chapterList view {
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0px 3em;
+  border-bottom: 1px solid #ccc;
+}
+
+.chapterBox .chapterMain .infoChapter .chapterList .chapterTitle {
+  background: #eee;
+  padding: 0px 2em;
+  margin: 0px;
+  border: 0px;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.chapterBox .chapterMain .infoChapter .chapterList .chapterName:last-child {
+  border: 0px;
+}
+
+.chapterBox .chapterMain .infoChapter .chapterList .chapterName.cur {
+  color: #ff0000;
 }

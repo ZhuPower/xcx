@@ -63,6 +63,24 @@
           "pathName": "pages/Novel/pages/detail/detail",
           "query": "id=412435",
           "scene": null
+        },
+        {
+          "name": "pages/Novel/pages/index/index",
+          "pathName": "pages/Novel/pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Welcome/Welcome",
+          "pathName": "pages/Welcome/Welcome",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Welcome/Welcome",
+          "pathName": "pages/Welcome/Welcome",
+          "query": "",
+          "scene": null
         }
       ]
     }
