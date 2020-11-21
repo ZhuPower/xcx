@@ -1,5 +1,5 @@
 <!--pages/navPage/navPage.wxml-->
-<view class="navWrap">
+<!-- <view class="navWrap">
 	<view class="logoMain">
 		<view class="logo" catchtap="copyTex">
 			<image wx:if="{{userInfo.avatarUrl}}" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
@@ -18,4 +18,4 @@
 		<navigator url="/pages/Video/pages/index/index">视频查询</navigator>
 		<button wx:if="{{isUser}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
 	</view>
-</view>
+</view> -->

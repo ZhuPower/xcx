@@ -64,9 +64,11 @@ const fnAjax = function (url, data, method, type) {
             } else if (url.indexOf('https://i.y.qq.com') > -1) {
               resolved(res.data)
             } else {
-              let str = res.data.replace(/,]/ig, "]");
-              let obj = JSON.parse(str)
-              resolved(obj)
+              // let str = res.data.replace(/,]/ig, "]");
+              // let obj = JSON.parse(str)
+              // resolved(obj)
+
+              resolved(res.data)
             }
           } else {
             resolved(res.data)

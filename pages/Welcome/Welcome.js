@@ -1,6 +1,7 @@
 // pages/navPage/navPage.js
 const apiUrl = require('../../utils/apiUrl')
 const fnCon = require('../../utils/common')
+const HtmlToJson = require('../../wxParse/html2json');
 let app = getApp()
 Page({
 
@@ -12,7 +13,88 @@ Page({
     userInfo: {},
     isUser: true,
     num: 0,
-    
+    resRule: {
+      index: {
+        url: 'http://www.bubulai.com',
+        getData: function (json) {
+          let body = json.nodes[1].nodes[1];
+          let a = body.nodes[0].nodes[1].nodes;
+          let b = body.nodes[0].nodes;
+          let indexList = [];
+
+          for (let i = 1; i < 5; i++) {
+            let url = a[i].nodes[0].attr.href;
+            let name = a[i].nodes[0].nodes[0].text;
+            let list = [];
+            let b1 = b[i + 5].nodes[0].nodes[1].nodes[0].nodes;
+
+            for (let x = 0; x < a.length; x++) {
+              let name = b1[x].nodes[0].attr.title.toString();
+              let url = b1[x].nodes[0].attr.href;
+              let img = b1[x].nodes[0].nodes[0].attr.src;
+              let obj = {
+                name: name,
+                url: url,
+                img: img
+              }
+              list.push(obj);
+            }
+
+            let obj = {
+              url: url,
+              name: name,
+              list: list
+            }
+            indexList.push(obj);
+          }
+          return indexList;
+        }
+      },
+      sort:{
+        url:'http://www.bubulai.com/zv/10.html',
+        getData: function (json) {
+          let body = json.nodes[1].nodes[1];
+          let a = body.nodes[0].nodes[5].nodes[1];
+          let b = a.nodes[0].nodes[0].nodes;
+          let c = a.nodes[1].nodes;
+          let d = c[c.length-1]
+          console.log(b)
+          console.log(d)
+          console.log(json.nodes[1].nodes[1].nodes[0].nodes[5].nodes[1].nodes[1].nodes[9].nodes[0])
+          // let b = body.nodes[0].nodes;
+          let indexList = [];
+
+          // for (let i = 1; i < 5; i++) {
+          //   let url = a[i].nodes[0].attr.href;
+          //   let name = a[i].nodes[0].nodes[0].text;
+          //   let list = [];
+          //   let b1 = b[i + 5].nodes[0].nodes[1].nodes[0].nodes;
+
+          //   for (let x = 0; x < a.length; x++) {
+          //     let name = b1[x].nodes[0].attr.title.toString();
+          //     let url = b1[x].nodes[0].attr.href;
+          //     let img = b1[x].nodes[0].nodes[0].attr.src;
+          //     let obj = {
+          //       name: name,
+          //       url: url,
+          //       img: img
+          //     }
+          //     list.push(obj);
+          //   }
+
+          //   let obj = {
+          //     url: url,
+          //     name: name,
+          //     list: list
+          //   }
+          //   indexList.push(obj);
+          // }
+          return indexList;
+        }
+      }
+
+
+    }
   },
   bindGetUserInfo(e) {
     console.log(e.detail.userInfo)
@@ -82,7 +164,33 @@ Page({
 
     // })
   },
-  /**
+  getNodes(str){
+    let arr = str.split('.')
+    console.log(arr)
+  },
+  aaa() {
+    /* let url = this.data.resRule.index.url
+    let data = {}
+    this.data.fnAjax(url, data).then(res => {
+      var html2json = HtmlToJson.html2json;
+      var json = html2json(res, 'html');
+      console.log(json)
+      let oData = this.data.resRule.index.getData(json);
+      console.log(oData)
+    }) */
+
+    this.getNodes('1.1.0.5.1.1.9.0');
+    let url = this.data.resRule.sort.url
+    let data = {}
+    this.data.fnAjax(url, data).then(res => {
+      var html2json = HtmlToJson.html2json;
+      var json = html2json(res, 'html');
+      console.log(json)
+      let oData = this.data.resRule.sort.getData(json);
+      //console.log(oData)
+    })
+  },
+  /**i
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
@@ -111,6 +219,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    this.aaa();
     // let that = this;
     // // wx.showModal({
     // //   title: '温馨提示',
