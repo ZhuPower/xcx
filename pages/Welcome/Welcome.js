@@ -11,7 +11,8 @@ Page({
     fnAjax: fnCon.fnAjax,
     userInfo: {},
     isUser: true,
-    num: 0
+    num: 0,
+    
   },
   bindGetUserInfo(e) {
     console.log(e.detail.userInfo)
@@ -85,61 +86,61 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this;
-    wx.getSetting({
-      success(res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          that.setData({
-            isUser: false
-          })
-          wx.getUserInfo({
-            success: function (res) {
-              that.setData({
-                isUser: false,
-                userInfo: res.userInfo
-              })
-            }
-          })
-        }
-      }
-    })
+    // let that = this;
+    // wx.getSetting({
+    //   success(res) {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+    //       that.setData({
+    //         isUser: false
+    //       })
+    //       wx.getUserInfo({
+    //         success: function (res) {
+    //           that.setData({
+    //             isUser: false,
+    //             userInfo: res.userInfo
+    //           })
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    let that = this;
-    wx.showModal({
-      title: '温馨提示',
-      content: app.globalData.prompt,
-      success(res) { }
-    })
-    if (!app.globalData.openid) {
-      wx.login({
-        success(res) {
-          if (res.code) {
-            wx.request({
-              url: apiUrl.apiUrl.proxyUrl,
-              data: {
-                apiUrl: 'https://api.weixin.qq.com/sns/jscode2session',
-                appid: 'wx0393ec5072a7e5b1',
-                secret: 'd1eebf97803dae9e10da566f11664840',
-                js_code: res.code,
-                grant_type: 'authorization_code'
-              },
-              success(res) {
-                app.globalData.openid = res.data.openid
-                that.getResources()
-              }
-            })
-          }
-        }
-      })
-    } else {
-      that.getResources()
-    }
+    // let that = this;
+    // // wx.showModal({
+    // //   title: '温馨提示',
+    // //   content: app.globalData.prompt,
+    // //   success(res) { }
+    // // })
+    // if (!app.globalData.openid) {
+    //   wx.login({
+    //     success(res) {
+    //       if (res.code) {
+    //         wx.request({
+    //           url: apiUrl.apiUrl.proxyUrl,
+    //           data: {
+    //             apiUrl: 'https://api.weixin.qq.com/sns/jscode2session',
+    //             appid: 'wx0393ec5072a7e5b1',
+    //             secret: 'd1eebf97803dae9e10da566f11664840',
+    //             js_code: res.code,
+    //             grant_type: 'authorization_code'
+    //           },
+    //           success(res) {
+    //             app.globalData.openid = res.data.openid
+    //             that.getResources()
+    //           }
+    //         })
+    //       }
+    //     }
+    //   })
+    // } else {
+    //   that.getResources()
+    // }
   },
 
   /**

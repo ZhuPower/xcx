@@ -1,13 +1,7 @@
 <!--pages/Comics/pages/index/index.wxml-->
 <wxs module="m1" src="../../../../utils/calculation.wxs"></wxs>
 <view class="comicsIndexWrap">
-  <view class="searchMain {{isBackground ? 'cur' : ''}}">
-    <view class="searchBox">
-      <icon class="icon-small" type="search" size="20"></icon>
-      <input bindinput="bindKeyInput" value="{{searchKey}}" placeholder="请输入搜索关键字" />
-      <text catchtap="goList">搜索</text>
-    </view>
-  </view>
+  <NavTitle type="Comics" navPath="index" isOpacity="true"></NavTitle>
   <view class="banner">
     <swiper indicator-dots="{{swiperBanner.dots}}" autoplay="{{swiperBanner.autoplay}}"
       interval="{{swiperBanner.interval}}" duration="{{swiperBanner.duration}}" circular="{{swiperBanner.circular}}"

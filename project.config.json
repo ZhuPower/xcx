@@ -59,26 +59,26 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/Novel/pages/detail/detail",
-          "pathName": "pages/Novel/pages/detail/detail",
+          "name": "pages/Comics/pages/index/index",
+          "pathName": "pages/Comics/pages/index/index",
           "query": "id=412435",
           "scene": null
         },
         {
           "name": "pages/Novel/pages/index/index",
           "pathName": "pages/Novel/pages/index/index",
+          "query": "id=412435",
+          "scene": null
+        },
+        {
+          "name": "pages/Music/pages/index/index",
+          "pathName": "pages/Music/pages/index/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/Welcome/Welcome",
-          "pathName": "pages/Welcome/Welcome",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/Welcome/Welcome",
-          "pathName": "pages/Welcome/Welcome",
+          "name": "pages/Video/pages/index/index",
+          "pathName": "pages/Video/pages/index/index",
           "query": "",
           "scene": null
         }

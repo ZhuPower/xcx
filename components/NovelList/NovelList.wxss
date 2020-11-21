@@ -9,6 +9,7 @@
   left: 0;
   box-sizing: border-box;
   padding: 30rpx;
+  padding-bottom: 0px;
 }
 
 .listWrap .listBox {
@@ -50,9 +51,10 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 80%;
+  color: #999;
 }
 .listWrap .listBox .title .Score{
-  color: #ff0000;
+  color: #6974b3;
   font-size: 36rpx;
 }
 
@@ -64,7 +66,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
   overflow: hidden;
-  color: #999999;
+  color: #60606d;
   margin-top: 2rpx;
   margin-bottom: 12rpx;
 }

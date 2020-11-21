@@ -1,0 +1,128 @@
+/* components/NavTitle/NavTitle.wxss */
+@import "/assets/fonts/iconfont.wxss";
+
+.headerBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 114rpx;
+  height: auto;
+  z-index: 20;
+  padding-top: 34rpx;
+  box-sizing: border-box;
+  background: #090723;
+}
+
+.headerBox.isOpacity {
+  padding-top: 0px;
+}
+
+.headerBox.isOpacity,
+.headerBox.isScroll {
+  background: none;
+}
+
+.headerBox.isOpacity .searchMain {
+  background: #090723;
+}
+
+.headerBox.isOpacity .typeWrap {
+  background: rgba(9, 7, 35, .5);
+}
+
+.headerBox .pad-top {
+  background: #090723;
+  height: 34rpx;
+}
+
+.headerBox .NavTitle {
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+}
+
+.headerBox .NavTitle text {
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.headerBox.isScroll .NavTitle text {
+  display: none;
+}
+
+.headerBox.isNav .NavTitle text {
+  display: block;
+}
+
+.headerBox .NavTitle icon.iconhoutui {
+  font-size: 36rpx;
+  color: #fff;
+  left: 20rpx;
+  position: absolute;
+}
+
+
+.headerBox .searchMain {
+  height: 80rpx;
+  padding: 10rpx 0px;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 30rpx;
+  padding-right: 180rpx;
+}
+
+.headerBox .searchMain .searchBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60rpx;
+  position: relative;
+}
+
+.headerBox .searchMain .searchBox icon {
+  position: absolute;
+  left: 8rpx;
+  top: 15rpx;
+}
+
+.headerBox .searchMain .searchBox input {
+  color: #000;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  width: 400rpx;
+  padding-left: 50rpx;
+  box-sizing: border-box;
+}
+
+.headerBox .searchMain .searchBox text {
+  color: rgba(255, 255, 255, .5);
+  display: block;
+  width: 136rpx;
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.headerBox .typeWrap {
+  height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #3e3c4c;
+}
+
+.headerBox .typeWrap navigator {
+  width: 33.33%;
+  display: block;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.headerBox .typeWrap navigator.cur {
+  color: #ff7830;
+}

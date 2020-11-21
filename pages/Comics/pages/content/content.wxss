@@ -1,17 +1,161 @@
 /* pages/Comics/pages/content/content.wxss */
-.contentWrap{
+.contentWrap {}
 
-}
-.contentMain{
+.contentMain {
   overflow-x: hidden;
   width: 100%;
   height: 100%;
   position: fixed;
   left: 0;
-  top:0;
+  top: 0;
 }
-.contentMain image{
+
+.contentMain image {
   width: 100%;
   display: block;
   margin: 0px auto;
+}
+
+.navTitle {
+  z-index: 10;
+  position: fixed;
+  padding-top: 35rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 100%;
+  top: -120rpx;
+  left: 0;
+  overflow: hidden;
+  text-align: center;
+  background: rgba(9, 7, 35, .95);
+  transition: all .3s;
+}
+
+.navTitle.cur {
+  top: 0rpx;
+  transition: all .3s;
+}
+
+.navTitle text {
+  color: #fff;
+}
+
+.navTitle icon.iconhoutui {
+  font-size: 36rpx;
+  color: #fff;
+  left: 20rpx;
+  position: absolute;
+}
+
+.setBoxMain {
+  position: fixed;
+  bottom: -296rpx;
+  left: 0;
+  background: rgba(9, 7, 35, .95);
+  width: 100%;
+  padding: 0px 30rpx;
+  box-sizing: border-box;
+  transition: all .3s;
+}
+
+.setBoxMain view {
+  color: #fff;
+}
+
+.setBoxMain.cur {
+  bottom: 0;
+  transition: all .3s;
+}
+
+.setBoxMain .setBox {
+  display: flex;
+  justify-content: space-between;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  margin: 30rpx 0px;
+}
+
+.setBoxMain .setBox view {
+  width: 30%;
+  text-align: center;
+}
+
+.setBoxMain .setBox .setBox_3_2 {
+  width: 20%;
+}
+
+.setBoxMain .setBox .setBox_3_2,
+.setBoxMain .setBox .set_border {
+  border: 1px solid #ccc;
+  border-radius: 30rpx;
+}
+
+.chapterBoxBj {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, .6);
+}
+
+.chapterBox {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: -100%;
+  top: 0;
+  transition: all .3s;
+}
+
+.chapterBox.cur {
+  left: 0;
+  transition: all .3s;
+}
+
+.chapterBox .chapterMain {
+  width: 76%;
+  height: 100%;
+  background: rgba(9, 7, 35, .95);
+}
+
+.chapterBox .chapterMain .h3 {
+  height: 102rpx;
+  line-height: 102rpx;
+  padding-left: 1em;
+  font-size: 36rpx;
+  background: rgba(21, 29, 48, .2);
+}
+
+.chapterBox .chapterMain .infoChapter {
+  height: calc(100% - 102rpx);
+  position: fixed;
+  width: 76%;
+  left: -100%;
+  top: 102rpx;
+}
+
+.chapterBox.cur .chapterMain .infoChapter {
+  left: 0;
+  transition: all .3s;
+}
+
+.infoChapter .infoView {
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
+  padding: 30rpx;
+  align-items: center;
+}
+
+.infoChapter image {
+  width: 240rpx;
+  height: 135rpx;
+}
+.infoChapter .chapter-title{
+  margin-left: 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

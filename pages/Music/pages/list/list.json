@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarBackgroundColor": "#18be76"
+  "usingComponents": {
+    "NavTitle": "/components/NavTitle/NavTitle"
+  },
+  "navigationStyle": "custom"
 }

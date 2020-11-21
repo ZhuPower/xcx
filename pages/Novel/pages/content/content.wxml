@@ -4,10 +4,10 @@
   <scroll-view catchtap="setFn" class="contentMain" scroll-y="true" scroll-top="{{isTop == 1 ? true : false}}"
     bindscrolltolower="fnBotton" refresher-enabled="true" refresher-triggered="{{isRefresh}}"
     bindrefresherrefresh="fnTop"
-    style="font-size:{{setInfo.size}}rpx; color:{{setInfo.color}}; line-height:{{2*setInfo.size}}rpx;">
+    style="font-size:{{setInfo.size}}rpx; line-height:{{2*setInfo.size}}rpx;">
     <view class="contentList" wx:for="{{aContent}}" wx:key="cid">
-      <view class="contentTitle" style="font-size:{{setInfo.size + 10}}rpx;">{{item.cname}}</view>
-      <view class="contentCon">{{item.content}}</view>
+      <view class="contentTitle" style="font-size:{{setInfo.size + 10}}rpx;color:{{setInfo.color}};">{{item.cname}}</view>
+      <view class="contentCon" style="color:{{setInfo.color}};">{{item.content}}</view>
     </view>
   </scroll-view>
   <view class="navTitle {{isNav ? 'cur' : ''}}">
@@ -32,7 +32,8 @@
       <view class="setBox_3_2" catchtap="setBj" data-id="0">护眼</view>
     </view>
   </view>
-  <view class="chapterBox {{isChapter ? 'cur' : ''}}" catchtap="hideChapter">
+  <view class="chapterBoxBj" wx:if="{{isChapter}}"></view>
+  <view class="chapterBox {{isChapter ? 'cur' : ''}}" catchtap="hideChapter" >
     <view class="chapterMain">
       <view class="h3">目录</view>
       <scroll-view scroll-y="true" enhanced="true" show-scrollbar="true" scroll-into-view="_{{chapterId}}"

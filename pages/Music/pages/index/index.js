@@ -60,41 +60,17 @@ Page({
     let mid = e.currentTarget.dataset.mid
     let goMusic = fnCon.goMusic
 
-    if (app.globalData.musiclist.mid.indexOf(mid) == -1) {
-      app.globalData.musiclist.mid.push(mid)
-      app.globalData.musiclist.id.push(id)
-      app.globalData.musiclist.list.push(item)
+    console.log(app.globalData.userInfo)
+    if (app.globalData.userInfo.musiclist[0].mid.indexOf(mid) == -1) {
+      app.globalData.userInfo.musiclist[0].mid.push(mid)
+      app.globalData.userInfo.musiclist[0].id.push(id)
+      app.globalData.userInfo.musiclist[0].list.push(item)
     }
 
     if (app.globalData.isShow) {
       goMusic(id, mid)
     }
   },
-  bindKeyInput(e) {
-    this.setData({
-      searchKey: e.detail.value
-    })
-  },
-  goList() {
-    if (this.data.searchKey) {
-      let str = 'type=search&name=搜索"' + this.data.searchKey + '"结果&key=' + this.data.searchKey
-      this.setData({
-        searchKey: ''
-      })
-      wx.navigateTo({
-        url: '/pages/Music/pages/list/list?' + str,
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索关键字',
-        icon: 'none',
-        duration: 2000
-      })
-    }
-
-  },
-
-
   /**
    * 生命周期函数--监听页面加载
    */

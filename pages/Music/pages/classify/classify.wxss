@@ -9,7 +9,7 @@
 
 .topList {
   height: 246rpx;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
   box-sizing: border-box;
   padding: 30rpx;
   padding-left: 0px;
@@ -26,6 +26,6 @@
 }
 
 .topList>view{
-  color: #333;
+  color: #eee;
   font-size: 40rpx;
 }

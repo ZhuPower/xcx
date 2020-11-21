@@ -1,4 +1,4 @@
 {
   "usingComponents": {},
-  "navigationBarBackgroundColor": "#ff7830"
+  "navigationStyle": "custom"
 }

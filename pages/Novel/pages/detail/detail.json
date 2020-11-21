@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "NavTitle": "/components/NavTitle/NavTitle"
+  },
   "navigationStyle": "custom"
 }

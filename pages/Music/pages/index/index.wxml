@@ -1,15 +1,9 @@
 <!--pages/Music/pages/index/index.wxml-->
-<view class="musicIndexWrap">
-  <view class="searchMain">
-    <view class="searchBox">
-      <icon class="icon-small" type="search" size="20"></icon>
-      <input bindinput="bindKeyInput" value="{{searchKey}}" placeholder="请输入搜索关键字" />
-      <text catchtap="goList">搜索</text>
-    </view>
-  </view>
+<view class="musicIndexWrap"> 
+  <NavTitle type="Music" navPath="index"></NavTitle>
   <view class="banner">
     <swiper indicator-dots="true" autoplay="true" interval="2000" duration="500" circular="true"
-      indicator-active-color="#18be76">
+      indicator-active-color="#ff7830">
       <block wx:for="{{banner}}" wx:key="index">
         <swiper-item>
           <image src="{{item}}" lazy-load="{{true}}" mode="widthFix"></image>

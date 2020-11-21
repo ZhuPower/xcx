@@ -6,10 +6,10 @@
   width: 100%;
   left: 0;
   bottom: 0;
-  border-top: 1px solid #ccc;
   overflow: hidden;
-  background: #fff;
+  background: rgba(21,24,68,1);
   flex-wrap: nowrap;
+  color: rgba(255,255,255,.5);
 }
 
 .navBarWrap navigator {
@@ -23,7 +23,7 @@
 }
 
 .nav_2 navigator{
-  width: 50%;
+  width: 33.33%;
 }
 
 .nav_4 navigator{
@@ -56,36 +56,10 @@
   font-size: 24rpx;
 }
 
-.navBarWrap navigator.Video_cur icon {
-  color: #33a0ff;
-}
-
-.navBarWrap navigator.Video_cur text {
-  color: #33a0ff;
-}
-
-
-.navBarWrap navigator.Comics_cur icon {
+.navBarWrap navigator.cur icon {
   color: #ff7830;
 }
 
-.navBarWrap navigator.Comics_cur text {
+.navBarWrap navigator.cur text {
   color: #ff7830;
-}
-
-
-.navBarWrap navigator.Novel_cur icon {
-  color: #ff0000;
-}
-
-.navBarWrap navigator.Novel_cur text {
-  color: #ff0000;
-}
-
-.navBarWrap navigator.Music_cur icon {
-  color: #18be76;
-}
-
-.navBarWrap navigator.Music_cur text {
-  color: #18be76;
 }

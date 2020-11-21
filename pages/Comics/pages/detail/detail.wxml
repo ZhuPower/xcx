@@ -4,7 +4,7 @@
   <image src="{{detailData.cover_lateral + '!banner-600'}}" webp="true" lazy-load="true"></image>
   <view class="title">{{detailData.title}}</view>
   <image src="https://static.mkzcdn.com/mobile/img/detail/bg_detail_bannerbg.png" class="banner__bg"></image>
-  <image src="https://static.mkzcdn.com/mobile/img/detail/bg_banner.png" class="banner__bg2"></image>
+  <image src="../../images/bg_banner.png" class="banner__bg2"></image>
  </view>
  <view class="detailMain">
    <view class="tabH">

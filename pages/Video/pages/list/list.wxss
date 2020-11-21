@@ -7,6 +7,7 @@
   height: 88rpx;
   line-height: 88rpx;
   margin: 0px 30rpx;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
   width: 690rpx;
+  color: #fff;
 }

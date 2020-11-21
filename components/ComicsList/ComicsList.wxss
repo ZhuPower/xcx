@@ -20,7 +20,7 @@
 }
 .title{
   font-size: 28rpx;
-  color: #28292d;
+  color: #999;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -32,7 +32,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #999999;
+  color: #60606d;
   margin-top: 2rpx;
   margin-bottom: 12rpx;
 }

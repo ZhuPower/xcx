@@ -1,12 +1,9 @@
 <!--pages/Novel/pages/detail/detail.wxml-->
+<view class="bgimgblur" style="background: url({{img}}{{detailData.Img}}) no-repeat  top/cover"></view>
+<view class="detail-mask"></view>
+<NavTitle type="Novel" isNav="{{isNav}}" title="{{detailData.Name}}" isScroll="true"></NavTitle>
 <scroll-view class="detailWrap" scroll-y="true" bindscroll="scrollFn" wx:if="{{isShow2}}">
   <view class="topImg">
-    <view class="bgimgblur" style="background: url({{img}}{{detailData.Img}}) no-repeat  top/cover"></view>
-    <view class="detail-mask"></view>
-    <view class="navTitle {{isNav ? 'cur' : ''}}">
-      <icon class="iconfont iconhoutui" catchtap="goBack"></icon>
-      <text wx:if="{{isNav}}">{{detailData.Name}}</text>
-    </view>
     <view class="infoBox">
       <image src="{{img}}{{detailData.Img}}"></image>
       <view class="rightBox">

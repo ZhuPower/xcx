@@ -1,8 +1,6 @@
 {
   "pages": [
     "pages/Welcome/Welcome",
-    "pages/Member/Member",
-    "pages/Collect/Collect", 
     "pages/Novel/pages/index/index",
     "pages/Novel/pages/classify/classify",
     "pages/Novel/pages/list/list",
@@ -21,13 +19,15 @@
     "pages/Video/pages/classify/classify",
     "pages/Video/pages/list/list",
     "pages/Video/pages/play/play",
-    "pages/Video/pages/detail/detail"
+    "pages/Video/pages/detail/detail",
+    "pages/Member/Member",
+    "pages/Collect/Collect"
   ],
   "requiredBackgroundModes": ["audio"],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarBackgroundColor": "#090723",
+    "navigationBarTitleText": "多功能查询",
     "navigationBarTextStyle": "white"
   },
   "style": "v2",

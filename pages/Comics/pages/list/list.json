@@ -1,6 +1,5 @@
 {
   "usingComponents": {
     "ComicsList":"/components/ComicsList/ComicsList"
-  },
-  "navigationBarBackgroundColor": "#ff7830"
+  }
 }

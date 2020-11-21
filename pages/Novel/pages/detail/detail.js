@@ -56,7 +56,7 @@ Page({
     goNovel(id)
   },
   scrollFn(e) {
-    if (e.detail.scrollTop >= 150) {
+    if (e.detail.scrollTop >= 70) {
       this.setData({
         isNav: true
       })
@@ -65,11 +65,6 @@ Page({
         isNav: false
       })
     }
-  },
-  goBack() {
-    wx.navigateBack({
-      delta: 1
-    })
   },
   doTab(e) {
     let num = e.currentTarget.dataset.num

@@ -3,6 +3,5 @@
     "ComicsList":"/components/ComicsList/ComicsList",
     "NavBar": "/components/NavBar/NavBar"
   },
-  "navigationBarTitleText": "漫画分类",
-  "navigationBarBackgroundColor": "#ff7830"
+  "navigationBarTitleText": "漫画分类"
 }

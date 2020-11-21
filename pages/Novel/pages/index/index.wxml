@@ -1,12 +1,6 @@
 <!--pages/Novel/pages/index/index.wxml-->
 <view class="novelIndexWrap">
-  <view class="searchMain">
-    <view class="searchBox">
-      <icon class="icon-small" type="search" size="20"></icon>
-      <input bindinput="bindKeyInput" value="{{searchKey}}" placeholder="请输入搜索关键字" />
-      <text catchtap="goList">搜索</text>
-    </view>
-  </view>
+  <NavTitle type="Novel" navPath="index"></NavTitle>
   <view class="channel">
     <text class="{{nChannel == 0 ? 'cur' : ''}}" catchtap="setChannel" data-num="0">男频</text>
     <text class="{{nChannel == 1 ? 'cur' : ''}}" catchtap="setChannel" data-num="1">女频</text>

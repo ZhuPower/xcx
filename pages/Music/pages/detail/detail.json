@@ -2,6 +2,5 @@
   "usingComponents": {
     "x-progress-bar": "/components/progress-bar/progress-bar",
     "x-lyric": "/components/lyric/lyric"
-  },
-  "navigationBarBackgroundColor": "#18be76"
+  }
 }

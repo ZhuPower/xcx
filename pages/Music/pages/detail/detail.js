@@ -51,16 +51,16 @@ Page({
             backgroundAudioManager.singer = singer
             backgroundAudioManager.epname = name
 
-            if (!app.globalData.musiclist.list[nowPlayingIndex].name) {
-              app.globalData.musiclist.list[nowPlayingIndex].name = name
+            if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].name) {
+              app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].name = name
             }
 
-            if (!app.globalData.musiclist.list[nowPlayingIndex].pic) {
-              app.globalData.musiclist.list[nowPlayingIndex].pic = songImg
+            if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].pic) {
+              app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].pic = songImg
             }
 
-            if (app.globalData.musiclist.list[nowPlayingIndex].singer.length == 0) {
-              app.globalData.musiclist.list[nowPlayingIndex].singer = singer
+            if (app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].singer.length == 0) {
+              app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].singer = singer
             }
 
             wx.setNavigationBarTitle({
@@ -70,8 +70,8 @@ Page({
             for (let x = 0; x < res.detail.data.info.length; x++) {
               if (res.detail.data.info[x].type == 'lyric') {
                 let lyric = res.detail.data.info[x].content[0].value
-                if (!app.globalData.musiclist.list[nowPlayingIndex].lyric) {
-                  app.globalData.musiclist.list[nowPlayingIndex].lyric = lyric
+                if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].lyric) {
+                  app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].lyric = lyric
                 }
 
                 this.setData({
@@ -88,8 +88,8 @@ Page({
               str = `${this.data.songSrc}${res.req_0.data.midurlinfo[0].purl}`
               backgroundAudioManager.src = str
 
-              if (!app.globalData.musiclist.list[nowPlayingIndex].url) {
-                app.globalData.musiclist.list[nowPlayingIndex].url = str
+              if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].url) {
+                app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].url = str
               }
 
               this.setData({
@@ -107,8 +107,8 @@ Page({
                     let str1 = str0.substring(0, num1)
                     backgroundAudioManager.src = str1
 
-                    if (!app.globalData.musiclist.list[nowPlayingIndex].url) {
-                      app.globalData.musiclist.list[nowPlayingIndex].url = str1
+                    if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].url) {
+                      app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].url = str1
                     }
 
                     this.setData({
@@ -138,9 +138,9 @@ Page({
   onPrev() {
     nowPlayingIndex--
     if (nowPlayingIndex < 0) {
-      nowPlayingIndex = app.globalData.musiclist.list.length - 1
+      nowPlayingIndex = app.globalData.userInfo.musiclist[0].list.length - 1
     }
-    let musicInfo = app.globalData.musiclist.list[nowPlayingIndex]
+    let musicInfo = app.globalData.userInfo.musiclist[0].list[nowPlayingIndex]
     this.setData({
       musicInfo: musicInfo
     })
@@ -148,10 +148,10 @@ Page({
   },
   onNext() {
     nowPlayingIndex++
-    if (nowPlayingIndex == app.globalData.musiclist.list.length) {
+    if (nowPlayingIndex == app.globalData.userInfo.musiclist[0].list.length) {
       nowPlayingIndex = 0
     }
-    let musicInfo = app.globalData.musiclist.list[nowPlayingIndex]
+    let musicInfo = app.globalData.userInfo.musiclist[0].list[nowPlayingIndex]
     this.setData({
       musicInfo: musicInfo
     })
@@ -180,11 +180,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    nowPlayingIndex = app.globalData.musiclist.mid.indexOf(options.mid)
+    nowPlayingIndex = app.globalData.userInfo.musiclist[0].mid.indexOf(options.mid)
 
     if (nowPlayingIndex > -1) {
       this.setData({
-        musicInfo: JSON.parse(JSON.stringify(app.globalData.musiclist.list[nowPlayingIndex]))
+        musicInfo: JSON.parse(JSON.stringify(app.globalData.userInfo.musiclist[0].list[nowPlayingIndex]))
       })
 
       wx.setNavigationBarTitle({
@@ -208,9 +208,9 @@ Page({
         musicInfo: obj
       })
 
-      app.globalData.musiclist.mid.push(options.mid)
-      app.globalData.musiclist.id.push(options.id)
-      app.globalData.musiclist.list.push(obj)
+      app.globalData.userInfo.musiclist[0].mid.push(options.mid)
+      app.globalData.userInfo.musiclist[0].id.push(options.id)
+      app.globalData.userInfo.musiclist[0].list.push(obj)
     }
 
     if (options.mid == app.globalData.songmid) {

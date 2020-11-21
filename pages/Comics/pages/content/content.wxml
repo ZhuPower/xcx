@@ -1,8 +1,33 @@
 <!--pages/Comics/pages/content/content.wxml-->
 <view class="contentWrap">
-  <scroll-view class="contentMain" scroll-y="true" bindscrolltolower="fnBotton" refresher-enabled="true"
-    refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
+  <scroll-view catchtap="setFn" class="contentMain" scroll-y="true" bindscrolltolower="fnBotton" refresher-enabled="true"
+    refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop" scroll-top="{{isTop == 1 ? true : false}}">
     <image wx:for="{{aContent}}" wx:key="page_id" src="{{item.image + '!width-900'}}" webp="true" lazy-load="true"
       mode="widthFix"></image>
   </scroll-view>
+  <view class="navTitle {{isNav ? 'cur' : ''}}">
+    <icon class="iconfont iconhoutui" catchtap="goBack"></icon>
+    <text>{{_title}}</text>
+  </view>
+  <view class="setBoxMain {{isNav ? 'cur' : ''}}">
+    <view class="setBox setBox_1">
+      <view class="set_border" catchtap="prevChapter">上一章</view>
+      <view catchtap="showChapter">目录</view>
+      <view class="set_border" catchtap="nextChapter">下一章</view>
+    </view>
+  </view>
+  <view class="chapterBoxBj" wx:if="{{isChapter}}"></view>
+  <view class="chapterBox {{isChapter ? 'cur' : ''}}" catchtap="hideChapter">
+    <view class="chapterMain">
+      <view class="h3">目录</view>
+      <scroll-view scroll-y="true" enhanced="true" show-scrollbar="true" scroll-into-view="_{{chapterId}}"
+        class="infoChapter">
+        <view wx:for="{{aChapter}}" wx:key="chapter_id" catchtap="goComicCon" data-id="{{item.chapter_id}}"
+          data-title="{{item.title}}" data-index="{{index}}" class="infoView">
+          <image src="{{item.cover + '!cover-400-x'}}" webp="true" lazy-load="true"></image>
+          <view class="chapter-title">{{item.title}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
 </view>

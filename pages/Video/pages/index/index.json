@@ -1,7 +1,8 @@
 {
   "usingComponents": {
-    "NavBar": "/components/NavBar/NavBar"
+    "NavBar": "/components/NavBar/NavBar",
+    "NavTitle": "/components/NavTitle/NavTitle"
   },
-  "navigationBarTitleText": "视频首页",
-  "navigationBarBackgroundColor": "#33a0ff"
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "视频首页"
 }

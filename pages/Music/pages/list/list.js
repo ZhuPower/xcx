@@ -20,7 +20,8 @@ Page({
     total_song_num: 0,
     isRefresh: false,
     searchKey: '',
-    curnum: 1
+    curnum: 1,
+    name:''
   },
   getRankInfo() {
     let url = this.data.toplist
@@ -125,10 +126,10 @@ Page({
 
     for (let i = 0; i < arr.length; i++) {
 
-      if (app.globalData.musiclist.mid.indexOf(arr[i].mid) == -1) {
-        app.globalData.musiclist.mid.push(arr[i].mid)
-        app.globalData.musiclist.id.push(arr[i].id)
-        app.globalData.musiclist.list.push(arr[i])
+      if (app.globalData.userInfo.musiclist[0].mid.indexOf(arr[i].mid) == -1) {
+        app.globalData.userInfo.musiclist[0].mid.push(arr[i].mid)
+        app.globalData.userInfo.musiclist[0].id.push(arr[i].id)
+        app.globalData.userInfo.musiclist[0].list.push(arr[i])
       }
     }
 
@@ -203,19 +204,17 @@ Page({
 
     if (options.key) {
       this.setData({
-        searchKey: options.key
+        searchKey: options.key,
+        name:options.name
       })
     }
 
     if (options.id) {
       this.setData({
-        id: options.id
+        id: options.id,
+        name:options.name
       })
     }
-
-    wx.setNavigationBarTitle({
-      title: options.name
-    })
   },
 
   /**

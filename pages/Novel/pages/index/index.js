@@ -73,9 +73,6 @@ Page({
         }
       ]
     }
-
-    //  https://scxs.pysmei.com/top/男女/top/分类/榜单名/页码.html
-    //  https://scxs.pysmei.com/top/lady/top/commend/month/1.html
   },
   getHome() {
     let url = this.data.homeNovel
@@ -127,29 +124,7 @@ Page({
       }
     })
   },
-  bindKeyInput(e) {
-    this.setData({
-      searchKey: e.detail.value
-    })
-  },
-  goList() {
-    if (this.data.searchKey) {
-      let str = 'type=search&name=搜索"' + this.data.searchKey + '"结果&key=' + this.data.searchKey
-      this.setData({
-        searchKey: ''
-      })
-      wx.navigateTo({
-        url: '/pages/Novel/pages/list/list?' + str,
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索关键字',
-        icon: 'none',
-        duration: 2000
-      })
-    }
-
-  },
+  
 
   /**
    * 生命周期函数--监听页面加载

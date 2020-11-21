@@ -1,1 +1,81 @@
 /* pages/Member/Member.wxss */
+.navWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 114rpx;
+}
+
+.navWrap .logoMain {
+  width: 100%;
+}
+
+.navWrap .logoMain .logo {
+  width: 168rpx;
+  height: 168rpx;
+  border-radius: 84rpx;
+  margin: 0px auto;
+  border: 1px solid #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+
+.navWrap .logoMain .logo image {
+  width: 168rpx;
+  height: 132rpx;
+  display: block;
+}
+
+.navWrap .welcome {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 38rpx;
+  margin-top: 40rpx;
+}
+
+.navWrap .navMain {}
+
+.navWrap .navMain navigator,
+.navWrap .navMain button {
+  width: 360rpx;
+  height: 88rpx;
+  background: #fff;
+  margin-bottom: 40rpx;
+  text-align: center;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+}
+
+.navWrap .navMain button {
+  background: #07c160;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
+}
+
+.loginBtn {
+  background:none;
+  color: #fff;
+  font-weight: normal;
+  border: 1px solid #fff;
+  position: fixed;
+  bottom: 210rpx;
+}
+
+.mainBox{
+  margin: 0px 56rpx;
+}
+
+.mainBox>view{
+  height: 113rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #3e3c4c;
+}

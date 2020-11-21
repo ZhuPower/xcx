@@ -31,7 +31,7 @@
 
 .listMain .listBox .listRight .listName {
   font-size: 36rpx;
-  color: #33a0ff;
+  color: #fff;
   height: 60rpx;
   line-height: 60rpx;
   overflow: hidden;
@@ -44,6 +44,7 @@
   width: 72rpx;
   height: 44rpx;
   line-height: 44rpx;
+  color: #999;
 }
 
 .listMain .listBox .listRight .listInfo .listInfoC{
@@ -51,10 +52,11 @@
   overflow: hidden;
   height: 44rpx;
   line-height: 44rpx;
+  color: #60606d;
 }
 
 .listMain .listBox .listRight .listContent{
-  color: #aaa;
+  color: #60606d;
   height: 160rpx;
   overflow: hidden;
   line-height: 40rpx;

@@ -27,18 +27,18 @@
   line-height: 60rpx;
   font-size: 25rpx;
   float: left;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10rpx;
   margin-right: 20rpx;
   margin-bottom: 20rpx;
+  color: #fff;
 }
-/* .videoPlayWarp .playList text:nth-child(4n){
-} */
+
 
 .videoPlayWarp .playList text.cur{
   color: #fff;
-  background: #33a0ff;
-  border: 1px solid #33a0ff;
+  background: #ff7830;
+  border: 1px solid #ff7830;
 }
 
 

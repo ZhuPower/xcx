@@ -52,7 +52,7 @@
 
 .detail-content {
   font-size: 24rpx;
-  color: #666;
+  color: #999;
   line-height: 1.5;
   text-align: justify;
   text-indent: 2em;
@@ -63,7 +63,7 @@
 
 .tabH {
   overflow: hidden;
-  border-bottom: 1px solid #e5e5e5;
+  background: rgba(21, 29, 48, 1);
 }
 
 .tabH text {
@@ -76,8 +76,7 @@
 }
 
 .tabH text.cur {
-  background: #ff7830;
-  color: #fff;
+  color: #ff7830;
 }
 
 .detail-chapter {
@@ -86,7 +85,7 @@
 .detail-chapter>view {
   display: flex;
   box-sizing: border-box;
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
   padding: 30rpx;
   align-items: center;
 }

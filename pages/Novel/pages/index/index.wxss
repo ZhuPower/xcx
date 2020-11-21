@@ -1,57 +1,33 @@
 /* pages/Novel/pages/index/index.wxss */
-.novelIndexWrap .searchMain {
-  background: #ff0000;
-}
-
-.novelIndexWrap .searchMain .searchBox {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30rpx;
-  height: 60rpx;
-  position: relative;
-}
-
-.novelIndexWrap .searchMain .searchBox icon {
-  position: absolute;
-  left: 40rpx;
-  top: 43rpx;
-}
-
-.novelIndexWrap .searchMain .searchBox input {
-  color: #000;
-  height: 60rpx;
-  line-height: 60rpx;
-  border-radius: 30rpx;
-  background: #fff;
-  width: 600rpx;
-  padding-left: 50rpx;
-}
-
-.novelIndexWrap .searchMain .searchBox text {
-  color: #fff;
-  display: block;
-  width: 90rpx;
-  text-align: center;
+.novelIndexWrap {
+  padding-top: 194rpx;
 }
 
 .channel {
-  height: 80rpx;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #ccc;
+  height: 240rpx;
+  position: fixed;
+  right: 0;
+  top: 30%;
+  z-index: 9;
 }
 
 .channel text {
-  width: 33.33%;
+  width: auto;
   display: block;
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 60rpx;
+  line-height: 60rpx;
   text-align: center;
+  margin-bottom: 30rpx;
+  background: #151d30;
+  color: #737783;
+  padding: 0px 30rpx;
+  border-radius: 30rpx 0px 0px 30rpx;
+  box-sizing: border-box;
+  font-size: 25rpx;
 }
 
 .channel text.cur {
-  color: #ff0000;
+  color: #ff7830;
 }
 
 .bannerMain {
@@ -125,7 +101,7 @@
 
 .novelIndexWrap .listUl .listLi .title {
   font-size: 28rpx;
-  color: #28292d;
+  color:#999;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -137,7 +113,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #999999;
+  color: #60606d;
   margin-top: 2rpx;
   margin-bottom: 12rpx;
 }
@@ -166,16 +142,18 @@
   box-sizing: border-box;
   padding: 15rpx 0px;
 }
-.ranking .typeInfo .typeBox{
+
+.ranking .typeInfo .typeBox {
   display: flex;
 }
-.ranking .typeInfo .typeBox .typeList{
+
+.ranking .typeInfo .typeBox .typeList {
   height: 60rpx;
   line-height: 60rpx;
   width: 17%;
   text-align: center;
 }
 
-.ranking .typeInfo .typeBox .typeList.cur{
-  color:#ff0000;
+.ranking .typeInfo .typeBox .typeList.cur {
+  color: #ff7830;
 }

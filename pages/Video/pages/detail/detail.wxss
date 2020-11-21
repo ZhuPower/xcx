@@ -29,7 +29,7 @@
 
 .videoDetailWrap .top .topRight .videoName {
   font-size: 36rpx;
-  color: #33a0ff;
+  color: #fff;
   height: 60rpx;
   line-height: 60rpx;
   overflow: hidden;
@@ -67,6 +67,7 @@
   -webkit-box-orient: vertical;
   word-break: break-all;
   width: 370rpx;
+  color: #60606d;
 }
 
 .videoDetailWrap .top .topRight .videoInfoLi.col2 .listInfo {
@@ -92,7 +93,7 @@
 }
 
 .videoDetailWrap .conBox .conTabH text.cur {
-  background: #33a0ff;
+  background: #ff7830;
   border-radius: 10rpx;
   color: #fff;
 }
@@ -117,10 +118,11 @@
   line-height: 60rpx;
   font-size: 25rpx;
   float: left;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10rpx;
   margin-right: 20rpx;
   margin-bottom: 20rpx;
+  color: #eee;
 }
 
 /* .videoDetailWrap .conBox .conTabC .tabList_0 text:nth-child(4n) {

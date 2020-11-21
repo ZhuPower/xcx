@@ -77,10 +77,16 @@ App({
     getAc: [],
     prompt: '本程序仅供信息查询，如有需要请自行百度搜索观看',
     songmid: '',
-    musiclist: {
-      list: [],
-      id: [],
-      mid: []
-    }
+    userInfo: {
+      novellist: [],
+      comicslist: [],
+      musiclist: [{
+        list: [],
+        id: [],
+        mid: []
+      }],
+      videolist: []
+    },
+    _userInfo:{}
   }
 })

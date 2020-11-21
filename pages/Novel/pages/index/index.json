@@ -1,8 +1,9 @@
 {
   "usingComponents": {
     "NavBar": "/components/NavBar/NavBar",
-    "NovelList":"/components/NovelList/NovelList"
+    "NovelList":"/components/NovelList/NovelList",
+    "NavTitle": "/components/NavTitle/NavTitle"
   },
-  "navigationBarTitleText": "小说首页",
-  "navigationBarBackgroundColor": "#ff0000"
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "小说首页"
 }

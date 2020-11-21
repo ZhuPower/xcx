@@ -21,7 +21,7 @@ Page({
       interval:2000,
       duration:500,
       circular:true,
-      indicatorActive:'#33a0ff'
+      indicatorActive:'#ff7830'
     },
     bannerCurrent: 0,
     classify:{
@@ -42,38 +42,13 @@ Page({
         n:3
       }
     },
-    list:[],
-    searchKey:''
+    list:[]
   },
   goDetail(e){
     let id = e.currentTarget.dataset.id
     let goVideo = fnCon.goVideo
     goVideo(id,true)
   },
-  bindKeyInput(e){
-    this.setData({
-      searchKey: e.detail.value
-    })
-  },
-  goList(){
-    if(this.data.searchKey){
-      let str = 'type=-1&page=1&name=搜索"'+this.data.searchKey+'"结果&key='+this.data.searchKey
-      this.setData({
-        searchKey:''
-      })
-      wx.navigateTo({
-        url: '/pages/Video/pages/list/list?'+str,
-      })
-    }else{
-      wx.showToast({
-        title: '请输入搜索关键字',
-        icon: 'none',
-        duration: 2000
-      })
-    }
-    
-  },
-
   getBannerLists(){
     let url = this.data.urlBanner
     this.data.fnAjax(url,{}).then(res => {

@@ -19,10 +19,9 @@ Page({
       interval:2000,
       duration:500,
       circular:true,
-      indicatorActive:'#33a0ff'
+      indicatorActive:'#ff7830'
     },
-    comicsLists:[],
-    searchKey:''
+    comicsLists:[]
   },
 
   getBannerLists(){
@@ -63,29 +62,6 @@ Page({
         })
       }
     })
-  },
-  bindKeyInput(e){
-    this.setData({
-      searchKey: e.detail.value
-    })
-    e.detail.value = ''
-  },
-  goList(){
-    if(this.data.searchKey){
-      let str = 'page=1&name=搜索"'+this.data.searchKey+'"结果&key='+this.data.searchKey
-      this.setData({
-        searchKey:''
-      })
-      wx.navigateTo({
-        url:'/pages/Comics/pages/list/list?'+str
-      })
-    }else{
-      wx.showToast({
-        title: '请输入搜索关键字',
-        icon: 'none',
-        duration: 2000
-      })
-    }
   },
   goDetail(e){
     let id = e.currentTarget.dataset.id
