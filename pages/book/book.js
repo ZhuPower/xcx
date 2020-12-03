@@ -27,7 +27,7 @@ Page({
   },
 
   //搜索
-  search:function(keyword){
+  search: function (keyword) {
     let url = 'http://mhapi.spdchgj.com/3/cartoon/cartoon/search'
     let data = {
       keyword: keyword,
@@ -156,7 +156,7 @@ Page({
   signString: function (req) {
     var obj = {}
     for (var key in req) {
-      obj[key] = req[key]
+      obj[key] = encodeURI(req[key])
     }
     var tmp = Date.parse(new Date()).toString();
     var timestamp = tmp.substr(0, 13);
@@ -168,6 +168,7 @@ Page({
       num++;
     }
     var sortArr = arr.sort();
+
     var stringA = '';
     var j = 0;
     for (var i in sortArr) {
@@ -303,10 +304,15 @@ Page({
       inputValue: e.detail.value
     })
   },
-  searchBtn:function(){
+  searchBtn: function () {
     this.isLogin2().then(res => {
       if (res.code == 0) {
-        this.search(this.data.inputValue);
+        this.search(this.data.inputValue).then(res => {
+          this.setData({
+            bookList_6: res.data,
+            page: 1
+          })
+        });
       }
     })
   },
@@ -375,7 +381,6 @@ Page({
             bookList_6: res.data
           })
         })
-
         // this.fn_1().then(res => {
         //   console.log(res)
         // })
@@ -386,9 +391,9 @@ Page({
     // .then(res => {
     //   //console.log(res)
     // })
-    
+
     // setTimeout(()=>{
-      
+
     // },2000)
 
 
@@ -435,9 +440,9 @@ Page({
 
   },
 
-  async player (vid,endFn) {
+  async player(vid, endFn) {
     let res = await this.isLogin2();
-    if(res.code == 0){
+    if (res.code == 0) {
       let url = 'http://vapi.yichuba.com/player'
       let data = {
         vid: parseInt(vid),
@@ -446,7 +451,7 @@ Page({
       wx.clearStorage();
       let res2 = await this.setApi(url, data);
 
-      if(res2.code == 0){
+      if (res2.code == 0) {
         endFn && endFn(res2)
       }
     }

@@ -4,3 +4,6 @@
   word-break: break-all;
   word-wrap: break-word;
 }
+#myVideo{
+  width: 100%;
+}
