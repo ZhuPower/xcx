@@ -2,23 +2,18 @@
 <view class="videoClassifyWrap">
   <view class="classifyMain">
     <view class="h3">
-      <view class="section">
-        <picker bindchange="bindPickerChange" value="{{num}}" range="{{sourceUrl}}" range-key="name">
-          <view class="picker">
-            {{sourceUrl[num].name}}
-          </view>
-        </picker>
-      </view>
       <text>{{name}}列表</text>
       <view catchtap="setHeight" class="iconsText {{isShow?'cur':''}}">
         <icon class="iconfont iconjiantou"></icon>
       </view>
     </view>
     <view class="classifyH {{isShow?'cur':''}}">
-      <text wx:for="{{classifyList}}" wx:key="index" data-type="{{item.type_id || item._id}}" data-name="{{item.type_name || item.__text}}"
-        data-index="{{index}}" catchtap="getType" class="{{nIndex == index ? 'cur' : ''}}">{{item.type_name || item.__text}}</text>
+      <text wx:for="{{classifyList}}" wx:key="index" data-type="{{item.id}}"
+        data-name="{{item.name}}" data-index="{{index}}" catchtap="getType"
+        class="{{nType == index ? 'cur' : ''}}">{{item.name}}</text>
     </view>
-    <VideoList type="{{classifyType}}" searchKey="{{searchKey}}" sourceUrl="{{url}}" class="classifyC"></VideoList>
+    <VideoList type="{{classifyType}}" oData="{{oData}}" class="classifyC" isResChange="{{isResChange}}"></VideoList>
   </view>
+  <getResources type="video" isRefresh="{hsource}" bindresChange="resChange" wx:if="{{isShow2}}"></getResources>
   <NavBar navType="Video" navPath="classify"></NavBar>
 </view>

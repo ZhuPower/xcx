@@ -7,11 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classifyType:0,
-    searchKey:'',
-    name:'',
-    url:'',
-    isApp:true
+    oData: {},
+    name: '',
   },
 
 
@@ -19,22 +16,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      classifyType:options.type,
-      name:decodeURIComponent(options.name)
-    })
-  
-    if(options.key){
-      let url = app.globalData.nowSource.url
-      this.setData({
-        searchKey:decodeURIComponent(options.key),
-        url:url,
-        isApp:false
-      })
+    console.log(options)
+    let obj = null;
+    if (options.data) {
+      obj = JSON.parse(decodeURIComponent(options.data))
+    } else {
+      obj = options;
     }
 
+    this.setData({
+      oData: obj,
+      name: obj.name
+    })
+
+
+    // if (options.key) {
+    //   let url = app.globalData.nowSource.url
+    //   this.setData({
+    //     searchKey: decodeURIComponent(options.key)
+    //   })
+    // }
+
     wx.setNavigationBarTitle({
-      title: `${this.data.name}列表` 
+      title: `${obj.name}列表`
     })
 
   },
@@ -43,7 +47,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   
+
   },
 
   /**

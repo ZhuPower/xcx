@@ -68,6 +68,9 @@ App({
     })
   },
   globalData: {
+    sourceData:null,
+    nvideo:0,
+    iTime:null,
     sourceUrl: [],
     openid: '',
     nowSource: {},

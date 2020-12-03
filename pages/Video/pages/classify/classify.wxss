@@ -45,7 +45,7 @@
   box-sizing: border-box;
   background: rgba(21, 29, 48, .9);
   overflow: hidden;
-  z-index: 1;
+  z-index: 11;
   height: 0px;
   transition: all 0.25s linear;
 }
@@ -54,6 +54,8 @@
   padding-top: 20rpx;
   height: auto;
   transition: all 0.25s linear;
+  max-height: 500rpx;
+  overflow-y: scroll;
 }
 
 .videoClassifyWrap .classifyMain .classifyH text {

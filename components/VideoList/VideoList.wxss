@@ -8,7 +8,7 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
-  padding: 118rpx 30rpx 30rpx 30rpx;
+  padding: 118rpx 30rpx 88rpx 30rpx;
 }
 
 .listMain .listBox {

@@ -1,5 +1,4 @@
 // components/VideoList/VideoList.js
-const apiUrl = require('../../utils/apiUrl')
 const fnCon = require('../../utils/common')
 let app = getApp()
 Component({
@@ -7,10 +6,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    type: Number,
-    searchKey: String,
-    isApp: Boolean,
-    sourceUrl: String
+    oData: Object,
+    type: String,
+    isResChange: Boolean
   },
 
   /**
@@ -18,73 +16,48 @@ Component({
    */
   data: {
     videoList: [],
-    pagecount: 0,
+    pagecount: 1,
     page: 1,
     isRefresh: false,
-    url: '',
-    fnAjax: fnCon.fnAjax,
-    isNext: true
+    isNext: true,
+    item: ''
   },
   observers: {
     'type': function (str) {
       if (str > 0) {
-        if (this.data.searchKey) {
-          this.searchFn(1)
-        } else {
-          this.cshData(1)
-        }
-      }
-    },
-    'url': function (str) {
-      if (this.data.url != str) {
         this.setData({
-          url: str
+          page: 1,
+          videoList: []
         })
-
-        if (this.data.url) {
-          if (this.data.searchKey) {
-            this.searchFn(1)
-          } else {
-            this.cshData(1)
-          }
-        }
+        this.cshData('list')
       }
     },
-    'sourceUrl': function (str) {
+    'isResChange': function (b) {
       this.setData({
-        url: str,
-        page: 1
+        page: 1,
+        videoList: []
       })
-
-      if (this.data.searchKey) {
-        this.searchFn(1)
-      } else {
-        this.cshData(1)
-      }
+      this.cshData('list')
     }
   },
 
   ready() {
-   // console.log(this.data.sourceUrl)
-    if (this.data.isApp) {
-      this.setData({
-        url: apiUrl.apiUrl.video.VideoLists
-      })
+    console.log(this.data.oData)
+    if (this.data.oData.type == 'search') {
+      this.cshData('search')
+      let iTime = null
+      clearInterval(iTime);
+      iTime = setInterval(() => {
+        if (this.data.item) {
+          clearInterval(iTime);
+          this.cshData('searchDetail')
+        }
+      }, 20);
     } else {
-      this.setData({
-        url: this.data.sourceUrl
-      })
-    }
-
-    if (this.data.url) {
-      if (this.data.searchKey) {
-        this.searchFn(1)
-      } else {
-        this.cshData(1)
+      if (!this.data.isResChange) {
+        this.cshData('list')
       }
     }
-
-   // console.log(this.data.url)
   },
 
   /**
@@ -92,10 +65,22 @@ Component({
    */
   methods: {
     fnTop() {
-      if (this.data.searchKey) {
-        this.searchFn(1)
+      this.setData({
+        page: 1
+      })
+
+      if (this.data.oData.type == 'search') {
+        this.cshData('search')
+        let iTime = null
+        clearInterval(iTime);
+        iTime = setInterval(() => {
+          if (this.data.item) {
+            clearInterval(iTime);
+            this.cshData('searchDetail')
+          }
+        }, 20);
       } else {
-        this.cshData(1)
+        this.cshData('list')
       }
     },
     fnBotton() {
@@ -106,14 +91,22 @@ Component({
 
         let num = parseInt(this.data.page) + 1
         if (num <= this.data.pagecount) {
-          // wx.showLoading({
-          //   title: '加载中...',
-          // })
+          this.setData({
+            page: num
+          })
 
-          if (this.data.searchKey) {
-            this.searchFn(num)
+          if (this.data.oData.type == 'search') {
+            this.cshData('search')
+            let iTime = null
+            clearInterval(iTime);
+            iTime = setInterval(() => {
+              if (this.data.item) {
+                clearInterval(iTime);
+                this.cshData('searchDetail')
+              }
+            }, 20);
           } else {
-            this.cshData(num)
+            this.cshData('list')
           }
 
         } else {
@@ -125,144 +118,23 @@ Component({
         }
       }
     },
-    searchFn(num) {
-      let url = this.data.url
-      let fnAjax = this.data.fnAjax
-
-      let data = {
-        ac: 'list',
-        pg: num,
-        wd: this.data.searchKey
-      }
-
-      fnAjax(url, data).then(res => {
-        let arr_1 = []
-        if (res.code == 1) {
-          this.setData({
-            pagecount: res.pagecount,
-            page: res.page
-          })
-
-          for (let i = 0; i < res.list.length; i++) {
-            arr_1.push(res.list[i].vod_id)
-          }
-
-          let ids = arr_1.join(',')
-          let data2 = {
-            ac: 'detail',
-            pg: 1,
-            ids: ids
-          }
-          let arr_0 = app.globalData.getAc
-          if (arr_0.indexOf(url) > -1) {
-            data.ac = 'videolist'
-          }
-
-          fnAjax(url, data2).then(res => {
-            if (res.code == 1) {
-              let arr = []
-
-              if (num > 1) {
-                arr = this.data.videoList
-              }
-
-              arr.push(...res.list)
-
-              this.setData({
-                videoList: arr,
-                isRefresh: false,
-                isNext: true
-              })
-              wx.hideLoading()
-            }
-          })
-        }
-      })
-    },
-    cshData(num) {
-      let url = this.data.url
-      let fnAjax = this.data.fnAjax
-      let data = {}
-
-      if (this.data.isApp) {
-        data = {
-          limit: 20,
-          area: "-1",
-          year: "全部",
-          type_id: this.data.type,
-          page: num
-        }
+    cshData(key) {
+      if (app.globalData.sourceData) {
+        fnCon.getSource(app, key, this);
       } else {
-        data = {
-          ac: 'detail',
-          t: this.data.type,
-          pg: num
-        }
+        clearInterval(app.globalData.iTime)
+        app.globalData.iTime = setInterval(() => {
+          if (app.globalData.sourceData) {
+            clearInterval(app.globalData.iTime)
+            fnCon.getSource(app, key, this);
+          }
+        }, 20);
       }
-
-      let arr_0 = app.globalData.getAc
-      if (arr_0.indexOf(url) > -1) {
-        data.ac = 'videolist'
-      }
-
-
-      fnAjax(url, data).then(res => {
-        if (res.code == 1 || res.code == 200 || res.status == 200 || res.rss) {
-          let arr = []
-
-          if (num > 1) {
-            arr = this.data.videoList
-          }
-
-          if (res.data) {
-            if (res.data.list) {
-              arr.push(...res.data.list)
-            } else {
-              arr.push(...res.data)
-            }
-          } else if (res.list) {
-            arr.push(...res.list)
-          } else if (res.rss) {
-            arr.push(...res.rss.list.video)
-          }
-
-          let obj = {
-            videoList: arr,
-            isNext: true,
-            isRefresh: false
-          }
-
-          if (res.page) {
-            if (res.page.pageindex) {
-              obj['page'] = res.page.pageindex
-              obj['pagecount'] = res.page.pagecount
-            } else {
-              obj['page'] = res.page
-              obj['pagecount'] = res.pagecount
-            }
-          } else if (res.rss) {
-            obj['page'] = res.rss.list._page
-            obj['pagecount'] = res.rss.list._recordcount
-          } else {
-            if (res.data) {
-              if (res.data.page) {
-                obj['page'] = res.data.page
-                obj['pagecount'] = res.data.count
-              }
-            }
-          }
-
-
-          this.setData(obj)
-          wx.hideLoading()
-        }
-      })
     },
     goDetail(e) {
       let id = e.currentTarget.dataset.id
-      let app = this.data.isApp
       let goVideo = fnCon.goVideo
-      goVideo(id, app)
+      goVideo(id)
     }
   }
 })

@@ -1,6 +1,5 @@
 <!--components/NavTitle/NavTitle.wxml-->
-<view
-  class="headerBox {{isOpacity ? 'isOpacity' : ''}} {{isNav ? 'isNav' : ''}} {{isScroll ? 'isScroll' : ''}}">
+<view class="headerBox {{isOpacity ? 'isOpacity' : ''}} {{isNav ? 'isNav' : ''}} {{isScroll ? 'isScroll' : ''}}">
   <view wx:if="{{isOpacity}}" class="pad-top"></view>
   <view class="NavTitle" wx:if="{{title}}">
     <icon class="iconfont iconhoutui" catchtap="goBack"></icon>

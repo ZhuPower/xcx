@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "NavBar": "/components/NavBar/NavBar",
-    "VideoList":"/components/VideoList/VideoList"
+    "VideoList":"/components/VideoList/VideoList",
+    "getResources": "/components/Resources/Resources"
   },
   "navigationBarTitleText": "视频分类"
 }

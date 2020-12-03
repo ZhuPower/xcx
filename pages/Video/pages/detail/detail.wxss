@@ -98,7 +98,10 @@
   color: #fff;
 }
 
-.videoDetailWrap .conBox .conTabC {}
+.videoDetailWrap .conBox .conTabC {
+  overflow-y: scroll;
+  height: 500rpx;
+}
 
 .videoDetailWrap .conBox .conTabC .tabList_0 {
   overflow: hidden;
@@ -123,6 +126,12 @@
   margin-right: 20rpx;
   margin-bottom: 20rpx;
   color: #eee;
+}
+
+.videoDetailWrap .conBox .conTabC .tabList_0 text.cur{
+  color: #fff;
+  background: #ff7830;
+  border: 1px solid #ff7830;
 }
 
 /* .videoDetailWrap .conBox .conTabC .tabList_0 text:nth-child(4n) {
@@ -165,4 +174,9 @@
 .pickerValue icon{
   float: right;
   margin-left: 30rpx;
+}
+
+
+.playBox{
+  width: 100%;
 }

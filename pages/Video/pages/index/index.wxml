@@ -1,31 +1,33 @@
 <!--pages/Video/pages/index/index.wxml-->
-<wxs module="m1" src="../../../../utils/calculation.wxs"></wxs>
 <view class="videoIndexWrap">
 	<NavTitle type="Video" navPath="index"></NavTitle>
-	<view class="banner">
-		<swiper indicator-dots="{{swiperBanner.dots}}" autoplay="{{swiperBanner.autoplay}}" interval="{{swiperBanner.interval}}" duration="{{swiperBanner.duration}}" circular="{{swiperBanner.circular}}" indicator-active-color="{{swiperBanner.indicatorActive}}">
-			<block wx:for="{{banner}}" wx:key="vid">
+	<view class="banner" wx:if="{{oData.banner}}">
+		<swiper indicator-dots="true" autoplay="true" interval="2000" duration="500" circular="true"
+			indicator-active-color="#ff7830">
+			<block wx:for="{{oData.banner}}" wx:key="vid">
 				<swiper-item data-id="{{item.vid}}" catchtap="goDetail">
-					<image src="{{m1.getImgSrc(item.img)}}" lazy-load="{{true}}"></image>
+					<image src="{{item.img}}" lazy-load="{{true}}"></image>
 				</swiper-item>
 			</block>
 		</swiper>
 	</view>
-	<view class="main">
-		<!-- wx:if="{{list[index1].length > 0}}" -->
-		<view class="listMain" wx:for="{{videoLists}}" wx:for-index="key" wx:for-item="value" wx:key="key">
+	<!-- {{oData.list}} -->
+	<view class="main" wx:if="{{oData.list}}">
+		<view class="listMain" wx:for="{{oData.list}}" wx:key="index">
 			<view class="h3">
-				<text>{{classify[key].m}}</text>
-				<navigator url="../list/list?type={{classify[key].n}}&page=1&name={{classify[key].m}}" class="searchBtn">
+				<text>{{item.name}}</text>
+				<navigator url="../list/list?data={{item.more}}" class="searchBtn" wx:if="{{item.more}}">
 					More</navigator>
 			</view>
 			<view class="listUl">
-				<view class="listLi" wx:for="{{value.list}}" wx:for-index="index" wx:for-item="item" wx:key="vod_id" data-id="{{item.vod_id}}" catchtap="goDetail">
-					<image src="{{item.vod_pic}}"></image>
-					<text>{{item.vod_name}}</text>
+				<view class="listLi" wx:for="{{item.list}}" wx:for-index="index2" wx:for-item="item2" wx:key="id"
+					data-id="{{item2.id}}" catchtap="goDetail">
+					<!-- <image src="{{item2.img}}"></image> -->
+					<text>{{item2.name}}</text>
 				</view>
 			</view>
 		</view>
 	</view>
+	<getResources type="video" isRefresh="{oData ? true : false}" bindresChange="resChange" wx:if="{{isShow}}"></getResources>
 	<NavBar navType="Video" navPath="index"></NavBar>
 </view>

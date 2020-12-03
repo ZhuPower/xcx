@@ -31,9 +31,11 @@
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "bundle": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.0",
@@ -80,6 +82,18 @@
           "name": "pages/Video/pages/index/index",
           "pathName": "pages/Video/pages/index/index",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Video/pages/list/list",
+          "pathName": "pages/Video/pages/list/list",
+          "query": "data=%7B%22name%22%3A%22%E7%94%B5%E5%BD%B1%22%2C%22type%22%3A%22more%22%2C%22id%22%3A1%7D",
+          "scene": null
+        },
+        {
+          "name": "pages/Video/pages/detail/detail",
+          "pathName": "pages/Video/pages/detail/detail",
+          "query": "id=41661",
           "scene": null
         }
       ]

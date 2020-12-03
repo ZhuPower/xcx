@@ -57,34 +57,13 @@ Component({
         let data = { "action": "getContent", "item": "/xcx/Resources.txt" }
         this.data.fnAjax(url, data, 'POST').then(res => {
           let obj = JSON.parse(res.result)
-          app.globalData.jxUrl = obj.JxUrl
-          app.globalData.getAc = obj.Ac
-          var arr1 = obj.listD
-          var arr2 = obj.listC
-          var arr3 = obj.listB
-          var arr4 = obj.listA
+          app.globalData.sourceData = obj
           if (obj.authority[app.globalData.openid]) {
-            if (obj.authority[app.globalData.openid] == 'listC') {
-              app.globalData.sourceUrl.push(...arr1)
-              app.globalData.sourceUrl.push(...arr2)
-            } else if (obj.authority[app.globalData.openid] == 'listB') {
-              app.globalData.sourceUrl.push(...arr1)
-              app.globalData.sourceUrl.push(...arr2)
-              app.globalData.sourceUrl.push(...arr3)
-            } else if (obj.authority[app.globalData.openid] == 'listA') {
-              app.globalData.sourceUrl.push(...arr1)
-              app.globalData.sourceUrl.push(...arr2)
-              app.globalData.sourceUrl.push(...arr3)
-              app.globalData.sourceUrl.push(...arr4)
-            }
             app.globalData.isShow = true
             this.setData({
               isShow: app.globalData.isShow
             })
-          } else {
-            app.globalData.sourceUrl = arr1
           }
-          app.globalData.nowSource = app.globalData.sourceUrl[app.globalData.nindex]
         })
       }else{
         this.setData({

@@ -5,7 +5,7 @@
  * 支持符合RFC_4648标准中"URL and Filename Safe Alphabet"的URL安全Base64编解码
  * 支持中文字符的编解码(Unicode编码)
  */
-;(function (root, factory) {
+; (function (root, factory) {
     if (typeof exports === "object") {
         // CommonJS
         module.exports = exports = factory();
@@ -224,6 +224,36 @@
         return str;
     };
 
+    var _xgtvUrl = function (str) {
+        str = _encode(str, false);
+        var strLen = str.length;
+        var _str = [str[strLen - 2] ? str[strLen - 2] : 'a', str[strLen - 4] ? str[strLen - 4] : 's', str[strLen - 6] ? str[strLen - 6] : 'd', str[strLen - 8] ? str[strLen - 8] : 'f', str[strLen - 10] ? str[strLen - 10] : 'g'];
+        str = _str[4] + _str[3] + _str[2] + _str[1] + str;
+        var newStr = '';
+        for (var i = 0; i < strLen + 4; ++i) {
+            if (i % 5 === 0) {
+                newStr += _str[i / 5 % 5];
+            }
+            newStr += str[i];
+        }
+        var newStr1 = newStr.replace(/\//g, '-').replace(/=/g, '_').replace(/\+/g, '.');
+        return newStr1;
+    };
+    var _xgtv = function (str) {
+        if (!str) {
+            return null;
+        }
+        str = str.replace(/\\\//ig, '/');
+        str = str.split('').reverse().join('');
+        var str2 = '';
+        for (var i = 0; i < str.length; ++i) {
+            if (i % 10 !== 0) {
+                str2 += str[i];
+            }
+        }
+        return _decode(str2.substr(4, str2.length - 8), false);
+    };
+
     var __BASE64 = {
         encode: function (str) {
             return _encode(str, false);
@@ -236,6 +266,12 @@
         },
         urlsafe_decode: function (base64Str) {
             return _decode(base64Str, true);
+        },
+        xgtvUrl: function (str) {
+            return _xgtvUrl(str);
+        },
+        xgtv: function (str) {
+            return _xgtv(str);
         }
     };
 

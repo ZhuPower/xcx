@@ -1,0 +1,8 @@
+<!--components/Resources/Resources.wxml-->
+<view class="resourcesMain">
+  <picker bindchange="bindPickerChange" value="{{num}}" range="{{list}}" range-key="name">
+    <view class="picker">
+      {{list[num].name}}
+    </view>
+  </picker>
+</view>

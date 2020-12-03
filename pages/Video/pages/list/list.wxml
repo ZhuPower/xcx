@@ -1,5 +1,5 @@
 <!--pages/Video/pages/list/list.wxml-->
 <view class="videoListWrap">
 	<view class="h3">{{name}}列表</view>
-	<VideoList type="{{classifyType}}" searchKey="{{searchKey}}" isApp="{{isApp}}" sourceUrl="{{url}}"></VideoList>
+	<VideoList oData="{{oData}}"></VideoList>
 </view>

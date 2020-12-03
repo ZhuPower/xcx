@@ -1,0 +1,21 @@
+/* components/Resources/Resources.wxss */
+.resourcesMain{
+  position: fixed;
+  right: 0;
+  z-index: 10;
+  top:30%;
+}
+.resourcesMain .picker{
+  width: auto;
+  display: block;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  margin-bottom: 30rpx;
+  background: #151d30;
+  color: #ff7830;
+  padding: 0px 30rpx;
+  border-radius: 30rpx 0px 0px 30rpx;
+  box-sizing: border-box;
+  font-size: 25rpx;
+}
