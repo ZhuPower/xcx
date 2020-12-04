@@ -1,0 +1,15 @@
+<!--pages/catbook/catbook.wxml-->
+<view class="catBookMain">
+	<view class="catBookList">
+		<view class="list" wx:for="{{catlist}}" wx:key="unique" data-item="{{item}}" catchtap="playlike"
+			data-id="{{item.id}}">{{item.name}}</view>
+	</view>
+
+	<view class="section">
+		<picker bindchange="bindPickerChange" value="{{index}}" range="{{arr}}">
+			<view class="picker">
+				当前选择：{{arr[index]}}
+			</view>
+		</picker>
+	</view>
+</view>

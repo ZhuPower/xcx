@@ -30,7 +30,7 @@
 				<text>城市</text>
 				<text>{{userInfo.city}}</text>
 			</view>
-			
+			<navigator url="/pages/Comics2/pages/book/book" class="Comics2">漫画</navigator>
 		</view>
 	</view>
 	<button wx:if="{{isUser}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="loginBtn">登录</button>

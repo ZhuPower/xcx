@@ -72,7 +72,7 @@
   margin: 0px 56rpx;
 }
 
-.mainBox>view{
+.mainBox>view,.mainBox>navigator{
   height: 113rpx;
   display: flex;
   align-items: center;
