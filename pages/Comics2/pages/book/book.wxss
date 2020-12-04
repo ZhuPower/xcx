@@ -29,7 +29,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background: #ccc;
+  background: #151d30;
+  color: #737783;
   margin-bottom: 1%;
   text-align: center;
   font-size: 24rpx;
