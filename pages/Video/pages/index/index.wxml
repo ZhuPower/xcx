@@ -22,7 +22,7 @@
 			<view class="listUl">
 				<view class="listLi" wx:for="{{item.list}}" wx:for-index="index2" wx:for-item="item2" wx:key="id"
 					data-id="{{item2.id}}" catchtap="goDetail">
-					<!-- <image src="{{item2.img}}"></image> -->
+					<image src="{{item2.img}}"></image>
 					<text>{{item2.name}}</text>
 				</view>
 			</view>
