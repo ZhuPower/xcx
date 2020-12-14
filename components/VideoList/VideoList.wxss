@@ -10,6 +10,9 @@
   box-sizing: border-box;
   padding: 118rpx 30rpx 88rpx 30rpx;
 }
+.listMain.more{
+  padding-bottom: 0px;
+}
 
 .listMain .listBox {
   overflow: hidden;

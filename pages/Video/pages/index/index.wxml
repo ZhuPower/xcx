@@ -21,13 +21,14 @@
 			</view>
 			<view class="listUl">
 				<view class="listLi" wx:for="{{item.list}}" wx:for-index="index2" wx:for-item="item2" wx:key="id"
-					data-id="{{item2.id}}" catchtap="goDetail">
+					data-id="{{item2.id}}" catchtap="goDetail" wx:if="{{index2 < (item.list.length - item.list.length % 3)}}">
 					<image src="{{item2.img}}"></image>
 					<text>{{item2.name}}</text>
 				</view>
 			</view>
 		</view>
 	</view>
-	<getResources type="video" isRefresh="{oData ? true : false}" bindresChange="resChange" wx:if="{{isShow}}"></getResources>
+	<getResources type="video" isRefresh="{oData ? true : false}" bindresChange="resChange" wx:if="{{isShow}}">
+	</getResources>
 	<NavBar navType="Video" navPath="index"></NavBar>
 </view>

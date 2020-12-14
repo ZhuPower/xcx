@@ -3,9 +3,9 @@
 <view class="comicsIndexWrap">
   <NavTitle type="Comics" navPath="index" isOpacity="true"></NavTitle>
   <view class="banner">
-    <swiper indicator-dots="{{swiperBanner.dots}}" autoplay="{{swiperBanner.autoplay}}"
-      interval="{{swiperBanner.interval}}" duration="{{swiperBanner.duration}}" circular="{{swiperBanner.circular}}"
-      indicator-active-color="{{swiperBanner.indicatorActive}}">
+    <swiper indicator-dots="true" autoplay="true"
+      interval="2000" duration="500" circular="true"
+      indicator-active-color="#ff7830">
       <block wx:for="{{banner}}" wx:key="vid">
         <swiper-item data-id="{{item.vid}}" catchtap="goDetail">
           <image src="{{item.img}}" lazy-load="true" webp="true"></image>

@@ -14,11 +14,23 @@
   height: 300rpx;
   overflow: hidden;
   border-radius: 20rpx;
+  position: relative;
 }
 
 .videoDetailWrap .top .topLeft image {
   width: 220rpx;
   height: 300rpx;
+}
+
+.videoDetailWrap .top .topLeft icon{
+  position: absolute;
+  right: 20rpx;
+  bottom: 10rpx;
+}
+
+icon.iconshoucang,icon.iconlujing{
+  color: #ff7830;
+  font-size: 60rpx;
 }
 
 .videoDetailWrap .top .topRight {

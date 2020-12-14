@@ -1,0 +1,28 @@
+<!--components/playList/playList.wxml-->
+<view class="playListMain {{type == '0' ? 'xq':'qt'}} {{isHeight ? 'cur' : ''}}">
+  <view class="box1"></view>
+  <view class="box2">
+    <view class="box2h">
+      <text>播放列表</text>
+      <view catchtap="onAllDel">
+        <text class="iconfont icondustbin_icon"></text>
+        <text>清空</text>
+      </view>
+    </view>
+    <view class="box2c">
+      <view class="list" wx:for="{{oData.list}}" wx:key="index">
+        <view class="listLeft" catchtap="onSelect" data-index="{{index}}">
+          <text class="iconfont mr {{ (nowIndex == index && isPlaying) ? 'iconzanting' : 'iconbofang4'}}"></text>
+          <text>{{item.name}}</text>
+        </view>
+        <view class="listCen">
+          {{item.singer[0].name}}
+        </view>
+        <view class="listRIght">
+          <text class="iconfont mr {{item.isCollect ? 'iconlujing' : 'iconshoucang'}}" catchtap="onCollect" data-index="{{index}}"></text>
+          <text class="iconfont icondustbin_icon" catchtap="onDel" data-index="{{index}}"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

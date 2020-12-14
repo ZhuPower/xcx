@@ -1,1 +1,78 @@
 /* pages/Collect/Collect.wxss */
+.CollectWrap .tabHead {
+  height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #3e3c4c;
+}
+
+.CollectWrap .tabHead view {
+  width: 33.33%;
+  display: block;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.CollectWrap .tabHead view.cur {
+  color: #ff7830;
+}
+
+.CollectWrap .tabCon .tabList {
+  display: none;
+}
+
+.CollectWrap .tabCon .tabList.cur {
+  display: block;
+}
+
+.CollectWrap .tabCon {
+  padding-bottom: 88rpx;
+}
+
+.tabList>view {
+  padding: 30rpx;
+  border-bottom: 1px solid #3e3c4c;
+  display: flex;
+  align-items: center;
+}
+
+.tabList>view image {
+  width: 150rpx;
+  margin-right: 30rpx;
+  border-radius: 10rpx;
+}
+
+.tabList .boxRight {
+  width: 480rpx;
+  overflow: hidden;
+}
+
+.tabList.Comics>view image {
+  width: 250rpx;
+}
+
+.tabList.Comics .boxRight {
+  width: 380rpx;
+}
+
+.tabList .boxRight .boxName {
+  width: 100%;
+  overflow: hidden;
+  line-height: 40rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+.tabList .boxRight .boxInfo {
+  font-size: 24rpx;
+  color: #60606d;
+}
+
+.tabList>view>text {
+  font-size: 50rpx;
+  color: #ff7830;
+}

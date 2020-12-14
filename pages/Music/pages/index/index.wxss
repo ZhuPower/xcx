@@ -16,6 +16,7 @@
 
 .musicIndexWrap .main {
   padding: 0px 30rpx;
+  padding-bottom: 88rpx;
 }
 
 .musicIndexWrap .main .title {
@@ -26,7 +27,6 @@
 
 .musicIndexWrap .main .musicListBox {
   overflow: hidden;
-  padding-bottom: 88rpx;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -73,4 +73,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.musicIndexWrap .main .musicBox .h3 {
+  display: flex;
+  justify-content: space-between;
+  height: 88rpx;
+  align-items: center;
 }

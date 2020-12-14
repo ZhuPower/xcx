@@ -5,6 +5,8 @@
   <view class="top" wx:if="{{!isPlay}}">
     <view class="topLeft">
       <image src="{{data.img}}"></image>
+      <icon class="iconfont iconshoucang" catchtap="collectBtn" wx:if="{{isCollect}}"></icon>
+      <icon class="iconfont iconlujing" catchtap="notCollectBtn" wx:else></icon>
     </view>
     <view class="topRight">
       <view class="videoName">{{data.name}}</view>

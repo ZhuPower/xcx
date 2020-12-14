@@ -2,7 +2,7 @@
 <view class='detail-container' style='background: url({{topinfo.pic_v12}}) no-repeat top/cover' wx:if="{{id}}"></view>
 <view class='detail-mask' wx:if="{{id}}"></view>
 <NavTitle type="Music" title="{{name}}" isOpacity="true"></NavTitle>
-<scroll-view class="listWrap" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
+<scroll-view class="listWrap" bindscrolltolower="fnBotton" scroll-y="true" refresher-enabled="true"
   refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
   <block wx:if="{{id}}">
     <view class='detail-info'>

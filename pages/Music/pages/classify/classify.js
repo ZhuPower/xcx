@@ -1,32 +1,15 @@
 // pages/Music/pages/classify/classify.js
-const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    proxyUrl: apiUrl.apiUrl.proxyUrl,
-    toplist: apiUrl.apiUrl.music.toplist,
-    img: apiUrl.apiUrl.music.img,
-    fnAjax: fnCon.fnAjax,
     aToplist: []
   },
-  getRank() {
-    let url = this.data.toplist
-    let data = {
-      page: 'index',
-      format: 'html',
-      tpl: 'macv4',
-      v8debug: 1
-    }
-    this.data.fnAjax(url, data).then(res => {
-      this.setData({
-        aToplist: res.toplist
-      })
-    })
-  },
+
   goTopList(e) {
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
@@ -46,7 +29,25 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getRank()
+    if (app.globalData.sourceData) {
+      this.setData({
+        nIndex: app.globalData.nmusic,
+        isShow: app.globalData.isShow
+      })
+      fnCon.getSource(app, 'music', 'listType', this);
+    } else {
+      clearInterval(app.globalData.iTime)
+      app.globalData.iTime = setInterval(() => {
+        if (app.globalData.sourceData) {
+          clearInterval(app.globalData.iTime)
+          this.setData({
+            nIndex: app.globalData.nmusic,
+            isShow: app.globalData.isShow
+          })
+          fnCon.getSource(app, 'music', 'listType', this);
+        }
+      }, 20);
+    }
   },
 
   /**

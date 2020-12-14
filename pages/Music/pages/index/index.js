@@ -1,5 +1,4 @@
 // pages/Music/pages/index/index.js
-const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
 const app = getApp()
 Page({
@@ -8,51 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    proxyUrl: apiUrl.apiUrl.proxyUrl,
-    toplist: apiUrl.apiUrl.music.toplist,
-    img: apiUrl.apiUrl.music.img,
-    fnAjax: fnCon.fnAjax,
-    songList: [],
-    banner: [
-      'http://p1.music.126.net/sooZQ6BuDAtztTfS02e_hQ==/109951165457314199.jpg',
-      'http://p1.music.126.net/AcfS8ODMYZCzNqvjX1HoWQ==/109951165456003034.jpg',
-      'http://p1.music.126.net/qC-5B-_p4ld-ebX_uMgT8Q==/109951165456267803.jpg'
-    ]
-  },
-  getRank() {
-    let url = this.data.toplist
-    let data = {
-      page: 'index',
-      format: 'html',
-      tpl: 'macv4',
-      v8debug: 1
-    }
-    this.data.fnAjax(url, data).then(res => {
-      let arr = []
-      for (var key in res.songinfomap) {
-        let _obj = res.songinfomap[key]
-        let mid = _obj.songmid
-        let id = _obj.songid + ''
-        let name = _obj.songname
-        let singer = _obj.singer
-        let pic = `${this.data.img}${_obj.albummid}_1.jpg?max_age=2592000`
-        let obj = {
-          name: name,
-          mid: mid,
-          id: id,
-          singer: singer,
-          pic: pic,
-          url: '',
-          lyric: ''
-        }
-        arr.push(obj)
-      }
-      let num = arr.length % 3
-      arr.splice(-num, num)
-      this.setData({
-        songList: arr
-      })
-    })
+    isShow: false,
+    oData: null
   },
   goDetail(e) {
     let item = e.currentTarget.dataset.item
@@ -61,14 +17,24 @@ Page({
     let goMusic = fnCon.goMusic
 
     console.log(app.globalData.userInfo)
-    if (app.globalData.userInfo.musiclist[0].mid.indexOf(mid) == -1) {
-      app.globalData.userInfo.musiclist[0].mid.push(mid)
-      app.globalData.userInfo.musiclist[0].id.push(id)
+    if (app.globalData.musiclist.mid.indexOf(mid) == -1) {
+      app.globalData.musiclist.mid.push(mid)
+      app.globalData.musiclist.id.push(id)
+      app.globalData.musiclist.list.push(item)
       app.globalData.userInfo.musiclist[0].list.push(item)
     }
 
     if (app.globalData.isShow) {
       goMusic(id, mid)
+    }
+  },
+  resChange() {
+    if (app.globalData.nmusic != this.data.nIndex) {
+      this.setData({
+        nIndex: app.globalData.nmusic,
+        oData: null
+      })
+      fnCon.getSource(app, 'music', 'index', this);
     }
   },
   /**
@@ -82,9 +48,25 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getRank();
-    //this.getRankInfo(27)
-    // this.bb();
+    if (app.globalData.sourceData) {
+      this.setData({
+        nIndex: app.globalData.nmusic,
+        isShow: app.globalData.isShow
+      })
+      fnCon.getSource(app, 'music', 'index', this);
+    } else {
+      clearInterval(app.globalData.iTime)
+      app.globalData.iTime = setInterval(() => {
+        if (app.globalData.sourceData) {
+          clearInterval(app.globalData.iTime)
+          this.setData({
+            nIndex: app.globalData.nmusic,
+            isShow: app.globalData.isShow
+          })
+          fnCon.getSource(app, 'music', 'index', this);
+        }
+      }, 20);
+    }
   },
 
   /**

@@ -83,6 +83,24 @@
           "pathName": "pages/Comics2/pages/book/book",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/Video/pages/index/index",
+          "pathName": "pages/Video/pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Collect/Collect",
+          "pathName": "pages/Collect/Collect",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Music/pages/detail/detail",
+          "pathName": "pages/Music/pages/detail/detail",
+          "query": "id=407886&mid=0016IvEW0kcA1M",
+          "scene": 1007
         }
       ]
     }

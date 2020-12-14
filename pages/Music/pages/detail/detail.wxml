@@ -3,7 +3,6 @@
   <view class="player-container" style="background:url({{musicInfo.pic}}) center/cover no-repeat"></view>
   <view class="player-mask"></view>
   <view class="player-info">
-    {{backgroundAudioManager.coverImgUrl}}
     <!-- 封面信息 -->
     <view class="player-disc {{isPlaying?'play': ''}}" bind:tap="onChangeLyricShow" hidden="{{isLyricShow}}">
       <image class="player-img rotation {{isPlaying?'':'rotation-paused'}}" src="{{musicInfo.pic}}"></image>
@@ -20,10 +19,17 @@
 
     <!-- 控制面板 -->
     <view class="control">
+      <view class="playMode" catchtap="changePlayMode">
+        <text class="iconfont iconliebiaoshunxu" wx:if="{{playMode == 0}}"></text>
+        <text class="iconfont iconxunhuan" wx:elif="{{playMode == 1}}"></text>
+        <text class="iconfont iconhanhan-01-01" wx:elif="{{playMode == 2}}"></text>
+        <text class="iconfont iconsuiji" wx:elif="{{playMode == 3}}"></text>
+      </view>
       <text class="iconfont iconshangyiqu101" bind:tap="onPrev"></text>
       <text class="iconfont {{isPlaying?'iconzanting':'iconbofang4'}}" bind:tap="togglePlaying"></text>
       <text class="iconfont iconxiayiqu101" bind:tap="onNext"></text>
+      <text class="iconfont iconlist" catchtap="showList"></text>
     </view>
-
   </view>
+  <playList type="0" isHeight="{{isHeight}}" oData="{{musicList}}" nowIndex="{{nowIndex}}" isPlaying="{{isPlaying}}" bindonSelect="onSelect" bindonAllDel="onAllDel" bindonDel="onDel" bindonCollect="onCollect"></playList>
 </view>

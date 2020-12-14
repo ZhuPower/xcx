@@ -1,5 +1,4 @@
 // pages/Music/pages/detail/detail.js
-const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
 // 正在播放歌曲的index
 let nowPlayingIndex = 0
@@ -13,16 +12,89 @@ Page({
    * 页面的初始数据
    */
   data: {
-    proxyUrl: apiUrl.apiUrl.proxyUrl,
-    songInfo: apiUrl.apiUrl.music.songInfo,
-    songSrc: apiUrl.apiUrl.music.songSrc,
-    img: apiUrl.apiUrl.music.img,
-    fnAjax: fnCon.fnAjax,
     musicInfo: {},
     isPlaying: false, // false表示不播放，true表示正在播放
     isLyricShow: false, //表示当前歌词是否显示
     isSame: false, // 表示是否为同一首歌
-    isShow:false
+    isShow: false,
+    playMode: 0,
+    musicList: [],
+    isHeight: false,
+    nowIndex: 0
+  },
+  getData() {
+    let that = this;
+    if (app.globalData.sourceData) {
+      this.setData({
+        nIndex: app.globalData.nmusic,
+        isShow: app.globalData.isShow
+      })
+      fnCon.getSource(app, 'music', 'detail', this, '', '', setFn);
+    } else {
+      clearInterval(app.globalData.iTime)
+      app.globalData.iTime = setInterval(() => {
+        if (app.globalData.sourceData) {
+          clearInterval(app.globalData.iTime)
+          this.setData({
+            nIndex: app.globalData.nmusic,
+            isShow: app.globalData.isShow
+          })
+          fnCon.getSource(app, 'music', 'detail', this, '', '', setFn);
+        }
+      }, 20);
+    }
+
+    function setFn(obj) {
+      if (!obj.name) {
+        obj.name = that.data.musicInfo.name
+      }
+      if (!obj.songImg) {
+        obj.songImg = that.data.musicInfo.pic
+      }
+      if (!obj.singer) {
+        obj.singer = that.data.musicInfo.singer
+      }
+      if (obj.str) {
+        backgroundAudioManager.src = obj.str
+      }
+
+      backgroundAudioManager.title = obj.name
+      backgroundAudioManager.coverImgUrl = obj.songImg
+      backgroundAudioManager.singer = obj.singer
+      backgroundAudioManager.epname = obj.name
+
+
+      if (!app.globalData.musiclist.list[nowPlayingIndex].name) {
+        app.globalData.musiclist.list[nowPlayingIndex].name = obj.name
+      }
+
+      if (!app.globalData.musiclist.list[nowPlayingIndex].pic) {
+        app.globalData.musiclist.list[nowPlayingIndex].pic = obj.songImg
+      }
+
+      if (app.globalData.musiclist.list[nowPlayingIndex].singer.length == 0) {
+        app.globalData.musiclist.list[nowPlayingIndex].singer = obj.singer
+      }
+
+      if (!app.globalData.musiclist.list[nowPlayingIndex].lyric) {
+        app.globalData.musiclist.list[nowPlayingIndex].lyric = obj.lyric
+        that.setData({
+          'musicInfo.lyric': obj.lyric
+        })
+      }
+
+      if (!app.globalData.musiclist.list[nowPlayingIndex].url) {
+        app.globalData.musiclist.list[nowPlayingIndex].url = obj.str
+      }
+
+      that.setData({
+        isPlaying: true
+      })
+
+      wx.setNavigationBarTitle({
+        title: obj.name || that.data.musicInfo.name
+      })
+    }
   },
   getMusic() {
     backgroundAudioManager.stop()
@@ -34,95 +106,8 @@ Page({
       backgroundAudioManager.epname = this.data.musicInfo.name
       backgroundAudioManager.src = this.data.musicInfo.url
     } else {
-      let url = this.data.songInfo
-      let data = {
-        data: `{"req_0":{"module":"vkey.GetVkeyServer","method":"CgiGetVkey","param":{"guid":"1236856180","songmid":["${this.data.musicInfo.mid}"],"songtype":[0],"uin":"2466469516","loginflag":1,"platform":"23","h5to":"speed"}},"detail":{"module":"music.pf_song_detail_svr","method":"get_song_detail","param":{"song_id":${this.data.musicInfo.id}}},"comm":{"g_tk":599058787,"uin":2466469516,"format":"json","platform":"h5"}}`
-      }
-      this.data.fnAjax(url, data).then(res => {
-        console.log(res)
-        if (res.code == 0) {
-          if (res.detail.code == 0) {
-            let songImg = `${this.data.img}${res.detail.data.track_info.album.pmid}.jpg?max_age=2592000`
-            let name = res.detail.data.track_info.name
-            let singer = res.detail.data.track_info.singer[0].name
-
-            backgroundAudioManager.title = name
-            backgroundAudioManager.coverImgUrl = songImg
-            backgroundAudioManager.singer = singer
-            backgroundAudioManager.epname = name
-
-            if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].name) {
-              app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].name = name
-            }
-
-            if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].pic) {
-              app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].pic = songImg
-            }
-
-            if (app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].singer.length == 0) {
-              app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].singer = singer
-            }
-
-            wx.setNavigationBarTitle({
-              title: name
-            })
-
-            for (let x = 0; x < res.detail.data.info.length; x++) {
-              if (res.detail.data.info[x].type == 'lyric') {
-                let lyric = res.detail.data.info[x].content[0].value
-                if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].lyric) {
-                  app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].lyric = lyric
-                }
-
-                this.setData({
-                  'musicInfo.lyric': lyric
-                })
-
-              }
-            }
-          }
-
-          if (res.req_0.code == 0) {
-            let str = ''
-            if (res.req_0.data.midurlinfo[0].purl) {
-              str = `${this.data.songSrc}${res.req_0.data.midurlinfo[0].purl}`
-              backgroundAudioManager.src = str
-
-              if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].url) {
-                app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].url = str
-              }
-
-              this.setData({
-                isPlaying: true
-              })
-            } else {
-              let url = `https://i.y.qq.com/v8/playsong.html?songmid=${this.data.musicInfo.mid}&ADTAG=myqq&from=myqq&channel=10007100`
-              this.data.fnAjax(url, {}).then(res => {
-                let num0 = res.indexOf(',"m4aUrl":"')
-                if (num0 > -1) {
-                  let str0 = res.substring(num0 + 11)
-                  let num1 = str0.indexOf('","singer":')
-
-                  if (num1 > -1) {
-                    let str1 = str0.substring(0, num1)
-                    backgroundAudioManager.src = str1
-
-                    if (!app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].url) {
-                      app.globalData.userInfo.musiclist[0].list[nowPlayingIndex].url = str1
-                    }
-
-                    this.setData({
-                      isPlaying: true
-                    })
-                  }
-                }
-              })
-            }
-          }
-        }
-      })
+      this.getData();
     }
-
   },
   togglePlaying() {
     // 正在播放
@@ -136,31 +121,100 @@ Page({
     })
   },
   onPrev() {
-    nowPlayingIndex--
-    if (nowPlayingIndex < 0) {
-      nowPlayingIndex = app.globalData.userInfo.musiclist[0].list.length - 1
+    let playMode = this.data.playMode
+    let onOff = true
+    if (playMode == 0) {
+      if (nowPlayingIndex > 0) {
+        nowPlayingIndex--
+      } else {
+        onOff = false
+        wx.showToast({
+          title: '已是第一首',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } else if (playMode == 1) {
+      nowPlayingIndex--
+      if (nowPlayingIndex < 0) {
+        nowPlayingIndex = app.globalData.musiclist.list.length - 1
+      }
+    } else if (playMode == 2) {
+
+    } else if (playMode == 3) {
+      let num = app.globalData.musiclist.list.length
+      nowPlayingIndex = Math.floor(Math.random() * num)
     }
-    let musicInfo = app.globalData.userInfo.musiclist[0].list[nowPlayingIndex]
-    this.setData({
-      musicInfo: musicInfo
-    })
-    this.getMusic()
+
+    if (onOff) {
+      let musicInfo = app.globalData.musiclist.list[nowPlayingIndex]
+      this.setData({
+        nowIndex: nowPlayingIndex,
+        musicInfo: musicInfo
+      })
+      this.getMusic()
+    }
   },
   onNext() {
-    nowPlayingIndex++
-    if (nowPlayingIndex == app.globalData.userInfo.musiclist[0].list.length) {
-      nowPlayingIndex = 0
+    let playMode = this.data.playMode
+    let onOff = true
+    if (playMode == 0) {
+      if (nowPlayingIndex < app.globalData.musiclist.list.length - 1) {
+        nowPlayingIndex++
+      } else {
+        onOff = false
+        wx.showToast({
+          title: '已是最后一首',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } else if (playMode == 1) {
+      nowPlayingIndex++
+      if (nowPlayingIndex == app.globalData.musiclist.list.length) {
+        nowPlayingIndex = 0
+      }
+    } else if (playMode == 2) {
+
+    } else if (playMode == 3) {
+      let num = app.globalData.musiclist.list.length
+      nowPlayingIndex = Math.floor(Math.random() * num)
     }
-    let musicInfo = app.globalData.userInfo.musiclist[0].list[nowPlayingIndex]
-    this.setData({
-      musicInfo: musicInfo
-    })
-    this.getMusic()
+
+    if (onOff) {
+      let musicInfo = app.globalData.musiclist.list[nowPlayingIndex]
+      this.setData({
+        nowIndex: nowPlayingIndex,
+        musicInfo: musicInfo
+      })
+      this.getMusic()
+    }
+  },
+  onSelect(e) {
+    if (nowPlayingIndex != e.detail.index) {
+      nowPlayingIndex = e.detail.index
+      let musicInfo = app.globalData.musiclist.list[nowPlayingIndex]
+      this.setData({
+        nowIndex: nowPlayingIndex,
+        musicInfo: musicInfo
+      })
+      this.getMusic()
+    } else {
+      this.togglePlaying();
+    }
+
   },
   onChangeLyricShow() {
-    this.setData({
-      isLyricShow: !this.data.isLyricShow
-    })
+    if (this.data.isHeight) {
+      this.setData({
+        isHeight: false,
+      })
+    } else {
+      this.setData({
+        isLyricShow: !this.data.isLyricShow,
+      })
+    }
+
   },
   timeUpdate(event) {
     this.selectComponent('.lyric').update(event.detail.currentTime)
@@ -175,16 +229,133 @@ Page({
       isPlaying: false,
     })
   },
+  showList() {
+    this.setData({
+      isHeight: !this.data.isHeight
+    })
+  },
+  changePlayMode() {
+    let playMode = this.data.playMode
+    if (playMode < 3) {
+      playMode++;
+    } else {
+      playMode = 0
+    }
+    
+    this.setData({
+      playMode: playMode
+    })
+  },
+  onAllDel() {
+    backgroundAudioManager.stop()
+    app.globalData.musiclist.list = [];
+    app.globalData.musiclist.id = [];
+    app.globalData.musiclist.mid = [];
+    app.globalData.userInfo.musiclist[0].list = [];
+    this.setData({
+      nowIndex: 0,
+      musicList: [],
+      musicInfo: {}
+    })
+    wx.showToast({
+      title: '播放列表已清空',
+      icon: 'none',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.navigateBack({
+        delta: 1
+      })
+    }, 1000)
+  },
+  onDel(e) {
+    let num = e.detail.index
+    if (nowPlayingIndex != num) {
+      app.globalData.musiclist.list.splice(num, 1);
+      app.globalData.musiclist.id.splice(num, 1);
+      app.globalData.musiclist.mid.splice(num, 1)
+      if (nowPlayingIndex > num) {
+        nowPlayingIndex--
+      }
+
+      this.setData({
+        nowIndex: nowPlayingIndex,
+        musicList: app.globalData.musiclist
+      })
+    } else if (nowPlayingIndex == num) {
+      backgroundAudioManager.stop()
+      app.globalData.musiclist.list.splice(num, 1);
+      app.globalData.musiclist.id.splice(num, 1);
+      app.globalData.musiclist.mid.splice(num, 1)
+      nowPlayingIndex = 0
+      this.setData({
+        nowIndex: nowPlayingIndex,
+        musicList: app.globalData.musiclist
+      })
+    }
+  },
+  onCollect(e) {
+    let num = e.detail.index
+    let _o = app.globalData.musiclist.list[num]
+    let arr = app.globalData.userInfo.musiclist[1].list
+ 
+    if (_o.isCollect) {
+      _o.isCollect = false
+      for (let i = 0; i < arr.length; i++) {
+        if (_o.id == arr[i].id) {
+          arr.splice(i, 1);
+          wx.showToast({
+            title: '取消收藏！',
+            icon: 'none',
+            duration: 500
+          })
+          break;
+        }
+      }
+    } else {
+      _o.isCollect = true
+      let obj = {
+        id: _o.id,
+        mid: _o.mid,
+        name: _o.name,
+        pic: _o.pic,
+        lyric: '',
+        singer: _o.singer
+      }
+      app.globalData.userInfo.musiclist[1].list.push(obj);
+      wx.showToast({
+        title: '收藏成功！',
+        icon: 'none',
+        duration: 500
+      })
+    }
+
+    this.setData({
+      musicList: app.globalData.musiclist,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    nowPlayingIndex = app.globalData.userInfo.musiclist[0].mid.indexOf(options.mid)
+    nowPlayingIndex = app.globalData.musiclist.mid.indexOf(options.mid)
+    let arr = app.globalData.userInfo.musiclist[1].list;
+    for (let i = 0; i < arr.length; i++) {
+      let arr1 = app.globalData.musiclist.list;
+      for (let j = 0; j < arr1.length; j++) {
+        if (arr[i].mid == arr1[j].mid) {
+          arr1[j].isCollect = true
+          break;
+        }
+      }
+    }
 
     if (nowPlayingIndex > -1) {
       this.setData({
-        musicInfo: JSON.parse(JSON.stringify(app.globalData.userInfo.musiclist[0].list[nowPlayingIndex]))
+        nowIndex: nowPlayingIndex,
+        musicList: app.globalData.musiclist,
+        musicInfo: JSON.parse(JSON.stringify(app.globalData.musiclist.list[nowPlayingIndex]))
       })
 
       wx.setNavigationBarTitle({
@@ -203,14 +374,16 @@ Page({
         url: '',
         lyric: ''
       }
+      app.globalData.musiclist.mid.push(options.mid)
+      app.globalData.musiclist.id.push(options.id)
+      app.globalData.musiclist.list.push(obj)
 
       this.setData({
+        nowIndex: nowPlayingIndex,
+        musicList: app.globalData.musiclist,
         musicInfo: obj
       })
 
-      app.globalData.userInfo.musiclist[0].mid.push(options.mid)
-      app.globalData.userInfo.musiclist[0].id.push(options.id)
-      app.globalData.userInfo.musiclist[0].list.push(obj)
     }
 
     if (options.mid == app.globalData.songmid) {
@@ -231,7 +404,7 @@ Page({
    */
   onReady: function () {
     this.setData({
-      isShow:app.globalData.isShow
+      isShow: app.globalData.isShow
     })
   },
 

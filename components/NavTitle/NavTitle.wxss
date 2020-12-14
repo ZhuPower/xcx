@@ -32,7 +32,7 @@
 }
 
 .headerBox .pad-top {
-  background: #090723;
+  /* background: #090723; */
   height: 34rpx;
 }
 

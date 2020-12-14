@@ -1,30 +1,41 @@
 <!--pages/Music/pages/index/index.wxml-->
-<view class="musicIndexWrap"> 
+<view class="musicIndexWrap">
   <NavTitle type="Music" navPath="index"></NavTitle>
-  <view class="banner">
+  <view class="banner" wx:if="{{oData.banner}}">
     <swiper indicator-dots="true" autoplay="true" interval="2000" duration="500" circular="true"
       indicator-active-color="#ff7830">
-      <block wx:for="{{banner}}" wx:key="index">
+      <block wx:for="{{oData.banner}}" wx:key="index">
         <swiper-item>
           <image src="{{item}}" lazy-load="{{true}}" mode="widthFix"></image>
         </swiper-item>
       </block>
     </swiper>
   </view>
-  <view class="main">
-    <view class="musicListBox">
-      <view class="musicList" wx:for="{{songList}}" wx:for-index="key" wx:for-item="value" wx:key="key" catchtap="goDetail" data-mid="{{value.mid}}" data-id="{{value.id}}" data-item="{{value}}">
-        <image class="albumdBox" src="{{value.pic}}"></image>
-        <view class="songInfo">
-          <view>
-            <view class="songname">{{value.name}}</view>
-            <view class="singer">
-              <text wx:for="{{value.singer}}"  wx:key="index">{{item.name}}<block wx:if="{{index < value.singer.length-1}}">、</block></text>
+  <view class="main" wx:if="{{oData.list}}">
+    <view class="musicBox" wx:for="{{oData.list}}" wx:key="index">
+      <view class="h3">
+        <text>{{item.name}}</text>
+        <navigator url="../list/list?data={{item.more}}" class="searchBtn" wx:if="{{item.more}}">
+          More</navigator>
+      </view>
+      <view class="musicListBox">
+        <view class="musicList" wx:for="{{item.songList}}" wx:for-index="key" wx:for-item="value" wx:key="key"
+          catchtap="goDetail" data-mid="{{value.mid}}" data-id="{{value.id}}" data-item="{{value}}">
+          <image class="albumdBox" src="{{value.pic}}"></image>
+          <view class="songInfo">
+            <view>
+              <view class="songname">{{value.name}}</view>
+              <view class="singer">
+                <text wx:for="{{value.singer}}" wx:key="index">{{item.name}}<block
+                    wx:if="{{index < value.singer.length-1}}">、</block></text>
+              </view>
             </view>
           </view>
         </view>
       </view>
     </view>
   </view>
+  <getResources type="music" isRefresh="{oData ? true : false}" bindresChange="resChange" wx:if="{{isShow}}">
+  </getResources>
   <NavBar navType="Music" navPath="index"></NavBar>
 </view>

@@ -1,5 +1,5 @@
 <!--components/VideoList/VideoList.wxml-->
-<scroll-view class="listMain" bindscrolltolower="fnBotton" scroll-y="{{true}}" refresher-enabled="{{true}}"
+<scroll-view class="listMain {{oData.type}}" bindscrolltolower="fnBotton" scroll-y="true" refresher-enabled="true"
   refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
   <view class="listBox" wx:for="{{videoList}}" wx:key="index" catchtap="goDetail" data-id="{{item.id}}">
     <image src="{{item.img}}" lazy-load="{{true}}"></image>

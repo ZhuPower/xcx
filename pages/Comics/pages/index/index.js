@@ -13,14 +13,6 @@ Page({
     fnAjax:fnCon.fnAjax,
     banner:[],
     bannerCurrent: 0,
-    swiperBanner:{
-      dots:true,
-      autoplay:true,
-      interval:2000,
-      duration:500,
-      circular:true,
-      indicatorActive:'#ff7830'
-    },
     comicsLists:[]
   },
 

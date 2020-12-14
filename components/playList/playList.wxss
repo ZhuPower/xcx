@@ -1,0 +1,101 @@
+/* components/playList/playList.wxss */
+@import "/assets/fonts/iconfont.wxss";
+
+.playListMain {
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  background: rgba(21, 29, 48, .8)
+}
+
+.playListMain.xq {
+  bottom: 20%;
+}
+
+.playListMain .box2 {
+  height: 0px;
+  overflow: hidden;
+  transition: all .6s;
+}
+
+.playListMain.cur .box2 {
+  height: 482rpx;
+  transition: all .6s;
+}
+
+.playListMain .box2 .box2h {
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 30rpx;
+  box-sizing: border-box;
+  border-bottom: 2px solid #3e3c4c;
+}
+
+.playListMain .box2 .box2h .icondustbin_icon {
+  margin-right: 10rpx;
+  font-size: 40rpx;
+}
+
+.playListMain .box2 .box2c {
+  height: auto;
+  max-height: 400rpx;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.playListMain .box2 .box2c .list {
+  height: 76rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #3e3c4c;
+  width: 100%;
+  padding: 0px 30rpx;
+  box-sizing: border-box;
+}
+
+.playListMain .box2 .box2c .list>view {
+  display: flex;
+  align-items: center;
+}
+
+.playListMain .box2 .box2c .list .listLeft {
+  width: 54%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playListMain .box2 .box2c .list .listCen {
+  width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playListMain .box2 .box2c .list .listRIght {
+  width: 16%;
+}
+
+.playListMain .box2 .box2c .list .iconfont {
+  font-size: 40rpx;
+}
+
+.playListMain .box2 .box2c .list .iconzanting,
+.playListMain .box2 .box2c .list .iconbofang4 {
+  font-size: 50rpx;
+}
+
+.playListMain .box2 .box2c .list .iconshoucang,
+.playListMain .box2 .box2c .list .iconlujing {
+  font-size: 46rpx;
+  color: #ff7830;
+}
+
+.playListMain .box2 .box2c .list text.mr {
+  margin-right: 30rpx;
+}

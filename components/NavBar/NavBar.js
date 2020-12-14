@@ -65,7 +65,30 @@ Component({
             })
           }
         })
-      }else{
+        if (app.globalData.isUser) {
+          app.globalData.isUser = false
+          let data2 = {
+            action: "getContent",
+            item: `/xcx/${app.globalData.openid}.txt`
+          }
+          this.data.fnAjax(url, data2, 'POST').then(res => {
+            console.log(typeof res.result == 'string')
+            if (typeof res.result == 'string') {
+
+              let obj = JSON.parse(res.result)
+              console.log(obj)
+              app.globalData.userInfo = obj
+              console.log(app.globalData.userInfo)
+              let arr = app.globalData.userInfo.musiclist[0].list
+              for (let i = 0; i < arr.length; i++) {
+                app.globalData.musiclist.mid.push(arr[i].mid)
+                app.globalData.musiclist.id.push(arr[i].id)
+                app.globalData.musiclist.list.push(arr[i])
+              }
+            }
+          })
+        }
+      } else {
         this.setData({
           isShow: app.globalData.isShow
         })

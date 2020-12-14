@@ -19,7 +19,8 @@ Page({
     isShow2: false,
     isNav: false,
     tabIndex: 0,
-    nowChapter:0
+    nowChapter: 0,
+    isCollect: true
   },
   getInfoNovel() {
     let url = `${this.data.infoNovel}/${this.data.novelId}.html`
@@ -51,7 +52,7 @@ Page({
     let id = e.currentTarget.dataset.id
     let goNovel = fnCon.goNovel
     this.setData({
-      nowChapter:parseInt(id)
+      nowChapter: parseInt(id)
     })
     goNovel(id)
   },
@@ -72,8 +73,59 @@ Page({
       tabIndex: num
     })
   },
-  scrollFn2(e){
+  scrollFn2(e) {
     console.log(e.detail.scrollTop)
+  },
+
+  collectBtn() {
+    if (this.data.detailData.Name && this.data.aChapter.length>0) {
+      if (this.data.isCollect) {
+        let obj = {
+          name: this.data.detailData.Name,
+          author:this.data.detailData.Author,
+          img: `${this.data.img}${this.data.detailData.Img}`,
+          id: this.data.detailData.Id,
+          chapter:this.data.nowChapter
+        }
+        app.globalData.userInfo.novellist.push(obj);
+        this.setData({
+          isCollect: false
+        })
+      } else {
+        let arr = app.globalData.userInfo.novellist;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].id == this.data.detailData.Id) {
+            arr.splice(i, 1);
+            this.setData({
+              isCollect: true
+            })
+            break;
+          }
+        }
+      }
+    } else {
+      wx.showToast({
+        title: '您点的太快了，请稍后再试',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+  getCollect() {
+    let id = setInterval(() => {
+      if (this.data.detailData.Name) {
+        clearInterval(id);
+        let arr = app.globalData.userInfo.novellist;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].id == this.data.detailData.Id) {
+            this.setData({
+              isCollect: false
+            })
+            break;
+          }
+        }
+      }
+    }, 20);
   },
 
   /**
@@ -95,6 +147,18 @@ Page({
     this.setData({
       isShow: app.globalData.isShow
     })
+
+    if (app.globalData.sourceData) {
+      this.getCollect();
+    } else {
+      clearInterval(app.globalData.iTime)
+      app.globalData.iTime = setInterval(() => {
+        if (app.globalData.sourceData) {
+          clearInterval(app.globalData.iTime)
+          this.getCollect();
+        }
+      }, 20);
+    }
   },
 
   /**

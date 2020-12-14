@@ -8,64 +8,119 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nIndex:0,
-    detailData:{},
-    aChapter:[],
-    comicId:0,
-    infoComics:apiUrl.apiUrl.comics.infoComics,
-    chapterComics:apiUrl.apiUrl.comics.chapterComics,
-    fnAjax:fnCon.fnAjax,
-    isShow:false
+    nIndex: 0,
+    nChapter: 0,
+    nowChapter: 0,
+    detailData: {},
+    aChapter: [],
+    comicId: 0,
+    infoComics: apiUrl.apiUrl.comics.infoComics,
+    chapterComics: apiUrl.apiUrl.comics.chapterComics,
+    fnAjax: fnCon.fnAjax,
+    isShow: false,
+    isCollect: true
   },
 
-  getInfoComics(){
+  getInfoComics() {
     let url = this.data.infoComics
 
     let data = {
       comic_id: this.data.comicId
     }
 
-    this.data.fnAjax(url,data).then(res => {
-      if(res.code == 200){
+    this.data.fnAjax(url, data).then(res => {
+      if (res.code == 200) {
         this.setData({
-          detailData:res.data
+          detailData: res.data
         })
 
         wx.setNavigationBarTitle({
-          title:res.data.title 
+          title: res.data.title
         })
       }
     })
   },
 
-  getChapterComics(){
+  getChapterComics() {
     let url = this.data.chapterComics
 
     let data = {
       comic_id: this.data.comicId
     }
 
-    this.data.fnAjax(url,data).then(res => {
-      if(res.code == 200){
+    this.data.fnAjax(url, data).then(res => {
+      if (res.code == 200) {
         this.setData({
-          aChapter:res.data
+          aChapter: res.data,
+          nowChapter: res.data[0].chapter_id
         })
       }
     })
   },
 
-  goComicCon(e){
-    let id = e.currentTarget.dataset.id
-    let title = e.currentTarget.dataset.title
-    let index = e.currentTarget.dataset.index
+  goComicCon(e) {
+    let id = e.currentTarget.dataset.id || this.data.nowChapter
+    let title = e.currentTarget.dataset.title || this.data.detailData.title
+    let index = e.currentTarget.dataset.index || this.data.nChapter
     let goComicCon = fnCon.goComicCon
-    goComicCon(id,this.data.comicId,title,index)
+    goComicCon(id, this.data.comicId, title, index)
   },
-  tabFn(e){
+  tabFn(e) {
     let n = e.currentTarget.dataset.num
     this.setData({
-      nIndex:n
+      nIndex: n
     })
+  },
+  collectBtn() {
+    if (this.data.detailData.title && this.data.aChapter.length > 0) {
+      if (this.data.isCollect) {
+        let obj = {
+          name: this.data.detailData.title,
+          author: this.data.detailData.author_id,
+          img: `${this.data.detailData.cover_lateral}!banner-600`,
+          id: this.data.detailData.comic_id,
+          chapter: this.data.nowChapter,
+          nIndex:this.data.nChapter
+        }
+        app.globalData.userInfo.comicslist.push(obj);
+        this.setData({
+          isCollect: false
+        })
+      } else {
+        let arr = app.globalData.userInfo.comicslist;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].id == this.data.detailData.comic_id) {
+            arr.splice(i, 1);
+            this.setData({
+              isCollect: true
+            })
+            break;
+          }
+        }
+      }
+    } else {
+      wx.showToast({
+        title: '您点的太快了，请稍后再试',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+  getCollect() {
+    let id = setInterval(() => {
+      if (this.data.detailData.title) {
+        clearInterval(id);
+        let arr = app.globalData.userInfo.comicslist;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].id == this.data.detailData.comic_id) {
+            this.setData({
+              isCollect: false
+            })
+            break;
+          }
+        }
+      }
+    }, 20);
   },
 
   /**
@@ -74,7 +129,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.setData({
-      comicId:options.id
+      comicId: options.id
     })
   },
 
@@ -85,8 +140,20 @@ Page({
     this.getInfoComics()
     this.getChapterComics()
     this.setData({
-      isShow:app.globalData.isShow
+      isShow: app.globalData.isShow
     })
+
+    if (app.globalData.sourceData) {
+      this.getCollect();
+    } else {
+      clearInterval(app.globalData.iTime)
+      app.globalData.iTime = setInterval(() => {
+        if (app.globalData.sourceData) {
+          clearInterval(app.globalData.iTime)
+          this.getCollect();
+        }
+      }, 20);
+    }
   },
 
   /**

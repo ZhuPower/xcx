@@ -1,5 +1,4 @@
 // pages/Member/Member.js
-const apiUrl = require('../../utils/apiUrl')
 const fnCon = require('../../utils/common')
 let app = getApp()
 Page({
@@ -11,7 +10,8 @@ Page({
     fnAjax: fnCon.fnAjax,
     userInfo: {},
     isUser: true,
-    num: 0
+    num: 0,
+    navType: 'Novel'
   },
   bindGetUserInfo(e) {
     console.log(e.detail.userInfo)
@@ -19,7 +19,6 @@ Page({
       isUser: false,
       userInfo: e.detail.userInfo
     })
-
   },
   copyTex() {
     let num = this.data.num;
@@ -39,18 +38,13 @@ Page({
       })
     }, 3000)
   },
-  bbb() {
-    // let url = 'https://www.ehvip.cn/File/Edit'
-    // let data = {"action":"edit","item":"/xcx/新建文本文档 (2).txt","content":"154545"}
-    // this.data.fnAjax(url, data,'POST').then(res => {
-    //   console.log(res)
-
-    // })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      navType: options.type
+    })
     let that = this;
     wx.getSetting({
       success(res) {
@@ -76,7 +70,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**

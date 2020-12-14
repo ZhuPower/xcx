@@ -1,32 +1,5 @@
 const apiUrl = {
   proxyUrl: 'https://test.yijiago.com/gly/yiJiaGo/test/proxy.php',
-  parsing: [
-    {
-      name:'金桥解析',
-      url:'http://5.nmgbq.com/2/api.php', 
-      method:'POST'
-    },
-    {
-      name:'测试解析2',
-      url:'http://qq.peilili.com/mgjiexi/api.php',
-      method:'POST'
-    },
-    {
-      name:'测试解析',
-      url:'https://cdn.yangju.vip/kc/api.php',
-      method:'GET' 
-    },
-    {
-      name:'解析接口1',
-      url:'https://www.ckmov.com/Api.php',
-      method:'POST'
-    },
-    {
-      name:'1717解析',
-      url:'https://1717.ntryjd.net/1717yun/api.php',
-      method:'POST'
-    } 
-  ],
   music:{
     search:'https://c.y.qq.com/soso/fcgi-bin/client_search_cp',
     toplist:'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',

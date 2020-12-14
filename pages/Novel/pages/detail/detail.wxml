@@ -33,7 +33,7 @@
       </view>
     </view>
     <view class="footBox" wx:if="{{isShow && aChapter.length>0}}">
-      <text class="addBtn">加入书架</text>
+      <text class="addBtn" catchtap="collectBtn">{{isCollect ? '加入书架' : '移除书架'}}</text>
       <text class="readBtn" catchtap="goNovelCon" data-id="{{nowChapter}}">开始阅读</text>
     </view>
   </view>

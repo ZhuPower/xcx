@@ -1,2 +1,56 @@
 <!--pages/Collect/Collect.wxml-->
-<text>pages/Collect/Collect.wxml</text>
+<view class="CollectWrap">
+  <view class="tabHead">
+    <view class="{{navType == 'Novel' ? 'cur' : ''}}" catchtap="tabFn" data-type="Novel">小说</view>
+    <view class="{{navType == 'Comics' ? 'cur' : ''}}" catchtap="tabFn" data-type="Comics">漫画</view>
+    <view class="{{navType == 'Music' ? 'cur' : ''}}" catchtap="tabFn" data-type="Music">音乐</view>
+    <view class="{{navType == 'Video' ? 'cur' : ''}}" catchtap="tabFn" data-type="Video">视频</view>
+  </view>
+  <view class="tabCon">
+    <view class="tabList Novel {{navType == 'Novel' ? 'cur' : ''}}">
+      <view class="list" wx:for="{{userInfo.novellist}}" wx:key="index" data-item="{{item}}" data-type="novel"
+        catchtap="goDetail">
+        <image src="{{item.img}}" mode="widthFix"></image>
+        <view class="boxRight">
+          <text class="boxName">{{item.name}}</text>
+          <text class="boxInfo">作者：{{item.author}}</text>
+        </view>
+        <text class="iconfont iconlujing" catchtap="notCollect" data-type="novel" data-index="{{index}}"></text>
+      </view>
+    </view>
+    <view class="tabList Comics {{navType == 'Comics' ? 'cur' : ''}}">
+      <view class="list" wx:for="{{userInfo.comicslist}}" wx:key="index" data-item="{{item}}" data-type="comics"
+        catchtap="goDetail">
+        <image src="{{item.img}}" mode="widthFix" webp="true"></image>
+        <view class="boxRight">
+          <text class="boxName">{{item.name}}</text>
+          <text class="boxInfo">作者：{{item.author}}</text>
+        </view>
+        <text class="iconfont iconlujing" catchtap="notCollect" data-type="comics" data-index="{{index}}"></text>
+      </view>
+    </view>
+    <view class="tabList Music {{navType == 'Music' ? 'cur' : ''}}">
+      <view class="list" wx:for="{{userInfo.musiclist[1].list}}" wx:key="index" data-item="{{item}}" data-type="music"
+        catchtap="goDetail">
+        <image src="{{item.pic}}" mode="widthFix"></image>
+        <view class="boxRight">
+          <text class="boxName">{{item.name}}</text>
+          <text class="boxInfo">{{item.singer[0].name}}</text>
+        </view>
+        <text class="iconfont iconlujing" catchtap="notCollect" data-type="music" data-index="{{index}}"></text>
+      </view>
+    </view>
+    <view class="tabList Video {{navType == 'Video' ? 'cur' : ''}}">
+      <view class="list" wx:for="{{userInfo.videolist}}" wx:key="index" data-item="{{item}}" data-type="video"
+        catchtap="goDetail">
+        <image src="{{item.img}}" mode="widthFix"></image>
+        <view class="boxRight">
+          <text class="boxName">{{item.name}}</text>
+          <text class="boxInfo">来源：{{item.urlName}}</text>
+        </view>
+        <text class="iconfont iconlujing" catchtap="notCollect" data-type="video" data-index="{{index}}"></text>
+      </view>
+    </view>
+  </view>
+  <NavBar navType="{{navType}}" navPath="Collect"></NavBar>
+</view>

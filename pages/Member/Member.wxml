@@ -30,9 +30,8 @@
 				<text>城市</text>
 				<text>{{userInfo.city}}</text>
 			</view>
-			<navigator url="/pages/Comics2/pages/book/book" class="Comics2">漫画</navigator>
 		</view>
 	</view>
 	<button wx:if="{{isUser}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="loginBtn">登录</button>
-	<NavBar navType="Member" navPath="Member" wx:if="{{!isUser}}"></NavBar>
+	<NavBar navType="{{navType}}" navPath="Member" wx:if="{{!isUser}}"></NavBar>
 </view>

@@ -10,7 +10,11 @@ Page({
     list: [],
     oData: null,
     nIndex: 0,
-    isShow: false
+    isShow: false,
+    isRefresh: false,
+    isNext: true,
+    pagecount: 1,
+    page: 1
   },
   goDetail(e) {
     let id = e.currentTarget.dataset.id
@@ -23,9 +27,11 @@ Page({
         nIndex: app.globalData.nvideo,
         oData: null
       })
-      fnCon.getSource(app, 'index', this);
+      fnCon.getSource(app, 'video', 'index', this);
     }
   },
+  fnBotton() {},
+  fnTop() {},
 
   /**
    * 生命周期函数--监听页面加载
@@ -43,7 +49,7 @@ Page({
         nIndex: app.globalData.nvideo,
         isShow: app.globalData.isShow
       })
-      fnCon.getSource(app, 'index', this);
+      fnCon.getSource(app, 'video', 'index', this);
     } else {
       clearInterval(app.globalData.iTime)
       app.globalData.iTime = setInterval(() => {
@@ -53,7 +59,7 @@ Page({
             nIndex: app.globalData.nvideo,
             isShow: app.globalData.isShow
           })
-          fnCon.getSource(app, 'index', this);
+          fnCon.getSource(app, 'video', 'index', this);
         }
       }, 20);
     }

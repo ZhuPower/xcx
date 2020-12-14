@@ -2,6 +2,34 @@
 App({
   onLaunch: function (options) {
     this.autoUpdate()
+    wx.showModal({
+      title: '温馨提示',
+      content: '本程序仅供查询，如有需要请自行百度搜索观看。',
+      success(res) {}
+    })
+  },
+  onHide: function () {
+    if (this.globalData.isShow && this.globalData.openid) {
+      let url = 'https://www.ehvip.cn/File/Edit'
+      let content = JSON.stringify(this.globalData.userInfo)
+      let data = {
+        action: "edit",
+        item: `/xcx/${this.globalData.openid}.txt`,
+        content: content
+      }
+
+      wx.request({
+        url: url,
+        method: 'POST',
+        data: data,
+        header: {
+          'cookie': 'user_id=8754; login_status=ok; login_key=261936dda6b290ca28145e6c981e3ca6; path=xcx; path_tmp=xcx'
+        },
+        success(res) {
+
+        }
+      })
+    }
   },
   autoUpdate: function () {
     var self = this
@@ -68,9 +96,10 @@ App({
     })
   },
   globalData: {
-    sourceData:null,
-    nvideo:0,
-    iTime:null,
+    sourceData: null,
+    nvideo: 0,
+    nmusic: 0,
+    iTime: null,
     sourceUrl: [],
     openid: '',
     nowSource: {},
@@ -83,13 +112,18 @@ App({
     userInfo: {
       novellist: [],
       comicslist: [],
-      musiclist: [{
-        list: [],
-        id: [],
-        mid: []
-      }],
+      musiclist: [
+        { name: '默认列表', list: [] },
+        { name: '喜欢', list: [] }
+      ],
       videolist: []
     },
-    _userInfo:{}
+    isUser: true,
+    musiclist: {
+      name: '默认列表',
+      list: [],
+      id: [],
+      mid: []
+    }
   }
 })

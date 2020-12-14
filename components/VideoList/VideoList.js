@@ -120,13 +120,13 @@ Component({
     },
     cshData(key) {
       if (app.globalData.sourceData) {
-        fnCon.getSource(app, key, this);
+        fnCon.getSource(app, 'video', key, this);
       } else {
         clearInterval(app.globalData.iTime)
         app.globalData.iTime = setInterval(() => {
           if (app.globalData.sourceData) {
             clearInterval(app.globalData.iTime)
-            fnCon.getSource(app, key, this);
+            fnCon.getSource(app, 'video', key, this);
           }
         }, 20);
       }

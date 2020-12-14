@@ -42,7 +42,7 @@ Page({
         nIndex: app.globalData.nvideo,
         isResChange: !this.data.isResChange
       })
-      fnCon.getSource(app, 'listType', this);
+      fnCon.getSource(app, 'video', 'listType', this);
     }
   },
   sjcsh() {
@@ -51,7 +51,7 @@ Page({
         nIndex: app.globalData.nvideo,
         isShow2: app.globalData.isShow
       })
-      fnCon.getSource(app, 'listType', this);
+      fnCon.getSource(app, 'video', 'listType', this);
     } else {
       clearInterval(app.globalData.iTime)
       app.globalData.iTime = setInterval(() => {
@@ -61,7 +61,7 @@ Page({
             nIndex: app.globalData.nvideo,
             isShow2: app.globalData.isShow
           })
-          fnCon.getSource(app, 'listType', this);
+          fnCon.getSource(app, 'video', 'listType', this);
         }
       }, 20);
     }
@@ -92,7 +92,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      isShow: false
+    })
   },
 
   /**

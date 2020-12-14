@@ -9,18 +9,18 @@
     <view class="searchMain">
       <view class="searchBox">
         <icon class="icon-small" type="search" size="20"></icon>
-        <input bindinput="bindKeyInput" value="{{searchKey}}" placeholder="请输入搜索关键字" />
+        <input bindinput="bindKeyInput" value="{{searchKey}}" placeholder="请输入搜索关键字" bindconfirm="goList" />
         <text catchtap="goList">搜索</text>
       </view>
     </view>
     <view class="typeWrap">
-      <navigator url="/pages/Novel/pages/{{navPath}}/{{navPath}}" class="{{type == 'Novel' ? 'cur' : ''}}">小说
+      <navigator open-type="redirect" url="/pages/Novel/pages/{{navPath}}/{{navPath}}" class="{{type == 'Novel' ? 'cur' : ''}}">小说
       </navigator>
-      <navigator url="/pages/Comics/pages/{{navPath}}/{{navPath}}" class="{{type == 'Comics' ? 'cur' : ''}}">漫画
+      <navigator open-type="redirect" url="/pages/Comics/pages/{{navPath}}/{{navPath}}" class="{{type == 'Comics' ? 'cur' : ''}}">漫画
       </navigator>
-      <navigator url="/pages/Music/pages/{{navPath}}/{{navPath}}" class="{{type == 'Music' ? 'cur' : ''}}">音乐
+      <navigator open-type="redirect" url="/pages/Music/pages/{{navPath}}/{{navPath}}" class="{{type == 'Music' ? 'cur' : ''}}">音乐
       </navigator>
-      <navigator url="/pages/Video/pages/{{navPath}}/{{navPath}}" class="{{type == 'Video' ? 'cur' : ''}}">视频
+      <navigator open-type="redirect" url="/pages/Video/pages/{{navPath}}/{{navPath}}" class="{{type == 'Video' ? 'cur' : ''}}">视频
       </navigator>
     </view>
   </block>

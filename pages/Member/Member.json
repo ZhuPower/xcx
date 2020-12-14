@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "NavTitle": "/components/NavTitle/NavTitle",
     "NavBar": "/components/NavBar/NavBar"
   },
   "navigationBarTitleText": "个人中心"
