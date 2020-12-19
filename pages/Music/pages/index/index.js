@@ -16,7 +16,6 @@ Page({
     let mid = e.currentTarget.dataset.mid
     let goMusic = fnCon.goMusic
 
-    console.log(app.globalData.userInfo)
     if (app.globalData.musiclist.mid.indexOf(mid) == -1) {
       app.globalData.musiclist.mid.push(mid)
       app.globalData.musiclist.id.push(id)

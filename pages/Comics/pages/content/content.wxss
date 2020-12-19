@@ -159,3 +159,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.infoChapter .chapter-title.cur{
+  color: #ff7830;
+}

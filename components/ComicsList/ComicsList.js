@@ -6,66 +6,67 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    typeComics:String,
-    searchKey:String,
-    bookId:String,
-    themeId:Number,
-    order:Number,
-    finish:Number
+    typeComics: String,
+    searchKey: String,
+    bookId: String,
+    themeId: Number,
+    order: Number,
+    finish: Number
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    comicsList:[],
-    pagecount:0,
-    page:1,
-    isRefresh:false,
-    url:'',
-    fnAjax:fnCon.fnAjax,
-    isNext:true
+    comicsList: [],
+    pagecount: 0,
+    page: 1,
+    isRefresh: false,
+    url: '',
+    fnAjax: fnCon.fnAjax,
+    isNext: true,
+    isTop: false
   },
 
-  observers:{
-    'themeId'(){
+  observers: {
+    'themeId'() {
       this.setData({
-        page:1
+        page: 1
       })
       this.getClassify()
     },
-    'order'(){
+    'order'() {
       this.setData({
-        page:1
+        page: 1
       })
       this.getClassify()
     },
-    'finish'(){
+    'finish'() {
       this.setData({
-        page:1
+        page: 1
       })
       this.getClassify()
     },
   },
 
-  ready(){
+  ready() {
     let url = ''
 
-    if(this.data.searchKey){
+    if (this.data.searchKey) {
       url = apiUrl.apiUrl.comics.keywordComics
       this.getSearchList(url)
-    }else{
-      if(this.data.typeComics == 'list'){
+    } else {
+      if (this.data.typeComics == 'list') {
         url = apiUrl.apiUrl.comics.moreComics
         this.getMoreList(url)
-      }else{
+      } else {
         url = apiUrl.apiUrl.comics.filterComics
         this.getClassify(url)
       }
     }
-    
+
     this.setData({
-      url:url
+      url: url
     })
 
   },
@@ -74,38 +75,38 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    fnTop(){
+    fnTop() {
 
       this.setData({
-        page:1
+        page: 1
       })
 
-      if(this.data.searchKey){
+      if (this.data.searchKey) {
         this.getSearchList()
-      }else{
-        if(this.data.typeComics == 'list'){
+      } else {
+        if (this.data.typeComics == 'list') {
           this.getMoreList()
-        }else{
+        } else {
           this.getClassify()
         }
       }
     },
-    fnBotton(){
-      if(this.data.isNext){
+    fnBotton() {
+      if (this.data.isNext) {
         let page = this.data.page + 1
         this.setData({
-          page:page
+          page: page
         })
-        if(this.data.searchKey){
+        if (this.data.searchKey) {
           this.getSearchList()
-        }else{
-          if(this.data.typeComics == 'list'){
+        } else {
+          if (this.data.typeComics == 'list') {
             this.getMoreList()
-          }else{
+          } else {
             this.getClassify()
           }
         }
-      }else{
+      } else {
         wx.showToast({
           title: '没有更多了',
           icon: 'none',
@@ -113,16 +114,16 @@ Component({
         })
       }
     },
-    goDetail(e){
+    goDetail(e) {
       let id = e.currentTarget.dataset.id
       let goComics = fnCon.goComics
       goComics(id)
     },
-    getClassify(str){
+    getClassify(str) {
 
       let url = this.data.url
-      
-      if(str){
+
+      if (str) {
         url = str
       }
 
@@ -131,40 +132,46 @@ Component({
         page_size: 20
       }
 
-      if(this.data.themeId){
+      if (this.data.themeId) {
         data['theme_id'] = this.data.themeId
       }
 
-      if(this.data.order){
+      if (this.data.order) {
         data['order'] = this.data.order
       }
 
-      if(this.data.finish){
+      if (this.data.finish) {
         data['order'] = this.data.finish
       }
 
-      this.data.fnAjax(url,data).then(res => {
+      this.data.fnAjax(url, data).then(res => {
         console.log(res)
-        if(res.code == 200){
+        if (res.code == 200) {
           let arr = []
-          if(this.data.page > 1){
+          if (this.data.page > 1) {
             arr = this.data.comicsList
           }
           arr.push(...res.data.list)
 
           this.setData({
-            comicsList:arr,
-            isRefresh:false,
+            comicsList: arr,
+            isRefresh: false,
             isNext: !(res.data.count < 20)
           })
+
+          if (this.data.page == 1) {
+            this.setData({
+              isTop: 0
+            })
+          }
         }
       })
 
     },
-    getMoreList(str){
+    getMoreList(str) {
       let url = this.data.url
-      
-      if(str){
+
+      if (str) {
         url = str
       }
 
@@ -175,48 +182,48 @@ Component({
         page_size: 5
       }
 
-      this.data.fnAjax(url,data).then(res => {
+      this.data.fnAjax(url, data).then(res => {
         console.log(res)
-        if(res.code == 200){
+        if (res.code == 200) {
           let arr = []
-          if(this.data.page > 1){
+          if (this.data.page > 1) {
             arr = this.data.comicsList
           }
           arr.push(...res.data.list)
 
           this.setData({
-            comicsList:arr,
-            isRefresh:false,
+            comicsList: arr,
+            isRefresh: false,
             isNext: !(res.data.count < 5)
           })
         }
       })
     },
-    getSearchList(str){
+    getSearchList(str) {
       let url = this.data.url
-      
-      if(str){
+
+      if (str) {
         url = str
       }
 
       let data = {
-        keyword:this.data.searchKey,
+        keyword: this.data.searchKey,
         page_num: this.data.page,
         page_size: 20
       }
 
-      this.data.fnAjax(url,data).then(res => {
+      this.data.fnAjax(url, data).then(res => {
         console.log(res)
-        if(res.code == 200){
+        if (res.code == 200) {
           let arr = []
-          if(this.data.page > 1){
+          if (this.data.page > 1) {
             arr = this.data.comicsList
           }
           arr.push(...res.data.list)
 
           this.setData({
-            comicsList:arr,
-            isRefresh:false,
+            comicsList: arr,
+            isRefresh: false,
             isNext: !(res.data.count < 20)
           })
         }

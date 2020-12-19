@@ -38,9 +38,14 @@ Page({
     let url = `${this.data.chapterNovel}${this.data.novelId}/`
     this.data.fnAjax(url, {}).then(res => {
       this.setData({
-        aChapter: res.data.list,
-        nowChapter: res.data.list[0].list[0].id
+        aChapter: res.data.list
       })
+
+      if (parseInt(this.data.nowChapter) == 0) {
+        this.setData({
+          nowChapter: res.data.list[0].list[0].id
+        })
+      }
     })
   },
   goNovelCon(e) {
@@ -78,14 +83,14 @@ Page({
   },
 
   collectBtn() {
-    if (this.data.detailData.Name && this.data.aChapter.length>0) {
+    if (this.data.detailData.Name && this.data.aChapter.length > 0) {
       if (this.data.isCollect) {
         let obj = {
           name: this.data.detailData.Name,
-          author:this.data.detailData.Author,
+          author: this.data.detailData.Author,
           img: `${this.data.img}${this.data.detailData.Img}`,
           id: this.data.detailData.Id,
-          chapter:this.data.nowChapter
+          chapter: this.data.nowChapter
         }
         app.globalData.userInfo.novellist.push(obj);
         this.setData({
@@ -119,6 +124,7 @@ Page({
         for (let i = 0; i < arr.length; i++) {
           if (arr[i].id == this.data.detailData.Id) {
             this.setData({
+              nowChapter: parseInt(arr[i].chapter),
               isCollect: false
             })
             break;
@@ -147,7 +153,12 @@ Page({
     this.setData({
       isShow: app.globalData.isShow
     })
+  },
 
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     if (app.globalData.sourceData) {
       this.getCollect();
     } else {
@@ -159,13 +170,6 @@ Page({
         }
       }, 20);
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
 
   /**

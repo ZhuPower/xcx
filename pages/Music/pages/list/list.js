@@ -95,7 +95,7 @@ Page({
         app.globalData.musiclist.mid.push(arr[i].mid)
         app.globalData.musiclist.id.push(arr[i].id)
         app.globalData.musiclist.list.push(arr[i])
-        app.globalData.userInfo.musiclist[0].list.push(item)
+        app.globalData.userInfo.musiclist[0].list.push(arr[i])
       }
     }
 

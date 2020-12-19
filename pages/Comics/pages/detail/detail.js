@@ -51,9 +51,14 @@ Page({
     this.data.fnAjax(url, data).then(res => {
       if (res.code == 200) {
         this.setData({
-          aChapter: res.data,
-          nowChapter: res.data[0].chapter_id
+          aChapter: res.data
         })
+
+        if (parseInt(this.data.nowChapter) == 0) {
+          this.setData({
+            nowChapter: res.data[0].chapter_id
+          })
+        }
       }
     })
   },
@@ -80,7 +85,7 @@ Page({
           img: `${this.data.detailData.cover_lateral}!banner-600`,
           id: this.data.detailData.comic_id,
           chapter: this.data.nowChapter,
-          nIndex:this.data.nChapter
+          nIndex: this.data.nChapter
         }
         app.globalData.userInfo.comicslist.push(obj);
         this.setData({
@@ -114,6 +119,8 @@ Page({
         for (let i = 0; i < arr.length; i++) {
           if (arr[i].id == this.data.detailData.comic_id) {
             this.setData({
+              nowChapter: arr[i].chapter,
+              nChapter: arr[i].nIndex,
               isCollect: false
             })
             break;
@@ -142,7 +149,12 @@ Page({
     this.setData({
       isShow: app.globalData.isShow
     })
+  },
 
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     if (app.globalData.sourceData) {
       this.getCollect();
     } else {
@@ -154,13 +166,6 @@ Page({
         }
       }, 20);
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
 
   /**

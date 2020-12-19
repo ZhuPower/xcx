@@ -1,6 +1,7 @@
 // pages/Novel/pages/content/content.js
 const apiUrl = require('../../../../utils/apiUrl')
 const fnCon = require('../../../../utils/common')
+const app = getApp()
 Page({
 
   /**
@@ -12,6 +13,8 @@ Page({
     aChapter: [],
     aContent: [],
     _title: '',
+    img: apiUrl.apiUrl.novel.img,
+    infoNovel: apiUrl.apiUrl.novel.info,
     chapterNovel: apiUrl.apiUrl.novel.chapter,
     fnAjax: fnCon.fnAjax,
     pid: 0,
@@ -27,7 +30,9 @@ Page({
     aBj: ['/pages/Novel/assets/image/bj1.jpg', '/pages/Novel/assets/image/bj2.jpg', '/pages/Novel/assets/image/bj3.jpg'],
     isNav: false,
     isTop: false,
-    isChapter: false
+    isChapter: false,
+    isBlack: false,
+    novelIndex: -1
   },
   getContent(b, b2) {
     let url = `${this.data.chapterNovel}${this.data.novelId}/${this.data.chapterId}.html`
@@ -43,9 +48,19 @@ Page({
         pid: res.data.pid,
         nid: res.data.nid,
         isRefresh: false,
-        _title: res.data.cname,
-        isTop: b2 || false
+        _title: res.data.cname
       })
+      if (b2) {
+        this.setData({
+          isTop: 0
+        })
+      }
+      console.log(this.data.isTop)
+      if (this.data.novelIndex > -1) {
+        let _arr = app.globalData.userInfo.novellist;
+        _arr[this.data.novelIndex].chapter = this.data.chapterId
+      }
+
     })
   },
   getChapterNovel() {
@@ -93,9 +108,42 @@ Page({
     })
   },
   goBack() {
-    wx.navigateBack({
-      delta: 1
-    })
+    let that = this
+    let arr = app.globalData.userInfo.novellist;
+    if (this.data.isBlack) {
+      wx.navigateBack({
+        delta: 1
+      })
+    } else {
+      wx.showModal({
+        content: '是否添加到书架',
+        confirmColor: '#ff7830',
+        success(res) {
+          if (res.confirm) {
+            let url = `${that.data.infoNovel}/${that.data.novelId}.html`
+            that.data.fnAjax(url, {}).then(res => {
+              if (res.status == 1) {
+                let obj = {
+                  author: res.data.Author,
+                  chapter: that.data.chapterId,
+                  id: res.data.Id,
+                  img: `${that.data.img}${res.data.Img}`,
+                  name: res.data.Name
+                }
+                arr.push(obj);
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            })
+          } else if (res.cancel) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
+    }
   },
   setAddFont() {
     let num = this.data.setInfo.size
@@ -178,7 +226,7 @@ Page({
       isChapter: true
     })
   },
-  hideChapter(){
+  hideChapter() {
     this.setData({
       isChapter: false
     })
@@ -193,6 +241,17 @@ Page({
       novelId: options.novelId,
       chapterId: options.chapterId
     })
+
+    let arr = app.globalData.userInfo.novellist;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].id == this.data.novelId) {
+        this.setData({
+          isBlack: true,
+          novelIndex: i
+        })
+        break;
+      }
+    }
   },
 
   /**

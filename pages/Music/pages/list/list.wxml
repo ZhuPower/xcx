@@ -3,7 +3,7 @@
 <view class='detail-mask' wx:if="{{id}}"></view>
 <NavTitle type="Music" title="{{name}}" isOpacity="true"></NavTitle>
 <scroll-view class="listWrap" bindscrolltolower="fnBotton" scroll-y="true" refresher-enabled="true"
-  refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
+  refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop" wx:if="{{songList.length>0}}">
   <block wx:if="{{id}}">
     <view class='detail-info'>
       <image src="{{topinfo.pic_v12}}" class='detail-img'></image>

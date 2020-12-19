@@ -27,33 +27,28 @@ const fnAjax = function (url, data, method, type) {
       }
     }
 
-    if (url.indexOf('https://www.ehvip.cn') > -1) {
-      obj['cookie'] = 'user_id=8754; login_status=ok; login_key=261936dda6b290ca28145e6c981e3ca6; path=xcx; path_tmp=xcx'
-    }
-
-    let isUrl = false
-
-    //console.log(url)
-    if (url == apiUrl.apiUrl.proxyUrl) {
-      //data.apiUrl = url
-    } else if (url.indexOf('https://') != 0) {
-      isUrl = false
-      data.apiUrl = url
-    } else {
-      isUrl = true
-    }
-
-    //console.log(url)
-
-    //data.apiUrl = url
-    if (isLoading) {
-      wx.showLoading({
-        title: '加载中...',
-      })
-    }
-
 
     if (url) {
+      if (url.indexOf('https://www.ehvip.cn') > -1) {
+        obj['cookie'] = 'user_id=8754; login_status=ok; login_key=261936dda6b290ca28145e6c981e3ca6; path=xcx; path_tmp=xcx'
+      }
+
+      let isUrl = false
+
+      if (url == apiUrl.apiUrl.proxyUrl) {
+
+      } else if (url.indexOf('https://') != 0) {
+        isUrl = false
+        data.apiUrl = url
+      } else {
+        isUrl = true
+      }
+
+      if (isLoading) {
+        wx.showLoading({
+          title: '加载中...',
+        })
+      }
       wx.request({
         url: isUrl ? url : apiUrl.apiUrl.proxyUrl,
         method: method || 'GET',

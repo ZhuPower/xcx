@@ -1,6 +1,8 @@
 <!--components/ComicsList/ComicsList.wxml-->
-<scroll-view class="listWrap {{typeComics == 'classify' ? 'classifyMain' : ((typeComics == 'list' && !searchKey) ? 'listMain' : (searchKey ? 'searchMain' : ''))}}" bindscrolltolower="fnBotton" scroll-y="true" refresher-enabled="true"
-  refresher-triggered="{{isRefresh}}" bindrefresherrefresh="fnTop">
+<scroll-view
+  class="listWrap {{typeComics == 'classify' ? 'classifyMain' : ((typeComics == 'list' && !searchKey) ? 'listMain' : (searchKey ? 'searchMain' : ''))}}"
+  bindscrolltolower="fnBotton" scroll-y="true" refresher-enabled="true" refresher-triggered="{{isRefresh}}"
+  bindrefresherrefresh="fnTop" scroll-top="{{isTop}}" wx:if="{{comicsList.length>0}}">
   <view class="listBox" wx:for="{{comicsList}}" wx:key="index" catchtap="goDetail" data-id="{{item.comic_id}}">
     <view wx:if="{{typeComics == 'list'}}">
       <image src="{{item.cover + '!cover-400-x'}}" webp="true" lazy-load="true" wx:if="{{searchKey}}"></image>

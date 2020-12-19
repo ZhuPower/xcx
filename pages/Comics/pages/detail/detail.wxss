@@ -101,6 +101,10 @@
   white-space: nowrap;
 }
 
+.detail-chapter .chapter-title.cur{
+  color: #ff7830;
+}
+
 
 .footBox{
   position: fixed;

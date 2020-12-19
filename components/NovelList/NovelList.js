@@ -23,7 +23,8 @@ Component({
     page: 1,
     isRefresh: false,
     fnAjax: fnCon.fnAjax,
-    isNext: true
+    isNext: true,
+    isTop: false
   },
   observers: {
     'arrUrl'() {
@@ -77,6 +78,12 @@ Component({
           NovelList: arr,
           isRefresh: false
         })
+
+        if (this.data.page == 1) {
+          this.setData({
+            isTop: 0
+          })
+        }
       })
     },
     fnTop() {

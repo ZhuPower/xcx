@@ -1,12 +1,13 @@
 <!--pages/Novel/pages/content/content.wxml-->
 <view class="contentWrap">
   <image src="{{setInfo.Bj}}" class="themeBj"></image>
-  <scroll-view catchtap="setFn" class="contentMain" scroll-y="true" scroll-top="{{isTop == 1 ? true : false}}"
+  <scroll-view catchtap="setFn" class="contentMain" scroll-y="true" scroll-top="{{isTop}}"
     bindscrolltolower="fnBotton" refresher-enabled="true" refresher-triggered="{{isRefresh}}"
-    bindrefresherrefresh="fnTop"
-    style="font-size:{{setInfo.size}}rpx; line-height:{{2*setInfo.size}}rpx;">
+    bindrefresherrefresh="fnTop" style="font-size:{{setInfo.size}}rpx; line-height:{{2*setInfo.size}}rpx;"
+    wx:if="{{aContent.length>0}}">
     <view class="contentList" wx:for="{{aContent}}" wx:key="cid">
-      <view class="contentTitle" style="font-size:{{setInfo.size + 10}}rpx;color:{{setInfo.color}};">{{item.cname}}</view>
+      <view class="contentTitle" style="font-size:{{setInfo.size + 10}}rpx;color:{{setInfo.color}};">{{item.cname}}
+      </view>
       <view class="contentCon" style="color:{{setInfo.color}};">{{item.content}}</view>
     </view>
   </scroll-view>
@@ -33,7 +34,7 @@
     </view>
   </view>
   <view class="chapterBoxBj" wx:if="{{isChapter}}"></view>
-  <view class="chapterBox {{isChapter ? 'cur' : ''}}" catchtap="hideChapter" >
+  <view class="chapterBox {{isChapter ? 'cur' : ''}}" catchtap="hideChapter" wx:if="{{aChapter.length>0}}">
     <view class="chapterMain">
       <view class="h3">目录</view>
       <scroll-view scroll-y="true" enhanced="true" show-scrollbar="true" scroll-into-view="_{{chapterId}}"

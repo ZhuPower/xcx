@@ -1,11 +1,11 @@
 <!--pages/Novel/pages/detail/detail.wxml-->
-<view class="bgimgblur" style="background: url({{img}}{{detailData.Img}}) no-repeat  top/cover"></view>
+<view class="bgimgblur" style="background: url({{img}}{{detailData.Img}}) no-repeat  top/cover" wx:if="{{detailData.Img}}"></view>
 <view class="detail-mask"></view>
 <NavTitle type="Novel" isNav="{{isNav}}" title="{{detailData.Name}}" isScroll="true"></NavTitle>
-<scroll-view class="detailWrap" scroll-y="true" bindscroll="scrollFn" wx:if="{{isShow2}}">
+<scroll-view class="detailWrap" scroll-y="true" bindscroll="scrollFn" wx:if="{{isShow2}}" wx:if="{{detailData.Name}}">
   <view class="topImg">
     <view class="infoBox">
-      <image src="{{img}}{{detailData.Img}}"></image>
+      <image src="{{img}}{{detailData.Img}}" wx:if="{{detailData.Img}}"></image>
       <view class="rightBox">
         <text class="Name">{{detailData.Name}}</text>
         <text class="Author">作者：{{detailData.Author}}</text>
@@ -25,7 +25,7 @@
     <view class="authoMore">
       <view class="moreList" wx:for="{{detailData.SameUserBooks}}" wx:key="index" data-id="{{item.Id}}"
         catchtap="goDetail">
-        <image src="{{img}}{{item.Img}}"></image>
+        <image src="{{img}}{{item.Img}}" wx:if="{{item.Img}}"></image>
         <view class="moreRight">
           <view class="Name">{{item.Name}}</view>
           <view class="LastChapter">{{item.LastChapter}}</view>
