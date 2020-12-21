@@ -161,6 +161,9 @@
   line-height: 80rpx;
   margin: 0px 3em;
   border-bottom: 1px solid rgba(255, 255, 255, .2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .chapterBox .chapterMain .infoChapter .chapterList .chapterTitle {

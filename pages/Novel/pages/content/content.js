@@ -32,36 +32,47 @@ Page({
     isTop: false,
     isChapter: false,
     isBlack: false,
-    novelIndex: -1
+    novelIndex: -1,
+    isGetData: true
   },
   getContent(b, b2) {
-    let url = `${this.data.chapterNovel}${this.data.novelId}/${this.data.chapterId}.html`
-    this.data.fnAjax(url, {}).then(res => {
-      console.log(res)
-      let arr = []
-      if (b) {
-        arr = this.data.aContent
-      }
-      arr.push(res.data)
+    if (this.data.isGetData) {
       this.setData({
-        aContent: arr,
-        pid: res.data.pid,
-        nid: res.data.nid,
-        isRefresh: false,
-        _title: res.data.cname
+        isGetData: false
       })
-      if (b2) {
+      let url = `${this.data.chapterNovel}${this.data.novelId}/${this.data.chapterId}.html`
+      this.data.fnAjax(url, {}).then(res => {
+        let arr = []
+        if (b) {
+          arr = this.data.aContent
+        }
+        arr.push(res.data)
         this.setData({
-          isTop: 0
+          aContent: arr,
+          pid: res.data.pid,
+          nid: res.data.nid,
+          isRefresh: false,
+          _title: res.data.cname,
+          isGetData: true
         })
-      }
-      console.log(this.data.isTop)
-      if (this.data.novelIndex > -1) {
-        let _arr = app.globalData.userInfo.novellist;
-        _arr[this.data.novelIndex].chapter = this.data.chapterId
-      }
+        if (b2) {
+          this.setData({
+            isTop: 0
+          })
+        }
+        if (this.data.novelIndex > -1) {
+          let _arr = app.globalData.userInfo.novellist;
+          _arr[this.data.novelIndex].chapter = this.data.chapterId
+        }
 
-    })
+      })
+    } else {
+      wx.showToast({
+        title: '你滑动的太快了，请稍后再试',
+        icon: 'none',
+        duration: 1000
+      })
+    }
   },
   getChapterNovel() {
     let url = `${this.data.chapterNovel}${this.data.novelId}/`
