@@ -1,4 +1,4 @@
-/* pages/index/index.wxss */
+/* pages/Novel/pages/index/index.wxss */
 .indexMain {
   width: 100%;
   height: auto;

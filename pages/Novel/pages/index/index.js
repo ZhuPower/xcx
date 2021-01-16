@@ -1,4 +1,4 @@
-// pages/index/index.js
+// pages/Novel/pages/index/index.js
 Page({
 
   /**

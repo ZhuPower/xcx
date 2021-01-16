@@ -1,4 +1,4 @@
-<!--pages/index/index.wxml-->
+<!--pages/Novel/pages/index/index.wxml-->
 <view class="indexMain">
   <view class="navMain">
     <navigator url="/pages/book/book" hover-class="navigator-hover">文章</navigator>

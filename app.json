@@ -1,6 +1,6 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/Novel/pages/index/index",
     "pages/logs/logs",
     "pages/book/book",
     "pages/book2/book2",
